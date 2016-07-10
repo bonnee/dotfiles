@@ -26,12 +26,12 @@
 # Each block command defaults to the script name to avoid boilerplate.
 command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
-markup=none
+markup=pango
 
 
 [time]
-command=date '+%d-%m %H:%M'
-min_width=200
+command=date '+%d/%m %H:%M'
+min_width=1125
 align=left
 interval=5
 separator=false
@@ -42,16 +42,23 @@ separator=false
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=VOL
-#label=♪
+#label=VOL
+label=
 instance=Master
 #instance=PCM
 interval=once
 signal=10
 
+
+[disk-io]
+label=IO
+command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
+interval=persist
+
 [bandwidth]
+label=NET
 interval=2
-separator=false
+#separator=false
 
 # Memory usage
 #
@@ -79,7 +86,8 @@ separator=false
 
 [temperature]
 label=TEMP
-interval=20
+command=echo "$(sensors coretemp-isa-0000 | awk '/Physical/ { print $4 }')"
+interval=10
 
 # Battery indicator
 #
@@ -96,14 +104,14 @@ interval=20
 #
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-[keyindicator]
-instance=CAPS
-interval=once
-signal=11
-separator=false
+#[keyindicator]
+#instance=CAPS
+#interval=once
+#signal=11
+#separator=false
 
-[keyindicator]
-instance=NUM
-interval=once
-signal=11
+#[keyindicator]
+#instance=NUM
+#interval=once
+#signal=11
 

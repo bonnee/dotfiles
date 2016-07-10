@@ -31,7 +31,7 @@ markup=pango
 
 [time]
 command=date '+%d/%m %H:%M'
-min_width=1125
+min_width=400
 align=left
 interval=5
 separator=false

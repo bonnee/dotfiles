@@ -8,9 +8,8 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="Xresources.d config/compton.conf config/bspwm config/i3 config/termite"    
-# list of 
-files/folders to symlink in homedir
+files="Xresources.d config/compton.conf config/i3 config/termite"    
+# list of files/folders to symlink in homedir
 
 ##########
 

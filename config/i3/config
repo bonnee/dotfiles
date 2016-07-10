@@ -34,17 +34,15 @@ set $hlbg        #F6F6F6
 set $fontfam     Aller
 set $fontsize    10
 
-set $home /home/bonnee
+set $background $HOME/Pictures/Wallpapers/pluto.png
+#set $lockscreen $HOME/Pictures/Wallpapers/dc3.png
 
-set $background /home/bonnee/Pictures/Wallpapers/pluto.png
-#set $lockscreen $home/Immagini/Wallpapers/dc3.png
-
-set $locker /home/matteo/Lavoro-Temp/lock.sh
+set $locker $HOME/.config/i3/lock.sh
 
 font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-focus_follows_mouse no
+focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
 new_window pixel 3
 hide_edge_borders both
@@ -63,8 +61,7 @@ bindsym $mod+Return exec termite
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec rofi -show run -lines 10 -eh 2 -markup -width 100 -padding 900 -opacity "85" -bw 0 -bg "$black" -fg "$white" -hlbg "$white" -hlfg "$black" -font "$fontfam 14"
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb $black -nf $white -sb $white -sf $black'
+bindsym $mod+d exec rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam 14"
 
 # change focus
 bindsym $mod+Left focus left
@@ -140,11 +137,17 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym Mod1+Up exec amixer -D pulse sset Master 5%+ && notify-send -u low "Volume: $(amixer -c 0 get Master | grep Mono: | cut -d " " -f6)"
-bindsym Mod1+Down exec amixer -D pulse sset Master 5%- && notify-send -u low "Volume: $(amixer -c 0 get Master | grep Mono: | cut -d " " -f6)"
-bindsym Mod1+space exec playerctl play-pause
+bindsym Mod1+Up exec amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blocks
+bindsym Mod1+Down exec amixer -D pulse sset Master 5%- && pkill -SIGRTMIN+10 i3blocks
+#bindsym XF86AudioMute exec amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
+
+bindsym Mod1+Space exec playerctl play-pause
 bindsym Mod1+Right exec playerctl next
 bindsym Mod1+Left exec playerctl previous
+#bindsym XF86AudioStop exec playerctl stop
+
+#bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+#bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 bindsym $mod+l exec $locker
 
@@ -183,8 +186,8 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym l exec --no-startup-id $locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
@@ -236,8 +239,7 @@ bar {
 	}
 	position top
 	font pango:Aller 9
-       ##status_command $HOME/.config/i3/conky
-       #i3bar_command $HOME/.config/i3/lemonbar/i3_lemonbar.py >> $HOME/.config/i3/lemonbar/bar.log 2>> $HOME/.config/i3/lemonbar/bar.log
+	status_command i3blocks -c ~/.config/i3/i3blocks
 	#tray_output primary
 }
 
@@ -247,10 +249,10 @@ bar {
 #################################################
 
 exec_always --no-startup-id exec feh --bg-fill $background
-#exec --no-startup-id $home/.config/lemonbar/lemonbar.sh
+exec --no-startup-id twmnd &
 
-#exec --no-startup-id xautolock -detectsleep -time 3 -locker "$locker"
+exec --no-startup-id chromium --no-startup-window
+exec --no-startup-id nvdock
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet &
 
-#exec_always killall lemonbar
-#exec_always date | lemonbar
-#exec_always $HOME/.config/i3/lemonbar/i3_lemonbar.py >> $HOME/.config/i3/lemonbar/bar.log 2>> $HOME/.config/i3/lemonbar/bar.log

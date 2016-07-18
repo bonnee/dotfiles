@@ -144,7 +144,7 @@ bindsym Mod1+Up exec amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blo
 bindsym Mod1+Down exec amixer -D pulse sset Master 5%- && pkill -SIGRTMIN+10 i3blocks
 #bindsym XF86AudioMute exec amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
 
-bindsym Mod1+Space exec playerctl play-pause
+bindsym Mod1+space exec playerctl play-pause
 bindsym Mod1+Right exec playerctl next
 bindsym Mod1+Left exec playerctl previous
 #bindsym XF86AudioStop exec playerctl stop

@@ -1,0 +1,171 @@
+"*":
+  "atom-beautify":
+    apex:
+      beautify_on_save: true
+    arduino:
+      beautify_on_save: true
+    c:
+      beautify_on_save: true
+    cfml:
+      beautify_on_save: true
+    coffeescript:
+      beautify_on_save: true
+    cpp:
+      beautify_on_save: true
+    cs:
+      beautify_on_save: true
+    css:
+      beautify_on_save: true
+    csv:
+      beautify_on_save: true
+    d:
+      beautify_on_save: true
+    ejs:
+      beautify_on_save: true
+    elm:
+      beautify_on_save: true
+    erb:
+      beautify_on_save: true
+    erlang:
+      beautify_on_save: true
+    fortran:
+      beautify_on_save: true
+    general:
+      _analyticsUserId: "2dff4104-4225-47a8-b2c9-223acec4b820"
+      muteUnsupportedLanguageErrors: true
+    gherkin:
+      beautify_on_save: true
+    go:
+      beautify_on_save: true
+    handlebars:
+      beautify_on_save: true
+    haskell:
+      beautify_on_save: true
+    html:
+      beautify_on_save: true
+    jade:
+      beautify_on_save: true
+    java:
+      beautify_on_save: true
+    js:
+      beautify_on_save: true
+      eval_code: true
+      indent_with_tabs: true
+      keep_array_indentation: true
+      keep_function_indentation: true
+    json:
+      beautify_on_save: true
+      eval_code: true
+      indent_with_tabs: true
+      keep_array_indentation: true
+      keep_function_indentation: true
+      space_after_anon_function: true
+      space_in_paren: true
+    jsx:
+      beautify_on_save: true
+    latex: {}
+    less:
+      beautify_on_save: true
+    markdown:
+      beautify_on_save: true
+    marko:
+      beautify_on_save: true
+    mustache: {}
+    objectivec:
+      beautify_on_save: true
+    pawn:
+      beautify_on_save: true
+    perl:
+      beautify_on_save: true
+    php:
+      beautify_on_save: true
+      default_beautifier: "PHPCBF"
+      disabled: true
+    puppet:
+      beautify_on_save: true
+    python:
+      beautify_on_save: true
+    riot:
+      beautify_on_save: true
+    ruby:
+      beautify_on_save: true
+    rust:
+      beautify_on_save: true
+    sass:
+      beautify_on_save: true
+    scss:
+      beautify_on_save: true
+    spacebars:
+      beautify_on_save: true
+    sql:
+      beautify_on_save: true
+      identifiers: "upper"
+      keywords: "unchanged"
+    svg:
+      beautify_on_save: true
+    swig:
+      beautify_on_save: true
+    tss:
+      align_assignments: true
+    twig:
+      beautify_on_save: true
+    typescript:
+      beautify_on_save: true
+    vala:
+      beautify_on_save: true
+    visualforce:
+      beautify_on_save: true
+    xml:
+      beautify_on_save: true
+    xtemplate:
+      beautify_on_save: true
+  "atom-material-ui":
+    colors: {}
+    fonts:
+      fontSize: 14
+    tabs:
+      compactTabs: true
+    treeView:
+      compactList: true
+    ui:
+      panelContrast: true
+      panelShadows: true
+  core:
+    packagesWithKeymapsDisabled: [
+      "angularjs"
+    ]
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
+  editor:
+    fontFamily: "Envy Code R"
+    invisibles: {}
+    showIndentGuide: true
+  "exception-reporting":
+    userId: "c4b4c9d1-13eb-0880-ac7b-c1305213ab50"
+  "language-babel":
+    allowLocalOverride: true
+    disableWhenNoBabelrcFileInPath: false
+  linter:
+    ignoreVCSIgnoredFiles: false
+  minimap:
+    absoluteMode: true
+    plugins:
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      pigments: true
+      pigmentsDecorationsZIndex: 0
+  "one-dark-ui": {}
+  "platformio-ide":
+    showHomeScreen: false
+  "platformio-ide-terminal":
+    core:
+      autoRunCommand: "export PATH=/home/bonnee/.atom/packages/platformio-ide/penv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/bin:/usr/local/bin"
+  "silent-sync":
+    notifyMissingConfig: true
+    useConfigFile: true
+  "tool-bar":
+    position: "Left"
+  welcome:
+    showOnStartup: false

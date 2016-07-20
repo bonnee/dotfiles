@@ -241,7 +241,7 @@ bar {
 		binding_mode       $white  $white     $black
 	}
 	position top
-	font pango:Aller 9
+	font pango:Aller 12
 	status_command i3blocks -c $HOME/.config/i3/i3blocks
 	#tray_output primary
 }

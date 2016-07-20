@@ -5,6 +5,8 @@ A collection of my configuration dotfiles
 2. Use [GNU stow](http://www.gnu.org/software/stow/) to install the files you want
 
 # Content
+##`/atom`
+Configuration for [Atom] (https://atom.io/)
 ##`/bash`
 Configuration for [Bash] (https://savannah.gnu.org/git/?group=bash)
 ##`/compton`
@@ -20,4 +22,5 @@ Configuration for [Synergy](http://symless.com/synergy/)
 ##`/termite`
 Configuration for [termite](https://github.com/thestinger/termite)
 ##`/xresources`
-Configuration for [X Resources](https://wiki.archlinux.org/index.php/X_resources)
+Configuration for [X Resources](https://wiki.archlinux.org/index.php/X_resources)  
+WARN: To use xresources files you have to add `#include ".Xresources.d/FILENAME` for every file you want to include into `~/.Xresources`

@@ -51,16 +51,18 @@
       beautify_on_save: true
       eval_code: true
       indent_with_tabs: true
+      jslint_happy: true
       keep_array_indentation: true
       keep_function_indentation: true
+      unescape_strings: true
     json:
       beautify_on_save: true
       eval_code: true
       indent_with_tabs: true
       keep_array_indentation: true
       keep_function_indentation: true
-      space_after_anon_function: true
       space_in_paren: true
+      unescape_strings: true
     jsx:
       beautify_on_save: true
     latex: {}
@@ -131,6 +133,18 @@
       panelContrast: true
       panelShadows: true
   core:
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      ".pioenvs"
+      ".piolibdeps"
+      ".clang_complete"
+      ".gcc-flags.json"
+    ]
     packagesWithKeymapsDisabled: [
       "angularjs"
     ]
@@ -167,5 +181,7 @@
     useConfigFile: true
   "tool-bar":
     position: "Left"
+  "tree-view":
+    hideIgnoredNames: true
   welcome:
     showOnStartup: false

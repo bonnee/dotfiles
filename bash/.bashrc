@@ -14,4 +14,4 @@ alias xbuild-rel="xbuild /p:Configuration=Release"
 
 export TERM="xterm"
 
-#neofetch
+echo $HOSTNAME at your commands.

@@ -53,7 +53,7 @@ gaps outer 30
 smart_gaps on
 
 #################################################
-#####               bindsyms                #####
+#####              Keystrokes               #####
 #################################################
 # start a terminal
 bindsym $mod+Return exec termite
@@ -94,12 +94,6 @@ bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-# bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -155,13 +149,33 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Pause mode "$mode_system"
 
 #################################################
+#####          Scratchpad settings          #####
+#################################################
+
+# Keystrokes to show various marks
+bindsym $mod+t [con_mark="dropterm"] scratchpad show
+bindsym $mod+m [con_mark="music"] scratchpad show
+bindsym $mod+s [con_mark="scratch"] scratchpad show
+
+# General "Move to scratchpad" keystroke
+bindsym $mod+Shift+s mark "scratch", move scratchpad
+
+# Move dropterm to scratchpad
+for_window [window_role="dropterm"] mark "dropterm", move scratchpad
+
+# Automatically move Spotify to scratchpad
+for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
+
+bindsym $mod+c exec chromium
+
+#################################################
 #####                 Modes                 #####
 #################################################
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-	
+
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -189,7 +203,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -200,6 +214,7 @@ mode "$mode_system" {
 #####          Windows Preferences          #####
 #################################################
 
+# Window Colors
 # class                 border  backgr. text    indicator
 
 client.focused          $hlbg   $hlbg   $hldg   $green
@@ -208,16 +223,14 @@ client.unfocused        $dbg    $dbg    $dfg    $green
 client.urgent           $red    $red    $dfg    $green
 client.background       $dbg
 
+
 for_window [class="vlc"] floating enable
 for_window [class="Gpick"] floating enable
-
 for_window [window_type="menu"] floating enable
-
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
-
 for_window [title="Terminator Preferences"] floating enable
 
 #new_float border normal
@@ -243,19 +256,6 @@ bar {
 	#tray_output primary
 }
 
-
-bindsym $mod+t [con_mark="dropterm"] scratchpad show
-bindsym $mod+m [con_mark="music"] scratchpad show
-
-bindsym $mod+Shift+s mark "scratch", move scratchpad
-bindsym $mod+s [con_mark="scratch"] scratchpad show
-
-for_window [window_role="dropterm"] mark "dropterm", move scratchpad
-# Automatically move Spotify to scratchpad
-for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
-
-bindsym $mod+c exec chromium
-
 #################################################
 #####                Autorun                #####
 #################################################
@@ -269,4 +269,3 @@ exec --no-startup-id chromium --no-startup-window
 exec --no-startup-id nvdock
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet &
-

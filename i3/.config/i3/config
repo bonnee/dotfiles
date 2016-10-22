@@ -130,9 +130,6 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+z move container to workspace back_and_forth; workspace back_and_forth
 
-bindsym $mod+Shift+s move scratchpad
-bindsym $mod+s scratchpad show
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -241,23 +238,29 @@ bar {
 		binding_mode       $white  $white     $black
 	}
 	position top
-	font pango:Aller 12
+	font pango:Aller 8
 	status_command i3blocks -c $HOME/.config/i3/i3blocks
 	#tray_output primary
 }
 
 
-#exec --no-startup-id termite -r dropterm --geometry=3840x1024
-for_window [window_role="dropterm"] floating enable;
-for_window [window_role="dropterm"] move scratchpad; scratchpad show move position 0px 24px; border none; move scratchpad
-bindsym $mod+t [window_role="dropterm"] scratchpad show
+bindsym $mod+t [con_mark="dropterm"] scratchpad show
+bindsym $mod+m [con_mark="music"] scratchpad show
 
+bindsym $mod+Shift+s mark "scratch", move scratchpad
+bindsym $mod+s [con_mark="scratch"] scratchpad show
+
+for_window [window_role="dropterm"] mark "dropterm", move scratchpad
 # Automatically move Spotify to scratchpad
-for_window [class="Spotify"] move scratchpad, scratchpad show
+for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
+
+bindsym $mod+c exec chromium
 
 #################################################
 #####                Autorun                #####
 #################################################
+
+exec --no-startup-id termite -r dropterm --geometry=3840x1024
 
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id twmnd &

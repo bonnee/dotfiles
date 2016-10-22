@@ -161,6 +161,7 @@
   "language-babel":
     allowLocalOverride: true
     disableWhenNoBabelrcFileInPath: false
+  latex: {}
   linter:
     ignoreVCSIgnoredFiles: false
   minimap:

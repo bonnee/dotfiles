@@ -82,7 +82,7 @@ iostat -dyz "$dt" | awk -v sep="$sep" "
                 printf \"</span>\";
             }
 
-            #WX
+            # WX
             if ($threshold > 0 && wx >= $threshold) {
                 printf \"<span color='$warn_color'>\";
             }
@@ -96,6 +96,7 @@ iostat -dyz "$dt" | awk -v sep="$sep" "
                 printf \"</span>\";
             }
 
+
             printf \"\n\";
             fflush(stdout);
         }
@@ -107,3 +108,4 @@ iostat -dyz "$dt" | awk -v sep="$sep" "
             wx += \$4;
         }
     }"
+    

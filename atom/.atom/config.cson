@@ -148,10 +148,6 @@
     packagesWithKeymapsDisabled: [
       "angularjs"
     ]
-    themes: [
-      "atom-material-ui"
-      "atom-material-syntax"
-    ]
   editor:
     fontFamily: "Envy Code R"
     invisibles: {}

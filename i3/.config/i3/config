@@ -262,6 +262,7 @@ bar {
 
 exec --no-startup-id termite -r dropterm --geometry=3840x1024
 
+exec --no-startup-id compton -b
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id twmnd &
 

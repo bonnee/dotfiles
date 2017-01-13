@@ -148,6 +148,8 @@ bindsym $mod+l exec $locker
 bindsym $mod+r mode "resize"
 bindsym $mod+Pause mode "$mode_system"
 
+bindsym $mod+a exec telegram-desktop
+
 #################################################
 #####          Scratchpad settings          #####
 #################################################
@@ -232,6 +234,7 @@ for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="Terminator Preferences"] floating enable
+for_window [class="TelegramDesktop"] floating enable
 
 #new_float border normal
 

@@ -34,7 +34,7 @@ set $hlbg        #F6F6F6
 set $fontfam     Aller
 set $fontsize    10
 
-set $background $HOME/Pictures/Wallpapers/pluto.png
+set $background $HOME/.config/i3/wallpaper.jpg
 #set $lockscreen $HOME/Pictures/Wallpapers/dc3.png
 
 set $locker $HOME/.config/i3/lock.sh

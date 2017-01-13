@@ -256,7 +256,7 @@ bar {
 	position top
 	font pango:Aller 8
 	status_command i3blocks -c $HOME/.config/i3/i3blocks
-	#tray_output primary
+	tray_output primary
 }
 
 #################################################

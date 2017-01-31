@@ -56,12 +56,12 @@ smart_gaps on
 #####              Keystrokes               #####
 #################################################
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec --no-startup-id termite
 
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam 14"
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam 14"
 
 # change focus
 bindsym $mod+Left focus left
@@ -131,24 +131,24 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -SIGRTMIN+10 i3blocks
-#bindsym XF86AudioMute exec amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -SIGRTMIN+10 i3blocks
+#bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+l exec $locker
+bindsym $mod+l exec --no-startup-id $locker
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Pause mode "$mode_system"
 
-bindsym $mod+a exec telegram-desktop
+bindsym $mod+a exec --no-startup-id telegram-desktop
 
 #################################################
 #####          Scratchpad settings          #####
@@ -168,7 +168,7 @@ for_window [window_role="dropterm"] mark "dropterm", move scratchpad
 # Automatically move Spotify to scratchpad
 for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
 
-bindsym $mod+c exec chromium
+bindsym $mod+c exec --no-startup-id chromium
 
 #################################################
 #####                 Modes                 #####

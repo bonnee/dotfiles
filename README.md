@@ -17,6 +17,8 @@ Configuration for [compton](https://github.com/chjj/compton)
 * `./.config/lock.sh` [i3lock](https://github.com/i3/i3lock) based lockscreen script
 * `./.config/blocks/` container of i3blocks blocklets
 
+##`/dunst`
+Configuration for [Dunst](http://knopwob.org/dunst/index.html)
 ##`/synergy`
 Configuration for [Synergy](http://symless.com/synergy/)
 ##`/termite`

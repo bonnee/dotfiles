@@ -20,6 +20,8 @@ Configuration for [compton](https://github.com/chjj/compton)
 
 ##`/dunst`
 Configuration for [Dunst](http://knopwob.org/dunst/index.html)
+##`/htop`
+Configuration for [htop](http://hisham.hm/htop/)
 ##`/synergy`
 Configuration for [Synergy](http://symless.com/synergy/)
 ##`/termite`

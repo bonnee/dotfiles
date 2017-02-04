@@ -24,18 +24,29 @@ set $white       #F6F6F6
 set $darkwhite   #E0E0E0
 set $transparent #000000FF
 
+# Dark foreground
 set $dfg         #AFB8C5
+
+# Dark background
 set $dbg         #000000
-set $lfg         $F6F6F6
-set $lbg         $9E9E9E
+
+# Light foreground
+set $lfg         #F6F6F6
+
+# Light background
+set $lbg         #9E9E9E
+
+# Highlight foreground
 set $hlfg        #000000
+
+# Highlight background
 set $hlbg        #F6F6F6
 
 set $fontfam     Aller
 set $fontsize    10
 
+set $terminal termite
 set $background $HOME/.config/i3/wallpaper.jpg
-#set $lockscreen $HOME/Pictures/Wallpapers/dc3.png
 
 set $locker $HOME/.config/i3/lock.sh
 
@@ -56,7 +67,7 @@ smart_gaps on
 #####              Keystrokes               #####
 #################################################
 # start a terminal
-bindsym $mod+Return exec --no-startup-id termite
+bindsym $mod+Return exec --no-startup-id $terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -265,9 +276,8 @@ bar {
 
 exec --no-startup-id termite -r dropterm --geometry=3840x1024
 
-exec --no-startup-id compton -b
 exec_always --no-startup-id exec feh --bg-fill $background
-exec --no-startup-id twmnd &
+exec --no-startup-id dunst &
 
 exec --no-startup-id chromium --no-startup-window
 exec --no-startup-id nvdock

@@ -12,10 +12,11 @@ Configuration for [Bash] (https://savannah.gnu.org/git/?group=bash)
 ##`/compton`
 Configuration for [compton](https://github.com/chjj/compton)
 ##`/i3`
-* `./.config/config` [i3-gaps](https://github.com/Airblader/i3) config
-* `./.config/i3blocks` [i3blocks](https://github.com/vivien/i3blocks) config
-* `./.config/lock.sh` [i3lock](https://github.com/i3/i3lock) based lockscreen script
-* `./.config/blocks/` container of i3blocks blocklets
+* `.config/config` [i3-gaps](https://github.com/Airblader/i3) config
+* `.config/i3blocks` [i3blocks](https://github.com/vivien/i3blocks) config
+* `.config/lock.sh` [i3lock](https://github.com/i3/i3lock) based lockscreen script
+* `.config/blocks/` container of i3blocks blocklets
+* `.config/wallpaper.jpg` my wallpaper (I know, it sucks)
 
 ##`/dunst`
 Configuration for [Dunst](http://knopwob.org/dunst/index.html)

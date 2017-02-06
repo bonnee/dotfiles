@@ -12,7 +12,7 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export EDITOR=nano
 
-PS1='\e[94m\A \e[1m\u\e[21m\e[39m@\e[2m\h\e[22m [\W\e[32m$(__git_ps1 " %s")\e[39m]\$ '
+PS1='[\e[94m\A \e[1m\u\e[21m\e[39m@\e[2m\h\e[22m \W\e[32m$(__git_ps1 " %s")\e[39m]\$ '
 
 # Quick and dirty tweak to make aliases available under linux
 alias sudo='sudo '

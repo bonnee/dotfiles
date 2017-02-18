@@ -7,7 +7,7 @@
 
 source /usr/share/git/completion/git-prompt.sh
 
-export TERM="xterm-256color"
+export TERM="xterm"
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export EDITOR=nano

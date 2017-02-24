@@ -11,6 +11,9 @@
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+if ! hash __git_ps1>/dev/null; then
+    source /usr/share/git/completion/git-prompt.sh
+fi
 
 PATH=$PATH:$HOME/bin
 

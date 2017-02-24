@@ -11,7 +11,7 @@
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-if ! hash __git_ps1>/dev/null; then
+if ! hash __git_ps1 2> /dev/null; then
     source /usr/share/git/completion/git-prompt.sh
 fi
 
@@ -36,6 +36,9 @@ alias xbuild-rel="xbuild /p:Configuration=Release"
 alias gputop='sudo intel_gpu_top'
 alias todo='todo.sh'
 
-printf "\e[1mWhat to do:\e[0m\n"
-todo.sh ls
-printf "\n\e[1;7m$HOSTNAME\e[0m at your commands.\n"
+if hash todo.sh 2> /dev/null; then
+    printf "\e[1mWhat to do:\e[0m\n"
+    todo.sh ls
+    printf "\n"
+fi
+printf "\e[1;7m$HOSTNAME\e[0m at your commands.\n"

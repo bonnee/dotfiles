@@ -154,6 +154,7 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
+bindsym XF86Launch8 exec --no-startup-id $locker
 bindsym $mod+l exec --no-startup-id $locker
 
 bindsym $mod+r mode "resize"

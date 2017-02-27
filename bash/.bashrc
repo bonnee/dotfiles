@@ -30,7 +30,6 @@ export TERM="xterm"
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export EDITOR=nano
-export GREP_OPTIONS='--color=auto'
 
 # bash history mods
 export HISTFILESIZE=20000
@@ -45,6 +44,8 @@ PS1='\[\e[94m\]\A \[\e[1m\]\u\[\e[21m\e[39m\]@\[\e[2m\]\h\[\e[22m\] [\W\[\e[32m\
 
 # Quick and dirty tweak to make aliases available under linux
 alias sudo='sudo '
+
+alias grep='grep --color=auto'
 
 alias ls='ls --color=auto'
 alias ll='ls -l'

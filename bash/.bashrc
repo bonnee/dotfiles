@@ -76,8 +76,7 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     host="@$HST_COLOR\h$RST_COLOR"
 fi
 
-PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$host [\W$GIT_COLOR$(__git_ps1 " %s")$RST_COLOR]\$ "
-
+PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$host [\W$GIT_COLOR\$(__git_ps1 ' %s')$RST_COLOR]\$ "
 
 printf "Welcome $USER,\n"
 if hash todo.sh 2> /dev/null; then

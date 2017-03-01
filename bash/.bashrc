@@ -38,16 +38,24 @@ export HISTSIZE=10000
 shopt -s cmdhist
 # Ignore duplicates, ls without options and builtin commands
 HISTCONTROL=ignoredups
-export HISTIGNORE="&:ls:[bf]g:exit"
+HISTIGNORE="&:ls:[bf]g:exit"
 
 PS1='\[\e[94m\]\A \[\e[1m\]\u\[\e[21m\e[39m\]@\[\e[2m\]\h\[\e[22m\] [\W\[\e[32m\]$(__git_ps1 " %s")\[\e[39m\]]\$ '
 
 # Quick and dirty tweak to make aliases available under linux
 alias sudo='sudo '
 
-alias grep='grep --color=auto'
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
-alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 alias ll='ls -l'
 alias la='ls -a'
 
@@ -57,7 +65,6 @@ alias ....='cd ../../..'
 
 alias vi='vim'
 alias xbuild-rel="xbuild /p:Configuration=Release"
-alias gputop='sudo intel_gpu_top'
 alias todo='todo.sh'
 
 

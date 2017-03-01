@@ -71,10 +71,10 @@ USR_COLOR="\[\e[94m\]"
 GIT_COLOR="\[\e[32m\]"
 
 if [ "$IS_SSH" = true ]; then
-    usr='"@\[\e[2m\]\h\[\e[22m\'
+    usr='@\[\e[2m\]\h\[\e[22m\]'
 fi
 
-export PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$usr [\W$GIT_COLOR$(__git_ps1 " %s")$RST_COLOR]\$ "
+PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$usr [\W$GIT_COLOR$(__git_ps1 " %s")$RST_COLOR]\$ "
 
 
 printf "Welcome $USER,\n"

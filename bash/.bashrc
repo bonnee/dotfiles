@@ -15,8 +15,6 @@ if ! hash __git_ps1 2> /dev/null; then
     source /usr/share/git/completion/git-prompt.sh
 fi
 
-PATH=$PATH:$HOME/bin
-
 bind "set show-all-if-ambiguous On"
 
 function fawk {
@@ -40,9 +38,7 @@ shopt -s cmdhist
 HISTCONTROL=ignoredups
 HISTIGNORE="&:ls:[bf]g:exit"
 
-PS1='\[\e[94m\]\A \[\e[1m\]\u\[\e[21m\e[39m\]@\[\e[2m\]\h\[\e[22m\] [\W\[\e[32m\]$(__git_ps1 " %s")\[\e[39m\]]\$ '
-
-# Quick and dirty tweak to make aliases available under linux
+# Quick and dirty tweak to make aliases available under sudo
 alias sudo='sudo '
 
 if [ -x /usr/bin/dircolors ]; then
@@ -66,6 +62,19 @@ alias ....='cd ../../..'
 alias vi='vim'
 alias xbuild-rel="xbuild /p:Configuration=Release"
 alias todo='todo.sh'
+
+BOLD="\[\e[1m\]"
+RST_BOLD="\[\e[21m\]"
+
+RST_COLOR="\[\e[39m\]"
+USR_COLOR="\[\e[94m\]"
+GIT_COLOR="\[\e[32m\]"
+
+if [ "$IS_SSH" = true ]; then
+    usr='"@\[\e[2m\]\h\[\e[22m\'
+fi
+
+export PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$usr [\W$GIT_COLOR$(__git_ps1 " %s")$RST_COLOR]\$ "
 
 
 printf "Welcome $USER,\n"

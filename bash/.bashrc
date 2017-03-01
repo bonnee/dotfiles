@@ -68,13 +68,15 @@ RST_BOLD="\[\e[21m\]"
 
 RST_COLOR="\[\e[39m\]"
 USR_COLOR="\[\e[94m\]"
+HST_COLOR="\[\e[31m\]"
 GIT_COLOR="\[\e[32m\]"
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    usr='@\[\e[2m\]\h\[\e[22m\]'
+#    USR_COLOR="\[\e[92m\]"
+    host="@$HST_COLOR\h$RST_COLOR"
 fi
 
-PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$usr [\W$GIT_COLOR$(__git_ps1 " %s")$RST_COLOR]\$ "
+PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$host [\W$GIT_COLOR$(__git_ps1 " %s")$RST_COLOR]\$ "
 
 
 printf "Welcome $USER,\n"

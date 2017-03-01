@@ -70,7 +70,7 @@ RST_COLOR="\[\e[39m\]"
 USR_COLOR="\[\e[94m\]"
 GIT_COLOR="\[\e[32m\]"
 
-if [ "$IS_SSH" = true ]; then
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     usr='@\[\e[2m\]\h\[\e[22m\]'
 fi
 

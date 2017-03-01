@@ -48,7 +48,7 @@ set $fontsize    10
 set $terminal termite
 set $background $HOME/.config/i3/wallpaper.jpg
 
-set $locker $HOME/.config/i3/lock.sh
+set $locker $HOME/bin/lock.sh
 
 font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position

@@ -68,11 +68,10 @@ RST_BOLD="\[\e[21m\]"
 
 RST_COLOR="\[\e[39m\]"
 USR_COLOR="\[\e[94m\]"
-HST_COLOR="\[\e[31m\]"
+HST_COLOR="\[\e[33m\]"
 GIT_COLOR="\[\e[32m\]"
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-#    USR_COLOR="\[\e[92m\]"
     host="@$HST_COLOR\h$RST_COLOR"
 fi
 

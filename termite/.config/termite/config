@@ -7,7 +7,7 @@ font = Envy Code R 21
 foreground      = #ffffff
 foreground_bold = #ffffff
 cursor          = #ffffff
-background      = #000000
+background      = rgba(0, 0, 0, 0.95)
 
 # black
 color0  = #000000

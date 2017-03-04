@@ -46,7 +46,7 @@ set $fontfam     Aller
 set $fontsize    10
 
 set $terminal termite
-set $background $HOME/.config/i3/wallpaper.jpg
+set $background $HOME/.config/i3/wallpaper.png
 
 set $locker $HOME/bin/lock.sh
 

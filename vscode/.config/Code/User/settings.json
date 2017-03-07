@@ -1,0 +1,11 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.fontFamily": "Envy Code R",
+    "editor.formatOnType": true,
+    "files.autoSave": "afterDelay",
+    "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
+    "omnisharp.useMono": true,
+    "terminal.external.linuxExec": "termite",
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.iconTheme": "vs-seti",
+}

@@ -83,7 +83,7 @@ if hash todo.sh 2> /dev/null; then
     todo.sh ls
 fi
 
-printf "\nYou still have $(($(cat /proc/meminfo | sed -n '3p' | fawk 2) / 1024)) MB of memory to mess with.\n"
-printf "Load is $(cat /proc/loadavg | fawk 1).\n"
+printf "\nYou still have \e[1m$(($(cat /proc/meminfo | sed -n '3p' | fawk 2) / 1024)) MB\e[21m of memory to mess with.\n"
+printf "Load is \e[1m$(cat /proc/loadavg | fawk 1)\e[21m.\n"
 
 printf "\n\e[1;7m$HOSTNAME\e[0m is ready.\n"

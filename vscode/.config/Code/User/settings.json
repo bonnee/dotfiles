@@ -8,4 +8,10 @@
     "terminal.external.linuxExec": "termite",
     "workbench.colorTheme": "Solarized Dark",
     "workbench.iconTheme": "vs-seti",
+    "[cpp]": {
+        "editor.quickSuggestions": false
+    },
+    "[c]": {
+        "editor.quickSuggestions": false
+    },
 }

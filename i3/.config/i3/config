@@ -61,6 +61,8 @@ new_window pixel 3
 hide_edge_borders both
 force_display_urgency_hint 500 ms
 
+popup_during_fullscreen smart
+
 gaps inner 15
 gaps outer 30
 smart_gaps on
@@ -160,7 +162,7 @@ bindsym XF86Launch8 exec --no-startup-id $locker
 bindsym $mod+l exec --no-startup-id $locker
 
 bindsym $mod+r mode "resize"
-bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Escape mode "$mode_system"
 
 bindsym $mod+a exec --no-startup-id telegram-desktop
 
@@ -267,7 +269,7 @@ bar {
 		urgent_workspace   $red    $red       $white
 		binding_mode       $white  $white     $black
 	}
-	position top
+	position bottom
 	font pango:Aller 8
 	status_command i3blocks -c $HOME/.config/i3/i3blocks
 	tray_output primary

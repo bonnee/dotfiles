@@ -1,12 +1,25 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.fontFamily": "Envy Code R",
+    "editor.fontFamily": "'Envy Code R', monospace",
+
     "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+
+    "editor.mouseWheelZoom": true,
+    "editor.renderIndentGuides": true,
+
+    "editor.minimap.enabled": true,
+    "editor.minimap.maxColumn": 200,
+
     "files.autoSave": "afterDelay",
+
+    "extensions.autoUpdate": true,
+
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "omnisharp.useMono": true,
     "terminal.external.linuxExec": "termite",
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "vs-seti",
     "[cpp]": {
         "editor.quickSuggestions": false
@@ -14,4 +27,6 @@
     "[c]": {
         "editor.quickSuggestions": false
     },
+
+      "C_Cpp.clang_format_formatOnSave": false
 }

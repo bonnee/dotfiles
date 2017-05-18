@@ -16,17 +16,13 @@
 
     "extensions.autoUpdate": true,
 
-    "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
-    "omnisharp.useMono": true,
     "terminal.external.linuxExec": "termite",
     "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "vs-seti",
-    "[cpp]": {
-        "editor.quickSuggestions": false
-    },
-    "[c]": {
-        "editor.quickSuggestions": false
-    },
 
-      "C_Cpp.clang_format_formatOnSave": false
+    "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
+    "omnisharp.useMono": true,
+
+    "C_Cpp.clang_format_formatOnSave": true,
+    "python.formatting.formatOnSave": false
 }

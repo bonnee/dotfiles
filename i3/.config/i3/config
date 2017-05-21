@@ -284,9 +284,11 @@ exec --no-startup-id termite -r dropterm --geometry=3840x1024
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id dunst &
 
-exec --no-startup-id dropbox &
-
-exec --no-startup-id $browser --no-startup-window
-exec --no-startup-id nvdock
 exec --no-startup-id nm-applet
+
 exec --no-startup-id blueman-applet &
+exec --no-startup-id nvdock
+exec --no-startup-id indicator-kdeconnect &
+
+exec --no-startup-id dropbox &
+exec --no-startup-id $browser --no-startup-window

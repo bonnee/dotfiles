@@ -1,9 +1,11 @@
 [options]
+
 # BEGIN desktop
-#font = Envy Code R 21
+font = Envy Code R 21
 # END desktop
+
 # BEGIN laptop
-#font = Envy Code R 12
+font = Envy Code R 12
 # END laptop
 
 [colors]

@@ -53,7 +53,7 @@
         },
         "workbench.action.closeWindow": {
             "id": "workbench.action.closeWindow",
-            "label": "Ctrl+Shift+W",
+            "label": "Ctrl+W",
             "isNative": true
         },
         "workbench.action.closeFolder": {
@@ -417,6 +417,7 @@
     "windowsState": {
         "openedFolders": [],
         "lastActiveWindow": {
+            "workspacePath": null,
             "uiState": {
                 "mode": 1,
                 "x": 962,
@@ -428,10 +429,13 @@
     },
     "openedPathsList": {
         "files": [
+            "/home/bonnee/Scaricati/data.Rdata",
+            "/home/bonnee/Scaricati/Telegram Desktop/script.R",
             "/run/media/bonnee/PEDOPORNO/Readme.txt"
         ],
         "folders": [
             "/home/bonnee/dotfiles"
         ]
-    }
+    },
+    "pickerWorkingDir": "/home/bonnee/Scaricati"
 }

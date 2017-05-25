@@ -1,28 +1,21 @@
 // Place your settings in this file to overwrite the default settings
 {
     "editor.fontFamily": "'Envy Code R', monospace",
-
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-
     "editor.mouseWheelZoom": true,
     "editor.renderIndentGuides": true,
-
     "editor.minimap.enabled": true,
     "editor.minimap.maxColumn": 200,
-
     "files.autoSave": "afterDelay",
-
     "extensions.autoUpdate": true,
-
     "terminal.external.linuxExec": "termite",
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Monokai Dimmed",
     "workbench.iconTheme": "vs-seti",
-
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "omnisharp.useMono": true,
-
     "C_Cpp.clang_format_formatOnSave": true,
-    "python.formatting.formatOnSave": false
+    "python.formatting.formatOnSave": false,
+    "window.zoomLevel": 0
 }

@@ -43,7 +43,14 @@ set $hlfg        #000000
 set $hlbg        #F6F6F6
 
 set $fontfam     Aller
-set $fontsize    10
+# BEGIN desktop
+#set $fontsize    10
+# END desktop
+
+# BEGIN laptop
+#set $fontsize    11
+# END laptop
+
 
 set $terminal termite
 set $browser google-chrome-stable
@@ -57,15 +64,23 @@ font pango: $fontfam $fontsize
 floating_modifier $mod
 focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
-new_window pixel 3
-hide_edge_borders both
-force_display_urgency_hint 500 ms
-
-popup_during_fullscreen smart
-
-gaps inner 15
-gaps outer 30
-smart_gaps on
+# BEGIN desktop
+##new_window pixel 3
+##hide_edge_borders both
+## END destkop
+## BEGIN laptop
+#new_window pixel 2
+#hide_edge_borders smart
+## END laptop
+#force_display_urgency_hint 500 ms
+#
+#popup_during_fullscreen smart
+#
+## BEGIN desktop
+##gaps inner 15
+##gaps outer 30
+##smart_gaps on
+# END desktop
 
 #################################################
 #####              Keystrokes               #####
@@ -76,7 +91,7 @@ bindsym $mod+Return exec --no-startup-id $terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam 14"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam $fontsize"'
 
 # change focus
 bindsym $mod+Left focus left
@@ -146,9 +161,14 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# BEGIN laptop
+#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+# END laptop
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -SIGRTMIN+10 i3blocks
-#bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
 
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
@@ -270,9 +290,14 @@ bar {
 		binding_mode       $white  $white     $black
 	}
 	position bottom
-	font pango:Aller 8
+    # BEGIN desktop
+    #font pango:Aller 8
+    # END desktop
+    # BEGIN laptop
+	#font pango:$fontfam $fontsize
+    # END laptop
 	status_command i3blocks -c $HOME/.config/i3/i3blocks
-	tray_output primary
+    tray_output primary
 }
 
 #################################################
@@ -281,14 +306,15 @@ bar {
 
 exec --no-startup-id termite -r dropterm --geometry=3840x1024
 
+exec --no-startup-id $HOME/bin/autostart.sh
+
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id dunst &
 
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 
-exec --no-startup-id blueman-applet &
-exec --no-startup-id nvdock
-exec --no-startup-id indicator-kdeconnect &
+#exec --no-startup-id blueman-applet &
+#exec --no-startup-id indicator-kdeconnect &
 
-exec --no-startup-id dropbox &
-exec --no-startup-id $browser --no-startup-window
+#exec --no-startup-id dropbox &
+#exec --no-startup-id $browser --no-startup-window

@@ -52,13 +52,18 @@ signal=10
 
 [disk-io]
 label=IO
-command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
+command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
 interval=persist
 
 [bandwidth]
 label=NET
-interval=2
+interval=5
 #separator=false
+
+# BEGIN laptop
+#[wifi]
+#interval=10
+# END laptop
 
 # Memory usage
 #
@@ -74,7 +79,7 @@ interval=30
 # see the script for details.
 [cpu_usage]
 label=CPU
-interval=2
+interval=5
 min_width=CPU: 100.00%
 align=center
 separator=false
@@ -92,11 +97,13 @@ interval=10
 # Battery indicator
 #
 # The battery instance defaults to 0.
-[battery]
-label=BAT
+# BEGIN laptop
+#[battery]
+#label=BAT
+#interval=10
+# END laptop
 #label=⚡
 #instance=1
-interval=20
 
 # Key indicators
 #

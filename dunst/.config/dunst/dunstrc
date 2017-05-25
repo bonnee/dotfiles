@@ -1,5 +1,11 @@
 [global]
-    font = Droid Sans Regular 15
+    # BEGIN desktop
+    #font = Droid Sans Regular 15
+    # END desktop
+
+    # BEGIN laptop
+    #font = Aller 12
+    # END laptop
  
     # allow a small subset of html markup:
     # <b>bold</b>

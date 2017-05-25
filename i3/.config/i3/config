@@ -43,12 +43,10 @@ set $hlfg        #000000
 set $hlbg        #F6F6F6
 
 set $fontfam     Aller
+
 # BEGIN desktop
-#<<<<<<< HEAD
-##set $fontsize    14
-#=======
-##set $fontsize    10
-#>>>>>>> 8ba6d38556419edb0121551f01776fe3f839c7db
+#set $fontsize    14
+#set $fontsize    10
 # END desktop
 
 # BEGIN laptop
@@ -70,22 +68,22 @@ focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
 
 # BEGIN desktop
-##new_window pixel 3
-##hide_edge_borders both
-#<<<<<<< HEAD
-### END destkop
-##
-### BEGIN laptop
-##new_window pixel 2
-##hide_edge_borders smart
-### END laptop
-##
-###force_display_urgency_hint 500 ms
-###
-###popup_during_fullscreen smart
-###
-### BEGIN desktop
-#=======
+#new_window pixel 3
+#hide_edge_borders both
+# END destkop
+
+# BEGIN laptop
+#new_window pixel 2
+#hide_edge_borders smart
+# END laptop
+
+force_display_urgency_hint 500 ms
+
+popup_during_fullscreen smart
+
+# BEGIN desktop
+#new_window pixel 3
+#hide_edge_borders both
 # END desktop
 
 # BEGIN laptop
@@ -97,10 +95,9 @@ force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
 
 # BEGIN desktop
-#>>>>>>> 8ba6d38556419edb0121551f01776fe3f839c7db
-##gaps inner 15
-##gaps outer 30
-##smart_gaps on
+#gaps inner 15
+#gaps outer 30
+#smart_gaps on
 # END desktop
 
 #################################################

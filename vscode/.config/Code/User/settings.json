@@ -17,5 +17,5 @@
     "omnisharp.useMono": true,
     "C_Cpp.clang_format_formatOnSave": true,
     "python.formatting.formatOnSave": false,
-    "window.zoomLevel": 2
+    "window.zoomLevel": 0
 }

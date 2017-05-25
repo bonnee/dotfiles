@@ -1,10 +1,10 @@
 [global]
     # BEGIN desktop
-    #font = Droid Sans Regular 15
+    font = Aller 15
     # END desktop
 
     # BEGIN laptop
-    #font = Aller 12
+    font = Aller 12
     # END laptop
  
     # allow a small subset of html markup:

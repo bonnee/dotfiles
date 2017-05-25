@@ -65,21 +65,21 @@ floating_modifier $mod
 focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
 # BEGIN desktop
-##new_window pixel 3
-##hide_edge_borders both
-## END destkop
-## BEGIN laptop
+#new_window pixel 3
+#hide_edge_borders both
+# END destkop
+# BEGIN laptop
 #new_window pixel 2
 #hide_edge_borders smart
-## END laptop
+# END laptop
 #force_display_urgency_hint 500 ms
 #
 #popup_during_fullscreen smart
 #
-## BEGIN desktop
-##gaps inner 15
-##gaps outer 30
-##smart_gaps on
+# BEGIN desktop
+#gaps inner 15
+#gaps outer 30
+#smart_gaps on
 # END desktop
 
 #################################################
@@ -294,7 +294,7 @@ bar {
     #font pango:Aller 8
     # END desktop
     # BEGIN laptop
-	#font pango:$fontfam $fontsize
+    #font pango:$fontfam $fontsize
     # END laptop
 	status_command i3blocks -c $HOME/.config/i3/i3blocks
     tray_output primary

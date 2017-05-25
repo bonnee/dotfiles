@@ -68,7 +68,7 @@ focus_follows_mouse yes
 # BEGIN desktop
 new_window pixel 3
 hide_edge_borders both
-# END destkop
+# END desktop
 
 # BEGIN laptop
 new_window pixel 2

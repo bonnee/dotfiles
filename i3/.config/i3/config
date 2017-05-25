@@ -44,11 +44,11 @@ set $hlbg        #F6F6F6
 
 set $fontfam     Aller
 # BEGIN desktop
-set $fontsize    10
+#set $fontsize    14
 # END desktop
 
 # BEGIN laptop
-set $fontsize    11
+#set $fontsize    12
 # END laptop
 
 
@@ -66,23 +66,23 @@ focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
 
 # BEGIN desktop
-new_window pixel 3
-hide_edge_borders both
-# END destkop
-
-# BEGIN laptop
-new_window pixel 2
-hide_edge_borders smart
-# END laptop
-
-#force_display_urgency_hint 500 ms
+#new_window pixel 3
+#hide_edge_borders both
+## END destkop
 #
-#popup_during_fullscreen smart
+## BEGIN laptop
+#new_window pixel 2
+#hide_edge_borders smart
+## END laptop
 #
-# BEGIN desktop
-gaps inner 15
-gaps outer 30
-smart_gaps on
+##force_display_urgency_hint 500 ms
+##
+##popup_during_fullscreen smart
+##
+## BEGIN desktop
+#gaps inner 15
+#gaps outer 30
+#smart_gaps on
 # END desktop
 
 #################################################
@@ -165,8 +165,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # BEGIN laptop
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 # END laptop
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blocks
@@ -295,11 +295,11 @@ bar {
 	position bottom
 	
 	# BEGIN desktop
-	font pango:Aller 8
+	#font pango:Aller 8
 	# END desktop
 	
 	# BEGIN laptop
-	font pango:$fontfam $fontsize
+	#font pango:$fontfam $fontsize
 	# END laptop
     
     status_command i3blocks -c $HOME/.config/i3/i3blocks

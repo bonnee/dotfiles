@@ -2,6 +2,8 @@
 {
     // BEGIN laptop
     //"editor.fontSize": 19,
+    //"markdown.preview.fontSize": 18,
+    //"terminal.integrated.fontSize": 16,
     // END laptop
     "editor.fontFamily": "'Envy Code R', monospace",
     "editor.formatOnType": true,

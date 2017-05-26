@@ -3,6 +3,7 @@ A collection of my configuration dotfiles
 # Installation
 1. Clone this repo in your home directory
 2. Use [GNU stow](http://www.gnu.org/software/stow/) to install the files you want
+2. Use [mir.qualia](https://github.com/darkfeline/mir.qualia) to auto comment/uncomment config sections to handle more devices
 
 # Content
 ## `/atom`

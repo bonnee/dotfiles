@@ -49,7 +49,7 @@ set $fontfam     Aller
 # END desktop
 
 # BEGIN laptop
-#set $fontsize    12
+#set $fontsize    13
 # END laptop
 
 

@@ -1,10 +1,10 @@
 [global]
     # BEGIN desktop
-    font = Aller 15
+    #font = Aller 15
     # END desktop
 
     # BEGIN laptop
-    font = Aller 12
+    #font = Aller 14
     # END laptop
  
     # allow a small subset of html markup:
@@ -66,7 +66,7 @@
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
     #geometry = "300x5-30+20"
-    geometry = "400x30-15-40"
+    geometry = "450x60-15-40"
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
     transparency = 20

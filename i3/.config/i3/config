@@ -108,7 +108,7 @@ bindsym $mod+Return exec --no-startup-id $terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam $fontsize"'
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam $fontsize"
 
 # change focus
 bindsym $mod+Left focus left
@@ -183,8 +183,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 # END laptop
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && pkill -SIGRTMIN+10 i3blocks
+set $unmute amixer set Master unmute
+bindsym XF86AudioRaiseVolume exec --no-startup-id $unmute && amixer set Master 5%+ && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id $unmute && amixer set Master 5%- && pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
 
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause

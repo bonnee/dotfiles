@@ -43,7 +43,7 @@ separator=false
 # See the script for details.
 [volume]
 #label=VOL
-label=
+label=♪
 instance=Master
 #instance=PCM
 interval=once
@@ -61,8 +61,13 @@ interval=5
 #separator=false
 
 # BEGIN laptop
-[wifi]
-interval=10
+#[ssid]
+#command=$HOME/.config/i3/blocks/ssid
+#interval=10
+#separator=false
+#
+#[wifi]
+#interval=10
 # END laptop
 
 # Memory usage
@@ -91,7 +96,7 @@ separator=false
 
 [temperature]
 label=TEMP
-command=echo "$(sensors coretemp-isa-0000 | awk '/Physical/ { print $4 }')"
+#command=echo "$(sensors coretemp-isa-0000 | awk '/Physical/ { print $4 }')"
 interval=10
 
 # Battery indicator
@@ -99,11 +104,11 @@ interval=10
 # The battery instance defaults to 0.
 
 # BEGIN laptop
-[battery]
-label=BAT
+#[battery]
+##label=BAT
 #label=⚡
-#instance=1
-interval=10
+##instance=1
+#interval=10
 # END laptop
 
 # Key indicators

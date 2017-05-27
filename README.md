@@ -6,8 +6,6 @@ A collection of my configuration dotfiles
 2. Use [mir.qualia](https://github.com/darkfeline/mir.qualia) to auto comment/uncomment config sections to handle more devices
 
 # Content
-## `/atom`
-Configuration for [Atom] (https://atom.io/)
 ## `/bash`
 Configuration for [Bash] (https://savannah.gnu.org/git/?group=bash)
 ## `/compton`

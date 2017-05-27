@@ -18,4 +18,9 @@ xset +fp /usr/share/fonts/misc
 xset fp rehash                                                                           
 wmname LG3D
 
+xautolock -detectsleep \
+          -notify  5 -notifier "xset dpms force off" \
+          -time     8 -locker   "lock.sh" \
+          -killtime 10 -killer   "systemctl suspend" &
+
 exec i3

@@ -62,7 +62,9 @@ alias ....='cd ../../..'
 alias vi='vim'
 alias xbuild-rel="xbuild /p:Configuration=Release"
 alias todo='todo.sh'
-
+if [ -x /usr/bin/intel_gpu_top ]; then
+	alias itop='/usr/bin/intel_gpu_top'
+fi
 BOLD="\[\e[1m\]"
 RST_BOLD="\[\e[21m\]"
 

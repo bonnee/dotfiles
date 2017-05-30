@@ -5,6 +5,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+BOLD="\[\e[1m\]"
+RST_BOLD="\[\e[21m\]"
+
+RST_COLOR="\[\e[39m\]"
+USR_COLOR="\[\e[94m\]"
+HST_COLOR="\[\e[33m\]"
+GIT_COLOR="\[\e[32m\]"
+RED="\[\e[31m\]"
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -61,6 +70,8 @@ alias ....='cd ../../..'
 
 if [ -x /usr/bin/trash-put ]; then
     alias rm='trash-put'
+else
+    alias rm="print $REDNot using trash$RST_COLOR && rm"
 fi
 
 alias vi='vim'
@@ -69,13 +80,6 @@ alias todo='todo.sh'
 if [ -x /usr/bin/intel_gpu_top ]; then
 	alias itop='/usr/bin/intel_gpu_top'
 fi
-BOLD="\[\e[1m\]"
-RST_BOLD="\[\e[21m\]"
-
-RST_COLOR="\[\e[39m\]"
-USR_COLOR="\[\e[94m\]"
-HST_COLOR="\[\e[33m\]"
-GIT_COLOR="\[\e[32m\]"
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     host="@$HST_COLOR\h$RST_COLOR"

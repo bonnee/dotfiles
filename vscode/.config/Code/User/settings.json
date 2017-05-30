@@ -22,5 +22,6 @@
     "omnisharp.useMono": true,
     "C_Cpp.clang_format_formatOnSave": true,
     "python.formatting.formatOnSave": false,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "gitProjectManager.baseProjectsFolders": ["/home/bonnee/src"]
 }

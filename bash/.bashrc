@@ -59,6 +59,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+if [ -x /usr/bin/trash-put ]; then
+    alias rm='trash-put'
+fi
+
 alias vi='vim'
 alias xbuild-rel="xbuild /p:Configuration=Release"
 alias todo='todo.sh'

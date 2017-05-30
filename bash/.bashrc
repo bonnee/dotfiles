@@ -71,7 +71,7 @@ alias ....='cd ../../..'
 if [ -x /usr/bin/trash-put ]; then
     alias rm='trash-put'
 else
-    alias rm="print $REDNot using trash$RST_COLOR && rm"
+    alias rm='echo -e "\e[31mNot using trash\e[39m" && rm -i'
 fi
 
 alias vi='vim'

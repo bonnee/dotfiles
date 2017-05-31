@@ -43,25 +43,30 @@ separator=false
 # See the script for details.
 [volume]
 #label=VOL
-label=♪
+label=
 instance=Master
 #instance=PCM
 interval=once
 signal=10
 
-
 [disk-io]
-label=IO
+label=
 command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
 interval=persist
 
+[ip-address]
+label=
+command=$HOME/.config/i3/blocks/ip-address
+interval=10
+separator=false
+
 [bandwidth]
-label=NET
 interval=5
 #separator=false
 
 # BEGIN laptop
 #[ssid]
+#label=
 #command=$HOME/.config/i3/blocks/ssid
 #interval=10
 #separator=false
@@ -74,7 +79,7 @@ interval=5
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
+label=
 separator=false
 interval=30
 
@@ -83,19 +88,19 @@ interval=30
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU
+label=
 interval=5
 min_width=CPU: 100.00%
 align=center
 separator=false
 
 [load_average]
-label=LOAD
+label=
 interval=10
 separator=false
 
 [temperature]
-label=TEMP
+label=
 #command=echo "$(sensors coretemp-isa-0000 | awk '/Physical/ { print $4 }')"
 interval=10
 
@@ -104,9 +109,16 @@ interval=10
 # The battery instance defaults to 0.
 
 # BEGIN laptop
+#[batterybar]
+#command=$HOME/.config/i3/blocks/batterybar
+#label=BAT
+#interval=10
+#min_width=BAT ■■■■■
+#separator=false
+#
 #[battery]
 ##label=BAT
-#label=⚡
+##label=
 ##instance=1
 #interval=10
 # END laptop

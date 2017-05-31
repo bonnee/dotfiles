@@ -5,7 +5,7 @@
 # END desktop
 
 # BEGIN laptop
-#font = Envy Code R 14
+#font = Envy Code R 12
 # END laptop
 
 [colors]

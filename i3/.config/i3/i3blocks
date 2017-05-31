@@ -101,7 +101,6 @@ separator=false
 
 [temperature]
 label=
-#command=echo "$(sensors coretemp-isa-0000 | awk '/Physical/ { print $4 }')"
 interval=10
 
 # Battery indicator

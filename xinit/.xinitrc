@@ -20,8 +20,8 @@ wmname LG3D
 
 xautolock -detectsleep \
 # BEGIN desktop
-          #-notify   10 -notifier "xset dpms force off" \
-          #-time     15 -locker   "lock.sh"
+#          -notify   10 -notifier "xset dpms force off" \
+#          -time     15 -locker   "lock.sh"
 # END desktop
 # BEGIN laptop
           #-notify  5 -notifier "xset dpms force off" \

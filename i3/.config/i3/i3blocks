@@ -31,10 +31,10 @@ markup=pango
 
 [time]
 command=date '+%d/%m %H:%M'
-min_width=400
+#min_width=400
 align=left
 interval=5
-separator=false
+#separator=false
 
 # Volume indicator
 #
@@ -54,14 +54,14 @@ label=
 command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
 interval=persist
 
-[ip-address]
+[bandwidth]
 label=
-command=$HOME/.config/i3/blocks/ip-address
-interval=10
+interval=5
 separator=false
 
-[bandwidth]
-interval=5
+[ip-address]
+command=$HOME/.config/i3/blocks/ip-address
+interval=10
 #separator=false
 
 # BEGIN laptop
@@ -81,7 +81,7 @@ interval=5
 [memory]
 label=
 separator=false
-interval=30
+interval=5
 
 # CPU usage
 #

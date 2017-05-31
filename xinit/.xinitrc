@@ -29,5 +29,5 @@ wmname LG3D
 #          -time     8 -locker   "lock.sh" \
 #          -killtime 10 -killer   "systemctl suspend" &
 # END laptop
-#compton --config $HOME/.config/compton.conf &
+compton --config $HOME/.config/compton.conf &
 exec i3

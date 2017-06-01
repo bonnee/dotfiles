@@ -310,7 +310,7 @@ bar {
 	position bottom
 	
 	# BEGIN desktop
-	#font pango:Aller, FontAwesome 8
+	#font pango:Aller, FontAwesome 10
 	# END desktop
 	
 	# BEGIN laptop

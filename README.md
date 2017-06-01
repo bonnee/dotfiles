@@ -15,10 +15,10 @@ Configuration for [Dunst](http://knopwob.org/dunst/index.html)
 ## `/htop`
 Configuration for [htop](http://hisham.hm/htop/)
 ## `/i3`
-* `.config/config` [i3-gaps](https://github.com/Airblader/i3) config
-* `.config/i3blocks` [i3blocks](https://github.com/vivien/i3blocks) config
-* `.config/blocks/` container of custom i3blocks blocklets
-* `.config/wallpaper.png` my wallpaper (I know, it sucks)
+* `.config/i3/config` [i3-gaps](https://github.com/Airblader/i3) config
+* `.config/i3/i3blocks` [i3blocks](https://github.com/vivien/i3blocks) config
+* `.config/i3/blocks/` my custom blocklets
+* `.config/i3/wallpaper.png` my wallpaper
 ## `/neofetch`
 Configuration for [Neofetch](https://github.com/dylanaraps/neofetch)
 ## `/scripts`
@@ -29,6 +29,9 @@ Configuration for [Synergy](http://symless.com/synergy/)
 Configuration for [termite](https://github.com/thestinger/termite)
 ## `/vscode`
 Configuration for [Visual Studio Code](https://github.com/Microsoft/vscode)
+## `/xinit`
+My .xinitrc
 ## `/xresources`
-Configuration for [X Resources](https://wiki.archlinux.org/index.php/X_resources)  
+X Resources file
+
 WARN: To use xresources files you have to add `#include ".Xresources.d/FILENAME` for every file you want to include into `~/.Xresources`

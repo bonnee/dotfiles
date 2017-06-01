@@ -59,12 +59,12 @@ label=
 interval=5
 separator=false
 
-[ip-address]
-command=$HOME/.config/i3/blocks/ip-address
-interval=10
-#separator=false
-
 # BEGIN laptop
+#[ip-address]
+#command=$HOME/.config/i3/blocks/ip-address
+#interval=10
+##separator=false
+#
 #[ssid]
 #label=
 #command=$HOME/.config/i3/blocks/ssid

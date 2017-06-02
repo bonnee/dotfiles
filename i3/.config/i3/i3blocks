@@ -28,12 +28,19 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+# BEGIN desktop
+#interval=2
+# END desktop
+# BEGIN laptop
+#interval=5
+# END laptop
+
+
 
 [time]
 command=date '+%d/%m %H:%M'
 #min_width=400
 align=left
-interval=5
 #separator=false
 
 # Volume indicator
@@ -56,7 +63,6 @@ interval=persist
 
 [bandwidth]
 label=
-interval=5
 separator=false
 
 # BEGIN laptop
@@ -81,7 +87,6 @@ separator=false
 [memory]
 label=
 separator=false
-interval=5
 
 # CPU usage
 #
@@ -89,19 +94,16 @@ interval=5
 # see the script for details.
 [cpu_usage]
 label=
-interval=5
 min_width=CPU: 100.00%
 align=center
 separator=false
 
 [load_average]
 label=
-interval=10
 separator=false
 
 [temperature]
 label=
-interval=10
 
 # Battery indicator
 #

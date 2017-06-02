@@ -31,6 +31,7 @@ markup=pango
 # BEGIN desktop
 #interval=2
 # END desktop
+
 # BEGIN laptop
 #interval=5
 # END laptop

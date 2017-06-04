@@ -183,11 +183,11 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 # END laptop
 
-set $unmute amixer set Master unmute
-bindsym XF86AudioRaiseVolume exec --no-startup-id $unmute && amixer set Master 5%+ && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id $unmute && amixer set Master 5%- && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle && pkill -SIGRTMIN+10 i3blocks
-
+set $unmute amixer -q set Master unmute
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ unmute && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%- unmute && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -195,6 +195,8 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+bindsym Print exec --no-startup-id scrot
 
 bindsym XF86Launch8 exec --no-startup-id $locker
 bindsym $mod+l exec --no-startup-id $locker

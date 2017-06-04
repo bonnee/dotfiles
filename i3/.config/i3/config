@@ -198,6 +198,7 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym XF86Launch8 exec --no-startup-id $locker
 bindsym $mod+l exec --no-startup-id $locker
+bindsym $mod+Shift+l exec --no-startup-id $locker && xset dpms force off
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Escape mode "$mode_system"

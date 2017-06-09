@@ -198,9 +198,17 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym Print exec --no-startup-id scrot
 
-bindsym XF86Launch8 exec --no-startup-id $locker
+# BEGIN desktop
+#set $hardlock XF86Launch8
+# END desktop
+# BEGIN laptop
+#set $hardlock Mod4+Shift+l
+# END laptop
+
 bindsym $mod+l exec --no-startup-id $locker
-bindsym $mod+Shift+l exec --no-startup-id $locker && xset dpms force off
+bindsym $hardlock exec --no-startup-id $locker && xset dpms force off
+#bindsym XF86Launch8 exec --no-startup-id $locker
+
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Escape mode "$mode_system"

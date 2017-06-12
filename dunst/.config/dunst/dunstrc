@@ -1,10 +1,10 @@
 [global]
     # BEGIN desktop
-    #font = Aller 15
+    #font = "Aller, Font Awesome 15"
     # END desktop
 
     # BEGIN laptop
-    #font = Aller 14
+    #font = "Aller, Font Awesome 14"
     # END laptop
  
     # allow a small subset of html markup:

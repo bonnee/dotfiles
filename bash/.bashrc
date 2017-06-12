@@ -43,6 +43,9 @@ export HISTFILESIZE=20000
 export HISTSIZE=10000
 # Combine multiline commands into one in history
 shopt -s cmdhist
+# Auto cd when a path is entered
+shopt -s autocd
+
 # Ignore duplicates, ls without options and builtin commands
 HISTCONTROL=ignoredups
 HISTIGNORE="&:ls:[bf]g:exit"

@@ -23,12 +23,24 @@ get_backlight() {
     xbacklight -get
 }
 
+get_brightness() {
+    xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1
+}
+
 raise_backlight() {
-    xbacklight -ctrl $1 -inc $2
+    if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) <= 1.0 ") )); then
+        xrandr --output eDP1 --brightness 1.2
+    else
+        xbacklight -ctrl $1 -inc $2
+    fi
 }
 
 lower_backlight() {
-    xbacklight -ctrl $1 -dec $2
+    if (( $(get_backlight) == "100" )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
+	xrandr --output eDP1 --brightness 1
+    else
+        xbacklight -ctrl $1 -dec $2
+    fi
 }
 
 set_backlight() {
@@ -36,16 +48,16 @@ set_backlight() {
 }
 
 get_backlight_icon() {
-    local vol="$1"
+    local bl="$1"
     local icon
 
-    if [ "${vol}" -eq "100" ]; then
+    if [ "${bl}" -eq "100" ]; then
         icon="stock_backlight-max"
-    elif [ "${vol}" -ge "70" ]; then
+    elif [ "${bl}" -ge "70" ]; then
         icon="stock_backlight-high"
-    elif [ "${vol}" -ge "40" ]; then
+    elif [ "${bl}" -ge "40" ]; then
         icon="stock_backlight-med"
-    elif [ "${vol}" -gt "0" ]; then
+    elif [ "${bl}" -gt "0" ]; then
         icon="stock_backlight-min"
     else
         icon="stock_backlight-0"
@@ -56,9 +68,9 @@ get_backlight_icon() {
 
 notify_backlight() {
     local device="$1"
-    vol=$(get_backlight "$device")
-    icon=$(get_backlight_icon "$vol")
-    notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:backlight "backlight ${vol}%"
+    bl=$(get_backlight "$device")
+    icon=$(get_backlight_icon "$bl")
+    notify-send -u low -t 1 -i "${icon}" -h int:value:"${bl}" -h string:synchronous:backlight "backlight ${bl}%"
 }
 
 # Updates the status line.

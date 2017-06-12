@@ -104,6 +104,9 @@ label=
 separator=false
 
 [temperature]
+# BEGIN laptop
+#command=/usr/lib/i3blocks/temperature --chip acpitz-virtual-0
+# END laptop
 label=
 
 # Battery indicator

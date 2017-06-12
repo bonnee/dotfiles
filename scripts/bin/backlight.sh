@@ -1,7 +1,23 @@
+#!/bin/bash
+#
+#  i3-backlight
+#
+#  Backlight control and notifications for i3wm.
+#
+#  Requires:
+#    notify-osd
+#    xbacklight
+#    awk
+#
+#  Copyright (c) 2017 Matteo Bonora. All rights reserved.
+#  License: GNU Lesser General Public License v3
+#
+#  Author: Matteo Bonora <bonora.matteo@gmail.com>
+#  URL: https://github.com/Bonnee/dotfiles/blob/master/scripts/bin/backlight.sh
+
 get_default_device() {
     xbacklight -list | head -n1
 }
-
 
 get_backlight() {
     xbacklight -get

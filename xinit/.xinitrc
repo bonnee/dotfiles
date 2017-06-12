@@ -22,6 +22,7 @@ wmname LG3D
 #xautolock -detectsleep \
 #          #-notify   10 -notifier "xset dpms force off" \
 #          #-time     15 -locker   "lock.sh"
+#numlockx &
 # END desktop
 # BEGIN laptop
 #xautolock -detectsleep \
@@ -29,5 +30,6 @@ wmname LG3D
 #          -time     8 -locker   "lock.sh" \
 #          -killtime 10 -killer   "systemctl suspend" &
 # END laptop
+
 compton --config $HOME/.config/compton.conf &
 exec i3

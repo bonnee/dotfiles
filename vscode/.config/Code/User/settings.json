@@ -1,11 +1,12 @@
 // Place your settings in this file to overwrite the default settings
 {
     // BEGIN laptop
-    //"editor.fontSize": 19,
-    //"markdown.preview.fontSize": 18,
+    //"editor.fontSize": 18,
+    //"markdown.preview.fontSize": 17,
     //"terminal.integrated.fontSize": 16,
     // END laptop
-    "editor.fontFamily": "'Envy Code R', monospace",
+    "editor.fontFamily": "'Fira Code', 'Envy Code R', monospace",
+    "editor.fontLigatures": true,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,

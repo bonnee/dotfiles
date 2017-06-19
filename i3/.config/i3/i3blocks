@@ -39,9 +39,7 @@ markup=pango
 
 
 [time]
-command=date '+%d/%m %H:%M'
-#min_width=400
-align=left
+command=date '+%^a %d %^b %H:%M'
 #separator=false
 
 # Volume indicator
@@ -114,16 +112,16 @@ label=
 # The battery instance defaults to 0.
 
 # BEGIN laptop
-#[batterybar]
-#command=$HOME/.config/i3/blocks/batterybar
-#label=BAT
-#interval=10
-#min_width=BAT ■■■■■
-#separator=false
+##[batterybar]
+##command=$HOME/.config/i3/blocks/batterybar
+##label=BAT
+##interval=10
+##min_width=BAT ■■■■■
+##separator=false
 #
 #[battery]
 ##label=BAT
-##label=
+#label=
 ##instance=1
 #interval=10
 # END laptop

@@ -133,7 +133,7 @@ get_volume_icon() {
 
 # Display a notification indicating the volume is muted.
 notify_muted() {
-    notify-send -u low -t 1 -i stock_volume-mute -h int:value:0 -h string:synchronous:volume "Volume muted"
+    notify-send -u low -t 1 -i stock_volume-mute -h int:value:0 -h string:synchronous:volume "Muted"
 }
 
 # Display a notification indicating the current volume.

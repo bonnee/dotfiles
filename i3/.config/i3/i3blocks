@@ -55,12 +55,12 @@ instance=Master
 interval=once
 signal=10
 
-[disk-io]
-label=
 # BEGIN desktop
+#[disk-io]
+#label=
+#interval=persist
 #command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
 # END desktop
-
 # BEGIN laptop
 #command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
 # END laptop

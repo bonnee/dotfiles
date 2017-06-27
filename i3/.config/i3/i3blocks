@@ -57,8 +57,7 @@ signal=10
 
 [disk-io]
 label=
-command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
-interval=persist
+command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 0 -T 102400
 
 [bandwidth]
 label=
@@ -112,17 +111,8 @@ label=
 # The battery instance defaults to 0.
 
 # BEGIN laptop
-##[batterybar]
-##command=$HOME/.config/i3/blocks/batterybar
-##label=BAT
-##interval=10
-##min_width=BAT ■■■■■
-##separator=false
-#
 #[battery]
-##label=BAT
 #label=
-##instance=1
 #interval=10
 # END laptop
 

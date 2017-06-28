@@ -27,19 +27,38 @@ get_brightness() {
     xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1
 }
 
+# Raises the backlight or <brightness.
+#
+# Arguments:
+#   device  (string) The device to modify.
+#   amount    (int) The % of brightness to add.
 raise_backlight() {
-    if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) <= 1.0 ") )); then
+    if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) <= 1.0") )); then
+        # If backlight is already topped out, then increase brightness to make text more readable
         xrandr --output eDP1 --brightness 1.2
-    else
-        xbacklight -ctrl $1 -inc $2
+    else if (( $(get_backlight) == 1 )); then
+            # Assures that final backlight value is a multiple of amount
+            set_backlight "$1" "$2"
+        else
+            xbacklight -ctrl $1 -inc $2
+        fi
     fi
 }
 
+# Lowers the backlight or brightness.
+#
+# Arguments:
+#   device  (string) The device to modify.
+#   amount    (int) The % of brightness to subtract.
 lower_backlight() {
-    if (( $(get_backlight) == "100" )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
-	xrandr --output eDP1 --brightness 1
-    else
-        xbacklight -ctrl $1 -dec $2
+    # make the same controls of raise_backlight, but reversed.
+    if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
+	    xrandr --output eDP1 --brightness 1
+    else if (( $(get_backlight) - "$2" < 1 )); then
+            set_backlight "$1" "1"
+        else
+            xbacklight -ctrl $1 -dec $2
+        fi
     fi
 }
 

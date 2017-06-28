@@ -18,6 +18,9 @@ xset +fp /usr/share/fonts/misc
 xset fp rehash
 wmname LG3D
 
+export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dawt.useSystemAAFontSettings=gasp'
+
+
 # BEGIN desktop
 #export GDK_SCALE=1.7
 #export GDK_DPI_SCALE=0.7

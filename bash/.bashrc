@@ -36,7 +36,7 @@ function fawk {
 export TERM="xterm"
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
-export EDITOR=nano
+export EDITOR=vim
 
 # bash history mods
 export HISTFILESIZE=20000

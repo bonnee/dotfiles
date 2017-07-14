@@ -36,8 +36,6 @@ markup=pango
 #interval=5
 # END laptop
 
-
-
 [time]
 command=date '+%^a %d %^b %H:%M'
 #separator=false
@@ -78,11 +76,9 @@ separator=false
 #[ssid]
 #label=
 #command=$HOME/.config/i3/blocks/ssid
-#interval=10
 #separator=false
 #
 #[wifi]
-#interval=10
 # END laptop
 
 # Memory usage

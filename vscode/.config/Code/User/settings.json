@@ -17,7 +17,7 @@
     "files.autoSave": "afterDelay",
     "extensions.autoUpdate": true,
     "terminal.external.linuxExec": "termite",
-    "workbench.colorTheme": "One Monokai",
+    "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "vs-seti",
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "omnisharp.useMono": true,

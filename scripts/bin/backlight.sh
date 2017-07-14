@@ -35,7 +35,7 @@ get_brightness() {
 raise_backlight() {
     if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) <= 1.0") )); then
         # If backlight is already topped out, then increase brightness to make text more readable
-        xrandr --output eDP1 --brightness 1.2
+	     set_brightness "1.2"
     else if (( $(get_backlight) == 1 )); then
             # Assures that final backlight value is a multiple of amount
             set_backlight "$1" "$2"
@@ -53,7 +53,7 @@ raise_backlight() {
 lower_backlight() {
     # make the same controls of raise_backlight, but reversed.
     if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
-	    xrandr --output eDP1 --brightness 1
+	     set_brightness "1"
     else if (( $(get_backlight) - "$2" < 1 )); then
             set_backlight "$1" "1"
         else
@@ -64,6 +64,10 @@ lower_backlight() {
 
 set_backlight() {
     xbacklight -ctrl $1 -set $2
+}
+
+set_brightness() {
+    xrandr --output $(xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1) --brightness $1
 }
 
 get_backlight_icon() {

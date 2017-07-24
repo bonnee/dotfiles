@@ -103,10 +103,14 @@ label=
 separator=false
 
 [temperature]
-# BEGIN laptop
-#command=/usr/lib/i3blocks/temperature --chip acpitz-virtual-0
-# END laptop
 label=
+# BEGIN laptop
+#command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
+#
+#[fan]
+#label=❄
+#command=$HOME/.config/i3/blocks/fan
+# END laptop
 
 # Battery indicator
 #

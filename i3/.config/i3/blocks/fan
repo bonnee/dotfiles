@@ -1,0 +1,7 @@
+#!/bin/bash
+
+RPM=$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')
+
+if [[ "${RPM}" != "0" ]]; then
+  echo "${RPM} RPM"
+fi

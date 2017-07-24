@@ -26,6 +26,5 @@
     "window.zoomLevel": 0,
     "gitProjectManager.baseProjectsFolders": [
         "/home/bonnee/src"
-    ],
-    "workbench.welcome.enabled": true
+    ]
 }

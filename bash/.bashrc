@@ -14,6 +14,10 @@ HST_COLOR="\[\e[33m\]"
 GIT_COLOR="\[\e[32m\]"
 RED="\[\e[31m\]"
 
+if [[ $EUID -eq "0" ]]; then
+    USR_COLOR=$RED
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).

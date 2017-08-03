@@ -1,0 +1,17 @@
+#!/bin/bash
+
+channel=$(iw dev ${1} info | grep channel | awk '{print $3}' | cut -c2-)
+
+if [[ $channel != "" ]]; then
+  channel=$(echo "scale=1;$channel/1000" | bc)
+  if [[ $channel > 3 ]]; then
+    color='#00FF00'
+  else
+    color='yellow'
+  fi
+fi
+
+pre="<span color='$color'>"
+aft="</span>"
+
+echo "$pre$channel GHz $aft"

@@ -68,10 +68,7 @@ label=
 separator=false
 
 # BEGIN laptop
-#[ip-address]
-#command=$HOME/.config/i3/blocks/ip-address
-#interval=10
-##separator=false
+#[iface]
 #
 #[ssid]
 #label=
@@ -79,6 +76,11 @@ separator=false
 #separator=false
 #
 #[wifi]
+#separator=false
+#
+#[wlanfreq]
+#command=$HOME/.config/i3/blocks/wlanfreq wlan0
+#
 # END laptop
 
 # Memory usage

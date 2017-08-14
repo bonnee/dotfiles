@@ -1,9 +1,11 @@
 // Place your settings in this file to overwrite the default settings
 {
     // BEGIN laptop
-    //"editor.fontSize": 18,
-    //"markdown.preview.fontSize": 17,
-    //"terminal.integrated.fontSize": 16,
+//    "editor.fontSize": 12,
+//    "markdown.preview.fontSize": 12,
+//    "terminal.integrated.fontSize": 12,
+//    "window.zoomLevel": -1,
+//
     // END laptop
     "editor.fontFamily": "'Fira Code Retina', 'Envy Code R', monospace",
     "editor.fontLigatures": true,
@@ -23,7 +25,6 @@
     "omnisharp.useMono": true,
     "C_Cpp.clang_format_formatOnSave": true,
     "python.formatting.formatOnSave": false,
-    "window.zoomLevel": 0,
     "gitProjectManager.baseProjectsFolders": [
         "/home/bonnee/src"
     ]

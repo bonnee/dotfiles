@@ -3,7 +3,7 @@
 ! END desktop
 
 ! BEGIN laptop
-!Xft.dpi:			108
+!Xft.dpi:			166
 ! END laptop
 
 Xft.autohint:			0

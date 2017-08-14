@@ -1,5 +1,5 @@
 ! BEGIN desktop
-!Xft.dpi:			150
+!Xft.dpi:			157
 ! END desktop
 
 ! BEGIN laptop
@@ -8,7 +8,7 @@
 
 Xft.autohint:			0
 Xft.lcdfilter:			lcddefault
-Xft.hintstyle:			hintfull
+Xft.hintstyle:			hintmedium
 Xft.hinting:			1
 Xft.antialias:			1
 Xft.rgba:			rgb

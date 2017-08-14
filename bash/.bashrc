@@ -81,7 +81,10 @@ else
     alias rm='echo -e "\e[31mNot using trash\e[39m" && rm -i'
 fi
 
-alias vi='vim'
+if [ -x /usr/bin/pbzip2 ]; then
+	alias bzip2='pbzip2'
+fi
+
 alias xbuild-rel="xbuild /p:Configuration=Release"
 alias todo='todo.sh'
 if [ -x /usr/bin/intel_gpu_top ]; then

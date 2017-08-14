@@ -4,7 +4,7 @@
     # END desktop
 
     # BEGIN laptop
-    #font = "Aller, Font Awesome 14"
+    #font = "Aller, Font Awesome 10"
     # END laptop
  
     # allow a small subset of html markup:

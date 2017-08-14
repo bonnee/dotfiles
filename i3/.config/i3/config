@@ -49,7 +49,7 @@ set $fontfam     Aller
 # END desktop
 
 # BEGIN laptop
-#set $fontsize    13
+#set $fontsize     9 
 # END laptop
 
 
@@ -59,7 +59,7 @@ set $terminal termite
 # END desktop
 
 # BEGIN laptop
-#set $browser chromium
+#set $browser chromium --force-device-scale-factor=1.2
 # END laptop
 
 set $background $HOME/.config/i3/wallpaper.png
@@ -114,7 +114,7 @@ bindsym $mod+Return exec --no-startup-id $terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam $fontsize"
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 10 -eh 2 -markup -width 50 -padding 1 -opacity "85" -bw 0 -font "$fontfam 13"
 
 # change focus
 bindsym $mod+Left focus left

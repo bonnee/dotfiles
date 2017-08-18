@@ -331,7 +331,7 @@ bar {
 	# END desktop
 	
 	# BEGIN laptop
-	#font pango:$fontfam, FontAwesome $fontsize
+	#font pango:$fontfam, FontAwesome 8
 	# END laptop
     
     status_command i3blocks -c $HOME/.config/i3/i3blocks

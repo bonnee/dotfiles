@@ -5,17 +5,41 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-BOLD="\[\e[1m\]"
-RST_BOLD="\[\e[21m\]"
+RST_ATTR="\e[0m"
+RST_COLOR="\e[39m"
 
-RST_COLOR="\[\e[39m\]"
-USR_COLOR="\[\e[94m\]"
-HST_COLOR="\[\e[33m\]"
-GIT_COLOR="\[\e[32m\]"
-RED="\[\e[31m\]"
+BOLD="\e[1m"
+DIM="\e[2m"
+ULINE="\e[4m"
+BLINK="\e[5m"
+REVERSE="\e[7m"
+HIDDEN="\e[8m"
+
+BLACK="\e[30m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+LGRAY="\e[37m"
+DGRAY="\e[90m"
+LRED="\e[91m"
+LGREEN="\e[92m"
+LYELLOW="\e[93m"
+LBLUE="\e[94m"
+LMAGENTA="\e[95m"
+LCYAN="\e[96m"
+WHITE="\e[97m"
+
+
+HST_COLOR=$YELLOW
+GIT_COLOR=$GREEN
 
 if [[ $EUID -eq "0" ]]; then
     USR_COLOR=$RED
+else
+    USR_COLOR=$LBLUE
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -109,16 +133,16 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     host="@$HST_COLOR\h$RST_COLOR"
 fi
 
-export PS1="$USR_COLOR\A \$(free_mem) $BOLD\u$RST_BOLD$RST_COLOR$host [\W$GIT_COLOR\$(__git_ps1 ' %s')$RST_COLOR]$ "
+export PS1="\[$USR_COLOR\]\A \$(free_mem) \[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]$ "
 export PS2='> '
 
 printf "Welcome $USER,\n"
 if hash todo.sh 2> /dev/null; then
-    printf "\n\e[1mHere are some things you need to do:\e[0m\n"
+    printf "$BOLD\nHere are some things you need to do:$RST_ATTR\n"
     todo.sh ls
 fi
 
 #printf "\nYou still have \e[1m$(free_mem) MB\e[21m of memory to mess with.\n"
 #printf "\nLoad is \e[1m$(load)\e[21m.\n"
 
-printf "\n\e[1;7m$HOSTNAME\e[0m [$(free_mem) M | $(load)] is ready.\n"
+printf "\n$BOLD$REVERSE$HOSTNAME$RST_ATTR [$GREEN$(free_mem) M$RST_COLOR | $GREEN$(load)$RST_COLOR] is ready.\n"

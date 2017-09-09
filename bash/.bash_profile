@@ -26,5 +26,5 @@ function :q {
     notvim;
 }
 
-[[ -f ~/.bash_profile.d ]] && source ~/.bash_profile.d/*
+[[ -f ~/.profile.d ]] && source ~/.profile.d/*
 [[ -f ~/.bashrc ]] && . ~/.bashrc

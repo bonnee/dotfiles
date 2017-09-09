@@ -30,11 +30,25 @@ fi
 
 bind "set show-all-if-ambiguous On"
 
-function fawk {
+# Functions
+
+# shortcut to awk '{print $1}' command
+fawk()
+{
     first="awk '{print "
     last="}'"
     cmd="${first}\$${1}${last}"
     eval $cmd
+}
+
+free_mem()
+{
+    printf $(($(cat /proc/meminfo | sed -n '3p' | fawk 2) / 1024))
+}
+
+load()
+{
+    cat /proc/loadavg | fawk 1
 }
 
 export TERM="xterm"
@@ -95,7 +109,8 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     host="@$HST_COLOR\h$RST_COLOR"
 fi
 
-PS1="$USR_COLOR\A $BOLD\u$RST_BOLD$RST_COLOR$host [\W$GIT_COLOR\$(__git_ps1 ' %s')$RST_COLOR]$ "
+export PS1="$USR_COLOR\A \$(free_mem) $BOLD\u$RST_BOLD$RST_COLOR$host [\W$GIT_COLOR\$(__git_ps1 ' %s')$RST_COLOR]$ "
+export PS2='> '
 
 printf "Welcome $USER,\n"
 if hash todo.sh 2> /dev/null; then
@@ -103,7 +118,7 @@ if hash todo.sh 2> /dev/null; then
     todo.sh ls
 fi
 
-printf "\nYou still have \e[1m$(($(cat /proc/meminfo | sed -n '3p' | fawk 2) / 1024)) MB\e[21m of memory to mess with.\n"
-printf "Load is \e[1m$(cat /proc/loadavg | fawk 1)\e[21m.\n"
+#printf "\nYou still have \e[1m$(free_mem) MB\e[21m of memory to mess with.\n"
+#printf "\nLoad is \e[1m$(load)\e[21m.\n"
 
-printf "\n\e[1;7m$HOSTNAME\e[0m is ready.\n"
+printf "\n\e[1;7m$HOSTNAME\e[0m [$(free_mem) M | $(load)] is ready.\n"

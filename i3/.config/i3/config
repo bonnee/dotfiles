@@ -6,6 +6,13 @@
 
 set $mod Mod4
 
+# BEGIN desktop
+#set $hardlock XF86Launch8
+# END desktop
+# BEGIN laptop
+#set $hardlock Mod4+Shift+l
+# END laptop
+
 set $grey        #9E9E9E
 set $black       #000000
 set $red         #F44336
@@ -187,6 +194,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # BEGIN laptop
 #bindsym XF86MonBrightnessUp exec --no-startup-id backlight.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
 #bindsym XF86MonBrightnessDown exec --no-startup-id backlight.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
+#
+#bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1 -u normal "¯\_(ツ)_/¯"
 # END laptop
 
 set $unmute amixer -q set Master unmute
@@ -204,17 +213,8 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym Print exec --no-startup-id scrot && notify-send -t 1 -u normal "Screenshot Taken!"
 
-# BEGIN desktop
-#set $hardlock XF86Launch8
-# END desktop
-# BEGIN laptop
-#set $hardlock Mod4+Shift+l
-# END laptop
-
 bindsym $mod+l exec --no-startup-id $locker
 bindsym $hardlock exec --no-startup-id $locker && xset dpms force off
-#bindsym XF86Launch8 exec --no-startup-id $locker
-
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Escape mode "$mode_system"
@@ -253,6 +253,7 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
+        bindsym h resize grow width 10 px or 10 ppt
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
@@ -269,7 +270,7 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"

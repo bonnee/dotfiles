@@ -33,26 +33,22 @@ LCYAN="\e[96m"
 WHITE="\e[97m"
 
 
-HST_COLOR=$YELLOW
-GIT_COLOR=$GREEN
-
 if [[ $EUID -eq "0" ]]; then
     USR_COLOR=$RED
 else
     USR_COLOR=$LBLUE
 fi
+HST_COLOR=$YELLOW
+GIT_COLOR=$GREEN
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
-if ! hash __git_ps1 2> /dev/null; then
-    source /usr/share/git/completion/git-prompt.sh
-fi
+export TERM="xterm"
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export EDITOR=vim
 
-bind "set show-all-if-ambiguous On"
+# bash history mods
+export HISTFILESIZE=20000
+export HISTSIZE=10000
 
 # Functions
 
@@ -75,14 +71,19 @@ load()
     cat /proc/loadavg | fawk 1
 }
 
-export TERM="xterm"
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export EDITOR=vim
 
-# bash history mods
-export HISTFILESIZE=20000
-export HISTSIZE=10000
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+if ! hash __git_ps1 2> /dev/null; then
+    source /usr/share/git/completion/git-prompt.sh
+fi
+
+bind "set show-all-if-ambiguous On"
+
 # Combine multiline commands into one in history
 shopt -s cmdhist
 # Auto cd when a path is entered
@@ -95,6 +96,16 @@ HISTIGNORE="&:ls:[bf]g:exit"
 # Quick and dirty tweak to make aliases available under sudo
 alias sudo='sudo '
 
+alias ll='ls -l'
+alias la='ls -a'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias xbuild-rel="xbuild /p:Configuration=Release"
+alias todo='todo.sh'
+
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -106,13 +117,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls -l'
-alias la='ls -a'
-
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-
 if [ -x /usr/bin/trash-put ]; then
     alias rm='trash-put'
 else
@@ -123,8 +127,6 @@ if [ -x /usr/bin/pbzip2 ]; then
 	alias bzip2='pbzip2'
 fi
 
-alias xbuild-rel="xbuild /p:Configuration=Release"
-alias todo='todo.sh'
 if [ -x /usr/bin/intel_gpu_top ]; then
 	alias itop='/usr/bin/intel_gpu_top'
 fi
@@ -133,16 +135,13 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     host="@$HST_COLOR\h$RST_COLOR"
 fi
 
-export PS1="\[$USR_COLOR\]\A \$(free_mem) \[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]$ "
-export PS2='> '
-
 printf "Welcome $USER,\n"
 if hash todo.sh 2> /dev/null; then
     printf "$BOLD\nHere are some things you need to do:$RST_ATTR\n"
     todo.sh ls
 fi
 
-#printf "\nYou still have \e[1m$(free_mem) MB\e[21m of memory to mess with.\n"
-#printf "\nLoad is \e[1m$(load)\e[21m.\n"
-
 printf "\n$BOLD$REVERSE$HOSTNAME$RST_ATTR [$GREEN$(free_mem) M$RST_COLOR | $GREEN$(load)$RST_COLOR] is ready.\n"
+
+export PS1="\[$USR_COLOR\]\A \$(free_mem) \[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]$ "
+export PS2='> '

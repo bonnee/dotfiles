@@ -27,6 +27,8 @@ Configuration for [Neofetch](https://github.com/dylanaraps/neofetch)
 Configuration for [Synergy](http://symless.com/synergy/)
 ## `/termite`
 Configuration for [termite](https://github.com/thestinger/termite)
+## `/vim`
+Configuration for [vim](https://vim.sourceforge.io/)
 ## `/vscode`
 Configuration for [Visual Studio Code](https://github.com/Microsoft/vscode)
 ## `/xinit`

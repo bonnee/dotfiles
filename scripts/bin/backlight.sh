@@ -27,7 +27,7 @@ get_brightness() {
     xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1
 }
 
-# Raises the backlight or <brightness.
+# Raises the backlight or brightness.
 #
 # Arguments:
 #   device  (string) The device to modify.

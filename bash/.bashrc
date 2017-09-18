@@ -132,7 +132,7 @@ if [ -x /usr/bin/intel_gpu_top ]; then
 fi
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    host="@$HST_COLOR\h$RST_COLOR"
+    host="@\[$HST_COLOR\]\h\[$RST_COLOR\]"
 fi
 
 printf "Welcome $USER,\n"

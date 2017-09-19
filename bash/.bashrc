@@ -117,12 +117,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-if [ -x /usr/bin/trash-put ]; then
-    alias rm='trash-put'
-else
-    alias rm='echo -e "\e[31mNot using trash\e[39m" && rm -i'
-fi
-
 if [ -x /usr/bin/pbzip2 ]; then
 	alias bzip2='pbzip2'
 fi
@@ -136,8 +130,8 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 fi
 
 printf "Welcome $USER,\n"
-if hash todo.sh 2> /dev/null; then
-    printf "$BOLD\nHere are some things you need to do:$RST_ATTR\n"
+if hash todo.sh ls 2> /dev/null; then
+    printf "$BOLD\nTODO:$RST_ATTR\n"
     todo.sh ls
 fi
 

@@ -38,7 +38,6 @@ markup=pango
 
 [time]
 command=date '+%^a %d %^b %H:%M'
-#separator=false
 
 # Volume indicator
 #
@@ -46,7 +45,6 @@ command=date '+%^a %d %^b %H:%M'
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-#label=VOL
 label=
 instance=Master
 #instance=PCM
@@ -83,20 +81,13 @@ separator=false
 #
 # END laptop
 
-# Memory usage
-#
-# The type defaults to "mem" if the instance is not specified.
-[memory]
-label=
-separator=false
-
 # CPU usage
 #
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
 label=
-min_width=CPU: 100.00%
+min_width=1 100.00%
 align=center
 separator=false
 
@@ -119,6 +110,10 @@ label=
 # The battery instance defaults to 0.
 
 # BEGIN laptop
+#[consumption]
+#command=awk '{print $1*10^-6 " W"}' /sys/class/power_supply/BAT1/power_now
+#separator=false
+#
 #[battery]
 #label=
 #interval=10

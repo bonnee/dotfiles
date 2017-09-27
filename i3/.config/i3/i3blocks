@@ -54,6 +54,8 @@ signal=10
 [disk-io]
 label=
 interval=persist
+min_width= R 000A W 000A
+align=center
 # BEGIN desktop
 #command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
 # END desktop
@@ -63,6 +65,8 @@ interval=persist
 
 [bandwidth]
 label=
+min_width= IN 000A OUT 000A
+align=center
 separator=false
 
 # BEGIN laptop
@@ -111,11 +115,13 @@ label=
 
 # BEGIN laptop
 #[consumption]
-#command=awk '{print $1*10^-6 " W"}' /sys/class/power_supply/BAT1/power_now
+#command=awk '{printf "%.1f W\n", $1*10^-6}' /sys/class/power_supply/BAT1/power_now
 #separator=false
 #
 #[battery]
 #label=
+#min_width= 100% AAA (00:00)
+#align=center
 #interval=10
 # END laptop
 

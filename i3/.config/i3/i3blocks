@@ -115,7 +115,7 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
 
 # BEGIN laptop
 #[consumption]
-#command=awk '{printf "%.1f W\n", $1*10^-6}' /sys/class/power_supply/BAT1/power_now
+#command=awk '{printf "%.1f W\n", $1*10^-6}' /sys/class/power_supply/BAT?/power_now
 #separator=false
 #
 #[battery]

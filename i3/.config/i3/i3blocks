@@ -101,9 +101,9 @@ separator=false
 
 [temperature]
 label=
+command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
+
 # BEGIN laptop
-#command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
-#
 #[fan]
 #label=❄
 #command=$HOME/.config/i3/blocks/fan

@@ -54,7 +54,7 @@ signal=10
 [disk-io]
 label=
 interval=persist
-min_width= R 000A W 000A
+min_width= R 000.0M W 000.0M
 align=center
 # BEGIN desktop
 #command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
@@ -65,7 +65,7 @@ align=center
 
 [bandwidth]
 label=
-min_width= IN 000A OUT 000A
+min_width= IN 000.0M OUT 000.0M
 align=center
 separator=false
 
@@ -108,10 +108,6 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
 #label=❄
 #command=$HOME/.config/i3/blocks/fan
 # END laptop
-
-# Battery indicator
-#
-# The battery instance defaults to 0.
 
 # BEGIN laptop
 #[consumption]

@@ -135,7 +135,7 @@ if hash todo.sh ls 2> /dev/null; then
     todo.sh ls
 fi
 
-printf "\n$BOLD$REVERSE$HOSTNAME$RST_ATTR [$GREEN$(free_mem) M$RST_COLOR | $GREEN$(load)$RST_COLOR] is ready.\n"
+printf "\n$BOLD$REVERSE$HOSTNAME$RST_ATTR is ready.\n"
 
-export PS1="\[$USR_COLOR\]\A \$(free_mem) \[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]$ "
+export PS1="\[$USR_COLOR\]\A \$(free_mem) \$(load) \[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]$ "
 export PS2='> '

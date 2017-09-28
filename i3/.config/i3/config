@@ -351,5 +351,7 @@ exec --no-startup-id $HOME/bin/autostart.sh
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id dunst &
 
-#exec --no-startup-id indicator-kdeconnect &
-
+# BEGIN desktop
+## Autostarting steam will open the window no matter what.
+#exec --no-startup-id steam-runtime -silent
+# END desktop

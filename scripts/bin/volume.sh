@@ -113,27 +113,27 @@ is_muted() {
 get_volume_icon() {
     local vol="$1"
     local icon
+    
+    base_path="/home/bonnee/.local/share/icons/notifications/"
 
-    if [ "${vol}" -eq "100" ]; then
-        icon="stock_volume-max"
-    elif [ "${vol}" -ge "70" ]; then
-        icon="stock_volume-high"
-    elif [ "${vol}" -ge "40" ]; then
-        icon="stock_volume-med"
+    if [ "${vol}" -ge "100" ]; then
+        icon="audio-volume-high"
+    elif [ "${vol}" -ge "50" ]; then
+        icon="audio-volume-medium"
     elif [ "${vol}" -gt "0" ]; then
-        icon="stock_volume-min"
+        icon="audio-volume-low"
     else
-        icon="stock_volume-0"
+        icon="audio-volume-muted"
     fi
 
-    echo "${icon}"
+    echo "${base_path}${icon}.png"
 }
 
 
 
 # Display a notification indicating the volume is muted.
 notify_muted() {
-    notify-send -u low -t 1 -i stock_volume-mute -h int:value:0 -h string:synchronous:volume "Muted"
+    notify-send -u low -t 1 -i audio-volume-muted -h int:value:0 -h string:synchronous:volume "Muted"
 }
 
 # Display a notification indicating the current volume.

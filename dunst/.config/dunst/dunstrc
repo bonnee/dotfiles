@@ -7,6 +7,14 @@
     #font = "Aller, Font Awesome 10"
     # END laptop
  
+    icon_path = /home/bonnee/.local/share/icons/notifications/
+
+    # Align icons left/right/off
+    icon_position = left
+
+    # Scale larger icons down to this size, set to 0 to disable
+    max_icon_size = 64
+
     # allow a small subset of html markup:
     # <b>bold</b>
     # <i>italic</i>
@@ -15,7 +23,7 @@
     #
     # for a complete reference see http://developer.gnome.org/pango/stable/PangoMarkupFormat.html
     # If markup is not allowed, those tags will be stripped out of the message.
-    allow_markup = yes
+    markup = yes
  
     # The format of the message. Possible variables are:
     #   %a  appname
@@ -147,7 +155,7 @@
  
     # redisplay last message(s)
     # On the US keyboard layout 'grave' is normally above TAB and left of '1'.
-    history = ctrl+grave
+    #history = ctrl+grave
  
     # context menu
     context = ctrl+shift+period
@@ -190,5 +198,5 @@
  
 [spotify]
 	appname="spotify"
-	urgency="LOW"
+	urgency="low"
 	icon="spotify-indicator"

@@ -131,8 +131,8 @@ get_volume_icon() {
 
 # Display a notification indicating the volume is muted.
 notify_muted() {
-    icon=$(get_volume_icon "-1")
-    notify-send -u low -t 1 -i "${icon}" -h int:value:0 -h string:synchronous:volume "Muted"
+    #icon=$(get_volume_icon "-1")
+    notify-send -u low -t 1 -i "${icon}" -h int:value:0 -h string:synchronous:volume "Volume"
 }
 
 # Display a notification indicating the current volume.
@@ -142,7 +142,7 @@ notify_muted() {
 notify_volume() {
     local sink="$1"
     vol=$(get_volume "$sink")
-    icon=$(get_volume_icon "$vol")
+    #icon=$(get_volume_icon "$vol")
     notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume "Volume"
 }
 

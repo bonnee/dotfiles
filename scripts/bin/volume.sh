@@ -113,12 +113,10 @@ is_muted() {
 get_volume_icon() {
     local vol="$1"
     local icon
-    
-    base_path="/home/bonnee/.local/share/icons/notifications/"
 
-    if [ "${vol}" -ge "100" ]; then
+    if [ "${vol}" -ge "70" ]; then
         icon="audio-volume-high"
-    elif [ "${vol}" -ge "50" ]; then
+    elif [ "${vol}" -ge "30" ]; then
         icon="audio-volume-medium"
     elif [ "${vol}" -gt "0" ]; then
         icon="audio-volume-low"
@@ -126,14 +124,15 @@ get_volume_icon() {
         icon="audio-volume-muted"
     fi
 
-    echo "${base_path}${icon}.png"
+    echo "${icon_path}${icon}.png"
 }
 
 
 
 # Display a notification indicating the volume is muted.
 notify_muted() {
-    notify-send -u low -t 1 -i audio-volume-muted -h int:value:0 -h string:synchronous:volume "Muted"
+    icon=$(get_volume_icon "-1")
+    notify-send -u low -t 1 -i "${icon}" -h int:value:0 -h string:synchronous:volume "Muted"
 }
 
 # Display a notification indicating the current volume.
@@ -144,7 +143,7 @@ notify_volume() {
     local sink="$1"
     vol=$(get_volume "$sink")
     icon=$(get_volume_icon "$vol")
-    notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume "Volume ${vol}%"
+    notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume "Volume"
 }
 
 # Updates the status line.
@@ -187,6 +186,7 @@ signal=""
 sink="$(get_default_sink_name)"
 statusline=""
 volume_amount="5"
+icon_path="/usr/share/icons/Adwaita/256x256/status/"
 
 while getopts ":d:hi:mns:t:u:v:" o; do
     case "${o}" in

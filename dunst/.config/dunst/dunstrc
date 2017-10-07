@@ -61,7 +61,6 @@
     # ignore newlines '\n' in notifications
     ignore_newline = no
  
- 
     # the geometry of the window
     # geometry [{width}]x{height}][+/-{x}+/-{y}]
     # The geometry of the message window.
@@ -113,10 +112,10 @@
     separator_height = 2
  
     # padding between text and separator>
-    padding = 16
+    padding = 8
  
     # horizontal padding
-    horizontal_padding = 2
+    horizontal_padding = 8
  
     # Define a color for the separator.
     # possible values are:

@@ -1,11 +1,10 @@
 // Place your settings in this file to overwrite the default settings
 {
     // BEGIN laptop
-//    "editor.fontSize": 12,
-//    "markdown.preview.fontSize": 12,
-//    "terminal.integrated.fontSize": 12,
-//    "window.zoomLevel": -1,
-//
+    //"editor.fontSize": 14,
+    //"markdown.preview.fontSize": 14,
+    //"terminal.integrated.fontSize": 14,
+    //"window.zoomLevel": -1.5,
     // END laptop
     "editor.fontFamily": "'Fira Code Retina', 'Envy Code R', monospace",
     "editor.fontLigatures": true,
@@ -31,8 +30,5 @@
     "C_Cpp.clang_format_formatOnSave": true,
     "C_Cpp.intelliSenseEngine": "Default",
     "python.formatting.formatOnSave": false,
-    "python.autoComplete.addBrackets": true,
-    "gitProjectManager.baseProjectsFolders": [
-        "/home/bonnee/src"
-    ]
+    "python.autoComplete.addBrackets": true
 }

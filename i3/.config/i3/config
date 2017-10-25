@@ -79,8 +79,6 @@ floating_modifier $mod
 focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
 
-new_window pixel 3
-
 # BEGIN desktop
 #hide_edge_borders both
 # END desktop
@@ -93,13 +91,13 @@ force_display_urgency_hint 500 ms
 
 popup_during_fullscreen smart
 
+new_window pixel 2
+
 # BEGIN desktop
-#new_window pixel 3
 #hide_edge_borders both
 # END desktop
 
 # BEGIN laptop
-#new_window pixel 2
 #hide_edge_borders smart
 # END laptop
 

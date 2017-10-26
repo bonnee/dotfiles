@@ -38,5 +38,4 @@ export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndF
 #          -killtime 10 -killer   "systemctl suspend" &
 # END laptop
 
-compton --config $HOME/.config/compton.conf &
 exec i3

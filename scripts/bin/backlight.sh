@@ -33,10 +33,12 @@ get_brightness() {
 #   device  (string) The device to modify.
 #   amount    (int) The % of brightness to add.
 raise_backlight() {
-    if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) <= 1.0") )); then
+    cur=$(get_backlight $device)
+
+    if (( $cur == "100" )) && (( $(bc <<< "$(get_brightness) <= 1.0") )); then
         # If backlight is already topped out, then increase brightness to make text more readable
 	     set_brightness "1.2"
-    else if (( $(get_backlight) == 1 )); then
+    else if (( $cur == 1 )); then
             # Assures that final backlight value is a multiple of amount
             set_backlight "$1" "$2"
         else
@@ -51,10 +53,11 @@ raise_backlight() {
 #   device  (string) The device to modify.
 #   amount    (int) The % of brightness to subtract.
 lower_backlight() {
+    cur=$(get_backlight $device)
     # make the same controls of raise_backlight, but reversed.
-    if (( $(get_backlight) == 100 )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
+    if (( $cur == "100" )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
 	     set_brightness "1"
-    else if (( $(get_backlight) - "$2" < 1 )); then
+    else if (( $cur - "$2" < 1 )); then
             set_backlight "$1" "1"
         else
             xbacklight -ctrl $1 -dec $2
@@ -91,7 +94,7 @@ get_backlight_icon() {
 
 notify_backlight() {
     local device="$1"
-    bl=$(get_backlight "$device")
+    bl=$(get_backlight $device)
     #icon=$(get_backlight_icon "$bl")
     notify-send -u low -t 1 -i "${icon}" -h int:value:"${bl}" -h string:synchronous:backlight "Backlight"
 }
@@ -133,6 +136,7 @@ device="$(get_default_device)"
 signal=""
 statusline=""
 backlight_amount="5"
+
 
 while getopts ":d:hi:mns:t:u:v:" o; do
     case "${o}" in

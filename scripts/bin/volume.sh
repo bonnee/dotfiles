@@ -143,7 +143,12 @@ notify_volume() {
     local sink="$1"
     vol=$(get_volume "$sink")
     #icon=$(get_volume_icon "$vol")
-    notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume "Volume"
+    text="Volume"
+    if [ "$vol" -gt "100" ]; then
+	text="$text [$vol%]"
+    fi
+    
+    notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume $text
 }
 
 # Updates the status line.

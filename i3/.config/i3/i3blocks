@@ -51,24 +51,7 @@ instance=Master
 interval=once
 signal=10
 
-[disk-io]
-label=
-interval=persist
-align=center
-# BEGIN desktop
-#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
-# END desktop
 # BEGIN laptop
-#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
-# END laptop
-
-[bandwidth]
-label=
-align=center
-separator=false
-
-# BEGIN laptop
-#[iface]
 #
 #[ssid]
 #label=
@@ -80,7 +63,26 @@ separator=false
 #
 #[wlanfreq]
 #command=$HOME/.config/i3/blocks/wlanfreq wlan0
+#separator=false
 #
+#[iface]
+#separator=false
+#
+# END laptop
+
+[bandwidth]
+label=
+align=center
+
+[disk-io]
+label=
+interval=persist
+align=center
+# BEGIN desktop
+#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
+# END desktop
+# BEGIN laptop
+#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
 # END laptop
 
 # CPU usage

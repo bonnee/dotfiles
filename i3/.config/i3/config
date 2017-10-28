@@ -119,7 +119,7 @@ bindsym $mod+Return exec --no-startup-id $terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons true -lines 10 -width 30 -markup -padding 0 -bw 0 -font "$fontfam 15"
+bindsym $mod+d exec --no-startup-id rofi -show drun -markup
 
 # change focus
 bindsym $mod+Left focus left

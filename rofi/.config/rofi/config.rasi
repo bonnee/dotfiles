@@ -1,10 +1,10 @@
 configuration {
-/*	modi: "window,run,ssh";*/
-	width: 30;
+	modi: "run,drun";
+	width: 50;
 	lines: 10;
 /*	columns: 1;*/
-	font: "Aller 13";
-	bw: 0;
+	font: "Aller 14";
+	bw: 4;
 /*	location: 0;*/
 	padding: 0;
 /*	yoffset: 0;*/
@@ -23,9 +23,9 @@ configuration {
 /*	sort: false;*/
 /*	levenshtein-sort: false;*/
 /*	case-sensitive: false;*/
-/*	cycle: true;*/
+	cycle: false;
 /*	sidebar-mode: false;*/
-/*	eh: 1;*/
+	eh: 1;
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
@@ -33,11 +33,11 @@ configuration {
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
-/*	line-margin: 2;*/
-/*	line-padding: 1;*/
+	line-margin: 0;
+	line-padding: 10;
 /*	filter: ;*/
-/*	separator-style: "dash";*/
-/*	hide-scrollbar: false;*/
+	separator-style: "solid";
+	hide-scrollbar: true;
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/

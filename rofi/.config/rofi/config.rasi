@@ -52,7 +52,7 @@ configuration {
 	color-normal: "#000000, #ffffff, #121212, #ffffff, #000000";
 	color-urgent: "#000000, #ff0000, #121212, #ffffff, #ff0000";
 	color-active: "#000000, #268bd2, #121212, #268bd2, #fdf6e3";
-	color-window: "argb:EE000000, argb:EEffffff, argb:EEffffff";
+	color-window: "#EE000000, #EEffffff, #EEffffff";
 /*	plugin-path: "/usr/lib/rofi";*/
 /*	pid: "/run/user/123/rofi.pid";*/
 /*	display-window: ;*/
@@ -134,3 +134,4 @@ configuration {
 /*	me-accept-entry: "MouseD1";*/
 /*	me-accept-custom: "Control+MouseD1";*/
 }
+@import "theme.rasi"

@@ -4,6 +4,7 @@
  * Copyright: Dave Davenport
  */
 * {
+    white:			 rgba ( 255, 255, 255, 100 % );
     selected-normal-foreground:  rgba ( 0, 0, 0, 80 % );
     foreground:                  rgba ( 255, 255, 255, 100 % );
     normal-foreground:           @foreground;
@@ -22,13 +23,13 @@
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 0, 0, 0, 80 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
-    selected-normal-background:  rgba ( 255, 255, 255, 100 % );
+    selected-normal-background:  @white;
     border-color:                @foreground;
     spacing:                     2;
     separatorcolor:              rgba ( 68, 68, 68, 100 % );
     urgent-background:           @background;
     selected-urgent-background:  @red;
-    alternate-urgent-foreground: @urgent-foreground;
+    alternate-urgent-foreground: rgba ( 255, 255, 255, 100 % );
     background-color:            rgba ( 0, 0, 0, 20 % );
     alternate-active-foreground: @active-foreground;
     active-background:           @background;

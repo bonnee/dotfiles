@@ -105,6 +105,7 @@ alias ....='cd ../../..'
 
 alias xbuild-rel="xbuild /p:Configuration=Release"
 alias todo='todo.sh'
+alias p="python"
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"

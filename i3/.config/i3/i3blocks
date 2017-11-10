@@ -28,13 +28,7 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
-# BEGIN desktop
-#interval=2
-# END desktop
-
-# BEGIN laptop
-#interval=5
-# END laptop
+interval=2
 
 [time]
 command=date '+%^a %d %^b %H:%M'
@@ -78,12 +72,7 @@ align=center
 label=
 interval=persist
 align=center
-# BEGIN desktop
-#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
-# END desktop
-# BEGIN laptop
-#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 5 -T 102400
-# END laptop
+command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
 
 # CPU usage
 #
@@ -117,7 +106,6 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
 #[battery]
 #label=
 #align=center
-#interval=10
 # END laptop
 
 # Key indicators

@@ -344,7 +344,7 @@ bar {
 
 exec --no-startup-id compton --config $HOME/.config/compton.conf &
 
-exec --no-startup-id termite -r dropterm --geometry=3840x1024
+exec --no-startup-id termite -r dropterm
 
 exec --no-startup-id $HOME/bin/autostart.sh
 

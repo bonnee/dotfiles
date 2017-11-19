@@ -27,7 +27,6 @@
     "workbench.iconTheme": "vs-seti",
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "omnisharp.useMono": true,
-    "C_Cpp.clang_format_formatOnSave": true,
     "C_Cpp.intelliSenseEngine": "Default",
     "python.formatting.formatOnSave": false,
     "python.autoComplete.addBrackets": true

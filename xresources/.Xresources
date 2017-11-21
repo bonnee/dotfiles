@@ -44,6 +44,3 @@ Xcursor.theme:			Bridge
 *cursorColor: #7B9C58
 *colorUL:     #7B8C58
 
-
-#include ".Xresources.d/rofi"
-

@@ -31,11 +31,13 @@ export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndF
 #          #-time     15 -locker   "lock.sh"
 #numlockx &
 # END desktop
+
 # BEGIN laptop
-#xautolock -detectsleep \
-#          -notify  5 -notifier "xset dpms force off" \
-#          -time     8 -locker   "lock.sh" \
-#          -killtime 10 -killer   "systemctl suspend" &
+#xss-lock -- lock.sh &
+##xautolock -detectsleep \
+##          -notify  5 -notifier "xset dpms force off" \
+##          -time     8 -locker   "lock.sh" \
+##          -killtime 10 -killer   "systemctl suspend" &
 # END laptop
 
 exec i3

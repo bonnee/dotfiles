@@ -9,14 +9,19 @@ set hlsearch	" Highlight all search results
 set smartcase	" Enable smart-case search
 set ignorecase	" Always case-insensitive
 set incsearch	" Searches for strings incrementally
-set mouse=a
+set mouse=a	" Enable mouse interaction
 
 set autoindent	" Auto-indent new lines
 set shiftwidth=2	" Number of auto-indent spaces
 set smartindent	" Enable smart-indent
 set smarttab	" Enable smart-tabs
 set softtabstop=2	" Number of spaces per Tab
- 
+
+"" Set cursor shape
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[4 q"
+
 "" Advanced
 set ruler	" Show row and column ruler information
  

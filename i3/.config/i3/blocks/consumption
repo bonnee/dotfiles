@@ -1,0 +1,10 @@
+#!/bin/bash
+
+w=$(awk '{printf "%.1f", $1*10^-6}' /sys/class/power_supply/BAT1/power_now )
+
+(( $(echo "${w} >= 6"| bc -l) ))&& color="#FFFF00"
+(( $(echo "${w} >= 10"| bc -l) ))&& color="#FF0000"
+
+echo "$w W"
+echo ""
+echo "$color"

@@ -9,6 +9,9 @@ if [[ $freq != "" ]]; then
   [[ $freq > 3 ]] && color='#00FF00' || color='#FFFF00'
 fi
 
-[ "$freq" ] && echo "$freq GHz"
-echo ""
-echo "$color"
+if [ "$freq" ]; then
+  echo "$freq GHz"
+  echo "$freq G"
+  echo "$color"
+fi
+

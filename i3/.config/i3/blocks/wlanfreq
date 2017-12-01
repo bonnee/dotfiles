@@ -10,8 +10,8 @@ if [[ $freq != "" ]]; then
 fi
 
 if [ "$freq" ]; then
-  echo "$freq GHz"
-  echo "$freq G"
+  echo "${freq}GHz"
+  echo "${freq}G"
   echo "$color"
 fi
 

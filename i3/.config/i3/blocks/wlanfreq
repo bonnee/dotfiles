@@ -1,17 +1,17 @@
 #!/bin/bash
 
-channel=$(iw dev ${1} info | grep channel | awk '{print $3}' | cut -c2-)
+line=$(iw dev ${1} info | grep channel)
+freq=$(echo "$line" | awk '{print $3}' | cut -c2-)
+ch=$(echo "$line" | awk '{print $2}')
 
-if [[ $channel != "" ]]; then
-  channel=$(echo "scale=1;$channel/1000" | bc)
-  if [[ $channel > 3 ]]; then
-    color='#00FF00'
-  else
-    color='yellow'
-  fi
+if [[ $freq != "" ]]; then
+  freq=$(echo "scale=1;$freq/1000" | bc)
+  [[ $freq > 3 ]] && color='#00FF00' || color='#FFFF00'
 fi
 
-pre="<span color='$color'>"
-aft="</span>"
+if [ "$freq" ]; then
+  echo "$freq GHz"
+  echo "$freq G"
+  echo "$color"
+fi
 
-echo "$pre$channel GHz $aft"

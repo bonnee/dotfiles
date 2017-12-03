@@ -100,11 +100,11 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 
 # BEGIN laptop
 #[consumption]
+#label=
 #command=$HOME/.config/i3/blocks/consumption
 #separator=false
 #
 #[battery]
-#label=
 #align=center
 # END laptop
 

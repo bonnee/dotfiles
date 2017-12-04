@@ -269,6 +269,30 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+set $mode_brightness brightness
+bindsym $mod+Shift+b mode "$mode_brightness"
+mode "$mode_brightness" {
+    bindsym plus  exec --no-startup-id backlight.sh -i 10
+    bindsym minus exec --no-startup-id backlight.sh -d 10
+    bindsym Shift+plus  exec --no-startup-id backlight.sh -i 1
+    bindsym Shift+minus exec --no-startup-id backlight.sh -d 1
+
+    bindsym 0 exec --no-startup-id backlight.sh -v 100
+    bindsym 1 exec --no-startup-id backlight.sh -v 10
+    bindsym 2 exec --no-startup-id backlight.sh -v 20
+    bindsym 3 exec --no-startup-id backlight.sh -v 30
+    bindsym 4 exec --no-startup-id backlight.sh -v 40
+    bindsym 5 exec --no-startup-id backlight.sh -v 50
+    bindsym 6 exec --no-startup-id backlight.sh -v 60
+    bindsym 7 exec --no-startup-id backlight.sh -v 70
+    bindsym 8 exec --no-startup-id backlight.sh -v 80
+    bindsym 9 exec --no-startup-id backlight.sh -v 90
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
 set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $locker, mode "default"

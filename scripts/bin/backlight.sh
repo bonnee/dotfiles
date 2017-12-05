@@ -33,18 +33,18 @@ get_brightness() {
 #   device  (string) The device to modify.
 #   amount    (int) The % of brightness to add.
 raise_backlight() {
-    cur=$(get_backlight $device)
+  cur=$(get_backlight $device)
 
-    if (( $cur == "100" )) && (( $(bc <<< "$(get_brightness) <= 1.0") )); then
-        # If backlight is already topped out, then increase brightness to make text more readable
-	     set_brightness "1.2"
-    else if (( $cur == 1 )); then
-            # Assures that final backlight value is a multiple of amount
-            set_backlight "$1" "$2"
-        else
-            xbacklight -ctrl $1 -inc $2
-        fi
-    fi
+  if (( $cur == "100" )) && (( $(bc <<< "$(get_brightness) <= 1.0") )); then
+    # If backlight is already topped out, then increase brightness to make text more readable
+    set_brightness "1.2"
+  else if (( $cur == 1 )); then
+    # Assures that final backlight value is a multiple of amount
+    set_backlight "$1" "$2" "$3"
+  else
+    xbacklight -ctrl $1 -inc $2 -time $3
+  fi
+  fi
 }
 
 # Lowers the backlight or brightness.
@@ -53,20 +53,20 @@ raise_backlight() {
 #   device  (string) The device to modify.
 #   amount    (int) The % of brightness to subtract.
 lower_backlight() {
-    cur=$(get_backlight $device)
-    # make the same controls of raise_backlight, but reversed.
-    if (( $cur == "100" )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
-	     set_brightness "1"
-    else if (( $cur - "$2" < 1 )); then
-            set_backlight "$1" "1"
-        else
-            xbacklight -ctrl $1 -dec $2
-        fi
-    fi
+  cur=$(get_backlight $device)
+  # make the same controls of raise_backlight, but reversed.
+  if (( $cur == "100" )) && (( $(bc <<< "$(get_brightness) > 1.0") )); then
+    set_brightness "1"
+  else if (( $cur - "$2" < 1 )); then
+    set_backlight "$1" "1" "$3"
+  else
+    xbacklight -ctrl $1 -dec $2 -time $3
+  fi
+  fi
 }
 
 set_backlight() {
-    xbacklight -ctrl $1 -set $2
+    xbacklight -ctrl $1 -set $2 -time $3
 }
 
 set_brightness() {
@@ -117,6 +117,7 @@ Control backlight and related notifications.
 Options:
   -i <amount>       increase backlight
   -d <amount>       decrease backlight
+  -f <time>	    milliseconds of fade
   -n                show notification
   -p <device name>  name of device
   -t <procname>     name of status line process. must be used with -u
@@ -136,7 +137,7 @@ device="$(get_default_device)"
 signal=""
 statusline=""
 backlight_amount="5"
-
+fade_amount="50"
 
 while getopts ":d:hi:mns:t:u:v:" o; do
     case "${o}" in
@@ -172,15 +173,15 @@ done
 shift $((OPTIND-1)) # Shift off options and optional --
 
 if ${opt_increase_backlight}; then
-    raise_backlight "${device}" "${backlight_amount}"
+    raise_backlight "${device}" "${backlight_amount}" "${fade_amount}"
 fi
 
 if ${opt_decrease_backlight}; then
-    lower_backlight "${device}" "${backlight_amount}"
+    lower_backlight "${device}" "${backlight_amount}" "${fade_amount}"
 fi
 
 if ${opt_set_backlight}; then
-    set_backlight "${device}" "${backlight_amount}"
+    set_backlight "${device}" "${backlight_amount}" "${fade_amount}"
 fi
 
 # The options below this line must be last

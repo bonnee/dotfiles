@@ -2,11 +2,14 @@
 #cursor_shape = underline
 # BEGIN desktop
 #font = Envy Code R 14
+# browser = google-chrome-stable
 # END desktop
 
 # BEGIN laptop
 #font = Envy Code R 9 
+#browser = chromium
 # END laptop
+
 
 [colors]
 

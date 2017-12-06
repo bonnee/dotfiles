@@ -19,8 +19,8 @@ set softtabstop=2	" Number of spaces per Tab
 
 "" Set cursor shape
 let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[4 q"
+let &t_SR = "\<Esc>[2 q"
+let &t_EI = "\<Esc>[6 q"
 
 "" Advanced
 set ruler	" Show row and column ruler information

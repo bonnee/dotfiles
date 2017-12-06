@@ -1,5 +1,5 @@
 [options]
-cursor_shape = underline
+#cursor_shape = underline
 # BEGIN desktop
 #font = Envy Code R 14
 # browser = google-chrome-stable

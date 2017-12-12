@@ -340,7 +340,7 @@ for_window [window_type="dialog"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move down $height px
 for_window [class="(?i)qemu-system"] floating enable
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
-for_window [class="(?i)VirtualBox"] floating enable
+#for_window [class="(?i)VirtualBox"] floating enable
 for_window [class="(?i)blueman"] floating enable
 for_window [class="(?i)pinentry"] floating enable
 

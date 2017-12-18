@@ -39,5 +39,6 @@
         "suppressNoRepositoryWarning": false,
         "suppressUpdateNotice": true,
         "suppressWelcomeNotice": false
-    }
+    },
+    "workbench.editor.tabSizing": "shrink"
 }

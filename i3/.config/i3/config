@@ -218,6 +218,7 @@ bindsym $hardlock exec --no-startup-id $locker && xset dpms force off
 bindsym $mod+r mode "resize"
 bindsym $mod+Escape mode "$mode_system"
 
+bindsym $mod+g exec thunar
 bindsym $mod+a exec --no-startup-id telegram-desktop
 
 #################################################

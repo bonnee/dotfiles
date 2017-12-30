@@ -40,5 +40,6 @@
         "suppressUpdateNotice": true,
         "suppressWelcomeNotice": false
     },
-    "workbench.editor.tabSizing": "shrink"
+    "workbench.editor.tabSizing": "shrink",
+    "git.autofetch": true
 }

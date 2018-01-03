@@ -39,7 +39,7 @@ command=date '+%^a %d %^b %H:%M'
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=
+label=&#xf028;
 instance=Master
 #instance=PCM
 interval=once
@@ -47,15 +47,15 @@ signal=10
 
 # BEGIN laptop
 #
-#[ssid]
-#label=
-#command=$HOME/.config/i3/blocks/ssid
-#separator=false
+##[ssid]
+##command=$HOME/.config/i3/blocks/ssid
+##separator=false
 #
-#[wifi]
-#separator=false
+##[wifi]
+##separator=false
 #
 #[wlanfreq]
+#label=&#xf1eb;
 #command=$HOME/.config/i3/blocks/wlanfreq wlan0
 #separator=false
 #
@@ -65,11 +65,11 @@ signal=10
 # END laptop
 
 [bandwidth]
-label=
+label=&#xf106;&#xf107;
 align=center
 
 [disk-io]
-label=
+label=&#xf0a0;
 interval=persist
 align=center
 command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
@@ -85,7 +85,7 @@ command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=
+label=&#xf085;
 min_width=1 100.00%
 align=center
 separator=false
@@ -95,23 +95,28 @@ label=
 separator=false
 
 [temperature]
-label=
+label=
 command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 
 # BEGIN laptop
 #[fan]
-#label=❄
+#label=
 #command=$HOME/.config/i3/blocks/fan
 # END laptop
 
 # BEGIN laptop
 #[battery]
-#label=
+#label=
 #align=center
 #separator=false
 #
 #[consumption]
 #command=$HOME/.config/i3/blocks/consumption
+#
+#[updates]
+#label=&#xf021;
+#command=~/.config/i3/blocks/updates
+#interval=1800
 #
 # END laptop
 

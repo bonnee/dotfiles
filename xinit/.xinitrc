@@ -33,7 +33,6 @@ export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndF
 # END desktop
 
 # BEGIN laptop
-#export QT_SCALE_FACTOR=0.8
 #xss-lock -- lock.sh &
 ##xautolock -detectsleep \
 ##          -notify  5 -notifier "xset dpms force off" \

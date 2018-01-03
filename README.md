@@ -19,10 +19,14 @@ Configuration for [htop](http://hisham.hm/htop/)
 * `.config/i3/i3blocks` [i3blocks](https://github.com/vivien/i3blocks) config
 * `.config/i3/blocks/` my custom blocklets
 * `.config/i3/wallpaper.png` my wallpaper
+## `/locale`
+Configuration for language and locales
 ## `/neofetch`
 Configuration for [Neofetch](https://github.com/dylanaraps/neofetch)
+## `rofi`
+Configuration for [rofi](https://github.com/DaveDavenport/rofi)
 ## `/scripts`
-* `bin/lock.sh` [i3lock](https://github.com/i3/i3lock) based lockscreen script
+Various utilities and scripts
 ## `/synergy`
 Configuration for [Synergy](http://symless.com/synergy/)
 ## `/termite`
@@ -35,5 +39,7 @@ Configuration for [Visual Studio Code](https://github.com/Microsoft/vscode)
 My .xinitrc
 ## `/xresources`
 X Resources file
+## `/yeecli`
+Configuration for [Yeecli](https://github.com/Bonnee/yeecli)
 
 WARN: To use xresources files you have to add `#include ".Xresources.d/FILENAME` for every file you want to include into `~/.Xresources`

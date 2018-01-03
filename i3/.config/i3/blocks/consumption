@@ -8,6 +8,6 @@ if [ "$status" != "Charging" ]; then
   (( $(echo "${w} >= 10"| bc -l) ))&& color="#FF0000"
 fi
 
-echo "${w}W"
+echo "${w} W"
 echo ""
 echo "$color"

@@ -112,13 +112,12 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 #
 #[consumption]
 #command=$HOME/.config/i3/blocks/consumption
-#
-#[updates]
-#label=&#xf021;
-#command=~/.config/i3/blocks/updates
-#interval=1800
-#
 # END laptop
+
+[updates]
+label=&#xf021;
+command=~/.config/i3/blocks/updates
+interval=1800
 
 # Key indicators
 #

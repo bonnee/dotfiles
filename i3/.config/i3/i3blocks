@@ -117,6 +117,7 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 #label=&#xf021;
 #command=~/.config/i3/blocks/updates
 #interval=1800
+#signal=12
 #
 # END laptop
 

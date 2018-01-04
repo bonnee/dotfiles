@@ -4,6 +4,6 @@ RPM=$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')
 
 [ "${RPM}" -ne "0" ] && echo "${RPM} RPM"
 [ "${RPM}" -ge "3500" ] && color="#FFFF00"
-[ "${RPM}" -ge "4400" ] && color="#FF0000"
+[ "${RPM}" -ge "5000" ] && color="#FF0000"
 echo ""
 echo "$color"

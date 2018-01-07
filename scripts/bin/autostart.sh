@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 autostart_etc=${XDG_CONFIG_DIRS-/etc/xdg}/autostart
 autostart_home=${XDG_CONFIG_HOME-~/.config}/autostart
 

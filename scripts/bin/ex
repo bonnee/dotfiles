@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ex - archive extractor
 # usage: ex <file>
   if [ -f $1 ] ; then

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 line=$(iw dev ${1} info | grep channel)
 freq=$(echo "$line" | awk '{print $3}' | cut -c2-)

@@ -4,12 +4,9 @@ line=$(iw dev ${1} info | grep channel)
 freq=$(echo "$line" | awk '{print $3}' | cut -c2-)
 ch=$(echo "$line" | awk '{print $2}')
 
-if [[ $freq != "" ]]; then
-  freq=$(echo "scale=1;$freq/1000" | bc)
-  [[ $freq > 3 ]] && color='#00FF00' || color='#FFFF00'
-fi
-
 if [ "$freq" ]; then
+  freq=$(echo "scale=1;$freq/1000" | bc)
+  [[ $freq < 3 ]] && color='#FFFF00'
   echo "${freq} GHz"
   echo "${freq} G"
   echo "$color"

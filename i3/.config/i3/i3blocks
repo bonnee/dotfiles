@@ -91,26 +91,27 @@ align=center
 separator=false
 
 [load_average]
-label=
+label=&#xf1fe;
 separator=false
 
 [temperature]
-label=
+label=&#xf2c9;
 command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 
 # BEGIN laptop
 #[fan]
-#label=
+#label=&#xf2dc;
 #command=$HOME/.config/i3/blocks/fan
 # END laptop
 
 # BEGIN laptop
 #[battery]
-#label=
+#label=&#xf242;
 #align=center
 #separator=false
 #
 #[consumption]
+#label=&#xf1e6;
 #command=$HOME/.config/i3/blocks/consumption
 #
 # END laptop

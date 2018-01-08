@@ -132,7 +132,7 @@ get_volume_icon() {
 # Display a notification indicating the volume is muted.
 notify_muted() {
     #icon=$(get_volume_icon "-1")
-    notify-send -u low -t 1 -i "${icon}" -h int:value:0 -h string:synchronous:volume "Volume"
+    notify-send -u low -t 1000 -i "${icon}" -h int:value:0 -h string:synchronous:volume "Volume"
 }
 
 # Display a notification indicating the current volume.
@@ -148,7 +148,7 @@ notify_volume() {
 	text="$text [$vol%]"
     fi
     
-    notify-send -u low -t 1 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume $text
+    notify-send -u low -t 1000 -i "${icon}" -h int:value:"${vol}" -h string:synchronous:volume $text
 }
 
 # Updates the status line.

@@ -96,7 +96,7 @@ notify_backlight() {
     local device="$1"
     bl=$(get_backlight $device)
     #icon=$(get_backlight_icon "$bl")
-    notify-send -u low -t 1 -i "${icon}" -h int:value:"${bl}" -h string:synchronous:backlight "Backlight"
+    notify-send -u low -t 1000 -i "${icon}" -h int:value:"${bl}" -h string:synchronous:backlight "Backlight"
 }
 
 # Updates the status line.

@@ -192,8 +192,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # BEGIN laptop
 #
 ## Yeelight control
-#bindsym Shift+XF86MonBrightnessUp exec --no-startup-id notify-send -u low "Brightness" -h int:value:"$(yee increase 10 | awk '{print $5}')%"
-#bindsym Shift+XF86MonBrightnessDown exec --no-startup-id notify-send -u low "Brightness" -h int:value:"$(yee decrease 10 | awk '{print $5}')%"
+#bindsym Shift+XF86MonBrightnessUp exec --no-startup-id notify-send -u low -t 1000 "Brightness" -h int:value:"$(yee increase 10 | awk '{print $5}')%"
+#bindsym Shift+XF86MonBrightnessDown exec --no-startup-id notify-send -u low -t 1000 "Brightness" -h int:value:"$(yee decrease 10 | awk '{print $5}')%"
 #
 #bindsym XF86MonBrightnessUp exec --no-startup-id backlight.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
 #bindsym XF86MonBrightnessDown exec --no-startup-id backlight.sh -d 5 -n -t i3blocks -u SIGRTMIN+10

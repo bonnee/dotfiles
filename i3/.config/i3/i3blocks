@@ -65,7 +65,7 @@ signal=10
 # END laptop
 
 [bandwidth]
-label=&#xf106;&#xf107;
+label=&#xf107;&#xf106;
 align=center
 
 [disk-io]

@@ -1,7 +1,7 @@
 "" General
 set number	" Show line numbers
 set showbreak=+++	" Wrap-broken line prefix
-set textwidth=100	" Line wrap (number of cols)
+"set textwidth=100	" Line wrap (number of cols)
 set showmatch	" Highlight matching brace
 set virtualedit=onemore	" Enable free-range cursor
  

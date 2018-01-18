@@ -198,7 +198,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #bindsym XF86MonBrightnessUp exec --no-startup-id backlight.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
 #bindsym XF86MonBrightnessDown exec --no-startup-id backlight.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
 #
-#bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1 -u normal "¯\_(ツ)_/¯"
+#bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 #bindsym XF86Display exec --no-startup-id lxrandr
 # END laptop
 

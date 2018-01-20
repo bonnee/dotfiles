@@ -189,6 +189,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id notify-send -u low -t 1000 "Brightness" -h int:value:"$(yee increase 10 | awk '{print $5}')%"
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id notify-send -u low -t 1000 "Brightness" -h int:value:"$(yee decrease 10 | awk '{print $5}')%"
+
 # BEGIN laptop
 #
 ## Yeelight control

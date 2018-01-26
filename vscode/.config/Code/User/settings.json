@@ -28,18 +28,7 @@
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "omnisharp.useMono": true,
     "C_Cpp.intelliSenseEngine": "Default",
-    "python.formatting.formatOnSave": false,
     "python.autoComplete.addBrackets": true,
-    "gitlens.advanced.messages": {
-        "suppressCommitHasNoPreviousCommitWarning": false,
-        "suppressCommitNotFoundWarning": false,
-        "suppressFileNotUnderSourceControlWarning": false,
-        "suppressGitVersionWarning": false,
-        "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false,
-        "suppressUpdateNotice": true,
-        "suppressWelcomeNotice": false
-    },
     "workbench.editor.tabSizing": "shrink",
     "git.autofetch": true
 }

@@ -396,7 +396,7 @@ bar {
 #####                Autorun                #####
 #################################################
 
-exec --no-startup-id compton --config $HOME/.config/compton.conf &
+#exec --no-startup-id compton --config $HOME/.config/compton.conf &
 
 exec --no-startup-id termite -r dropterm
 

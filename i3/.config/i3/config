@@ -59,10 +59,8 @@ set $fontfam     Aller
 #set $fontsize     9 
 # END laptop
 
-
-set $terminal termite
 # BEGIN desktop
-#set $browser google-chrome-stable --force-device-scale-factor=1.35
+#set $browser chromium --force-device-scale-factor=1.35
 # END desktop
 
 # BEGIN laptop
@@ -114,7 +112,7 @@ popup_during_fullscreen smart
 #####              Keystrokes               #####
 #################################################
 # start a terminal
-bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill

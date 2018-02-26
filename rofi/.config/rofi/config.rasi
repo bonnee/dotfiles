@@ -1,5 +1,5 @@
 configuration {
-	modi: "run,drun";
+	modi: "drun";
 	width: 50;
 	lines: 10;
 /*	columns: 1;*/
@@ -59,7 +59,7 @@ configuration {
 /*	display-windowcd: ;*/
 /*	display-run: ;*/
 /*	display-ssh: ;*/
-/*	display-drun: ;*/
+	display-drun: "> ";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/

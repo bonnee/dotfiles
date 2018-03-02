@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+state=0
+pidfile="/tmp/sun.pid"
+
+[ -z $(cat $pidfile) ] && state=0 || state=1
+
+if [ "$BLOCK_BUTTON" == "1" ]; then
+    if [ $state -eq 0 ]; then
+      state=1
+      systemd-inhibit --what=handle-lid-switch sleep 200 &
+      echo $! > $pidfile
+    else
+      state=0
+      kill $(cat $pidfile)
+      echo "" > $pidfile
+    fi
+fi
+
+[ $state -eq 1 ] && echo "&#xf185;" || echo "&#xf186;"
+

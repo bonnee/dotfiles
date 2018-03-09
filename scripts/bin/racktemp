@@ -1,0 +1,12 @@
+#!/bin/bash
+INTERVAL="${COLLECTD_INTERVAL:-10}"
+
+line=$(cat /dev/ttyACM0 | head -n1)
+
+target=$(echo $line | awk '{print $4}')
+temp=$(echo $line | awk '{print $9}')
+speed=$(echo $line | awk '{print $14}')
+
+echo "PUTVAL \"$HOSTNAME/rack/temperature-target\" interval=$INTERVAL N:$target"
+echo "PUTVAL \"$HOSTNAME/rack/temperature-air\" interval=$INTERVAL N:$temp"
+echo "PUTVAL \"$HOSTNAME/rack/percent-fan\" interval=$INTERVAL N:$speed"

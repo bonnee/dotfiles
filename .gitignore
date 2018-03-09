@@ -1,6 +1,5 @@
 *[Cc]ache*
 *[Cc]ookie*
-*[Bb]ackup*
 vscode/.config/Code/*
 !vscode/.config/Code/User/*.json
 !vscode/.config/Code/User/snippets

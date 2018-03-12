@@ -10,10 +10,12 @@ minver=8.24
 ddcmd="dd if=$disk"
 [ $(sort -V <(echo $corever) <(echo $minver) | head -n1) == "$minver" ] && ddcmd="$ddcmd status=progress"
 
+if command -v pigz; then gzipcmd="pigz" else gzipcmd="gzip"
+
 echo $ddcmd
 
 if mount 192.168.1.14:/c/dimages $path ; then
-  $ddcmd | pigz -c > $backpath
+  $ddcmd | $gzipcmd -c > $backpath
   chown bonnee:bonnee $backpath
 
   [ $(ls -1 | wc -l) -gt 3 ] && rm $(ls -1t | tail -1)

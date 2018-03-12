@@ -3,5 +3,5 @@ updates=$(checkupdates+aur | wc -l)
 [ "${updates}" -gt "0" ] && color="#00FF00"
 
 echo "$updates/$(pacaur -Q | wc -l)"
-echo ""
+echo "$updates"
 echo "$color"

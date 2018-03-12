@@ -68,11 +68,11 @@ signal=10
 label=&#xf107;&#xf106;
 align=center
 
-#[disk-io]
-#label=&#xf0a0;
-#interval=persist
-#align=center
-#command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
+[disk-io]
+label=&#xf0a0;
+interval=persist
+align=center
+command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
 
 # BEGIN desktop
 #separator=false

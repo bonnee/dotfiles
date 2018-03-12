@@ -7,7 +7,7 @@ backpath=$path/$HOSTNAME/$HOSTNAME-$(date +%Y-%m-%d).img.gz
 corever=`dd --version | head -n1 | awk '{print $3}'`
 minver=8.24
 
-ddcmd='dd if=$disk'
+ddcmd="dd if=$disk"
 [ $(sort -V <(echo $corever) <(echo $minver) | head -n1) == "$minver" ] && ddcmd="$ddcmd status=progress"
 
 echo $ddcmd

@@ -96,8 +96,8 @@ HISTIGNORE="&:ls:[bf]g:exit"
 # Quick and dirty tweak to make aliases available under sudo
 alias sudo='sudo '
 
-alias ll='ls -l'
-alias la='ls -a'
+alias ll='ls -lh'
+alias la='ls -ah'
 
 alias ..='cd ..'
 alias ...='cd ../..'

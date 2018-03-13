@@ -107,6 +107,7 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 
 # BEGIN laptop
 #[battery]
+##command=$HOME/.config/i3/blocks/battery
 #label=&#xf242;
 #align=center
 #separator=false

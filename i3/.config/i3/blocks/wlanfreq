@@ -7,8 +7,8 @@ ch=$(echo "$line" | awk '{print $2}')
 if [ "$freq" ]; then
   freq=$(echo "scale=1;$freq/1000" | bc)
   [[ $freq < 3 ]] && color='#FFFF00'
-  echo "${freq} GHz"
-  echo "${freq} G"
+  echo "${freq}GHz"
+  echo "${freq}G"
   echo "$color"
 fi
 

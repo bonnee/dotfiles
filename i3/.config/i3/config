@@ -253,65 +253,41 @@ bindsym $mod+c exec --no-startup-id $browser
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+  # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize grow width 10 px or 10 ppt
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ograve resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym h resize grow width 10 px or 10 ppt
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym ograve resize grow width 10 px or 10 ppt
+  
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+  
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
-
-set $mode_brightness brightness
-bindsym $mod+Shift+b mode "$mode_brightness"
-mode "$mode_brightness" {
-    bindsym plus  exec --no-startup-id backlight.sh -i 10
-    bindsym minus exec --no-startup-id backlight.sh -d 10
-    bindsym Shift+plus  exec --no-startup-id backlight.sh -i 1
-    bindsym Shift+minus exec --no-startup-id backlight.sh -d 1
-
-    bindsym 0 exec --no-startup-id backlight.sh -v 100
-    bindsym 1 exec --no-startup-id backlight.sh -v 10
-    bindsym 2 exec --no-startup-id backlight.sh -v 20
-    bindsym 3 exec --no-startup-id backlight.sh -v 30
-    bindsym 4 exec --no-startup-id backlight.sh -v 40
-    bindsym 5 exec --no-startup-id backlight.sh -v 50
-    bindsym 6 exec --no-startup-id backlight.sh -v 60
-    bindsym 7 exec --no-startup-id backlight.sh -v 70
-    bindsym 8 exec --no-startup-id backlight.sh -v 80
-    bindsym 9 exec --no-startup-id backlight.sh -v 90
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 
 set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+  bindsym l exec --no-startup-id $locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+  
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 #################################################
@@ -364,30 +340,30 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heigh
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	colors {
-		background $dbg
-		statusline $dfg
-		separator  $darkwhite
+  colors {
+    background $dbg
+    statusline $dfg
+    separator  $darkwhite
 
-		# Type             border  background font
-		focused_workspace  $hlbg   $hlbg      $hlfg
-		active_workspace   $hlbg   $hlbg      $hlfg
-		inactive_workspace $dbg    $dbg       $dfg
-		urgent_workspace   $red    $red       $white
-		binding_mode       $white  $white     $black
-	}
-	position bottom
+    # Type             border  background font
+    focused_workspace  $hlbg   $hlbg      $hlfg
+    active_workspace   $hlbg   $hlbg      $hlfg
+    inactive_workspace $dbg    $dbg       $dfg
+    urgent_workspace   $red    $red       $white
+    binding_mode       $white  $white     $black
+  }
+  position bottom
 	
-	# BEGIN desktop
-	#font pango:Aller, Font Awesome 5 Free 10
-	# END desktop
-	
-	# BEGIN laptop
-	#font pango:$fontfam, Font Awesome 5 Free, Solid 8
-	# END laptop
-    
-    status_command i3blocks -c $HOME/.config/i3/i3blocks
-    tray_output primary
+  # BEGIN desktop
+  #font pango:Aller, Font Awesome 5 Free 10
+  # END desktop
+
+  # BEGIN laptop
+  #font pango:$fontfam, Font Awesome 5 Free, Solid 8
+  # END laptop
+  
+  status_command i3blocks -c $HOME/.config/i3/i3blocks
+  tray_output primary
 }
 
 #################################################

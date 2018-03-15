@@ -41,7 +41,7 @@ fi
 HST_COLOR=$YELLOW
 GIT_COLOR=$GREEN
 
-export TERM="xterm-termite"
+[ $(ps -p $(ps -p $$ -o ppid=) o args=) == "termite" ] && export TERM="xterm-termite"
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export EDITOR=vim

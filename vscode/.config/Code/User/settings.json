@@ -30,6 +30,5 @@
     "C_Cpp.intelliSenseEngine": "Default",
     "python.autoComplete.addBrackets": true,
     "workbench.editor.tabSizing": "shrink",
-    "git.autofetch": true,
-    "gitlens.keymap": "alternate"
+    "git.autofetch": true
 }

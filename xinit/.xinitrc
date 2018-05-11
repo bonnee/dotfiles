@@ -28,8 +28,9 @@ export TERMINAL=termite
 #export QT_AUTO_SCREEN_SCALE_FACTOR=1
 #
 #xautolock -detectsleep \
-#          #-notify   10 -notifier "xset dpms force off" \
-#          #-time     15 -locker   "lock.sh"
+#          -notify   10 -notifier "xset dpms force off" \
+#          -time     15 -locker   "lock.sh"
+#          -killtime 45 -killer   "systemctl suspend" &
 #numlockx &
 # END desktop
 
@@ -41,4 +42,5 @@ export TERMINAL=termite
 ##          -killtime 10 -killer   "systemctl suspend" &
 # END laptop
 
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec i3

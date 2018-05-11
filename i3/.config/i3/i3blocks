@@ -77,8 +77,8 @@ command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
 # BEGIN desktop
 #separator=false
 #
-#[bcache-ratio]
-#command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
+##[bcache-ratio]
+##command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
 # END desktop
 
 # CPU usage

@@ -28,7 +28,7 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
-interval=2
+interval=4
 
 [time]
 command=date '+%^a %d %^b %H:%M'
@@ -42,7 +42,7 @@ command=date '+%^a %d %^b %H:%M'
 label=&#xf028;
 instance=Master
 #instance=PCM
-interval=5
+interval=10
 signal=10
 
 # BEGIN laptop
@@ -72,13 +72,13 @@ align=center
 label=&#xf0a0;
 interval=persist
 align=center
-command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 2 -T 102400
+command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 4 -T 102400
 
 # BEGIN desktop
 #separator=false
 #
-#[bcache-ratio]
-#command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
+##[bcache-ratio]
+##command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
 # END desktop
 
 # CPU usage

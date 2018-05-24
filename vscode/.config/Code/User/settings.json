@@ -30,5 +30,8 @@
     "C_Cpp.intelliSenseEngine": "Default",
     "python.autoComplete.addBrackets": true,
     "workbench.editor.tabSizing": "shrink",
-    "git.autofetch": true
+    "git.autofetch": true,
+    "emojisense.languages": {
+        "python": true
+    },
 }

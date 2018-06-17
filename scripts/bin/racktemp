@@ -1,7 +1,11 @@
 #!/bin/bash
 INTERVAL="${COLLECTD_INTERVAL:-10}"
 
-line=$(cat /dev/ttyACM0 | head -n1)
+while [ "$check" != "OK" ]; do
+  line=$(cat /dev/ttyACM0 | head -n1)
+  check=$(head -c2 <(echo $line))
+  sleep 1
+done
 
 target=$(echo $line | awk '{print $4}')
 temp=$(echo $line | awk '{print $9}')

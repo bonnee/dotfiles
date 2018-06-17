@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 updates=$(checkupdates+aur | wc -l)
 [ "${updates}" -gt "0" ] && color="#00FF00"
 

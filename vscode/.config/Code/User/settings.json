@@ -31,5 +31,7 @@
     "python.autoComplete.addBrackets": true,
     "workbench.editor.tabSizing": "shrink",
     "git.autofetch": true,
-    "gitlens.keymap": "alternate"
+    "emojisense.languages": {
+        "python": true
+    },
 }

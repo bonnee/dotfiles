@@ -363,7 +363,7 @@ bar {
   # END laptop
   
   status_command i3blocks -c $HOME/.config/i3/i3blocks
-  tray_output primary
+  #tray_output primary
 }
 
 #################################################

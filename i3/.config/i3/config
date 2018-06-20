@@ -13,41 +13,26 @@ set $mod Mod4
 #set $hardlock Mod4+Shift+l
 # END laptop
 
-set $grey        #9E9E9E
-set $black       #000000
-set $red         #F44336
-set $darkred     #B71C1C
-set $green       #4CAF50
-set $darkgreen   #1B5E20
-set $yellow      #FFEB3B
-set $darkyellow  #F57F17
-set $blue        #2196F3
-set $darkblue    #0D47A1
-set $magenta     #D500F9
-set $darkmagenta #AA00FF
-set $cyan        #00BCD4
-set $darkcyan    #006064
-set $white       #F6F6F6
-set $darkwhite   #E0E0E0
+
+set_from_resource $black       color0   #000000
+set_from_resource $darkgrey    color8   #9E9E9E
+set_from_resource $darkred     color1   #B71C1C
+set_from_resource $red         color9   #F44336
+set_from_resource $darkgreen   color2   #1B5E20
+set_from_resource $green       color10  #4CAF50
+set_from_resource $darkyellow  color3   #F57F17
+set_from_resource $yellow      color11  #FFEB3B
+set_from_resource $darkblue    color4   #0D47A1
+set_from_resource $blue        color12  #2196F3
+set_from_resource $darkmagenta color5   #AA00FF
+set_from_resource $magenta     color13  #D500F9
+set_from_resource $darkcyan    color6   #006064
+set_from_resource $cyan        color14  #00BCD4
+set_from_resource $lightgrey   color7   #E0E0E0
+set_from_resource $white       color15  #F6F6F6
+
 set $transparent #000000FF
-
-# Dark foreground
-set $dfg         #AFB8C5
-
-# Dark background
-set $dbg         #000000
-
-# Light foreground
-set $lfg         #F6F6F6
-
-# Light background
-set $lbg         #9E9E9E
-
-# Highlight foreground
-set $hlfg        #000000
-
-# Highlight background
-set $hlbg        #F6F6F6
+set $dark        #000000
 
 set $fontfam     Aller
 
@@ -295,13 +280,12 @@ mode "$mode_system" {
 #################################################
 
 # Window Colors
-# class                 border  backgr. text    indicator
-
-client.focused          $hlbg   $hlbg   $hldg   $green
-client.focused_inactive $dbg    $dbg    $dfg    $green
-client.unfocused        $dbg    $dbg    $dfg    $green
-client.urgent           $red    $red    $dfg    $green
-client.background       $dbg
+# class                 border    backgr.   text        indicator
+client.focused          $white    $white    $black      $green
+client.focused_inactive $darkcyan $darkcyan $lightgrey  $green
+client.unfocused        $darkgrey $darkgrey $lightgrey  $green
+client.urgent           $red      $red      $lightgrey  $green
+client.background       $darkgrey
 
 
 for_window [class="vlc"] floating enable
@@ -341,16 +325,16 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heigh
 # finds out, if available)
 bar {
   colors {
-    background $dbg
-    statusline $dfg
-    separator  $darkwhite
+    background $dark
+    statusline $lightgrey
+    separator  $lightgrey
 
-    # Type             border  background font
-    focused_workspace  $hlbg   $hlbg      $hlfg
-    active_workspace   $hlbg   $hlbg      $hlfg
-    inactive_workspace $dbg    $dbg       $dfg
-    urgent_workspace   $red    $red       $white
-    binding_mode       $white  $white     $black
+    # Type             border     background font
+    focused_workspace  $white     $white     $black
+    active_workspace   $darkcyan  $darkcyan  $lightgrey
+    inactive_workspace $dark      $dark      $lightgrey
+    urgent_workspace   $red       $red       $white
+    binding_mode       $white     $white     $black
   }
   position bottom
 	
@@ -378,8 +362,3 @@ exec --no-startup-id $HOME/bin/autostart.sh
 
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id dunst &
-
-# BEGIN desktop
-## Autostarting steam will open the window no matter what.
-#exec --no-startup-id steam-runtime -silent
-# END desktop

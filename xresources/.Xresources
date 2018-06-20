@@ -16,30 +16,31 @@ Xft.rgba:			rgb
 Xcursor.theme:			Bridge
 !Xcursor.size:			32
 
-! black
-*color0:      #14161A
-*color8:      #14161A
-! red
-*color1:      #8C5760
-*color9:      #8C5760
-! green
-*color2:      #7B8C58
-*color10:     #7B8C58
-! yellow
-*color3:      #B28C55
-*color11:     #B28C55
-! blue
-*color4:      #58698C
-*color12:     #58698C
-! magenta
-*color5:      #B23450
-*color13:     #B23450
-! cyan
-*color6:      #737373
-*color14:     #737373
-! white
-*color7:      #D7D7D7
-*color15:     #D7D7D7
+
+! Black + DarkGrey
+*color0:      #000000
+*color8:      #9E9E9E
+! DarkRed + Red
+*color1:      #B71C1C
+*color9:      #F44336
+! DarkGreen + Green
+*color2:      #1B5E20
+*color10:     #4CAF50
+! DarkYellow + Yellow
+*color3:      #F57F17
+*color11:     #FFEB3B
+! DarkBlue + Blue
+*color4:      #0D47A1
+*color12:     #2196F3
+! DarkMagenta + Magenta
+*color5:      #AA00FF
+*color13:     #D500F9
+! DarkCyan + Cyan
+*color6:      #006064
+*color14:     #00BCD4
+! LightGrey + White
+*color7:      #E0E0E0
+*color15:     #F6F6F6
 
 *cursorColor: #7B9C58
 *colorUL:     #7B8C58

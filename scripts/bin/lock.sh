@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Lock wrapper around i3lock-color
 
 tmpbg='/tmp/screen.png'
 

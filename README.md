@@ -17,6 +17,7 @@ Configuration for [htop](http://hisham.hm/htop/)
 * `.config/i3/i3blocks` [i3blocks](https://github.com/vivien/i3blocks) config
 * `.config/i3/blocks/` my custom blocklets
 * `.config/i3/wallpaper.png` my wallpaper
+
 ## `/locale`
 Configuration for language and locales
 ## `/neofetch`

@@ -29,14 +29,14 @@ export TERMINAL=termite
 #
 #xset s 600		# lock at 600s
 #xset dpms 900	# stdby at 900s
-#xss-lock -- lock.sh -n &
+#xss-lock -l -- lock.sh -n &
 #numlockx &
 # END desktop
 
 # BEGIN laptop
 #xset s 120 180	# dim at 120s. lock at 120+180s
 #xset dpms 360	# stdby at 360s
-#xss-lock -n dim-screen.sh -- lock.sh -n &
+#xss-lock -l -n dim-screen.sh -- lock.sh -n &
 # END laptop
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

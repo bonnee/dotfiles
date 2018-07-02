@@ -27,19 +27,16 @@ export TERMINAL=termite
 #export GDK_DPI_SCALE=0.7
 #export QT_AUTO_SCREEN_SCALE_FACTOR=1
 #
-#xautolock -detectsleep \
-#          -notify   10 -notifier "xset dpms force off" \
-#          -time     15 -locker   "lock.sh"
-#          -killtime 45 -killer   "systemctl suspend" &
+#xset s 600		# lock at 600s
+#xset dpms 900	# stdby at 900s
+#xss-lock -- lock.sh -n &
 #numlockx &
 # END desktop
 
 # BEGIN laptop
-#xss-lock -- lock.sh &
-##xautolock -detectsleep \
-##          -notify  5 -notifier "xset dpms force off" \
-##          -time     8 -locker   "lock.sh" \
-##          -killtime 10 -killer   "systemctl suspend" &
+#xset s 120 180	# dim at 120s. lock at 120+180s
+#xset dpms 360	# stdby at 360s
+#xss-lock -n dim-screen.sh -- lock.sh -n &
 # END laptop
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

@@ -60,13 +60,13 @@ lower_backlight() {
   else if (( $cur - "$2" < 1 )); then
     set_backlight "$1" "1" "$3"
   else
-    xbacklight -ctrl $1 -dec $2 -time $3
+    xbacklight -ctrl $1 -dec $2 -time $3 -steps 20
   fi
   fi
 }
 
 set_backlight() {
-    xbacklight -ctrl $1 -set $2 -time $3
+    xbacklight -ctrl $1 -set $2 -time $3 -steps 20
 }
 
 set_brightness() {

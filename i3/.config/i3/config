@@ -54,8 +54,6 @@ set $fontfam     Aller
 
 set $background $HOME/.config/i3/wallpaper.png
 
-set $locker $HOME/bin/lock.sh
-
 font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -181,8 +179,8 @@ bindsym $mod+XF86AudioLowerVolume exec --no-startup-id notify-send -u low -t 100
 #bindsym Shift+XF86MonBrightnessUp exec --no-startup-id notify-send -u low -t 1000 "Brightness" -h int:value:"$(yee increase 10 | awk '{print $5}')%"
 #bindsym Shift+XF86MonBrightnessDown exec --no-startup-id notify-send -u low -t 1000 "Brightness" -h int:value:"$(yee decrease 10 | awk '{print $5}')%"
 #
-#bindsym XF86MonBrightnessUp exec --no-startup-id backlight.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
-#bindsym XF86MonBrightnessDown exec --no-startup-id backlight.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
+#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 -time 200 -steps 20 && notify-send -u low -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
+#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 -time 200 -steps 20 && notify-send -u low -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
 #
 #bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 #bindsym XF86Display exec --no-startup-id lxrandr
@@ -203,8 +201,8 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym $mod+Print exec --no-startup-id scrot && notify-send -t 1000 -u normal "Screenshot Taken!"
 
-bindsym $mod+l exec --no-startup-id $locker
-bindsym $hardlock exec --no-startup-id $locker && xset dpms force off
+bindsym $mod+l exec --no-startup-id xset s activate
+bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off
 
 bindsym $mod+r mode "resize"
 bindsym $mod+Escape mode "$mode_system"
@@ -263,7 +261,7 @@ mode "resize" {
 
 set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-  bindsym l exec --no-startup-id $locker, mode "default"
+  bindsym l exec --no-startup-id xset s activate, mode "default"
   bindsym e exec --no-startup-id i3-msg exit, mode "default"
   bindsym s exec --no-startup-id systemctl suspend, mode "default"
   bindsym h exec --no-startup-id systemctl hibernate, mode "default"

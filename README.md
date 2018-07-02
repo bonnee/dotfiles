@@ -8,8 +8,6 @@ A collection of my configuration dotfiles
 # Content
 ## `/bash`
 Configuration for [Bash] (https://savannah.gnu.org/git/?group=bash)
-## `/compton`
-Configuration for [compton](https://github.com/chjj/compton)
 ## `/dunst`
 Configuration for [Dunst](http://knopwob.org/dunst/index.html)
 ## `/htop`
@@ -27,8 +25,6 @@ Configuration for [Neofetch](https://github.com/dylanaraps/neofetch)
 Configuration for [rofi](https://github.com/DaveDavenport/rofi)
 ## `/scripts`
 Various utilities and scripts
-## `/synergy`
-Configuration for [Synergy](http://symless.com/synergy/)
 ## `/termite`
 Configuration for [termite](https://github.com/thestinger/termite)
 ## `/vim`

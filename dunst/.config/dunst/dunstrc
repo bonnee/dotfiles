@@ -7,8 +7,6 @@
     #font = "Aller, Font Awesome 10"
     # END laptop
  
-    icon_path = /usr/share/icons/Adwaita/256x256/status/:/usr/share/icons/Adwaita/256x256/devices/:/usr/share/icons/Adwaita/256x256/emotes/
-
     # Align icons left/right/off
     icon_position = left
 

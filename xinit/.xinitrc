@@ -13,9 +13,8 @@ unset includes
 dbus-update-activation-environment --all
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-xset +fp ~/.fonts
-xset +fp /usr/share/fonts/misc
-xset fp rehash
+xset b off  # turn off bell
+
 wmname LG3D
 
 export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dawt.useSystemAAFontSettings=gasp'

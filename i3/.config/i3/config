@@ -171,8 +171,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # BEGIN laptop
-#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 -time 200 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
-#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 -time 200 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
+#bindsym XF86MonBrightnessUp exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
+#bindsym XF86MonBrightnessDown exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
 #
 #bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 #bindsym XF86Display exec --no-startup-id lxrandr

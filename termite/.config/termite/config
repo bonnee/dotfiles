@@ -1,7 +1,7 @@
 [options]
 # BEGIN desktop
-# font = Iosevka Term SS09 Regular 9
-# browser = google-chrome-stable
+ #font = Iosevka Term SS09 Regular 15
+ #browser = google-chrome-stable
 # END desktop
 
 # BEGIN laptop

@@ -19,7 +19,7 @@ wmname LG3D
 
 export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dawt.useSystemAAFontSettings=gasp'
 
-export TERMINAL=termite
+export TERMINAL=alacritty
 
 # BEGIN desktop
 #export GDK_SCALE=1.7

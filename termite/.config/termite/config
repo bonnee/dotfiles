@@ -1,12 +1,11 @@
 [options]
-#cursor_shape = underline
 # BEGIN desktop
-#font = Envy Code R 14
+# font = Iosevka Term SS09 Regular 9
 # browser = google-chrome-stable
 # END desktop
 
 # BEGIN laptop
-#font = Envy Code R 9 
+#font = Iosevka Term SS09 Regular 9
 #browser = chromium
 # END laptop
 

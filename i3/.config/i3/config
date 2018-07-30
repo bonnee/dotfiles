@@ -215,7 +215,7 @@ bindsym $mod+s [con_mark="scratch"] scratchpad show
 bindsym $mod+Shift+s mark "scratch", move scratchpad
 
 # Move dropterm to scratchpad
-for_window [window_role="dropterm"] mark "dropterm", move scratchpad
+for_window [title="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
 for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
@@ -346,7 +346,7 @@ bar {
 
 #exec --no-startup-id compton --config $HOME/.config/compton.conf &
 
-exec --no-startup-id termite -r dropterm
+exec --no-startup-id alacritty --title dropterm
 
 exec --no-startup-id $HOME/bin/autostart.sh
 

@@ -87,7 +87,7 @@ popup_during_fullscreen smart
 
 # BEGIN desktop
 #gaps inner 15
-#gaps outer 20
+#gaps outer 10
 #smart_gaps on
 # END desktop
 

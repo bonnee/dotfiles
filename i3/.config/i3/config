@@ -1,4 +1,4 @@
-# i3 config file (v4)
+ # i3 config file (v4)
 
 #################################################
 #####               Variables               #####
@@ -333,6 +333,7 @@ bar {
   # END desktop
 
   # BEGIN laptop
+  #mode hide
   #font pango:$fontfam, Font Awesome 5 Free, Solid 8
   # END laptop
   

@@ -187,7 +187,7 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+Print exec --no-startup-id scrot && notify-send -t 1000 -u normal "Screenshot Taken!"
+bindsym $mod+Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
 bindsym $mod+l exec --no-startup-id xset s activate
 bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off

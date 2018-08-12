@@ -69,7 +69,6 @@ focus_follows_mouse yes
 # END laptop
 
 force_display_urgency_hint 500 ms
-
 popup_during_fullscreen smart
 
 # BEGIN desktop
@@ -81,9 +80,6 @@ popup_during_fullscreen smart
 #new_window pixel 2
 #hide_edge_borders smart
 # END laptop
-
-force_display_urgency_hint 500 ms
-popup_during_fullscreen smart
 
 # BEGIN desktop
 #gaps inner 15

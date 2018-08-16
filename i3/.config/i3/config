@@ -329,7 +329,6 @@ bar {
   # END desktop
 
   # BEGIN laptop
-  #mode hide
   #font pango:$fontfam, Font Awesome 5 Free, Solid 8
   # END laptop
   

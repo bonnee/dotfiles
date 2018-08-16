@@ -34,4 +34,7 @@
     "emojisense.languages": {
         "python": true
     },
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
 }

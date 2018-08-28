@@ -12,7 +12,7 @@ green="$(xgetres color10)FF"
 
 scrot "$tmpbg"
 convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
-i3lock --clock --indicator \
+i3lock --clock --indicator --pass-media-keys \
 \
 --insidevercolor=$black \
 --ringvercolor=$blue \

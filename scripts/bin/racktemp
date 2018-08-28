@@ -8,8 +8,8 @@ while [ "$check" != "OK" ]; do
 done
 
 target=$(echo $line | awk '{print $4}')
-temp=$(echo $line | awk '{print $9}')
-speed=$(echo $line | awk '{print $14}')
+temp=$(echo $line | awk '{print $7}')
+speed=$(echo $line | awk '{print $10}')
 
 echo "PUTVAL \"$HOSTNAME/rack/temperature-target\" interval=$INTERVAL N:$target"
 echo "PUTVAL \"$HOSTNAME/rack/temperature-air\" interval=$INTERVAL N:$temp"

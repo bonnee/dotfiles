@@ -5,8 +5,13 @@
     //"markdown.preview.fontSize": 14,
     //"terminal.integrated.fontSize": 14,
     //"window.zoomLevel": -1.5,
+    //"editor.smoothScrolling": false,
     // END laptop
-    "editor.fontFamily": "'Fira Code Retina', 'Envy Code R', monospace",
+    // BEGIN desktop
+    //"window.zoomLevel": 1.5,
+    //"editor.smoothScrolling": true,
+    // END desktop
+    "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
     "editor.fontLigatures": true,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
@@ -18,7 +23,6 @@
     "editor.snippetSuggestions": "top",
     "editor.insertSpaces": false,
     "editor.acceptSuggestionOnEnter": "smart",
-    "editor.smoothScrolling": true,
     "editor.scrollBeyondLastLine": false,
     "files.autoSave": "onFocusChange",
     "extensions.autoUpdate": true,
@@ -33,8 +37,5 @@
     "git.autofetch": true,
     "emojisense.languages": {
         "python": true
-    },
-    "gitlens.advanced.messages": {
-        "suppressShowKeyBindingsNotice": true
-    },
+    }
 }

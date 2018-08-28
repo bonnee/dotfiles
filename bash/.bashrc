@@ -84,6 +84,8 @@ if ! hash __git_ps1 2> /dev/null; then
 fi
 
 bind "set show-all-if-ambiguous On"
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 # Combine multiline commands into one in history
 shopt -s cmdhist

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-RPM=$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')
+#RPM=$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')
+RPM=$(echo "scale=1;$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')/1000" | bc)
 
 color="#00FF00"
-[ "${RPM}" -ne "0" ] && echo "${RPM} RPM"
-[ "${RPM}" -ge "3500" ] && color="#FFFF00"
-[ "${RPM}" -ge "5000" ] && color="#FF0000"
+(( $(echo "${RPM}!=0"|bc -l) )) && echo "${RPM}K RPM"
+(( $(echo "${RPM}>=3.5"|bc -l) )) && color="#FFFF00"
+(( $(echo "${RPM}>=4.0"|bc -l) )) && color="#FF0000"
 echo ""
 echo "$color"

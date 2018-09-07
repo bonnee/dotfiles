@@ -31,7 +31,7 @@ markup=pango
 interval=4
 
 [time]
-command=date '+%^a %d %^b %H:%M'
+command=date '+%^a %d/%m %H:%M'
 
 # Volume indicator
 #
@@ -125,8 +125,8 @@ command=~/.config/i3/blocks/updates
 interval=1800
 signal=12
 
-[sun]
-command=$HOME/.config/i3/blocks/sun
+#[sun]
+#command=$HOME/.config/i3/blocks/sun
 
 # Key indicators
 #

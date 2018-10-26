@@ -4,7 +4,7 @@
     //"editor.fontSize": 14,
     //"markdown.preview.fontSize": 14,
     //"terminal.integrated.fontSize": 14,
-    //"window.zoomLevel": -1.5,
+    //"window.zoomLevel": -1,
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
@@ -16,7 +16,6 @@
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.mouseWheelZoom": true,
     "editor.renderIndentGuides": true,
     "editor.minimap.enabled": true,
     "editor.minimap.maxColumn": 200,

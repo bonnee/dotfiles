@@ -8,7 +8,7 @@
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
-    //"window.zoomLevel": 1.5,
+    //"window.zoomLevel": 1.6,
     //"editor.smoothScrolling": true,
     // END desktop
     "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
@@ -37,5 +37,6 @@
     "git.autofetch": true,
     "emojisense.languages": {
         "python": true
-    }
+    },
+    "editor.fontSize": 15
 }

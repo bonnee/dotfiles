@@ -37,5 +37,6 @@
     "emojisense.languages": {
         "python": true
     },
-    "editor.fontSize": 15
+    "editor.fontSize": 15,
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }

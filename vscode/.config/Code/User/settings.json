@@ -8,7 +8,7 @@
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
-    //"window.zoomLevel": 1.5,
+    //"window.zoomLevel": 1.6,
     //"editor.smoothScrolling": true,
     // END desktop
     "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
@@ -29,7 +29,6 @@
     "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "vs-seti",
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
-    "omnisharp.useMono": true,
     "C_Cpp.intelliSenseEngine": "Default",
     "python.autoComplete.addBrackets": true,
     "workbench.editor.tabSizing": "shrink",
@@ -37,5 +36,5 @@
     "emojisense.languages": {
         "python": true
     },
-    "extensions.ignoreRecommendations": false
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }

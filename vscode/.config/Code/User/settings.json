@@ -36,5 +36,6 @@
     "git.autofetch": true,
     "emojisense.languages": {
         "python": true
-    }
+    },
+    "extensions.ignoreRecommendations": false
 }

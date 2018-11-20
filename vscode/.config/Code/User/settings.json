@@ -36,5 +36,8 @@
     "emojisense.languages": {
         "python": true
     },
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "window.titleBarStyle": "custom",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false
 }

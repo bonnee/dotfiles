@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #RPM=$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')
-RPM=$(echo "scale=1;$(cat /proc/acpi/ibm/fan | grep speed | awk '{print $2}')/1000" | bc)
+RPM=$(echo "scale=1;$(grep speed /proc/acpi/ibm/fan | awk '{print $2}')/1000" | bc)
 
 color="#00FF00"
 (( $(echo "${RPM}!=0"|bc -l) )) && echo "${RPM}K RPM"

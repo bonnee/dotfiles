@@ -112,6 +112,10 @@ command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 #align=center
 #separator=false
 #
+#[threshold]
+#label=THR
+#command=$HOME/.config/i3/blocks/chg_threshold.sh
+#
 #[consumption]
 #label=&#xf1e6;
 #command=$HOME/.config/i3/blocks/consumption

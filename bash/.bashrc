@@ -140,10 +140,12 @@ fi
 printf "Welcome $USER,\n"
 if hash todo.sh ls 2> /dev/null; then
     printf "$BOLD\nTODO:$RST_ATTR\n"
+    #tb
     todo.sh ls
 fi
 
 printf "\n$BOLD$REVERSE$HOSTNAME$RST_ATTR is ready.\n"
 
-export PS1="\[$USR_COLOR\]\A \$(free_mem) \$(load) \[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]$ "
+export PS1="\[$USR_COLOR\]\[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]> "
 export PS2='> '
+

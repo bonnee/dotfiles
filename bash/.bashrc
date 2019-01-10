@@ -137,9 +137,9 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     host="@\[$HST_COLOR\]\h\[$RST_COLOR\]"
 fi
 
-printf "Welcome $USER,\n"
+#printf "Welcome $USER,\n"
 if hash todo.sh ls 2> /dev/null; then
-    printf "$BOLD\nTODO:$RST_ATTR\n"
+    printf "$BOLD""TODO:$RST_ATTR\n"
     #tb
     todo.sh ls
 fi

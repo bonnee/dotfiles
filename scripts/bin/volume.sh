@@ -30,7 +30,7 @@ get_default_sink_name() {
 get_volume() {
     local sink=$1
     pacmd list-sinks |
-        awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'${sink}'>"}
+        awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'"${sink}"'>"}
             /^\s+volume: / && indefault {print $5; exit}' |
         sed 's/%//'
 }
@@ -98,7 +98,7 @@ toggle_mute() {
 is_muted() {
     local sink="$1"
     muted=$(pacmd list-sinks |
-            awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'${sink}'>"}
+            awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'"${sink}"'>"}
                 /^\s+muted: / && indefault {print $2; exit}')
     [ "${muted}" = "yes" ]
 }
@@ -121,7 +121,7 @@ notify_volume() {
 	text="$text [$vol%]"
     fi
     
-    notify-send -u low -t 1000 -h int:value:"${vol}" -h string:synchronous:volume $text
+    notify-send -u low -t 1000 -h int:value:"${vol}" -h string:synchronous:volume "$text"
 }
 
 # Updates the status line.

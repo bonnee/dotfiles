@@ -14,24 +14,24 @@ scrot "$tmpbg"
 convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
 i3lock --clock --indicator --pass-media-keys \
 \
---insidevercolor=$black \
---ringvercolor=$blue \
+--insidevercolor="$black" \
+--ringvercolor="$blue" \
 \
---insidewrongcolor=$black \
---ringwrongcolor=$red \
+--insidewrongcolor="$black" \
+--ringwrongcolor="$red" \
 \
---insidecolor=$black \
---ringcolor=$trans \
+--insidecolor="$black" \
+--ringcolor="$trans" \
 --line-uses-ring \
---separatorcolor=$trans \
---keyhlcolor=$green \
---bshlcolor=$red \
+--separatorcolor="$trans" \
+--keyhlcolor="$green" \
+--bshlcolor="$red" \
 \
---verifcolor=$white \
---wrongcolor=$white \
---timecolor=$white \
---datecolor=$white \
---layoutcolor=$white \
+--verifcolor="$white" \
+--wrongcolor="$white" \
+--timecolor="$white" \
+--datecolor="$white" \
+--layoutcolor="$white" \
 \
 --veriftext="Mhm..." \
 --wrongtext="Nope!" \

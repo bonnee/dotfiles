@@ -31,7 +31,7 @@ first() {
   echo "$1" | head -1
 }
 
-printf "Mounting $remote..."
+printf "Mounting %s..." "$remote"
 if mount "$remote" "$mount_point" ; then
   echo "Done."
 else
@@ -48,7 +48,7 @@ sync; sync
 
 log "New backup starting"
 
-disksize=$(blockdev --getsize64 $disk)
+disksize=$(blockdev --getsize64 "$disk")
 statcmd="pv -s $disksize"
 
 if [ "$gzip" = 1 ]; then
@@ -93,7 +93,7 @@ if [ "$state" = 0 ]; then
   imgs=$(ls -1tr "$dir" | grep -E "(img.gz$|img$)")
 
   if [ $(count "$imgs") -gt 3 ] ; then
-    old=$(first $imgs)
+    old=$(first "$imgs")
     msg "Removing $old" && rm "$dir/$old" && msg "$old removed."
 
   fi

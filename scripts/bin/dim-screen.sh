@@ -29,37 +29,37 @@ fade_step_time=0.05
 ###############################################################################
 
 get_brightness() {
-    if [[ -z $sysfs_path ]]; then
+    if [[ -z "$sysfs_path" ]]; then
         xbacklight -get
     else
-        cat $sysfs_path
+        cat "$sysfs_path"
     fi
 }
 
 set_brightness() {
-    if [[ -z $sysfs_path ]]; then
-        xbacklight -steps 1 -set $1
+    if [[ -z "$sysfs_path" ]]; then
+        xbacklight -steps 1 -set "$1"
     else
-        echo $1 > $sysfs_path
+        echo "$1" > "$sysfs_path"
     fi
 }
 
 fade_brightness() {
     if [[ -z $sysfs_path ]]; then
-        xbacklight -time $fade_time -steps $fade_steps -set $1
+        xbacklight -time $fade_time -steps $fade_steps -set "$1"
     elif [[ -z $fade_step_time ]]; then
-        set_brightness $1
+        set_brightness "$1"
     else
         local level
-        for level in $(eval echo {$(get_brightness)..$1}); do
-            set_brightness $level
+        for level in $(eval echo "{$(get_brightness)..\"$1\"}"); do
+            set_brightness "$level"
             sleep $fade_step_time
         done
     fi
 }
 
 trap 'exit 0' TERM INT
-trap "set_brightness $(get_brightness); kill %%" EXIT
+trap 'set_brightness "$(get_brightness); kill %%"' EXIT
 fade_brightness $min_brightness
 sleep 2147483647 &
 wait

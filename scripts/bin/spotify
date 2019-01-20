@@ -7,5 +7,5 @@ then
   blockify &
   block_pid=$!
   $spotify
-  trap "kill -9 $block_pid" SIGINT SIGTERM EXIT
+  trap 'kill -9 $block_pid' SIGINT SIGTERM EXIT
 fi

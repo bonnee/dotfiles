@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # ~/.bashrc
 #
@@ -59,17 +60,17 @@ fawk()
     first="awk '{print "
     last="}'"
     cmd="${first}\$${1}${last}"
-    eval $cmd
+    eval "$cmd"
 }
 
 free_mem()
 {
-    printf $(($(cat /proc/meminfo | sed -n '3p' | fawk 2) / 1024))
+    printf "%s" "$(($(sed -n '3p' < /proc/meminfo | fawk 2) / 1024))"
 }
 
 load()
 {
-    cat /proc/loadavg | fawk 1
+    fawk 1 < /proc/loadavg
 }
 
 
@@ -139,12 +140,12 @@ fi
 
 #printf "Welcome $USER,\n"
 if hash todo.sh ls 2> /dev/null; then
-    printf "$BOLD""TODO:$RST_ATTR\n"
+    printf "%bTo Do:%b\n" "$BOLD" "$RST_ATTR"
     #tb
     todo.sh ls
 fi
 
-printf "\n$BOLD$REVERSE$HOSTNAME$RST_ATTR is ready.\n"
+printf "\n%b%b%b%b is ready.\n" "$BOLD" "$REVERSE" "$HOSTNAME" "$RST_ATTR"
 
 export PS1="\[$USR_COLOR\]\[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]> "
 export PS2='> '

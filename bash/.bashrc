@@ -52,6 +52,8 @@ export EDITOR=vim
 export HISTFILESIZE=20000
 export HISTSIZE=10000
 
+git_prompt="/usr/share/git/completion/git-prompt.sh"
+
 # Functions
 
 # shortcut to awk '{print $1}' command
@@ -80,8 +82,9 @@ load()
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-if ! hash __git_ps1 2> /dev/null; then
-    source /usr/share/git/completion/git-prompt.sh
+
+if ! command -v __git_ps1 2>&1 /dev/null && [ -r "$git_prompt" ]; then
+  source "$git_prompt"
 fi
 
 bind "set show-all-if-ambiguous On"
@@ -147,6 +150,7 @@ fi
 
 printf "\n%b%b%b%b is ready.\n" "$BOLD" "$REVERSE" "$HOSTNAME" "$RST_ATTR"
 
-export PS1="\[$USR_COLOR\]\[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s')\[$RST_COLOR\]]> "
+export PS1="\[$USR_COLOR\]\[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s' 2> /dev/null)\[$RST_COLOR\]]> "
+
 export PS2='> '
 

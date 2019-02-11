@@ -83,7 +83,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if ! command -v __git_ps1 2>&1 /dev/null && [ -r "$git_prompt" ]; then
+if ! command -v __git_ps1 > /dev/null 2>&1 && [ -r "$git_prompt" ]; then
   source "$git_prompt"
 fi
 
@@ -146,9 +146,10 @@ if hash todo.sh ls 2> /dev/null; then
     printf "%bTo Do:%b\n" "$BOLD" "$RST_ATTR"
     #tb
     todo.sh ls
+    printf "\n"
 fi
 
-printf "\n%b%b%b%b is ready.\n" "$BOLD" "$REVERSE" "$HOSTNAME" "$RST_ATTR"
+printf "%b%b%b%b is ready.\n" "$BOLD" "$REVERSE" "$HOSTNAME" "$RST_ATTR"
 
 export PS1="\[$USR_COLOR\]\[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s' 2> /dev/null)\[$RST_COLOR\]]> "
 

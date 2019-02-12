@@ -33,7 +33,7 @@ LMAGENTA="\e[95m"
 LCYAN="\e[96m"
 WHITE="\e[97m"
 
-
+# If root, show username in red
 if [[ $EUID -eq "0" ]]; then
     USR_COLOR=$RED
 else
@@ -41,8 +41,6 @@ else
 fi
 HST_COLOR=$YELLOW
 GIT_COLOR=$GREEN
-
-#[ $(ps -p $(ps -p $$ -o ppid=) o args=) == "termite" ] && export TERM="xterm-termite"
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -54,8 +52,6 @@ export HISTSIZE=10000
 
 git_prompt="/usr/share/git/completion/git-prompt.sh"
 
-# Functions
-
 # shortcut to awk '{print $1}' command
 fawk()
 {
@@ -65,17 +61,6 @@ fawk()
     eval "$cmd"
 }
 
-free_mem()
-{
-    printf "%s" "$(($(sed -n '3p' < /proc/meminfo | fawk 2) / 1024))"
-}
-
-load()
-{
-    fawk 1 < /proc/loadavg
-}
-
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -83,7 +68,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if ! command -v __git_ps1 > /dev/null 2>&1 && [ -r "$git_prompt" ]; then
+if ! type __git_ps1 >/dev/null 2>&1 && [ -r "$git_prompt" ]; then
   source "$git_prompt"
 fi
 
@@ -104,13 +89,12 @@ HISTIGNORE="&:ls:[bf]g:exit"
 alias sudo='sudo '
 
 alias ll='ls -lh'
-alias la='ls -ah'
+alias la='ls -lah'
 
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-alias xbuild-rel="xbuild /p:Configuration=Release"
 alias todo='todo.sh'
 alias p='python'
 alias tb='taskbook'
@@ -118,7 +102,7 @@ alias tb='taskbook'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection c -o'
 
-if [ -x /usr/bin/dircolors ]; then
+if type -p dircolors >/dev/null; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
@@ -129,20 +113,21 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-if [ -x /usr/bin/pbzip2 ]; then
-	alias bzip2='pbzip2'
+if type -p pbzip2 >/dev/null; then
+  alias bzip2='pbzip2'
 fi
 
-if [ -x /usr/bin/intel_gpu_top ]; then
-	alias itop='/usr/bin/intel_gpu_top'
+itop="$(type -p intel_gpu_top)"
+if [ ! -z $itop ]; then
+  alias itop="$itop"
 fi
 
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    host="@\[$HST_COLOR\]\h\[$RST_COLOR\]"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [[ $EUID -eq "0" ]];  then
+  host="@\[$HST_COLOR\]\h\[$RST_COLOR\]"
 fi
 
 #printf "Welcome $USER,\n"
-if hash todo.sh ls 2> /dev/null; then
+if hash todo.sh > /dev/null; then
     printf "%bTo Do:%b\n" "$BOLD" "$RST_ATTR"
     #tb
     todo.sh ls

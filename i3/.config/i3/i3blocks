@@ -69,7 +69,7 @@ label=&#xf0e8;
 align=center
 
 [disk-io]
-label=&#xf0a0;
+label=&#xf1c0;
 interval=persist
 align=center
 command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 4 -T 102400

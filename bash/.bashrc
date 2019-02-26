@@ -127,7 +127,7 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [[ $EUID -eq "0" ]];  then
 fi
 
 #printf "Welcome $USER,\n"
-if hash todo.sh > /dev/null; then
+if hash todo.sh 2> /dev/null; then
     printf "%bTo Do:%b\n" "$BOLD" "$RST_ATTR"
     #tb
     todo.sh ls

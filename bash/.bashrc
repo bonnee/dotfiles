@@ -68,6 +68,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+if [ -r /usr/share/undistract-me/long-running.bash ]; then
+  source /usr/share/undistract-me/long-running.bash;notify_when_long_running_commands_finish_install
+fi
+
 if ! type __git_ps1 >/dev/null 2>&1 && [ -r "$git_prompt" ]; then
   source "$git_prompt"
 fi

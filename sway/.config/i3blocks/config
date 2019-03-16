@@ -28,6 +28,7 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+
 interval=4
 
 [time]
@@ -48,7 +49,7 @@ signal=10
 # BEGIN laptop
 #
 ##[ssid]
-##command=$HOME/.config/i3/blocks/ssid
+##command=$HOME/.config/i3blocks/blocks/ssid
 ##separator=false
 #
 ##[wifi]
@@ -56,7 +57,7 @@ signal=10
 #
 #[wlanfreq]
 #label=&#xf1eb;
-#command=$HOME/.config/i3/blocks/wlanfreq wlan0
+#command=$HOME/.config/i3blocks/blocks/wlanfreq wlan0
 #separator=false
 #
 #[iface]
@@ -72,14 +73,7 @@ align=center
 label=&#xf1c0;
 interval=persist
 align=center
-command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 4 -T 102400
-
-# BEGIN desktop
-#separator=false
-#
-##[bcache-ratio]
-##command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
-# END desktop
+command=$HOME/.config/i3blocks/blocks/disk-io -s " " -w 0 -t 4 -T 102400
 
 # CPU usage
 #
@@ -100,52 +94,30 @@ label=&#xf2c9;
 command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000 -w 60 -c 70
 
 # BEGIN laptop
+#
 #[fan]
 #label=&#xf2dc;
-#command=$HOME/.config/i3/blocks/fan
-# END laptop
-
-# BEGIN laptop
+#command=$HOME/.config/i3blocks/blocks/fan
+#
 #[battery]
-##command=$HOME/.config/i3/blocks/battery
 #label=&#xf242;
 #align=center
 #separator=false
 #
 #[threshold]
 #label=THR
-#command=$HOME/.config/i3/blocks/chg_threshold.sh
+#command=$HOME/.config/i3blocks/blocks/chg_threshold.sh
 #
 #[consumption]
 #label=&#xf1e6;
-#command=$HOME/.config/i3/blocks/consumption
-#
+#command=$HOME/.config/i3blocks/blocks/consumption
 #
 # END laptop
 
 [updates]
 label=&#xf021;
-command=~/.config/i3/blocks/updates
+command=$HOME/.config/i3blocks/blocks/updates
 interval=1800
 signal=12
 
-#[sun]
-#command=$HOME/.config/i3/blocks/sun
-
-# Key indicators
-#
-# Add the following bindings to i3 config file:
-#
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-#[keyindicator]
-#instance=CAPS
-#interval=once
-#signal=11
-#separator=false
-
-#[keyindicator]
-#instance=NUM
-#interval=once
-#signal=11
 

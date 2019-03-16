@@ -4,38 +4,31 @@
 tmpbg='/tmp/screen.png'
 
 trans="#00000000"
-black="$(xgetres color8)BB"
-white="$(xgetres color15)FF"
-blue="$(xgetres color4)FF"
-red="$(xgetres color1)FF"
-green="$(xgetres color10)FF"
+black="#000000BB"
+white="#F6F6F6FF"
+blue="#2196F3FF"
+red="#F44336FF"
+green="#4CAF50FF"
 
-scrot "$tmpbg"
+grim "$tmpbg"
 convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
-i3lock --clock --indicator --pass-media-keys \
+swaylock -f \
 \
---insidevercolor="$black" \
---ringvercolor="$blue" \
+--indicator-radius=150 \
+--inside-ver-color="$black" \
+--ring-ver-color="$blue" \
 \
---insidewrongcolor="$black" \
---ringwrongcolor="$red" \
+--inside-wrong-color="$black" \
+--ring-wrong-color="$red" \
 \
---insidecolor="$black" \
---ringcolor="$trans" \
+--inside-color="$black" \
+--ring-color="$trans" \
 --line-uses-ring \
---separatorcolor="$trans" \
---keyhlcolor="$green" \
---bshlcolor="$red" \
+--separator-color="$trans" \
+--key-hl-color="$green" \
+--bs-hl-color="$red" \
 \
---verifcolor="$white" \
---wrongcolor="$white" \
---timecolor="$white" \
---datecolor="$white" \
---layoutcolor="$white" \
-\
---veriftext="Mhm..." \
---wrongtext="Nope!" \
---timestr="%H:%M" \
---datestr="%a %d %b" \
+--text-ver-color="$white" \
+--text-wrong-color="$white" \
 \
 -i "$tmpbg" 

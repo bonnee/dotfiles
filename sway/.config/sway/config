@@ -4,6 +4,11 @@
 #####               Variables               #####
 #################################################
 
+#output eDP-1 scale 1
+#1.56
+
+output eDP-1 bg $HOME/.config/sway/wallpaper.png fill
+
 set $mod Mod4
 
 # BEGIN desktop
@@ -13,23 +18,34 @@ set $mod Mod4
 #set $hardlock Mod4+Shift+l
 # END laptop
 
+input 2:14:ETPS/2_Elantech_Touchpad {
+  accel_profile adaptive
+  pointer_accel 0.25
+  tap enabled
+  drag_lock enabled
+  click_method clickfinger
+}
 
-set_from_resource $black       color0   #000000
-set_from_resource $darkgrey    color8   #9E9E9E
-set_from_resource $darkred     color1   #B71C1C
-set_from_resource $red         color9   #F44336
-set_from_resource $darkgreen   color2   #1B5E20
-set_from_resource $green       color10  #4CAF50
-set_from_resource $darkyellow  color3   #F57F17
-set_from_resource $yellow      color11  #FFEB3B
-set_from_resource $darkblue    color4   #0D47A1
-set_from_resource $blue        color12  #2196F3
-set_from_resource $darkmagenta color5   #AA00FF
-set_from_resource $magenta     color13  #D500F9
-set_from_resource $darkcyan    color6   #006064
-set_from_resource $cyan        color14  #00BCD4
-set_from_resource $lightgrey   color7   #E0E0E0
-set_from_resource $white       color15  #F6F6F6
+input 1:1:AT_Translated_Set_2_keyboard {
+  xkb_layout it
+}
+
+set $black        #000000
+set $darkgrey     #9E9E9E
+set $darkred      #B71C1C
+set $red          #F44336
+set $darkgreen    #1B5E20
+set $green        #4CAF50
+set $darkyellow   #F57F17
+set $yellow       #FFEB3B
+set $darkblue     #0D47A1
+set $blue         #2196F3
+set $darkmagenta  #AA00FF
+set $magenta      #D500F9
+set $darkcyan     #006064
+set $cyan         #00BCD4
+set $lightgrey    #E0E0E0
+set $white        #F6F6F6
 
 set $transparent #000000FF
 set $dark        #000000
@@ -41,7 +57,7 @@ set $fontfam     Aller
 # END desktop
 
 # BEGIN laptop
-#set $fontsize     9 
+#set $fontsize     9
 # END laptop
 
 # BEGIN desktop
@@ -52,13 +68,20 @@ set $fontfam     Aller
 #set $browser chromium --force-device-scale-factor=1.2
 # END laptop
 
-set $background $HOME/.config/i3/wallpaper.png
 
 font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
+
+# BEGIN desktop
+#hide_edge_borders both
+# END desktop
+
+# BEGIN laptop
+#hide_edge_borders smart
+# END laptop
 
 force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
@@ -69,9 +92,8 @@ popup_during_fullscreen smart
 # END desktop
 
 # BEGIN laptop
-#new_window pixel 2
-#smart_borders on
-#hide_edge_borders on
+#new_window pixel 4
+#hide_edge_borders smart
 # END laptop
 
 # BEGIN desktop
@@ -84,7 +106,7 @@ popup_during_fullscreen smart
 #####              Keystrokes               #####
 #################################################
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty #i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -157,11 +179,11 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-#bindsym XF86MonBrightnessUp exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
-#bindsym XF86MonBrightnessDown exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
+#bindsym XF86MonBrightnessUp exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 20 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
+#bindsym XF86MonBrightnessDown exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 20 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
 #
 #bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 #bindsym XF86Display exec --no-startup-id lxrandr
@@ -172,8 +194,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -i 5 -n -t i3blocks 
 bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMute exec --no-startup-id volume.sh -mnt i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
-bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
@@ -181,16 +202,13 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
+bindsym $mod+Print exec --no-startup-id grim "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u critical "Screenshot Taken!"
 
-bindsym $mod+l exec --no-startup-id xset s activate
-bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off
-
-bindsym $mod+r mode "resize"
-bindsym $mod+Escape mode "$mode_system"
+bindsym $mod+l exec --no-startup-id lock.sh
+bindsym $hardlock exec --no-startup-id lock.sh
 
 bindsym $mod+g exec thunar
-bindsym $mod+a exec --no-startup-id telegram-desktop
+bindsym $mod+a exec --no-startup-id telegram-desktop; sleep 0.01; swaymsg "floating enable"
 
 #################################################
 #####          Scratchpad settings          #####
@@ -205,7 +223,7 @@ bindsym $mod+s [con_mark="scratch"] scratchpad show
 bindsym $mod+Shift+s mark "scratch", move scratchpad
 
 # Move dropterm to scratchpad
-for_window [title="dropterm"] mark "dropterm", move scratchpad
+for_window [app_id="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
 for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
@@ -215,6 +233,10 @@ bindsym $mod+c exec --no-startup-id $browser
 #################################################
 #####                 Modes                 #####
 #################################################
+
+set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+bindsym $mod+r mode "resize"
+bindsym $mod+Escape mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -241,10 +263,9 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 
-set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-  bindsym l exec --no-startup-id xset s activate, mode "default"
-  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym l exec --no-startup-id lock.sh, mode "default"
+  bindsym e exec --no-startup-id swaymsg exit, mode "default"
   bindsym s exec --no-startup-id systemctl suspend, mode "default"
   bindsym h exec --no-startup-id systemctl hibernate, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -260,11 +281,11 @@ mode "$mode_system" {
 #################################################
 
 # Window Colors
-# class                 border    backgr.   text        indicator
-client.focused          $white    $white    $black      $green
-client.focused_inactive $darkcyan $darkcyan $lightgrey  $green
-client.unfocused        $darkgrey $darkgrey $lightgrey  $green
-client.urgent           $red      $red      $lightgrey  $green
+# class                 border    backgr.   text        indicator  child_border
+client.focused		$white	  $white    $black	$green	  $white
+client.focused_inactive $darkcyan $darkcyan $lightgrey  $green	  $darkcyan
+client.unfocused        $darkgrey $darkgrey $lightgrey  $green	  $darkgrey
+client.urgent           $red      $red      $lightgrey  $green	  $red
 client.background       $darkgrey
 
 
@@ -276,26 +297,29 @@ for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="Terminator Preferences"] floating enable
-for_window [class="TelegramDesktop"] floating enable
+for_window [instance="telegram-desktop"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
+for_window [app_id="lxrandr"] floating enable
 
 for_window [window_type="dialog"] floating enable
 
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move down $height px
 for_window [class="(?i)qemu-system"] floating enable
+#for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
+#for_window [class="(?i)VirtualBox"] floating enable
+for_window [app_id="(?i)blueman"] floating enable
 for_window [class="(?i)pinentry"] floating enable
-for_window [class="(?i)blueberry*"] floating enable
-for_window [class="(?i)blueman*"] floating enable
 
+#for_window [instance="sun-awt-X11-XFramePeer"] floating enable
 for_window [instance="__scratchpad"] floating enable
 for_window [instance="__nmtui"] floating enable
 for_window [class="(?i)recordmydesktop"] floating enable
 
-for_window [class="(?i)pavucontrol"] floating enable, move position mouse
-for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
+for_window [app_id="(?i)pavucontrol"] floating enable, move position mouse
+for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 
 #new_float border normal
 
@@ -321,10 +345,10 @@ bar {
   # END desktop
 
   # BEGIN laptop
-  #font pango:$fontfam, Font Awesome 5 Free, Solid 8
+  #font pango:$fontfam, Font Awesome 5 Free, Solid 14
   # END laptop
   
-  status_command i3blocks -c $HOME/.config/i3/i3blocks
+  status_command i3blocks -c $HOME/.config/i3blocks/config
   #tray_output primary
 }
 
@@ -332,11 +356,18 @@ bar {
 #####                Autorun                #####
 #################################################
 
-#exec --no-startup-id compton --config $HOME/.config/compton.conf &
-
-exec --no-startup-id alacritty --title dropterm
+exec --no-startup-id bash -c 'while true; do alacritty --class dropterm; done'
+exec --no-startup-id mako
 
 exec --no-startup-id $HOME/bin/autostart.sh
 
-exec_always --no-startup-id exec feh --bg-fill $background
-exec --no-startup-id dunst &
+exec --no-startup-id pulseaudio-dlna &
+exec --no-startup-id redshift-gtk &
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+exec --no-startup-id swayidle -w timeout 120 "dim.sh -sd" \
+				 resume "swaymsg \"output * dpms on\"; dim.sh -r" \
+				 timeout 180 'dim.sh -0; lock.sh; swaymsg "output * dpms off"' \
+				 before-sleep "dim.sh -s0; lock.sh" \
+				 after-resume "dim.sh -r"
+

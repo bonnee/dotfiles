@@ -105,7 +105,7 @@ is_muted() {
 
 # Display a notification indicating the volume is muted.
 notify_muted() {
-    notify-send -u low -t 1000 -h int:value:0 -h string:synchronous:volume "Volume  "
+    notify-send -u low -t 1000 "Volume" "Muted"
 }
 
 # Display a notification indicating the current volume.
@@ -121,7 +121,7 @@ notify_volume() {
 	text="$text [$vol%]"
     fi
     
-    notify-send -u low -t 1000 -h int:value:"${vol}" -h string:synchronous:volume "$text"
+    notify-send -u low -t 1000 "$text" "$vol%"
 }
 
 # Updates the status line.

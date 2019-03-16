@@ -4,7 +4,7 @@
     //"editor.fontSize": 14,
     //"markdown.preview.fontSize": 14,
     //"terminal.integrated.fontSize": 14,
-    //"window.zoomLevel": -1,
+    //"window.zoomLevel": 1,
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
@@ -39,5 +39,6 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "window.titleBarStyle": "custom",
     "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "editor.tabSize": 2
 }

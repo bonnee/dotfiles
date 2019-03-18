@@ -111,7 +111,7 @@ bindsym $mod+Return exec alacritty #i3-sensible-terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show drun -markup
+bindsym $mod+d exec rofi -show drun -markup
 
 # change focus
 bindsym $mod+Left focus left
@@ -182,33 +182,33 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-#bindsym XF86MonBrightnessUp exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 20 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
-#bindsym XF86MonBrightnessDown exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 20 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
+#bindsym XF86MonBrightnessUp exec flock /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 20 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
+#bindsym XF86MonBrightnessDown exec flock /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 20 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
 #
-#bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1000 -u low "¯\_(ツ)_/¯"
-#bindsym XF86Display exec --no-startup-id lxrandr
+#bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
+#bindsym XF86Display exec lxrandr
 # END laptop
 
 set $unmute amixer -q set Master unmute
-bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
-bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
-bindsym XF86AudioMute exec --no-startup-id volume.sh -mnt i3blocks -u SIGRTMIN+10
-bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioStop exec --no-startup-id playerctl stop
+bindsym XF86AudioRaiseVolume exec volume.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
+bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
+bindsym XF86AudioMute exec volume.sh -mnt i3blocks -u SIGRTMIN+10
+bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
 
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+Print exec --no-startup-id grim "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u critical "Screenshot Taken!"
+bindsym $mod+Print exec grim "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u critical "Screenshot Taken!"
 
-bindsym $mod+l exec --no-startup-id lock.sh
-bindsym $hardlock exec --no-startup-id lock.sh
+bindsym $mod+l exec lock.sh
+bindsym $hardlock exec lock.sh
 
 bindsym $mod+g exec thunar
-bindsym $mod+a exec --no-startup-id telegram-desktop; sleep 0.01; swaymsg "floating enable"
+bindsym $mod+a exec telegram-desktop; sleep 0.01; swaymsg "floating enable"
 
 #################################################
 #####          Scratchpad settings          #####
@@ -226,9 +226,9 @@ bindsym $mod+Shift+s mark "scratch", move scratchpad
 for_window [app_id="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
-for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
+for_window [class="Spotify"] mark "music", move scratchpad, [con_mark="music"] scratchpad show
 
-bindsym $mod+c exec --no-startup-id $browser
+bindsym $mod+c exec $browser
 
 #################################################
 #####                 Modes                 #####
@@ -264,12 +264,12 @@ mode "resize" {
 }
 
 mode "$mode_system" {
-  bindsym l exec --no-startup-id lock.sh, mode "default"
-  bindsym e exec --no-startup-id swaymsg exit, mode "default"
-  bindsym s exec --no-startup-id systemctl suspend, mode "default"
-  bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-  bindsym r exec --no-startup-id systemctl reboot, mode "default"
-  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+  bindsym l exec lock.sh, mode "default"
+  bindsym e exec swaymsg exit, mode "default"
+  bindsym s exec systemctl suspend, mode "default"
+  bindsym h exec systemctl hibernate, mode "default"
+  bindsym r exec systemctl reboot, mode "default"
+  bindsym Shift+s exec systemctl poweroff -i, mode "default"
   
   # back to normal: Enter or Escape
   bindsym Return mode "default"
@@ -356,18 +356,19 @@ bar {
 #####                Autorun                #####
 #################################################
 
-exec --no-startup-id bash -c 'while true; do alacritty --class dropterm; done'
-exec --no-startup-id mako
+exec bash -c 'while true; do alacritty --class dropterm; done'
+exec mako
 
-exec --no-startup-id $HOME/bin/autostart.sh
+exec $HOME/bin/autostart.sh
 
-exec --no-startup-id pulseaudio-dlna &
-exec --no-startup-id redshift-gtk &
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec pulseaudio-dlna
+exec redshift-gtk
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-exec --no-startup-id swayidle -w timeout 120 "dim.sh -sd" \
-				 resume "swaymsg \"output * dpms on\"; dim.sh -r" \
-				 timeout 180 'dim.sh -0; lock.sh; swaymsg "output * dpms off"' \
-				 before-sleep "dim.sh -s0; lock.sh" \
-				 after-resume "dim.sh -r"
+exec swayidle -w \
+    timeout 120 'dim.sh -sd' \
+    resume 'swaymsg "output * dpms on"; dim.sh -r' \
+    timeout 180 'dim.sh -0; lock.sh; swaymsg "output * dpms off"' \
+    before-sleep 'dim.sh -s0; lock.sh' \
+    after-resume 'dim.sh -r'
 

@@ -1,0 +1,19 @@
+for_window [class="vlc"] floating enable
+for_window [class="Gpick"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="(Pp)references"] floating enable
+for_window [window_type="dialog"] floating enable
+
+for_window [title="Terminator Preferences"] floating enable
+for_window [app_id="lxrandr"] floating enable
+for_window [class="(?i)qemu-system"] floating enable
+for_window [app_id="(?i)blueman"] floating enable
+for_window [class="(?i)pinentry"] floating enable
+
+for_window [app_id="(?i)pavucontrol"] floating enable, move position mouse
+for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
+
+for_window [instance="telegram-desktop"] mark "telegram", floating enable

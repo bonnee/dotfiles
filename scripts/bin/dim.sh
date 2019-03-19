@@ -4,7 +4,7 @@ save="/tmp/bkl"
 
 idle_backlight=5
 fade_time=500
-fade_steps=10
+fade_steps=20
 
 save(){
   xbacklight -get > "$save"

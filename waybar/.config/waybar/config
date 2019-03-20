@@ -1,0 +1,88 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","network","cpu","memory","temperature","battery","custom/consumption"],
+    "sway/window": {
+        "max-length": 50
+    },
+
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+	"states": {
+	    "warning": 30,
+	    "critical": 10
+	}
+    },
+    "clock": {
+        "format": "{:%a %d %H:%M}"
+    },
+    "cpu": {
+	"interval": 5,
+	"format": "{usage}% ",
+	"max-length": 10
+    },
+    "memory": {
+	"interval": 30,
+	"format": "{}% ",
+	"max-length": 10
+    },
+    "network": {
+	"interface": "wlan0",
+        "format": "{ifname}",
+        "format-wifi": "{signalStrength}% ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "no net", //An empty format will hide the module.
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+    "pulseaudio": {
+	"format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "mute",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
+    },
+     "temperature": {
+	// "thermal-zone": 2,
+	// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+	// "critical-threshold": 80,
+	// "format-critical": "{temperatureC}°C ",
+	"format": "{temperatureC}°C "
+    },
+    "custom/consumption": {
+      "format": "{} W &#xf0e7;",
+      "interval": 5,
+      "exec": "$HOME/.config/i3blocks/blocks/consumption"
+    },
+     "tray": {
+	"icon-size": 24,
+	"spacing": 10
+    },
+    "idle_inhibitor": {
+	"format": "{icon}",
+        "format-icons": {
+	  "activated": "",
+	  "deactivated": ""
+        }
+    },
+    "custom/updates": {
+      "format": "{} &#xf2f1;",
+      "signal": 12,
+      "exec": "$HOME/.config/i3blocks/blocks/updates"
+    }
+}

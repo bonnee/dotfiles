@@ -1,0 +1,86 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, "Font Awesome Free", Helvetica, Arial, sans-serif, Font Awesome;
+    font-size: 15px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: black;
+    color: white;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: gray;
+    border-top: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    color: white;
+    border-top: 3px solid white;
+}
+
+#mode {
+    background: #64727D;
+    border-top: 3px solid white;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #idle_inhibitor, #custom-consumption, #custom-updates {
+    padding: 0 10px;
+    margin: 0 5px;
+
+    color: white;
+    border-top: 3px solid black;
+}
+
+#battery.charging {
+    color: lightgreen;
+    border-top: 3px solid lightgreen; /*#26A65B;*/
+}
+
+#battery.warning.discharging {
+    color: orange;
+    border-top: 3px solid orange;
+}
+
+@keyframes blink {
+    50% {
+      color: darkred;
+      border-top: 3px solid #000000;
+    }
+}
+
+#battery.critical.discharging {
+    color: orangered;
+    border-top: 3px solid orangered;
+    animation: blink 1.5s ease infinite;
+}
+
+#network.disconnected {
+    color: gray;
+    border-top: 3px solid gray;
+}
+
+#pulseaudio.muted {
+    color: gray;
+    border-top: 3px solid gray;
+}
+
+#custom-consumption.medium {
+    color: orange;
+    border-top: 3px solid orange;
+}
+
+#custom-consumption.high {
+  color: orangered;
+  border-top: 3px solid orangered;
+}
+
+#custom-updates.updates {
+  color: lightgreen;
+}
+

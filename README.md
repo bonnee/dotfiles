@@ -31,3 +31,5 @@ Various utilities and scripts
 Configuration for [vim](https://vim.sourceforge.io/)
 ## `/vscode`
 Configuration for [Visual Studio Code](https://code.visualstudio.com/)
+## `/waybar`
+Configuration and scripts for [Waybar](https://github.com/Alexays/Waybar)

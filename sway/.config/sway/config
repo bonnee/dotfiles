@@ -49,7 +49,7 @@ set $lightgrey    #E0E0E0
 set $white        #F6F6F6
 
 set $transparent #000000FF
-set $dark        #000000
+set $dark        #333333
 
 set $fontfam     Aller
 
@@ -285,46 +285,21 @@ mode "$exit" {
 
 # Window Colors
 # class                 border    backgr.   text        indicator  child_border
-client.focused		$white	  $white    $black	$green	  $white
+client.focused		$white	  $white    $dark	$green	  $white
 client.focused_inactive $darkcyan $darkcyan $lightgrey  $green	  $darkcyan
 client.unfocused        $darkgrey $darkgrey $lightgrey  $green	  $darkgrey
 client.urgent           $red      $red      $lightgrey  $green	  $red
 client.background       $darkgrey
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-  colors {
-    background $dark
-    statusline $lightgrey
-    separator  $lightgrey
-
-    # Type             border     background font
-    focused_workspace  $white     $white     $black
-    active_workspace   $darkcyan  $darkcyan  $lightgrey
-    inactive_workspace $dark      $dark      $lightgrey
-    urgent_workspace   $red       $red       $white
-    binding_mode       $white     $white     $black
-  }
-  position bottom
-	
-  # BEGIN desktop
-  #font pango:Aller, Font Awesome 5 Free 10
-  # END desktop
-
-  # BEGIN laptop
-  #font pango:$fontfam, Font Awesome 5 Free, Solid 14
-  # END laptop
-  
-  status_command i3blocks -c $HOME/.config/i3blocks/config
-  #tray_output primary
-}
 
 include ~/.config/sway/config.d/*
 
 #################################################
 #####                Autorun                #####
 #################################################
+
+bar {
+  swaybar_command waybar
+}
 
 exec bash -c 'while true; do alacritty --class dropterm; done'
 exec mako

@@ -24,6 +24,7 @@ input 2:14:ETPS/2_Elantech_Touchpad {
   tap enabled
   drag_lock enabled
   click_method clickfinger
+  dwt disabled
 }
 
 input 1:1:AT_Translated_Set_2_keyboard {
@@ -74,14 +75,6 @@ font pango: $fontfam $fontsize
 floating_modifier $mod
 focus_follows_mouse yes
 #workspace_auto_back_and_forth yes
-
-# BEGIN desktop
-#hide_edge_borders both
-# END desktop
-
-# BEGIN laptop
-#hide_edge_borders smart
-# END laptop
 
 force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
@@ -195,6 +188,7 @@ bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMute exec volume.sh -mnt i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop

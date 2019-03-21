@@ -5,7 +5,7 @@
     "modules-center": ["clock"],
     "modules-right": ["tray","idle_inhibitor","pulseaudio","network","cpu","memory","temperature","battery","custom/consumption"],
     "sway/window": {
-        "max-length": 50
+        "max-length": 100
     },
 
     "battery": {
@@ -67,7 +67,7 @@
     "custom/consumption": {
       "format": "{} W &#xf0e7;",
       "interval": 5,
-      "exec": "$HOME/.config/i3blocks/blocks/consumption"
+      "exec": "$HOME/.config/waybar/scripts/consumption"
     },
      "tray": {
 	"icon-size": 24,
@@ -83,6 +83,6 @@
     "custom/updates": {
       "format": "{} &#xf2f1;",
       "signal": 12,
-      "exec": "$HOME/.config/i3blocks/blocks/updates"
+      "exec": "$HOME/.config/waybar/scripts/updates"
     }
 }

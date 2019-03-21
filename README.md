@@ -24,12 +24,10 @@ Configuration for [Rofi](https://github.com/DaveDavenport/rofi)
 Various utilities and scripts
 ## `/sway`
 * `.config/sway/config` [sway](https://swaywm.org/) config
-* `.config/i3blocks/config` [i3blocks](https://vivien.github.io/i3blocks/) config
-* `.config/i3blocks/blocks/` my custom blocklets
+* `.config/waybar` [Waybar](https://github.com/Alexays/Waybar) config and style
+* `.config/waybar/scripts/` my custom scripts for Waybar
 * `.config/sway/wallpaper.png` my wallpaper
 ## `/vim`
 Configuration for [vim](https://vim.sourceforge.io/)
 ## `/vscode`
 Configuration for [Visual Studio Code](https://code.visualstudio.com/)
-## `/waybar`
-Configuration and scripts for [Waybar](https://github.com/Alexays/Waybar)

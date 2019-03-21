@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-updates=$(checkupdates+aur | wc -l)
-if [ "$updates" -gt "0" ]; then
-  class="updates"
-fi
-
-echo "$updates/$(pacman -Q | wc -l)"
-echo "$updates"
-echo "$class"

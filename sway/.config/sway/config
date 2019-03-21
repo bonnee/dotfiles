@@ -259,7 +259,7 @@ mode "resize" {
 
 mode "$mode_system" {
   bindsym l exec lock.sh, mode "default"
-  bindsym e exec exit, mode "default"
+  bindsym e exit, mode "default"
   bindsym s exec systemctl suspend, mode "default"
   bindsym h exec systemctl hibernate, mode "default"
   bindsym r exec systemctl reboot, mode "default"

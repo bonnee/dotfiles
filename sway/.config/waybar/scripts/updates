@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 updates=$(checkupdates+aur | wc -l)
 if [ "$updates" -gt "0" ]; then
-  class="updates"
+  class="low"
 fi
 
 echo "$updates/$(pacman -Q | wc -l)"

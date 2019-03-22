@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","network","cpu","memory","temperature","battery","custom/consumption"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","network","cpu","memory","temperature","custom/fan","battery","custom/consumption"],
     "sway/window": {
         "max-length": 100
     },
@@ -79,6 +79,11 @@
 	  "activated": "",
 	  "deactivated": ""
         }
+    },
+    "custom/fan": {
+      "format": "{}",
+      "interval": 5,
+      "exec": "$HOME/.config/waybar/scripts/fan"
     },
     "custom/updates": {
       "format": "{} &#xf2f1;",

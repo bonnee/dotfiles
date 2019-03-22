@@ -86,7 +86,7 @@ popup_during_fullscreen smart
 
 # BEGIN laptop
 #new_window pixel 4
-#hide_edge_borders smart
+#hide_edge_borders both
 # END laptop
 
 # BEGIN desktop
@@ -183,8 +183,8 @@ bindsym $mod+Shift+r restart
 # END laptop
 
 set $unmute amixer -q set Master unmute
-bindsym XF86AudioRaiseVolume exec volume.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
-bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
+bindsym XF86AudioRaiseVolume exec volume.sh -i 5 -n
+bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n
 bindsym XF86AudioMute exec volume.sh -mnt i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 bindsym XF86AudioPlay exec playerctl play-pause

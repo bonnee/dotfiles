@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+rpm="$(grep speed /proc/acpi/ibm/fan | awk '{print $2}')"
+
+class="low"
+(( $(echo "${rpm}>=3500"|bc -l) )) && class="medium"
+(( $(echo "${rpm}>=4000"|bc -l) )) && class="high"
+
+if [ "$rpm" -ne 0 ]; then
+  echo ""
+  echo "$rpm RPM"
+  echo "$class"
+fi

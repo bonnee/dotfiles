@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-    background: black;
+    background: rgba(0,0,0,0.75);
     color: white;
 }
 
@@ -38,7 +38,7 @@ window#waybar {
     margin: 0 5px;
 
     color: white;
-    border-top: 3px solid black;
+    border-top: 3px solid rgba(0,0,0,0);
 }
 
 #battery.charging {
@@ -74,17 +74,21 @@ window#waybar {
     border-top: 3px solid gray;
 }
 
-#custom-consumption.medium {
-    color: orange;
-    border-top: 3px solid orange;
+.low {
+  border-top: 3px solid lightgreen;
+  color: lightgreen
 }
 
-#custom-consumption.high {
+.medium {
+  border-top: 3px solid orange;
+  color: orange;
+}
+
+.high {
   color: orangered;
   border-top: 3px solid orangered;
 }
 
-#custom-updates.updates {
-  color: lightgreen;
+#custom-fan {
+  border-top: 3px solid rgba(0,0,0,0);
 }
-

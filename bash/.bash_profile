@@ -1,4 +1,4 @@
-#
+
 # ~/.bash_profile
 #
 
@@ -6,8 +6,10 @@ export PATH=~/bin:~/.npm-global/bin:$PATH
 
 # BEGIN laptop
 #CYCLES_OPENCL_SPLIT_KERNEL_TEST=1; export CYCLES OPENCL_SPLIT_KERNEL_TEST
-#QT_DEVICE_PIXEL_RATIO=auto
-#export QT_DEVICE_PIXEL_RATIO
+#
+#export QT_AUTO_SCREEN_SCALE_FACTOR=1
+##export GDK_SCALE=1
+#
 # END laptop
 
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"

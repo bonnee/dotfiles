@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-w=$(awk '{printf "%.1f", $1*10^-6}' /sys/class/power_supply/BAT1/power_now )
+w=$(awk '{printf "%.1f", $1*10^-6}' /sys/class/power_supply/BAT1/power_now)
 status=$(cat "/sys/class/power_supply/BAT1/status")
 
+class=""
 if [ "$status" != "Charging" ]; then
   (( $(echo "${w} >= 7"| bc -l) ))&& class="medium"
   (( $(echo "${w} >= 10"| bc -l) ))&& class="high"
@@ -10,6 +11,6 @@ else
   w="-$w"
 fi
 
-echo "${w}"
+echo "$w"
 echo ""
 echo "$class"

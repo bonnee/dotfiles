@@ -35,11 +35,10 @@
         "format-wifi": "{signalStrength}% ",
         "format-ethernet": "{ifname} ",
         "format-disconnected": "no net", //An empty format will hide the module.
-        "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
+        "tooltip-format": "{ipaddr} {ifname}",
+        "tooltip-format-wifi": "{ipaddr} {essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ipaddr} {ifname} ",
+        "tooltip-format-disconnected": "Disconnected"
     },
     "pulseaudio": {
 	"format": "{volume}% {icon}",
@@ -58,10 +57,10 @@
         "on-click": "pavucontrol"
     },
      "temperature": {
-	// "thermal-zone": 2,
+	"thermal-zone": 2,
 	// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-	// "critical-threshold": 80,
-	// "format-critical": "{temperatureC}°C ",
+	"critical-threshold": 80,
+	"format-critical": "{temperatureC}°C ",
 	"format": "{temperatureC}°C "
     },
     "custom/consumption": {
@@ -71,7 +70,7 @@
     },
      "tray": {
 	"icon-size": 24,
-	"spacing": 10
+	"spacing": 8
     },
     "idle_inhibitor": {
 	"format": "{icon}",

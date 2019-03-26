@@ -25,11 +25,12 @@
 	"max-length": 10
     },
     "memory": {
-	"interval": 30,
+	"interval": 20,
 	"format": "{}% ",
 	"max-length": 10
     },
     "network": {
+	"interval": 20,
 	"interface": "wlan0",
         "format": "{ifname}",
         "format-wifi": "{signalStrength}% ",
@@ -81,7 +82,7 @@
     },
     "custom/fan": {
       "format": "{}",
-      "interval": 5,
+      "interval": 10,
       "exec": "$HOME/.config/waybar/scripts/fan"
     },
     "custom/updates": {

@@ -9,6 +9,8 @@ export PATH=~/bin:~/.npm-global/bin:$PATH
 #
 #export QT_AUTO_SCREEN_SCALE_FACTOR=1
 #export GDK_SCALE=1
+#export _JAVA_AWT_WM_NONREPARENTING=1
+#
 #
 # END laptop
 

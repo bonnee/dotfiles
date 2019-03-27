@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","network","cpu","memory","temperature","custom/fan","battery","custom/consumption"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","network","cpu","memory","temperature","custom/fan","battery","custom/ibam","custom/consumption"],
     "sway/window": {
         "max-length": 100
     },
@@ -12,9 +12,14 @@
         "format": "{capacity}% {icon}",
         "format-icons": ["", "", "", "", ""],
 	"states": {
-	    "warning": 30,
-	    "critical": 10
+	    "warning": 35,
+	    "critical": 15
 	}
+    },
+    "custom/ibam": {
+      "format": "{}",
+      "interval": 60,
+      "exec": "ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
     },
     "clock": {
         "format": "{:%a %d %H:%M}"
@@ -57,12 +62,11 @@
         "scroll-step": 1,
         "on-click": "pavucontrol"
     },
-     "temperature": {
-	"thermal-zone": 2,
-	// "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-	"critical-threshold": 80,
-	"format-critical": "{temperatureC}°C ",
-	"format": "{temperatureC}°C "
+    "temperature": {
+      "thermal-zone": 2,
+      "critical-threshold": 80,
+      "format-critical": "{temperatureC}°C ",
+      "format": "{temperatureC}°C "
     },
     "custom/consumption": {
       "format": "{} W &#xf0e7;",

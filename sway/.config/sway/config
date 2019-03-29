@@ -51,14 +51,14 @@ set $white        #F6F6F6
 set $transparent #000000FF
 set $dark        #333333
 
-set $fontfam     Aller
+set $fontfam     Noto Sans Regular
 
 # BEGIN desktop
 #set $fontsize    14
 # END desktop
 
 # BEGIN laptop
-#set $fontsize     9
+#set $fontsize     10
 # END laptop
 
 # BEGIN desktop
@@ -202,7 +202,7 @@ bindsym $mod+l exec lock.sh
 bindsym $hardlock exec lock.sh
 
 bindsym $mod+g exec thunar
-bindsym $mod+a exec telegram-desktop, exec 'sleep 0.2; swaymsg "floating enable"'
+bindsym $mod+a exec telegram-desktop
 
 #################################################
 #####          Scratchpad settings          #####

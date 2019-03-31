@@ -1,0 +1,10 @@
+[Unit]
+Description="ibam monitoring process"
+Documentation="http://ibam.sourceforge.net/README"
+
+[Service]
+ExecStart=/usr/bin/ibam --profile
+
+[Install]
+WantedBy=multi-user.target
+

@@ -4,3 +4,5 @@ vscode/.config/Code/*
 !vscode/.config/Code/User/*.json
 !vscode/.config/Code/User/snippets
 *.swp
+
+*/.config/systemd/user/*/

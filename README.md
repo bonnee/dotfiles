@@ -27,6 +27,8 @@ Various utilities and scripts
 * `.config/waybar` [Waybar](https://github.com/Alexays/Waybar) config and style
 * `.config/waybar/scripts/` my custom scripts for Waybar
 * `.config/sway/wallpaper.png` my wallpaper
+## `/systemd`
+My user services and timers for [systemd](https://www.freedesktop.org/wiki/Software/systemd/)
 ## `/vim`
 Configuration for [vim](https://vim.sourceforge.io/)
 ## `/vscode`

@@ -16,4 +16,4 @@ for_window [class="(?i)pinentry"] floating enable
 for_window [app_id="(?i)pavucontrol"] floating enable, move position mouse
 for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 
-for_window [instance="telegram-desktop"] floating enable
+for_window [app_id="telegram-desktop"] floating enable

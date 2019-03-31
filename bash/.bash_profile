@@ -9,7 +9,15 @@ export PATH=~/bin:~/.npm-global/bin:$PATH
 #
 #export QT_AUTO_SCREEN_SCALE_FACTOR=1
 #export GDK_SCALE=1
-#export _JAVA_AWT_WM_NONREPARENTING=1
+#
+#export QT_QPA_PLATFORM=wayland-egl
+#export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+##export QT_WAYLAND_FORCE_DPI=physical
+#
+#export _JAVA_AWT_WM_NONREPARENTING=1 # Fix java on xwayland
+#
+#export EDIT=vim
+#export EDITOR=vim
 #
 #
 # END laptop

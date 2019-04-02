@@ -21,3 +21,5 @@ for_window [app_id=".*nm-.*"] floating enable
 
 for_window [class="Eclipse"] floating enable
 for_window [class="Eclipse" title=".* - Eclipse"] floating disable
+
+for_window [floating] resize set width 1400 height 900

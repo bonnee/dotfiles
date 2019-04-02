@@ -70,8 +70,8 @@ window#waybar {
 }
 
 #pulseaudio.muted {
-    color: gray;
-    border-top: 3px solid gray;
+    color: white;
+    border-top: 3px solid white;
 }
 
 #custom-consumption.low {

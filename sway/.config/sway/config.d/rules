@@ -18,3 +18,6 @@ for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heig
 
 for_window [app_id="telegram-desktop"] floating enable
 for_window [app_id=".*nm-.*"] floating enable
+
+for_window [class="Eclipse"] floating enable
+for_window [class="Eclipse" title=".* - Eclipse"] floating disable

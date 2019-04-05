@@ -301,7 +301,7 @@ bar {
   swaybar_command waybar
 }
 
-exec bash -c 'while true; do alacritty --class dropterm; done'
+exec bash -c 'while true; do alacritty -d 150 35 --class dropterm; done'
 exec mako
 
 exec $HOME/bin/autostart.sh

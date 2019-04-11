@@ -12,7 +12,9 @@ green="#4CAF50FF"
 
 grim "$tmpbg"
 
-$HOME/bin/corrupter/corrupter "$tmpbg" "$tmpbg"
+convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
+#$HOME/bin/corrupter/corrupter "$tmpbg" "$tmpbg"
+
 swaylock -f \
 \
 --indicator-radius=150 \

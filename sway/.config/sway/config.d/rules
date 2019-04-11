@@ -13,8 +13,8 @@ for_window [class="(?i)qemu-system"] floating enable
 for_window [app_id="(?i)blueman"] floating enable
 for_window [class="(?i)pinentry"] floating enable
 
-for_window [app_id="(?i)pavucontrol"] floating enable, move position mouse
-for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
+for_window [app_id="(?i)pavucontrol"] floating enable
+#for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 
 for_window [app_id="telegram-desktop"] floating enable
 for_window [app_id=".*nm-.*"] floating enable
@@ -22,3 +22,4 @@ for_window [app_id=".*nm-.*"] floating enable
 for_window [class="Eclipse"] floating enable
 for_window [class="Eclipse" title=".* - Eclipse"] floating disable
 
+for_window [app_id="threshy-gui"] floating enable

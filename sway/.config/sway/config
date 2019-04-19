@@ -220,7 +220,7 @@ bindsym $mod+Shift+s mark "scratch", move scratchpad
 for_window [app_id="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
-for_window [class="Spotify"] mark "music", move scratchpad, [con_mark="music"] scratchpad show
+for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900
 
 bindsym $mod+c exec $browser
 

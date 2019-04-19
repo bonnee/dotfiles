@@ -9,7 +9,16 @@ fade_down_steps=60
 fade_up_steps=30
 
 save(){
-  xbacklight -get > "$save"
+  tmp_backlight=$(get_backlight)
+
+  if [ "$tmp_backlight" -gt $idle_backlight ]; then
+    echo "$tmp_backlight" > "$save"
+  fi
+}
+
+get_backlight()
+{
+  xbacklight -get
 }
 
 resume(){

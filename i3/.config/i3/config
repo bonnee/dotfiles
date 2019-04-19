@@ -13,7 +13,6 @@ set $mod Mod4
 #set $hardlock Mod4+Shift+l
 # END laptop
 
-
 set_from_resource $black       color0   #000000
 set_from_resource $darkgrey    color8   #9E9E9E
 set_from_resource $darkred     color1   #B71C1C
@@ -34,10 +33,10 @@ set_from_resource $white       color15  #F6F6F6
 set $transparent #000000FF
 set $dark        #000000
 
-set $fontfam     Aller
+set $fontfam     Noto Sans
 
 # BEGIN desktop
-#set $fontsize    14
+#set $fontsize    9
 # END desktop
 
 # BEGIN laptop
@@ -45,7 +44,7 @@ set $fontfam     Aller
 # END laptop
 
 # BEGIN desktop
-#set $browser chromium --force-device-scale-factor=1.35
+#set $browser chromium #--force-device-scale-factor=1.35
 # END desktop
 
 # BEGIN laptop

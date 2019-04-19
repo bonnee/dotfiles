@@ -16,17 +16,17 @@ Configuration for [htop](https://hisham.hm/htop/)
 Configuration for language and locales
 ## `/mako`
 Configuration for [mako](https://wayland.emersion.fr/mako/)
-## `/neofetch`
-Configuration for [Neofetch](https://github.com/dylanaraps/neofetch)
+## `/pacman`
+makepkg.conf and other [Arch Linux](https://www.archlinux.org/) stuff
 ## `/rofi`
 Configuration for [Rofi](https://github.com/DaveDavenport/rofi)
 ## `/scripts`
 Various utilities and scripts
 ## `/sway`
 * `.config/sway/config` [sway](https://swaywm.org/) config
-* `.config/waybar` [Waybar](https://github.com/Alexays/Waybar) config and style
-* `.config/waybar/scripts/` my custom scripts for Waybar
 * `.config/sway/wallpaper.png` my wallpaper
+* `.config/waybar` [Waybar](https://github.com/Alexays/Waybar) config and style
+* `.config/waybar/scripts` my custom scripts for Waybar
 ## `/systemd`
 My user services and timers for [systemd](https://www.freedesktop.org/wiki/Software/systemd/)
 ## `/vim`

@@ -30,6 +30,11 @@ markup=pango
 
 interval=4
 
+[focused window]
+command=xtitle -s
+align=left
+interval=persist
+
 [time]
 command=date '+%^a %d/%m %H:%M'
 

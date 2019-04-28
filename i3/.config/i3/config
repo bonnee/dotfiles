@@ -207,7 +207,8 @@ bindsym $mod+Shift+s mark "scratch", move scratchpad
 for_window [title="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
-for_window [class="Spotify"] mark "music", move scratchpad, scratchpad show
+for_window [class="Spotify"] mark "music", move scratchpad, [con_mark="music"] scratchpad show
+for_window [title="ncspot"] mark "music", move scratchpad, [con_mark="music"] scratchpad show
 
 bindsym $mod+c exec --no-startup-id $browser
 

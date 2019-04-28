@@ -175,8 +175,8 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-#bindsym XF86MonBrightnessUp exec flock /tmp/xbacklight.lock xbacklight -inc 5 -time 200 -steps 12 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
-#bindsym XF86MonBrightnessDown exec flock /tmp/xbacklight.lock xbacklight -dec 5 -time 200 -steps 12 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
+#bindsym XF86MonBrightnessUp exec flock -n /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 6 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
+#bindsym XF86MonBrightnessDown exec flock -n /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 6 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
 #
 #bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 #bindsym XF86Display exec lxrandr
@@ -221,6 +221,7 @@ for_window [app_id="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
 for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900
+for_window [app_id="ncspot"] mark "music", move scratchpad, resize set width 1600 height 900, [con_mark="music"] scratchpad show
 
 bindsym $mod+c exec $browser
 

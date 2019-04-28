@@ -141,6 +141,7 @@ fi
 printf "%b%b%b%b is ready.\n" "$BOLD" "$REVERSE" "$HOSTNAME" "$RST_ATTR"
 
 export PS1="\[$USR_COLOR\]\[$BOLD\]\u\[$RST_ATTR$RST_COLOR\]$host [\W\[$GIT_COLOR\]\$(__git_ps1 ' %s' 2> /dev/null)\[$RST_COLOR\]]> "
-
 export PS2='> '
+
+trap 'echo -ne "\033]2;$(history 1 | sed "s/^[ ]*[0-9]*[ ]*//g")\007"' DEBUG
 

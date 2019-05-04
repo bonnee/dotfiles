@@ -4,10 +4,7 @@
 #####               Variables               #####
 #################################################
 
-#output eDP-1 scale 1
-#1.56
-
-output eDP-1 bg $HOME/.config/sway/wallpaper.png fill
+output * bg $HOME/.config/sway/wallpaper.png fill
 
 set $mod Mod4
 
@@ -27,7 +24,7 @@ input 2:14:ETPS/2_Elantech_Touchpad {
   dwt disabled
 }
 
-input 1:1:AT_Translated_Set_2_keyboard {
+input * {
   xkb_layout it
 }
 
@@ -58,7 +55,7 @@ set $fontfam     Noto Sans Regular
 # END desktop
 
 # BEGIN laptop
-#set $fontsize     10
+#set $fontsize     11
 # END laptop
 
 # BEGIN desktop

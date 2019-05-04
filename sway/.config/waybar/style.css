@@ -24,8 +24,15 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    color: white;
     border-top: 3px solid white;
+}
+
+#workspaces button.visible {
+  color: white;
+}
+
+#workspaces button.urgent {
+    background-color: orangered;
 }
 
 #mode {

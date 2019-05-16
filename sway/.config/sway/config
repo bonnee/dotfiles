@@ -4,6 +4,8 @@
 #####               Variables               #####
 #################################################
 
+#output eDP-1 pos 3840,1080
+#output HDMI-A-1 res 3840x2160@60Hz pos 0,0 scale 1
 output * bg $HOME/.config/sway/wallpaper.png fill
 
 set $mod Mod4
@@ -217,7 +219,7 @@ bindsym $mod+Shift+s mark "scratch", move scratchpad
 for_window [app_id="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
-for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900
+for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900  [con_mark="music"] scratchpad show
 for_window [app_id="ncspot"] mark "music", move scratchpad, resize set width 1600 height 900, [con_mark="music"] scratchpad show
 
 bindsym $mod+c exec $browser

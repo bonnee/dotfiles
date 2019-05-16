@@ -32,7 +32,8 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-    background-color: orangered;
+    border-top: 3px solid orangered;
+    color: orangered;
 }
 
 #mode {

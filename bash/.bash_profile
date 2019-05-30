@@ -10,7 +10,7 @@ export PATH=~/bin:~/.npm-global/bin:$PATH
 #export QT_AUTO_SCREEN_SCALE_FACTOR=1
 #export GDK_SCALE=1
 #
-##export XDG_SESSION_TYPE=wayland
+#export XDG_SESSION_TYPE=wayland
 #export QT_QPA_PLATFORM=wayland-egl
 #export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 ##export QT_WAYLAND_FORCE_DPI=physical

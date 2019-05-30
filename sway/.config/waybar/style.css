@@ -34,6 +34,7 @@ window#waybar {
 #workspaces button.urgent {
     border-top: 3px solid orangered;
     color: orangered;
+    animation: blink 1.5s ease infinite;
 }
 
 #mode {
@@ -52,6 +53,10 @@ window#waybar {
 #battery.charging {
     color: lightgreen;
     border-top: 3px solid lightgreen; /*#26A65B;*/
+}
+#battery.plugged {
+  color: white;
+  border-top: 3px solid white;
 }
 
 #battery.warning.discharging {

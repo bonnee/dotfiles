@@ -6,7 +6,8 @@
 
 #output eDP-1 pos 3840,1080
 #output HDMI-A-1 res 3840x2160@60Hz pos 0,0 scale 1
-output * bg $HOME/.config/sway/wallpaper.png fill
+
+exec swaybg -o* -m fill -i $HOME/.config/sway/wallpaper.png
 
 set $mod Mod4
 
@@ -79,12 +80,12 @@ force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
 
 # BEGIN desktop
-#new_window pixel 3
+#default_border pixel 3
 #hide_edge_borders both
 # END desktop
 
 # BEGIN laptop
-#new_window pixel 4
+#default_border pixel 4
 #hide_edge_borders both
 # END laptop
 
@@ -195,7 +196,7 @@ bindsym XF86AudioStop exec playerctl stop
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+Print exec grim "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u critical "Screenshot Taken!"
+bindsym $mod+Print exec grim "$(xdg-user-dir PICTURES)/screenshot-$(date +%F_%T).png" && notify-send -t 1000 -u critical "Screenshot Taken!"
 
 bindsym $mod+l exec lock.sh
 bindsym $hardlock exec lock.sh
@@ -303,7 +304,7 @@ bar {
 
 exec bash -c 'while true; do alacritty -d 150 35 --class dropterm; done'
 exec mako
-
+exec libinput-gestures
 exec $HOME/bin/autostart.sh
 
 exec pulseaudio-dlna

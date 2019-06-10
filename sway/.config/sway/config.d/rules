@@ -16,8 +16,9 @@ for_window [class="(?i)pinentry"] floating enable
 for_window [app_id="(?i)pavucontrol"] floating enable
 #for_window [app_id="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 
-for_window [app_id="telegramdesktop"] floating enable
 for_window [app_id=".*nm-.*"] floating enable
+for_window [class="TelegramDesktop"] floating enable
+for_window [app_id="telegramdesktop"] floating enable
 
 for_window [class="Eclipse"] floating enable
 for_window [class="Eclipse" title=".* - Eclipse"] floating disable

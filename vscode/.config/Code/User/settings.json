@@ -1,7 +1,7 @@
 // Place your settings in this file to overwrite the default settings
 {
     // BEGIN laptop
-    //"window.zoomLevel": 1.5,
+    //"window.zoomLevel": 1,
     // END laptop
     // BEGIN desktop
     //"window.zoomLevel": 1.6,
@@ -38,4 +38,6 @@
     "explorer.confirmDelete": false,
     "editor.tabSize": 2,
     "editor.renderWhitespace": "boundary",
+    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "terminal.integrated.rendererType": "dom",
 }

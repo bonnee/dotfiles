@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Lock wrapper around i3lock-color
 
+[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+
 tmpbg='/tmp/screen.png'
 
 trans="#00000000"
@@ -13,7 +15,6 @@ green="#4CAF50FF"
 grim "$tmpbg"
 
 convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
-#$HOME/bin/corrupter/corrupter "$tmpbg" "$tmpbg"
 
 swaylock -f \
 \

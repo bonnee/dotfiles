@@ -315,6 +315,5 @@ exec swayidle -w \
     timeout 120 'dim.sh -sd' \
     resume 'swaymsg "output * dpms on"; dim.sh -r' \
     timeout 210 'dim.sh -0; lock.sh; swaymsg "output * dpms off"' \
-    before-sleep 'dim.sh -s0; lock.sh' \
-    after-resume 'dim.sh -r'
-
+    before-sleep 'dim.sh -s0; lock.sh; swaymsg "output * dpms off"' \
+    after-resume 'swaymsg "output * dpms on"; dim.sh -r'

@@ -22,7 +22,11 @@ get_backlight()
 }
 
 resume(){
-  val=$(cat "$save")
+  if [[ -r "$save" ]]; then
+    val=$(cat "$save")
+  else
+    val=50
+  fi
   set_backlight "$val" "$fade_up_time" "$fade_up_steps"
 }
 

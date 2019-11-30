@@ -1,11 +1,10 @@
 // Place your settings in this file to overwrite the default settings
 {
     // BEGIN laptop
-    //"window.zoomLevel": 1,
+    "window.zoomLevel": 1,
     // END laptop
     // BEGIN desktop
     //"window.zoomLevel": 1.6,
-    //"editor.smoothScrolling": true,
     // END desktop
     "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
     "editor.fontLigatures": true,
@@ -20,10 +19,8 @@
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.scrollBeyondLastLine": false,
     "files.autoSave": "onFocusChange",
-    "extensions.autoUpdate": true,
+    "extensions.autoUpdate": false,
     "terminal.external.linuxExec": "termite",
-    "workbench.colorTheme": "One Dark Pro",
-    "workbench.iconTheme": "vs-seti",
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "C_Cpp.intelliSenseEngine": "Default",
     "python.autoComplete.addBrackets": true,
@@ -33,11 +30,23 @@
         "python": true
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "window.titleBarStyle": "custom",
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     "editor.tabSize": 2,
     "editor.renderWhitespace": "boundary",
     "terminal.integrated.shell.linux": "/usr/bin/fish",
     "terminal.integrated.rendererType": "dom",
+    "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, UseTab: true, IndentWidth: 4, TabWidth: 4, ColumnLimit: 80}",
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": true,
+    "telemetry.enableTelemetry": false,
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.cppStandard": "c++11",
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.experimentalFeatures": "Enabled",
+    "C_Cpp.loggingLevel": "Warning",
+    "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.workspaceParsingPriority": "medium",
+    "arduino.path": "/usr/share/arduino",
+    "cortex-debug.enableTelemetry": false,
 }

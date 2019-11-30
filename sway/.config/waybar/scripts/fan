@@ -7,7 +7,7 @@ class="low"
 (( $(echo "${rpm}>3990"|bc -l) )) && class="high"
 
 if [ "$rpm" -ne 0 ]; then
-  echo ""
+  echo "&#xf863;"
   echo "$rpm RPM"
   echo "$class"
 fi

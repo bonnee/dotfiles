@@ -15,7 +15,7 @@ set $mod Mod4
 #set $hardlock XF86Launch8
 # END desktop
 # BEGIN laptop
-set $hardlock Mod4+Shift+l
+#set $hardlock Mod4+Shift+l
 # END laptop
 
 input 2:14:ETPS/2_Elantech_Touchpad {
@@ -59,7 +59,7 @@ set $fontfam     Noto Sans Regular
 # END desktop
 
 # BEGIN laptop
-set $fontsize     11
+#set $fontsize     11
 # END laptop
 
 # BEGIN desktop
@@ -67,7 +67,7 @@ set $fontsize     11
 # END desktop
 
 # BEGIN laptop
-set $browser firefox-beta # --force-device-scale-factor=1.2
+#set $browser firefox # --force-device-scale-factor=1.2
 # END laptop
 
 
@@ -86,8 +86,8 @@ popup_during_fullscreen smart
 # END desktop
 
 # BEGIN laptop
-default_border pixel 4
-hide_edge_borders both
+#default_border pixel 4
+#hide_edge_borders both
 # END laptop
 
 # BEGIN desktop
@@ -176,10 +176,10 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-bindsym XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
-bindsym XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
-bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
-bindsym XF86Display exec lxrandr
+#bindsym XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+#bindsym XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+#bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
+#bindsym XF86Display exec lxrandr
 # END laptop
 
 set $unmute amixer -q set Master unmute

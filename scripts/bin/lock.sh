@@ -36,4 +36,4 @@ swaylock -f \
 --text-wrong-color="$white" \
 \
 -i "$tmpbg"
-
+#sleep 2

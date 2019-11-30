@@ -15,15 +15,16 @@ set $mod Mod4
 #set $hardlock XF86Launch8
 # END desktop
 # BEGIN laptop
-#set $hardlock Mod4+Shift+l
+set $hardlock Mod4+Shift+l
 # END laptop
 
 input 2:14:ETPS/2_Elantech_Touchpad {
   accel_profile adaptive
-  pointer_accel 0.25
+  pointer_accel 0.15
   tap enabled
   drag_lock enabled
   click_method clickfinger
+  middle_emulation enabled
   dwt disabled
 }
 
@@ -58,7 +59,7 @@ set $fontfam     Noto Sans Regular
 # END desktop
 
 # BEGIN laptop
-#set $fontsize     11
+set $fontsize     11
 # END laptop
 
 # BEGIN desktop
@@ -66,7 +67,7 @@ set $fontfam     Noto Sans Regular
 # END desktop
 
 # BEGIN laptop
-#set $browser chromium # --force-device-scale-factor=1.2
+set $browser firefox-beta # --force-device-scale-factor=1.2
 # END laptop
 
 
@@ -85,8 +86,8 @@ popup_during_fullscreen smart
 # END desktop
 
 # BEGIN laptop
-#default_border pixel 4
-#hide_edge_borders both
+default_border pixel 4
+hide_edge_borders both
 # END laptop
 
 # BEGIN desktop
@@ -104,7 +105,7 @@ bindsym $mod+Return exec alacritty #i3-sensible-terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec rofi -show drun -markup
+bindsym $mod+d exec j4-dmenu-desktop --term "alacritty" --usage-log "$HOME/.config/j4-dmenu-usage" --dmenu "bemenu -ib -p \"run\" -H 28 --fn \"Noto Sans 14\"" #rofi -show drun -markup
 
 # change focus
 bindsym $mod+Left focus left
@@ -175,17 +176,19 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-#bindsym XF86MonBrightnessUp exec flock -n /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 6 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
-#bindsym XF86MonBrightnessDown exec flock -n /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 6 && notify-send -u low -t 1000 "Backlight" "$(xbacklight -get)"
-#
-#bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
-#bindsym XF86Display exec lxrandr
+bindsym XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+bindsym XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
+bindsym XF86Display exec lxrandr
 # END laptop
 
 set $unmute amixer -q set Master unmute
-bindsym XF86AudioRaiseVolume exec volume.sh -i 5 -n
-bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n
-bindsym XF86AudioMute exec volume.sh -mnt i3blocks -u SIGRTMIN+10
+bindsym XF86AudioRaiseVolume exec flock -n /tmp/vol.lock amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+bindsym XF86AudioLowerVolume exec flock -n /tmp/vol.lock amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
+#bindsym XF86AudioRaiseVolume exec volume.sh -i 5 -n
+#bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n
+#bindsym XF86AudioMute exec volume.sh -mnt i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
@@ -196,9 +199,12 @@ bindsym XF86AudioStop exec playerctl stop
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-bindsym $mod+Print exec grim "$(xdg-user-dir PICTURES)/screenshot-$(date +%F_%T).png" && notify-send -t 1000 -u critical "Screenshot Taken!"
+set $screenshot "$(xdg-user-dir PICTURES)/screenshot-$(date +%F_%T).png" && notify-send -t 1000 -u critical "Screenshot Taken!"
 
-bindsym $mod+l exec lock.sh
+bindsym $mod+Print exec grim $screenshot
+bindsym $mod+Shift+Print exec grim -g "$(slurp)" $screenshot
+
+bindsym $mod+l exec loginctl lock-session
 bindsym $hardlock exec lock.sh
 
 bindsym $mod+g exec thunar
@@ -221,7 +227,7 @@ for_window [app_id="dropterm"] mark "dropterm", move scratchpad
 
 # Automatically move Spotify to scratchpad
 for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900  [con_mark="music"] scratchpad show
-for_window [app_id="ncspot"] mark "music", move scratchpad, resize set width 1600 height 900, [con_mark="music"] scratchpad show
+for_window [app_id="spotify"] mark "music", move scratchpad, resize set width 1600 height 900, [con_mark="music"] scratchpad show
 
 bindsym $mod+c exec $browser
 
@@ -299,21 +305,27 @@ include ~/.config/sway/config.d/*
 #################################################
 
 bar {
-  swaybar_command waybar
+  #swaybar_command waybar
 }
 
+exec waybar
 exec bash -c 'while true; do alacritty -d 150 35 --class dropterm; done'
 exec mako
+exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
 exec libinput-gestures
-exec $HOME/bin/autostart.sh
-
-exec pulseaudio-dlna
 exec redshift-gtk
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec kanshi
 
-exec swayidle -w \
-    timeout 120 'dim.sh -sd' \
-    resume 'swaymsg "output * dpms on"; dim.sh -r' \
-    timeout 210 'dim.sh -0; lock.sh; swaymsg "output * dpms off"' \
-    before-sleep 'dim.sh -s0; lock.sh; swaymsg "output * dpms off"' \
-    after-resume 'swaymsg "output * dpms on"; dim.sh -r'
+exec swayidle -dw \
+    timeout 120 'brillo -O; brillo -u 1000000 -S 20' \
+    resume 'brillo -u 500000 -I' \
+    timeout 210 'brillo -u 1000000 -S 0; lock.sh; swaymsg "output * dpms off"' \
+    timeout 30 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
+    resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
+    before-sleep 'brillo -O; brillo -u 1000000 -S 0; lock.sh' \
+    after-resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
+    lock 'lock.sh' > swayidle.log 2>&1
+
+exec $HOME/bin/autostart.sh
+

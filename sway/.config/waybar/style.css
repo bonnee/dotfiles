@@ -66,15 +66,15 @@ window#waybar {
 
 @keyframes blink {
     50% {
-      color: darkred;
-      border-top: 3px solid darkred;
+      color: black;
+      background-color: orangered;
     }
 }
 
 #battery.critical.discharging {
     color: orangered;
     border-top: 3px solid orangered;
-    animation: blink 1.5s ease infinite;
+    animation: blink 1s ease-out infinite;
 }
 
 #network.disconnected {
@@ -118,6 +118,11 @@ window#waybar {
 
 #custom-fan.high {
   color: orangered;
+}
+
+#custom-updates.high {
+  border-top: 3px solid lightgreen;
+  color: lightgreen;
 }
 
 #temperature.critical {

@@ -12,7 +12,7 @@
         "format": "{capacity}% {icon}",
         "format-icons": ["", "", "", "", ""],
 	"states": {
-	    "warning": 35,
+	    "warning": 40,
 	    "critical": 15
 	}
     },
@@ -69,7 +69,7 @@
       "format": "{temperatureC}°C "
     },
     "custom/consumption": {
-      "format": "{} W &#xf0e7;",
+      "format": "{}W &#xf0e7;",
       "interval": 5,
       "exec": "$HOME/.config/waybar/scripts/consumption"
     },

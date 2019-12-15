@@ -22,6 +22,8 @@ Configuration for [htop](https://hisham.hm/htop/)
 
 ## `/locale`
 Configuration for language and locales
+## `/logitech`
+Configuration for my MX Master 2S using [logiops](https://github.com/PixlOne/logiops)
 ## `/rofi`
 Configuration for [rofi](https://github.com/DaveDavenport/rofi)
 ## `/scripts`

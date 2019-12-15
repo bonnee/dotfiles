@@ -8,8 +8,8 @@
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
-    //"window.zoomLevel": 1.3,
-    //"editor.smoothScrolling": true,
+    "window.zoomLevel": 0,
+    "editor.smoothScrolling": true,
     // END desktop
     "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
     "editor.fontLigatures": true,
@@ -26,7 +26,6 @@
     "files.autoSave": "onFocusChange",
     "extensions.autoUpdate": true,
     "terminal.external.linuxExec": "termite",
-    "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "vs-seti",
     "omnisharp.path": "/opt/omnisharp-roslyn/OmniSharp.exe",
     "C_Cpp.intelliSenseEngine": "Default",
@@ -40,5 +39,18 @@
     "window.titleBarStyle": "custom",
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "breadcrumbs.enabled": true,
+    "editor.lineNumbers": "relative",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, UseTab: true, IndentWidth: 4, TabWidth: 4, ColumnLimit: 80}",
+    "C_Cpp.default.cppStandard": "c++11",
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.experimentalFeatures": "Enabled",
+    "C_Cpp.loggingLevel": "Warning",
+    "C_Cpp.updateChannel": "Insiders",
+    "editor.cursorSmoothCaretAnimation": true
 }

@@ -7,7 +7,7 @@
 set $mod Mod4
 
 # BEGIN desktop
-#set $hardlock XF86Launch8
+set $hardlock XF86Launch8
 # END desktop
 # BEGIN laptop
 #set $hardlock Mod4+Shift+l
@@ -36,7 +36,7 @@ set $dark        #000000
 set $fontfam     Noto Sans
 
 # BEGIN desktop
-#set $fontsize    9
+set $fontsize    9
 # END desktop
 
 # BEGIN laptop
@@ -44,7 +44,7 @@ set $fontfam     Noto Sans
 # END laptop
 
 # BEGIN desktop
-#set $browser chromium --force-device-scale-factor=1.3
+set $browser firefox #chromium --force-device-scale-factor=1.3
 # END desktop
 
 # BEGIN laptop
@@ -63,8 +63,8 @@ force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
 
 # BEGIN desktop
-#new_window pixel 3
-#hide_edge_borders both
+new_window pixel 3
+hide_edge_borders both
 # END desktop
 
 # BEGIN laptop
@@ -74,9 +74,9 @@ popup_during_fullscreen smart
 # END laptop
 
 # BEGIN desktop
-#gaps inner 15
-#gaps outer 10
-#smart_gaps on
+gaps inner 15
+gaps outer 10
+smart_gaps on
 # END desktop
 
 #################################################
@@ -167,8 +167,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # END laptop
 
 set $unmute amixer -q set Master unmute
-bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -i 5 -n -t i3blocks -u SIGRTMIN+10
-bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -d 5 -n -t i3blocks -u SIGRTMIN+10
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -i 2 -n -t i3blocks -u SIGRTMIN+10
+bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -d 2 -n -t i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMute exec --no-startup-id volume.sh -mnt i3blocks -u SIGRTMIN+10
 bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
@@ -317,7 +317,7 @@ bar {
   position bottom
 	
   # BEGIN desktop
-  #font pango:Aller, Font Awesome 5 Free 10
+  font pango:Aller, Font Awesome 5 Free 10
   # END desktop
 
   # BEGIN laptop
@@ -340,3 +340,4 @@ exec --no-startup-id $HOME/bin/autostart.sh
 
 exec_always --no-startup-id exec feh --bg-fill $background
 exec --no-startup-id dunst &
+exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"

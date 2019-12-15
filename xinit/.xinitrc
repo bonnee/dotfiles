@@ -22,14 +22,14 @@ export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndF
 export TERMINAL=alacritty
 
 # BEGIN desktop
-#export GDK_SCALE=1
-#export GDK_DPI_SCALE=0.7
-#export QT_AUTO_SCREEN_SCALE_FACTOR=1
-#
-#xset s 600		# lock at 600s
-#xset dpms 900  # stdby at 900s
-#xss-lock -l -- lock.sh -n &
-#numlockx &
+export GDK_SCALE=1
+export GDK_DPI_SCALE=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+
+xset s 600		# lock at 600s
+xset dpms 900  # stdby at 900s
+xss-lock -l -- lock.sh -n &
+numlockx &
 # END desktop
 
 # BEGIN laptop

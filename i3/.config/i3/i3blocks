@@ -24,7 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/lib/i3blocks/$BLOCK_NAME
+command=/usr/lib/i3blocks/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
@@ -80,10 +80,10 @@ align=center
 command=$HOME/.config/i3/blocks/disk-io -s " " -w 0 -t 4 -T 102400
 
 # BEGIN desktop
-#separator=false
-#
-##[bcache-ratio]
-##command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
+separator=false
+
+#[bcache-ratio]
+#command=echo "$(cat /sys/block/bcache0/bcache/stats_five_minute/cache_hit_ratio)%"
 # END desktop
 
 # CPU usage

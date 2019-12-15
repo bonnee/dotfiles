@@ -14,6 +14,8 @@ Configuration for [Bash](https://www.gnu.org/software/bash/)
 Configuration for [htop](https://hisham.hm/htop/)
 ## `/locale`
 Configuration for language and locales
+## `/logitech`
+Configuration for my MX Master 2S using [logiops](https://github.com/PixlOne/logiops)
 ## `/mako`
 Configuration for [mako](https://wayland.emersion.fr/mako/)
 ## `/pacman`

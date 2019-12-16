@@ -28,6 +28,8 @@ Configuration for my MX Master 2S using [logiops](https://github.com/PixlOne/log
 Configuration for [rofi](https://github.com/DaveDavenport/rofi)
 ## `/scripts`
 Various utilities and scripts
+## `/systemd`
+My user services and timers for [systemd](https://www.freedesktop.org/wiki/Software/systemd/)
 ## `/vim`
 Configuration for [vim](https://vim.sourceforge.io/)
 ## `/vscode`

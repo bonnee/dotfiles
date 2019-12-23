@@ -19,7 +19,6 @@ set $mod Mod4
 # END laptop
 
 input 2:14:ETPS/2_Elantech_Touchpad {
-  accel_profile adaptive
   pointer_accel 0.15
   tap enabled
   drag_lock enabled
@@ -105,7 +104,7 @@ bindsym $mod+Return exec alacritty #i3-sensible-terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec j4-dmenu-desktop --term "alacritty" --usage-log "$HOME/.config/j4-dmenu-usage" --dmenu "bemenu -ib -p \"run\" -H 28 --fn \"Noto Sans 14\"" #rofi -show drun -markup
+bindsym $mod+d exec j4-dmenu-desktop --term "alacritty" --usage-log "$HOME/.config/j4-dmenu-usage" --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\"" #rofi -show drun -markup
 
 # change focus
 bindsym $mod+Left focus left
@@ -309,24 +308,26 @@ bar {
 }
 
 exec waybar
-exec bash -c 'while true; do alacritty -d 150 35 --class dropterm; done'
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do alacritty -d 150 35 --class dropterm; done'
 exec mako
 exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
 exec libinput-gestures
-exec redshift-gtk
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec kanshi
 
+exec redshift-gtk
+exec blueman-applet
+exec nm-applet --indicator
+
 exec swayidle -dw \
     timeout 120 'brillo -O; brillo -u 1000000 -S 5' \
-    resume 'brillo -u 500000 -I' \
+    resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
     timeout 210 'brillo -u 1000000 -S 0; lock.sh; swaymsg "output * dpms off"' \
+    timeout 30 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
     resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
     before-sleep 'brillo -O; brillo -u 1000000 -S 0; lock.sh' \
     after-resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
     lock 'lock.sh'
 
-#timeout 30 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
 
-exec $HOME/bin/autostart.sh
-
+#exec $HOME/bin/autostart.sh

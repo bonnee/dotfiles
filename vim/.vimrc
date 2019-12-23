@@ -8,7 +8,7 @@ augroup numbertoggle  " toggle number line style
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-set showbreak=+++	" Wrap-broken line prefix
+"set showbreak=+++	" Wrap-broken line prefix
 "set textwidth=100	" Line wrap (number of cols)
 set showmatch	" Highlight matching brace
 set virtualedit=onemore	" Enable free-range cursor

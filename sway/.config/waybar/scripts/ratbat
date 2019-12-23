@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#mouse="$(upower -e | grep mouse)"
+
+#if ! [ -z "$mouse" ]; then
+#  perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
+
+#  if [ "${perc::-1}" -le "20" ]; then
+#    #class="critical"
+#    printf "%s\n" "$perc"
+#  fi
+#fi
+
+while read line ; do
+  case $line in
+    *"mouse"* )
+      mouse="$(echo $line | awk '{print $4}')"
+      perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
+
+      if [ "${perc::-1}" -le 20 ]; then
+        printf "%s\n" "${perc}"
+      fi
+      ;;
+    * )
+      ;;
+  esac
+done < <(upower -m)

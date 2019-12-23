@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","custom/consumption","custom/ibam","battery"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","custom/consumption","custom/ibam","battery", "custom/ratbat"],
     "sway/window": {
         "max-length": 100
     },
@@ -13,7 +13,8 @@
         "format-icons": ["", "", "", "", ""],
 	"states": {
 	    "warning": 40,
-	    "critical": 15
+	    "low": 20,
+	    "critical": 10
 	}
     },
     "custom/ibam": {
@@ -93,5 +94,9 @@
       "format": "{} &#xf2f1;",
       "signal": 12,
       "exec": "$HOME/.config/waybar/scripts/updates"
+    },
+    "custom/ratbat": {
+      "format": "{} &#xf8cc;",
+      "exec": "$HOME/.config/waybar/scripts/ratbat"
     }
 }

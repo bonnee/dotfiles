@@ -35,3 +35,5 @@ My user services and timers for [systemd](https://www.freedesktop.org/wiki/Softw
 Configuration for [vim](https://vim.sourceforge.io/)
 ## `/vscode`
 Configuration for [Visual Studio Code](https://code.visualstudio.com/)
+## `/zsh`
+Zsh config with some light [Oh My ZSH](https://ohmyz.sh/) customizations

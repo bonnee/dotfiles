@@ -34,7 +34,7 @@
     "explorer.confirmDelete": false,
     "editor.tabSize": 2,
     "editor.renderWhitespace": "boundary",
-    "terminal.integrated.shell.linux": "/usr/bin/fish",
+    "terminal.integrated.shell.linux": "/bin/zsh",
     "terminal.integrated.rendererType": "dom",
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, UseTab: true, IndentWidth: 4, TabWidth: 4, ColumnLimit: 80}",
     "editor.smoothScrolling": true,
@@ -49,4 +49,5 @@
     "C_Cpp.workspaceParsingPriority": "medium",
     "arduino.path": "/usr/share/arduino",
     "cortex-debug.enableTelemetry": false,
+    "diffEditor.ignoreTrimWhitespace": false,
 }

@@ -42,12 +42,15 @@ window#waybar {
     border-top: 3px solid white;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #idle_inhibitor, #temperature, #custom-consumption, #custom-ibam, #custom-ratbat {
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #idle_inhibitor, #temperature, #custom-consumption, #custom-ibam {
     padding: 0 5px;
     margin: 0 5px;
-
+    border-top: 3px solid transparent;
     color: white;
-    border-top: 3px solid rgba(0,0,0,0);
+}
+
+#battery {
+  margin-right: 2px;
 }
 
 #battery.charging {
@@ -55,8 +58,8 @@ window#waybar {
     border-top: 3px solid lightgreen; /*#26A65B;*/
 }
 #battery.plugged {
-  color: white;
-  border-top: 3px solid white;
+    color: white;
+    border-top: 3px solid white;
 }
 
 #battery.warning.discharging {
@@ -130,11 +133,6 @@ window#waybar {
   color: lightgreen;
 }
 
-#custom-ratbat {
-  border-top: 3px solid orangered;
-  color: orangered;
-}
-
 #temperature.critical {
   border-top: 3px solid orangered;
   color: orangered;
@@ -142,4 +140,38 @@ window#waybar {
 
 #idle_inhibitor.activated {
   border-top: 3px solid white;
+}
+
+#custom-separator {
+  margin: 0 2px;
+}
+
+#custom-ratbat {
+  border-top: 3px solid transparent;
+  padding: 0 1px;
+  font-size: 90%;
+}
+
+#custom-ratbat.on {
+  color: lightgreen;
+}
+
+#custom-ratbat.off {
+  color: grey;
+}
+
+#custom-ratbat.notify {
+  border-top: 3px solid orangered;
+}
+
+#custom-ratbat.critical {
+  border-top: 3px solid orangered;
+  color: orangered;
+  animation: dotblink 1s ease-out infinite;
+}
+
+@keyframes dotblink {
+    50% {
+      color: grey;
+    }
 }

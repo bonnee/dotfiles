@@ -319,6 +319,9 @@ exec redshift-gtk
 exec blueman-applet
 exec nm-applet --indicator
 
+# Let root run X apps
+exec xhost +SI:localuser:root
+
 exec swayidle -dw \
     timeout 120 'brillo -O; brillo -u 1000000 -S 5' \
     resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \

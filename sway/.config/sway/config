@@ -178,7 +178,7 @@ bindsym $mod+Shift+r restart
 #bindsym XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 #bindsym XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 #bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
-#bindsym XF86Display exec lxrandr
+#bindsym XF86Display exec wdisplays
 # END laptop
 
 set $unmute amixer -q set Master unmute

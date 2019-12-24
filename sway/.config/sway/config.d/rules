@@ -24,3 +24,4 @@ for_window [class="Eclipse"] floating enable
 for_window [class="Eclipse" title=".* - Eclipse"] floating disable
 
 for_window [app_id="threshy-gui"] floating enable
+for_window [app_id="wdisplays"] floating enable

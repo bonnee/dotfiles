@@ -175,25 +175,22 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-#bindsym XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
-#bindsym XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+#bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+#bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 #bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 #bindsym XF86Display exec wdisplays
 # END laptop
 
-set $unmute amixer -q set Master unmute
-bindsym XF86AudioRaiseVolume exec flock -n /tmp/vol.lock amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-bindsym XF86AudioLowerVolume exec flock -n /tmp/vol.lock amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
-#bindsym XF86AudioRaiseVolume exec volume.sh -i 5 -n
-#bindsym XF86AudioLowerVolume exec volume.sh -d 5 -n
-#bindsym XF86AudioMute exec volume.sh -mnt i3blocks -u SIGRTMIN+10
-bindsym XF86AudioMicMute exec amixer -q sset Capture toggle
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioStop exec playerctl stop
+bindsym --locked XF86AudioRaiseVolume exec volume.sh -gs +2% > $SWAYSOCK.wob
+bindsym --locked XF86AudioLowerVolume exec volume.sh -gs -2% > $SWAYSOCK.wob
+bindsym --locked XF86AudioMute exec volume.sh -gm
+bindsym --locked XF86AudioMicMute exec volume.sh -i
+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioStop exec playerctl stop
 
 #bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 #bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
@@ -310,7 +307,7 @@ bar {
 exec waybar
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do alacritty -d 150 35 --class dropterm; done'
 exec mako
-exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob; done'
 exec libinput-gestures
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec kanshi

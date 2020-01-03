@@ -19,73 +19,39 @@
 #  URL: https://github.com/hastinbe/i3-volume
 
 # Get default sink name
-get_default_sink_name() {
+get_default_out() {
     pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
+}
+
+get_default_in() {
+    pacmd stat | awk -F": " '/^Default source name: /{print $2}'
 }
 
 # Gets the sink volume as a percentage.
 #
-# Arguments
-#   Sink name   (string) Symbolic name of sink.
 get_volume() {
-    local sink=$1
     pacmd list-sinks |
-        awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'"${sink}"'>"}
-            /^\s+volume: / && indefault {print $5; exit}' |
-        sed 's/%//'
-}
-
-# Increase volume relative to current volume.
-#
-# Arguments:
-#   Sink name   (string)  Symbolic name of sink.
-#   Step        (integer) Percentage to increase by.
-raise_volume() {
-    local sink="$1"
-    local step="5"
-
-    if [ -n "$2" ]; then
-        step="$2"
-    fi
-
-    set_volume "${sink}" "+${step}%"
-}
-
-# Decrease volume relative to current volume.
-#
-# Arguments:
-#   Sink name   (string)  Symbolic name of sink.
-#   Step        (integer) Percentage to lower by.
-lower_volume() {
-    local sink="$1"
-    local step="5"
-
-    if [ -n "$2" ]; then
-        step="$2"
-    fi
-
-    set_volume "${sink}" "-${step}%"
+        awk '/^\s+name: /{indefault = $2 == "<'$out'>"}
+            /^\s+volume: / && indefault {print $5; exit}' | sed 's/%$//'
 }
 
 # Set volume of sink.
 #
 # Arguments:
-#   Sink name   (string) Symbolic name of sink.
 #   Volume      (integer|linear factor|percentage|decibel)
 set_volume() {
-    local sink="$1"
-    local vol="$2"
+    local vol="$1"
 
-    pactl set-sink-volume "${sink}" "${vol}" ||
-        pactl set-sink-volume "${sink}" -- "${vol}"
+    pactl set-sink-volume "${out}" "${vol}" ||
+        pactl set-sink-volume "${out}" -- "${vol}"
 }
 
-# Toggle mute.
-#
-# Arguments:
-#   Sink name   (string) Symbolic name of sink.
-toggle_mute() {
-    pactl set-sink-mute "${sink}" toggle
+toggle_out_mute() {
+    pactl set-sink-mute "$out" toggle
+}
+
+toggle_in_mute() {
+    pactl set-source-mute "$in" toggle
 }
 
 # Check if default sink is muted.
@@ -95,44 +61,12 @@ toggle_mute() {
 #
 # Returns:
 #   0 when true, 1 when false.
-is_muted() {
+is_out_muted() {
     local sink="$1"
     muted=$(pacmd list-sinks |
-            awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'"${sink}"'>"}
+            awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'"$out"'>"}
                 /^\s+muted: / && indefault {print $2; exit}')
     [ "${muted}" = "yes" ]
-}
-
-# Display a notification indicating the volume is muted.
-notify_muted() {
-    notify-send -u low -t 1000 "Volume" "Muted"
-}
-
-# Display a notification indicating the current volume.
-#
-# Arguments:
-#   Sink name    (string)
-notify_volume() {
-    text="Volume"
-    local sink="$1"
-    vol=$(get_volume "$sink")
-
-    if [ "$vol" -gt "100" ]; then
-	text="$text [$vol%]"
-    fi
-    
-    notify-send -u low -t 1000 "$text" "$vol%"
-}
-
-# Updates the status line.
-#
-# Arguments:
-#   signal  (string) The signal used to update the status line.
-#   proc    (string) The name of the status line process.
-update_statusline() {
-    local signal="$1"
-    local proc="$2"
-    pkill "-${signal}" "${proc}"
 }
 
 # Display program usage.
@@ -141,59 +75,47 @@ usage() {
 Control volume and related notifications.
 
 Options:
-  -i <amount>       increase volume
-  -d <amount>       decrease volume
+  -g		    get volume
+  -s <value>        set volume (can also work with +/- increments)
   -m                toggle mute
-  -n                show notification
-  -s <sink name>    symbolic name of sink
   -t <procname>     name of status line process. must be used with -u
   -u <signal>       update status line using signal. must be used with -t
-  -v <value>        set volume
   -h                display this help and exit
 " 1>&2
     exit 1
 }
 ###########################################################
 
-opt_decrease_volume=false
-opt_increase_volume=false
-opt_mute_volume=false
-opt_notification=false
+opt_mute_out=false
+opt_mute_in=false
 opt_set_volume=false
-signal=""
-sink="$(get_default_sink_name)"
-statusline=""
-volume_amount="5"
+opt_get_volume=false
+out="$(get_default_out)"
+in="$(get_default_in)"
 
-while getopts ":d:hi:mns:t:u:v:" o; do
+volume_amount=""
+
+while getopts ":gmis:t:u:s:" o; do
     case "${o}" in
-        d)
-            opt_decrease_volume=true
-            volume_amount="${OPTARG}"
-            ;;
-        i)
-            opt_increase_volume=true
-            volume_amount="${OPTARG}"
-            ;;
         m)
-            opt_mute_volume=true
+            opt_mute_out=true
             ;;
-        n)
-            opt_notification=true
-            ;;
-        s)
-            sink="${OPTARG}"
-            ;;
+	i)
+	    opt_mute_in=true
+	    ;;
         t)
             statusline="${OPTARG}"
             ;;
         u)
             signal="${OPTARG}"
             ;;
-        v)
+        s)
             opt_set_volume=true
             volume_amount="${OPTARG}"
             ;;
+	g)
+	    opt_get_volume=true
+	    ;;
         h | *)
             usage
             ;;
@@ -201,39 +123,18 @@ while getopts ":d:hi:mns:t:u:v:" o; do
 done
 shift $((OPTIND-1)) # Shift off options and optional --
 
-if ${opt_increase_volume}; then
-    raise_volume "${sink}" "${volume_amount}"
-fi
-
-if ${opt_decrease_volume}; then
-    lower_volume "${sink}" "${volume_amount}"
-fi
-
 if ${opt_set_volume}; then
-    set_volume "${sink}" "${volume_amount}"
+    set_volume "${volume_amount}"
 fi
 
-if ${opt_mute_volume}; then
-    toggle_mute "${sink}"
+if ${opt_mute_out}; then
+    toggle_out_mute
 fi
 
-# The options below this line must be last
-if ${opt_notification}; then
-    if is_muted "${sink}"; then
-        notify_muted
-    else
-        notify_volume "${sink}"
-    fi
+if ${opt_mute_in}; then
+    toggle_in_mute
 fi
 
-if [ -n "${signal}" ]; then
-    if [ -z "${statusline}" ]; then
-        usage
-    fi
-    update_statusline "${signal}" "${statusline}"
-else
-    if [ -n "${statusline}" ]; then
-        usage
-    fi
+if ${opt_get_volume}; then
+  get_volume
 fi
-

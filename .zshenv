@@ -2,19 +2,12 @@ typeset -U PATH path
 path=("$HOME/bin" "$HOME/.npm-global/bin" "/usr/lib/ccache/bin" "$path[@]")
 export PATH
 
-export XDG_SESSION_TYPE=wayland
-export CLUTTER_BACKEND=wayland
-#export GDK_BACKEND=wayland # Crashes vscode
-export XDG_CURRENT_DESKTOP=unity
-export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORM=wayland-egl
+export QT_DEVICE_PIXEL_RATIO=auto
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export _JAVA_AWT_WM_NONREPARENTING=1
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 export EDITOR=vim
 export BC_ENV_ARGS="$HOME/.bc"
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-export DISABLE_AUTO_UPDATE=true
-
+source ~/."$HOST"_env

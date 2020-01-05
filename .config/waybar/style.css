@@ -1,0 +1,177 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Noto Sans", "Font Awesome 5 Free", Helvetica, Arial, sans-serif, Font Awesome;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0,0,0,0.75);
+    color: white;
+}
+
+#workspaces {
+    margin-right: 15px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: gray;
+    border-top: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    border-top: 3px solid white;
+}
+
+#workspaces button.visible {
+  color: white;
+}
+
+#workspaces button.urgent {
+    border-top: 3px solid orangered;
+    color: orangered;
+    animation: blink 1.5s ease infinite;
+}
+
+#mode {
+    background: #64727D;
+    border-top: 3px solid white;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #idle_inhibitor, #temperature, #custom-consumption, #custom-ibam {
+    padding: 0 5px;
+    margin: 0 5px;
+    border-top: 3px solid transparent;
+    color: white;
+}
+
+#battery {
+  margin-right: 2px;
+}
+
+#battery.charging {
+    color: lightgreen;
+    border-top: 3px solid lightgreen; /*#26A65B;*/
+}
+#battery.plugged {
+    color: white;
+    border-top: 3px solid white;
+}
+
+#battery.warning.discharging {
+    color: orange;
+    border-top: 3px solid orange;
+}
+
+#battery.low.discharging {
+    color: orangered;
+    border-top: 3px solid orangered;
+}
+
+@keyframes blink {
+    50% {
+      color: black;
+      background-color: orangered;
+    }
+}
+
+#battery.critical.discharging {
+    color: orangered;
+    border-top: 3px solid orangered;
+    animation: blink 1s ease-out infinite;
+}
+
+#network.disconnected {
+    color: gray;
+    border-top: 3px solid gray;
+}
+
+#pulseaudio.muted {
+    color: white;
+    border-top: 3px solid white;
+}
+
+#custom-consumption.low {
+  border-top: 3px solid lightgreen;
+  color: lightgreen
+}
+
+#custom-consumption.medium {
+  border-top: 3px solid orange;
+  color: orange;
+}
+
+#custom-consumption.high {
+  color: orangered;
+  border-top: 3px solid orangered;
+}
+
+#custom-fan {
+  border-top: 3px solid rgba(0,0,0,0);
+  padding: 0 5px;
+  margin: 0 5px;
+}
+
+#custom-fan.low {
+  color: lightgreen;
+}
+
+#custom-fan.medium {
+  color: orange;
+}
+
+#custom-fan.high {
+  color: orangered;
+}
+
+#custom-updates.high {
+  border-top: 3px solid lightgreen;
+  color: lightgreen;
+}
+
+#temperature.critical {
+  border-top: 3px solid orangered;
+  color: orangered;
+}
+
+#idle_inhibitor.activated {
+  border-top: 3px solid white;
+}
+
+#custom-separator {
+  margin: 0 2px;
+}
+
+#custom-ratbat {
+  border-top: 3px solid transparent;
+  padding: 0 1px;
+  font-size: 90%;
+}
+
+#custom-ratbat.on {
+  color: lightgreen;
+}
+
+#custom-ratbat.off {
+  color: grey;
+}
+
+#custom-ratbat.notify {
+  border-top: 3px solid orangered;
+}
+
+#custom-ratbat.critical {
+  border-top: 3px solid orangered;
+  color: orangered;
+  animation: dotblink 1s ease-out infinite;
+}
+
+@keyframes dotblink {
+    50% {
+      color: grey;
+    }
+}

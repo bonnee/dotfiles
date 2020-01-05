@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+
+mouse="$(upower -e | grep mouse)"
+bit=$1
+dot='\xE2\x97\x8F'
+#dot='\xE2\x80\xA2'
+
+trap "exit 130" SIGKILL
+
+printdot() {
+  state="on";
+  
+  case $bit in
+    0)
+      if [ "$1" -le "10" ]; then
+	state="critical"
+      fi
+      ;;
+    1)
+      if [ "$1" -lt "33" ]; then
+	state="off"
+      fi
+      ;;
+    2)
+      if [ "$1" -lt "66" ]; then
+	state="off"
+      fi
+      ;;
+    *)
+  esac
+
+  if [ "$bit" -ne "0" ] && [ "$1" -le "10" ]; then
+    state="notify"
+  fi
+
+  printf "{ \"text\": \"$dot\", \"tooltip\": \"$1%%\", \"percentage\": $1, \"class\": \"$state\" }\n"
+}
+
+if ! [ -z "$mouse" ]; then
+  perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
+
+  printdot "${perc%?}"
+fi
+
+while read line ; do
+  case $line in
+    *"mouse"* )
+      if [ "$(echo $line | awk '{print $3}')" = "removed:" ]; then
+	printf "{ \"text\": \"\" }\n"
+      else
+	mouse="$(echo $line | awk '{print $4}')"
+	perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
+
+	printdot "${perc%?}"
+      fi
+      ;;
+    * )
+      ;;
+  esac
+done < <(upower -m)

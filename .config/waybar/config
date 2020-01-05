@@ -1,0 +1,115 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-left": ["sway/workspaces","sway/mode", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","custom/consumption","custom/ibam","battery", "custom/separator", "custom/ratbat#2", "custom/ratbat#1", "custom/ratbat", "custom/separator"],
+    "sway/window": {
+        "max-length": 100
+    },
+
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+	"states": {
+	    "warning": 40,
+	    "low": 20,
+	    "critical": 10
+	}
+    },
+    "custom/ibam": {
+      "format": "{}",
+      "interval": 60,
+      "exec": "ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
+    },
+    "clock": {
+        "format": "{:%a %d %H:%M}"
+    },
+    "cpu": {
+	"interval": 5,
+	"format": "{usage}% ",
+	"max-length": 10
+    },
+    "memory": {
+	"interval": 20,
+	"format": "{}% ",
+	"max-length": 10
+    },
+    "network": {
+	"interval": 20,
+	"interface": "wlan0",
+        "format": "{ifname}",
+        "format-wifi": "{signalStrength}% ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "no net", //An empty format will hide the module.
+        "tooltip-format": "{ipaddr} {ifname}",
+        "tooltip-format-wifi": "{ipaddr} {essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ipaddr} {ifname} ",
+        "tooltip-format-disconnected": "Disconnected"
+    },
+    "pulseaudio": {
+	"format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "mute",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
+    },
+    "temperature": {
+      "thermal-zone": 2,
+      "critical-threshold": 80,
+      "format-critical": "{temperatureC}°C ",
+      "format": "{temperatureC}°C "
+    },
+    "custom/consumption": {
+      "format": "{}W &#xf0e7;",
+      "interval": 5,
+      "exec": "$HOME/.config/waybar/scripts/consumption"
+    },
+     "tray": {
+	"icon-size": 24,
+	"spacing": 8
+    },
+    "idle_inhibitor": {
+	"format": "{icon}",
+        "format-icons": {
+	  "activated": "",
+	  "deactivated": ""
+        }
+    },
+    "custom/fan": {
+      "format": "{}",
+      "interval": 10,
+      "exec": "$HOME/.config/waybar/scripts/fan"
+    },
+    "custom/updates": {
+      "format": "{} &#xf2f1;",
+      "signal": 12,
+      "exec": "$HOME/.config/waybar/scripts/updates"
+    },
+    "custom/ratbat": {
+      "return-type": "json",
+      "exec": "$HOME/.config/waybar/scripts/ratbat 0"
+    },
+    "custom/ratbat#1": {
+      "return-type": "json",
+      "exec": "$HOME/.config/waybar/scripts/ratbat 1"
+    },
+    "custom/ratbat#2": {
+      "return-type": "json",
+      "exec": "$HOME/.config/waybar/scripts/ratbat 2"
+    },
+    "custom/separator": {
+      "format": "&#x0;",
+      "interval": "once",
+      "tooltip": false
+    }
+}

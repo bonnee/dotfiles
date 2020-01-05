@@ -2,7 +2,6 @@ typeset -U PATH path
 path=("$HOME/bin" "$HOME/.npm-global/bin" "/usr/lib/ccache/bin" "$path[@]")
 export PATH
 
-export QT_DEVICE_PIXEL_RATIO=auto
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 

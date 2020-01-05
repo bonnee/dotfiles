@@ -27,8 +27,9 @@ input 2:14:ETPS/2_Elantech_Touchpad {
   dwt disabled
 }
 
-input * {
+input 1:1:AT_Translated_Set_2_keyboard {
   xkb_layout it
+  xkb_options ctrl:swapcaps
 }
 
 set $black        #000000

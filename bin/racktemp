@@ -1,0 +1,16 @@
+#!/bin/bash
+INTERVAL="${COLLECTD_INTERVAL:-10}"
+
+while [ "$check" != "OK" ]; do
+  line=$(head -n1 /dev/ttyACM0)
+  check=$(head -c2 <(echo "$line"))
+  sleep "$(shuf -i0-2 -n1).$(shuf -i0-100 -n1)"
+done
+
+target=$(echo "$line" | awk '{print $4}')
+temp=$(echo "$line" | awk '{print $7}')
+speed=$(echo "$line" | awk '{print $10}')
+
+echo "PUTVAL \"$HOSTNAME/rack/temperature-target\" interval=$INTERVAL N:$target"
+echo "PUTVAL \"$HOSTNAME/rack/temperature-air\" interval=$INTERVAL N:$temp"
+echo "PUTVAL \"$HOSTNAME/rack/percent-fan\" interval=$INTERVAL N:$speed"

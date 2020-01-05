@@ -1,0 +1,10 @@
+[Unit]
+Description=Logitech Configuration Daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/logid
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

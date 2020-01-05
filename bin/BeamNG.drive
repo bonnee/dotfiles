@@ -1,0 +1,2 @@
+#!/usr/bin/env bash 
+export WINEPREFIX="$HOME/.PlayOnLinux/wineprefix/BeamNG/" && wine "$HOME/.PlayOnLinux/wineprefix/BeamNG/drive_c/Program Files/BeamNG.drive/BeamNG.drive.exe"

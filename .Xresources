@@ -1,0 +1,47 @@
+! BEGIN desktop
+!Xft.dpi:			157
+! END desktop
+
+! BEGIN laptop
+!Xft.dpi:			166
+! END laptop
+
+Xft.autohint:			0
+Xft.lcdfilter:			lcddefault
+Xft.hintstyle:			hintmedium
+Xft.hinting:			1
+Xft.antialias:			1
+Xft.rgba:				rgb
+
+Xcursor.theme:			Bridge
+!Xcursor.size:			32
+
+
+! Black + DarkGrey
+*color0:      #000000
+*color8:      #9E9E9E
+! DarkRed + Red
+*color1:      #B71C1C
+*color9:      #F44336
+! DarkGreen + Green
+*color2:      #1B5E20
+*color10:     #4CAF50
+! DarkYellow + Yellow
+*color3:      #F57F17
+*color11:     #FFEB3B
+! DarkBlue + Blue
+*color4:      #0D47A1
+*color12:     #2196F3
+! DarkMagenta + Magenta
+*color5:      #AA00FF
+*color13:     #D500F9
+! DarkCyan + Cyan
+*color6:      #006064
+*color14:     #00BCD4
+! LightGrey + White
+*color7:      #E0E0E0
+*color15:     #F6F6F6
+
+*cursorColor: #7B9C58
+*colorUL:     #7B8C58
+

@@ -11,13 +11,6 @@ exec swaybg -o* -m fill -i $HOME/.config/sway/wallpaper.png
 
 set $mod Mod4
 
-# BEGIN desktop
-#set $hardlock XF86Launch8
-# END desktop
-# BEGIN laptop
-#set $hardlock Mod4+Shift+l
-# END laptop
-
 input 2:14:ETPS/2_Elantech_Touchpad {
   pointer_accel 0.15
   tap enabled
@@ -105,7 +98,7 @@ bindsym $mod+Return exec alacritty #i3-sensible-terminal
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec j4-dmenu-desktop --term "alacritty" --usage-log "$HOME/.config/j4-dmenu-usage" --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\"" #rofi -show drun -markup
+bindsym $mod+d exec j4-dmenu-desktop --term "alacritty" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\""
 
 # change focus
 bindsym $mod+Left focus left
@@ -202,7 +195,6 @@ bindsym $mod+Print exec grim $screenshot
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" $screenshot
 
 bindsym $mod+l exec loginctl lock-session
-bindsym $hardlock exec lock.sh
 
 bindsym $mod+g exec thunar
 bindsym $mod+a exec telegram-desktop
@@ -329,6 +321,5 @@ exec swayidle -dw \
     before-sleep 'brillo -O; brillo -u 1000000 -S 0; lock.sh' \
     after-resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
     lock 'lock.sh'
-
 
 #exec $HOME/bin/autostart.sh

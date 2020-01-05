@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Lock wrapper around i3lock-color
 
 [ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 
@@ -36,4 +35,3 @@ swaylock -f \
 --text-wrong-color="$white" \
 \
 -i "$tmpbg"
-#sleep 2

@@ -32,12 +32,6 @@ xss-lock -l -- lock.sh -n &
 numlockx &
 # END desktop
 
-# BEGIN laptop
-#xset s 120 180  # dim at 120s. lock at 120+180s
-#xset dpms 360   # stdby at 360s
-#xss-lock -l -n dim-screen.sh -- lock.sh -n &
-# END laptop
-
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/bin/pulseaudio-dlna &
 redshift-gtk &

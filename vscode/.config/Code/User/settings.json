@@ -8,7 +8,7 @@
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1.5,
     "editor.smoothScrolling": true,
     // END desktop
     "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",

@@ -308,10 +308,11 @@ exec kanshi
 exec ydotool
 exec libinput-gestures
 
-
 exec redshift-gtk
-exec blueman-applet
-exec nm-applet --indicator
+
+# These applets are run by autostart.sh
+#exec blueman-applet
+#exec nm-applet --indicator
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -320,14 +321,14 @@ exec xhost +SI:localuser:root
 
 exec swayidle -dw \
     timeout 120 'brillo -O; brillo -u 1000000 -S 5' \
-    resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
+    resume 'swaymsg "output * dpms on"; brillo -u 250000 -I' \
     timeout 210 'brillo -u 1000000 -S 0; lockw.sh; swaymsg "output * dpms off"' \
     timeout 30 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
     resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
-    before-sleep 'brillo -O; brillo -u 1000000 -S 0; lockw.sh' \
-    after-resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
+    before-sleep 'brillo -O; brillo -u 500000 -S 0; lockw.sh' \
+    after-resume 'swaymsg "output * dpms on"; brillo -u 250000 -I' \
     lock 'lockw.sh'
 
 exec waybar
 
-#exec $HOME/bin/autostart.sh
+exec $HOME/bin/autostart.sh

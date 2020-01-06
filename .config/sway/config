@@ -1,0 +1,327 @@
+ # i3 config file (v4)
+
+#################################################
+#####               Variables               #####
+#################################################
+
+#output eDP-1 pos 3840,1080
+#output HDMI-A-1 res 3840x2160@60Hz pos 0,0 scale 1
+
+exec swaybg -o* -m fill -i $HOME/.config/sway/wallpaper.png
+
+set $mod Mod4
+
+set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
+
+input 2:14:ETPS/2_Elantech_Touchpad {
+  pointer_accel 0.15
+  tap enabled
+  drag_lock enabled
+  click_method clickfinger
+  middle_emulation enabled
+  dwt disabled
+}
+
+input 1:1:AT_Translated_Set_2_keyboard {
+  xkb_layout it
+  xkb_options ctrl:swapcaps
+}
+
+set $black        #000000
+set $darkgrey     #9E9E9E
+set $darkred      #B71C1C
+set $red          #F44336
+set $darkgreen    #1B5E20
+set $green        #4CAF50
+set $darkyellow   #F57F17
+set $yellow       #FFEB3B
+set $darkblue     #0D47A1
+set $blue         #2196F3
+set $darkmagenta  #AA00FF
+set $magenta      #D500F9
+set $darkcyan     #006064
+set $cyan         #00BCD4
+set $lightgrey    #E0E0E0
+set $white        #F6F6F6
+
+set $transparent #000000FF
+set $dark        #333333
+
+set $fontfam     Noto Sans Regular
+
+# BEGIN desktop
+#set $fontsize    14
+# END desktop
+
+# BEGIN laptop
+set $fontsize     11
+# END laptop
+
+# BEGIN desktop
+#set $browser chromium --force-device-scale-factor=1.35
+# END desktop
+
+# BEGIN laptop
+set $browser firefox # --force-device-scale-factor=1.2
+# END laptop
+
+
+font pango: $fontfam $fontsize
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+focus_follows_mouse yes
+#workspace_auto_back_and_forth yes
+
+force_display_urgency_hint 500 ms
+popup_during_fullscreen smart
+
+# BEGIN desktop
+#default_border pixel 3
+#hide_edge_borders both
+# END desktop
+
+# BEGIN laptop
+default_border pixel 4
+hide_edge_borders both
+# END laptop
+
+# BEGIN desktop
+#gaps inner 15
+#gaps outer 10
+#smart_gaps on
+# END desktop
+
+#################################################
+#####              Keystrokes               #####
+#################################################
+# start a terminal
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+q kill
+
+bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\""
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Shift+space focus mode_toggle
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+less workspace back_and_forth
+bindsym $mod+Shift+greater move container to workspace back_and_forth; workspace back_and_forth
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
+
+# BEGIN laptop
+bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
+bindsym XF86Display exec wdisplays
+# END laptop
+
+bindsym --locked XF86AudioRaiseVolume exec volume.sh -gs +2% > $SWAYSOCK.wob
+bindsym --locked XF86AudioLowerVolume exec volume.sh -gs -2% > $SWAYSOCK.wob
+bindsym --locked XF86AudioMute exec volume.sh -gm
+bindsym --locked XF86AudioMicMute exec volume.sh -i
+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioStop exec playerctl stop
+
+#bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+#bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+set $screenshot "$(xdg-user-dir PICTURES)/screenshot-$(date +%F_%T).png" && notify-send -t 1000 -u critical "Screenshot Taken!"
+
+bindsym $mod+Print exec grim $screenshot
+bindsym $mod+Shift+Print exec grim -g "$(slurp)" $screenshot
+
+bindsym $mod+l exec loginctl lock-session
+
+bindsym $mod+g exec thunar
+bindsym $mod+a exec telegram-desktop
+
+#################################################
+#####          Scratchpad settings          #####
+#################################################
+
+# Keystrokes to show various marks
+bindsym $mod+t [con_mark="dropterm"] scratchpad show
+bindsym $mod+x [con_mark="music"] scratchpad show
+bindsym $mod+s [con_mark="scratch"] scratchpad show
+
+# General "Move to scratchpad" keystroke
+bindsym $mod+Shift+s mark "scratch", move scratchpad
+
+# Move dropterm to scratchpad
+for_window [app_id="dropterm"] mark "dropterm", move scratchpad
+
+# Automatically move Spotify to scratchpad
+for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900  [con_mark="music"] scratchpad show
+for_window [app_id="spotify"] mark "music", move scratchpad, resize set width 1600 height 900, [con_mark="music"] scratchpad show
+
+bindsym $mod+c exec $browser
+
+#################################################
+#####                 Modes                 #####
+#################################################
+
+set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+bindsym $mod+r mode "resize"
+bindsym $mod+Escape mode "$mode_system"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym h resize grow width 10 px or 10 ppt
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym ograve resize grow width 10 px or 10 ppt
+  
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+  
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "$mode_system" {
+  bindsym l exec lockw.sh, mode "default"
+  bindsym e exit, mode "default"
+  bindsym s exec systemctl suspend, mode "default"
+  bindsym h exec systemctl hibernate, mode "default"
+  bindsym r exec systemctl reboot, mode "default"
+  bindsym Shift+s exec systemctl poweroff -i, mode "default"
+  
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+
+set $exit Exit sway? (y/n)
+bindsym $mod+Shift+e mode "$exit"
+mode "$exit" {
+  bindsym y exit
+  bindsym n mode "default"
+  bindsym Escape mode "default"
+}
+
+#################################################
+#####          Windows Preferences          #####
+#################################################
+
+# Window Colors
+# class                 border    backgr.   text        indicator  child_border
+client.focused		$white	  $white    $dark	$green	  $white
+client.focused_inactive $darkcyan $darkcyan $lightgrey  $green	  $darkcyan
+client.unfocused        $darkgrey $darkgrey $lightgrey  $green	  $darkgrey
+client.urgent           $red      $red      $lightgrey  $green	  $red
+client.background       $darkgrey
+
+include ~/.config/sway/config.d/*
+
+#################################################
+#####                Autorun                #####
+#################################################
+
+bar {
+  #swaybar_command waybar
+}
+
+exec waybar
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term -d 150 35 --class dropterm; done'
+exec mako
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob; done'
+exec libinput-gestures
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec kanshi
+
+exec redshift-gtk
+exec blueman-applet
+exec nm-applet --indicator
+
+# Let root run X apps
+exec xhost +SI:localuser:root
+
+exec swayidle -dw \
+    timeout 120 'brillo -O; brillo -u 1000000 -S 5' \
+    resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
+    timeout 210 'brillo -u 1000000 -S 0; lockw.sh; swaymsg "output * dpms off"' \
+    timeout 30 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
+    resume 'if pgrep swaylock; then swaymsg "output * dpms on"; fi' \
+    before-sleep 'brillo -O; brillo -u 1000000 -S 0; lockw.sh' \
+    after-resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
+    lock 'lockw.sh'
+
+#exec $HOME/bin/autostart.sh

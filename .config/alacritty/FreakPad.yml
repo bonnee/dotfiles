@@ -35,6 +35,7 @@ draw_bold_text_with_bright_colors: true
 # Display tabs using this many cells (changes require restart)
 tabspaces: 2
 
+
 scrolling:
   # How many lines of scrollback to keep,
   # '0' will disable scrolling.
@@ -192,7 +193,7 @@ visual_bell:
   duration: 0
 
 # Background opacity
-background_opacity: 1.0
+background_opacity: 0.75
 
 # Mouse bindings
 #
@@ -373,3 +374,4 @@ key_bindings:
   - { key: F10,      mods: Super,   chars: "\x1b[21;3~"                  }
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                  }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                  }
+

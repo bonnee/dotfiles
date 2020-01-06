@@ -299,17 +299,21 @@ bar {
   #swaybar_command waybar
 }
 
-exec waybar
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term -d 150 35 --class dropterm; done'
 exec mako
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob; done'
-exec libinput-gestures
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 exec kanshi
+
+exec ydotool
+exec libinput-gestures
+
 
 exec redshift-gtk
 exec blueman-applet
 exec nm-applet --indicator
+
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Let root run X apps
 exec xhost +SI:localuser:root
@@ -323,5 +327,7 @@ exec swayidle -dw \
     before-sleep 'brillo -O; brillo -u 1000000 -S 0; lockw.sh' \
     after-resume 'swaymsg "output * dpms on"; brillo -u 500000 -I' \
     lock 'lockw.sh'
+
+exec waybar
 
 #exec $HOME/bin/autostart.sh

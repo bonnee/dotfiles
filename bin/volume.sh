@@ -78,6 +78,7 @@ Options:
   -g		    get volume
   -s <value>        set volume (can also work with +/- increments)
   -m                toggle mute
+  -i		    toggle mic mute
   -h                display this help and exit
 " 1>&2
     exit 1
@@ -93,7 +94,7 @@ in="$(get_default_in)"
 
 volume_amount=""
 
-while getopts ":gms:" o; do
+while getopts ":gims:" o; do
     case "${o}" in
         m)
             opt_mute_out=true

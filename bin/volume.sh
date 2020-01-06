@@ -78,8 +78,6 @@ Options:
   -g		    get volume
   -s <value>        set volume (can also work with +/- increments)
   -m                toggle mute
-  -t <procname>     name of status line process. must be used with -u
-  -u <signal>       update status line using signal. must be used with -t
   -h                display this help and exit
 " 1>&2
     exit 1
@@ -95,7 +93,7 @@ in="$(get_default_in)"
 
 volume_amount=""
 
-while getopts ":gmis:t:u:s:" o; do
+while getopts ":gms:" o; do
     case "${o}" in
         m)
             opt_mute_out=true

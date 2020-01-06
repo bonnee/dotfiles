@@ -6,12 +6,9 @@
 
 set $mod Mod4
 
-# BEGIN desktop
+set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
+
 set $hardlock XF86Launch8
-# END desktop
-# BEGIN laptop
-#set $hardlock Mod4+Shift+l
-# END laptop
 
 set_from_resource $black       color0   #000000
 set_from_resource $darkgrey    color8   #9E9E9E
@@ -34,22 +31,9 @@ set $transparent #000000FF
 set $dark        #000000
 
 set $fontfam     Noto Sans
-
-# BEGIN desktop
 set $fontsize    9
-# END desktop
 
-# BEGIN laptop
-#set $fontsize     9 
-# END laptop
-
-# BEGIN desktop
-set $browser firefox #chromium --force-device-scale-factor=1.3
-# END desktop
-
-# BEGIN laptop
-#set $browser chromium --force-device-scale-factor=1.2
-# END laptop
+set $browser firefox
 
 set $background $HOME/.config/i3/wallpaper.png
 
@@ -57,33 +41,22 @@ font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 focus_follows_mouse yes
-#workspace_auto_back_and_forth yes
 
 force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
 
-# BEGIN desktop
 new_window pixel 3
 hide_edge_borders both
-# END desktop
 
-# BEGIN laptop
-#new_window pixel 2
-#smart_borders on
-#hide_edge_borders on
-# END laptop
-
-# BEGIN desktop
 gaps inner 15
 gaps outer 10
 smart_gaps on
-# END desktop
 
 #################################################
 #####              Keystrokes               #####
 #################################################
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+q kill
@@ -158,27 +131,15 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# BEGIN laptop
-#bindsym XF86MonBrightnessUp exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -inc 5 -time 100 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
-#bindsym XF86MonBrightnessDown exec --no-startup-id flock /tmp/xbacklight.lock xbacklight -dec 5 -time 100 -steps 20 && notify-send -u low -t 1000 -h int:value:`xbacklight -get` -h string:synchronous:backlight "Backlight"
-#
-#bindsym XF86Bluetooth exec --no-startup-id notify-send -t 1000 -u low "¯\_(ツ)_/¯"
-#bindsym XF86Display exec --no-startup-id lxrandr
-# END laptop
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -s +2% && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -s -2% && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id volume.sh -m && pkill -SIGRTMIN+10 i3blocks
 
-set $unmute amixer -q set Master unmute
-bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -i 2 -n -t i3blocks -u SIGRTMIN+10
-bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -d 2 -n -t i3blocks -u SIGRTMIN+10
-bindsym XF86AudioMute exec --no-startup-id volume.sh -mnt i3blocks -u SIGRTMIN+10
-bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
 bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
-
-#bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-#bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
 bindsym $mod+Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
@@ -297,8 +258,6 @@ for_window [class="(?i)recordmydesktop"] floating enable
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 
-#new_float border normal
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -316,16 +275,9 @@ bar {
   }
   position bottom
 	
-  # BEGIN desktop
   font pango:Aller, Font Awesome 5 Free 10
-  # END desktop
 
-  # BEGIN laptop
-  #font pango:$fontfam, Font Awesome 5 Free, Solid 8
-  # END laptop
-  
   status_command i3blocks -c $HOME/.config/i3/i3blocks
-  #tray_output primary
 }
 
 #################################################
@@ -334,7 +286,9 @@ bar {
 
 #exec --no-startup-id compton --config $HOME/.config/compton.conf &
 
-exec --no-startup-id alacritty --title dropterm
+#exec --no-startup-id $term --title dropterm
+
+exec sh -c 'while [ -S "$I3SOCK" ]; do $term -d 150 35 --title dropterm; done'
 
 exec --no-startup-id $HOME/bin/autostart.sh
 

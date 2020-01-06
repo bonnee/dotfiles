@@ -8,12 +8,7 @@ devices: (
     };
     hiresscroll:
     {
-        // BEGIN laptop
         hires: false;
-        // END laptop
-        // BEGIN desktop
-        //hires: true;
-        // END desktop
         invert: false;
         target: false;
     };

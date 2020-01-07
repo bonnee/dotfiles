@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 updates=$(checkupdates+aur | wc -l)
-[ "${updates}" -gt "0" ] && color="#00FF00"
+if [ "${updates}" -gt "0" ]; then
+  color="#00FF00"
 
-echo "$updates/$(pacman -Q | wc -l)"
-echo "$updates"
-echo "$color"
+  echo "$updates/$(pacman -Q | wc -l)"
+  echo "$updates"
+  echo "$color"
+fi

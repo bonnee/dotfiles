@@ -30,9 +30,13 @@ get_default_in() {
 # Gets the sink volume as a percentage.
 #
 get_volume() {
+  if is_out_muted; then
+    echo 0
+  else
     pacmd list-sinks |
         awk '/^\s+name: /{indefault = $2 == "<'$out'>"}
             /^\s+volume: / && indefault {print $5; exit}' | sed 's/%$//'
+  fi
 }
 
 # Set volume of sink.

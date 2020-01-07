@@ -171,15 +171,15 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # BEGIN laptop
-bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 150000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
-bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 150000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 100000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 100000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 bindsym XF86Display exec wdisplays
 # END laptop
 
 bindsym --locked XF86AudioRaiseVolume exec volume.sh -gs +2% > $SWAYSOCK.wob
 bindsym --locked XF86AudioLowerVolume exec volume.sh -gs -2% > $SWAYSOCK.wob
-bindsym --locked XF86AudioMute exec volume.sh -gm
+bindsym --locked XF86AudioMute exec volume.sh -gm > $SWAYSOCK.wob
 bindsym --locked XF86AudioMicMute exec volume.sh -i
 
 bindsym --locked XF86AudioPlay exec playerctl play-pause
@@ -301,7 +301,7 @@ bar {
 
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term -d 150 35 --class dropterm; done'
 exec mako
-exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob; done'
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o0 -b3 -p0; done'
 
 exec kanshi
 

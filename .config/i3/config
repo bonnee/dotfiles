@@ -283,15 +283,10 @@ bar {
 #################################################
 #####                Autorun                #####
 #################################################
-
-#exec --no-startup-id compton --config $HOME/.config/compton.conf &
-
-#exec --no-startup-id $term --title dropterm
+exec_always --no-startup-id exec feh --bg-fill $background
 
 exec sh -c 'while [ -S "$I3SOCK" ]; do $term -d 150 35 --title dropterm; done'
+exec --no-startup-id dunst &
 
 exec --no-startup-id $HOME/bin/autostart.sh
-
-exec_always --no-startup-id exec feh --bg-fill $background
-exec --no-startup-id dunst &
 exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"

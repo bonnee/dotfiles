@@ -25,4 +25,4 @@ for_window [class="Eclipse" title=".* - Eclipse"] floating disable
 
 for_window [app_id="threshy-gui"] floating enable
 for_window [app_id="wdisplays"] floating enable
-for_window [title="Picture-in-Picture"] floating enable
+for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable

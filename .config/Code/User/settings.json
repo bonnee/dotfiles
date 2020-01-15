@@ -52,5 +52,6 @@
     "C_Cpp.experimentalFeatures": "Enabled",
     "C_Cpp.loggingLevel": "Warning",
     "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "editor.cursorSmoothCaretAnimation": true
 }

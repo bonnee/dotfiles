@@ -309,6 +309,7 @@ exec ydotool
 exec libinput-gestures
 
 exec redshift-gtk
+exec telegram-desktop -startintray
 
 # These applets are run by autostart.sh
 #exec blueman-applet

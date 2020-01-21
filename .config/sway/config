@@ -302,9 +302,16 @@ bar {
   #swaybar_command waybar
 }
 
+exec xsettingsd
+exec_always import-gsettings \
+    gtk-theme:gtk-theme-name \
+    icon-theme:gtk-icon-theme-name \
+    font-name:gtk-font-name \
+    cursor-theme:gtk-cursor-theme-name
+
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term -d 150 35 --class dropterm; done'
-exec mako
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
+exec mako
 
 exec kanshi
 

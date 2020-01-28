@@ -59,7 +59,7 @@ smart_gaps on
 bindsym $mod+Return exec $term
 
 # kill focused window
-bindsym $mod+q kill
+bindsym --release $mod+q kill
 
 bindsym $mod+d exec --no-startup-id rofi -show drun -markup
 

@@ -108,7 +108,7 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\""
+bindsym $mod+d exec flock -n /tmp/menu.lock j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\""
 
 # change focus
 bindsym $mod+Left focus left

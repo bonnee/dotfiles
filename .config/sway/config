@@ -23,16 +23,18 @@ input 2:14:ETPS/2_Elantech_Touchpad {
 }
 
 input * {
-  #xkb_options ctrl:swapcaps
+  xkb_options ctrl:swapcaps
+  xkb_layout it
+  xkb_numlock enabled
 }
 
 input 9494:71:Cooler_Master_Technology_Inc._MasterKeys_Pro_L_White {
-  xkb_layout it
 }
 
-
 input 1:1:AT_Translated_Set_2_keyboard {
+  xkb_options ctrl:swapcaps
   xkb_layout it
+  xkb_numlock disabled
 }
 
 set $black        #000000
@@ -106,9 +108,9 @@ hide_edge_borders both
 bindsym $mod+Return exec $term
 
 # kill focused window
-bindsym --release $mod+q kill
+bindsym $mod+q kill
 
-bindsym $mod+d exec flock -n /tmp/menu.lock j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\""
+bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\""
 
 # change focus
 bindsym $mod+Left focus left
@@ -320,7 +322,7 @@ exec mako
 
 exec kanshi
 
-exec caps2esc
+#exec caps2esc
 exec ydotool
 exec libinput-gestures
 

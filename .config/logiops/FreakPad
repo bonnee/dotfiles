@@ -12,7 +12,7 @@ devices: (
         invert: false;
         target: false;
     };
-    dpi: 2100;
+    dpi: 2000;
 
     buttons: (
         {

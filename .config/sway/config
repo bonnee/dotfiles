@@ -10,6 +10,7 @@
 exec swaybg -o* -m fill -i $HOME/.config/sway/wallpaper.png
 
 set $mod Mod4
+set $fn Menu
 
 set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
@@ -193,13 +194,13 @@ set $volume_mute volume.sh -gm > $SWAYSOCK.wob
 
 
 bindsym --locked XF86AudioRaiseVolume exec $volume_up
-bindsym --locked Menu+Page_Up exec $volume_up
+bindsym --locked $fn+Page_Up exec $volume_up
 
 bindsym --locked XF86AudioLowerVolume exec $volume_down
-bindsym --locked Menu+Page_Down exec $volume_down
+bindsym --locked $fn+Page_Down exec $volume_down
 
 bindsym --locked XF86AudioMute exec $volume_mute
-bindsym --locked Menu+Delete exec $volume_mute
+bindsym --locked $fn+Delete exec $volume_mute
 
 bindsym --locked XF86AudioMicMute exec volume.sh -i
 
@@ -209,12 +210,12 @@ set $song_prev playerctl previous
 
 bindsym --locked XF86AudioPlay exec $song_playpause
 bindsym --locked XF86AudioPause exec $song_playpause
-bindsym --locked Menu+Insert exec $song_playpause
+bindsym --locked $fn+Insert exec $song_playpause
 
 bindsym --locked XF86AudioNext exec $song_next
-bindsym --locked Menu+Home exec $song_next
+bindsym --locked $fn+Home exec $song_next
 
-bindsym --locked Menu+End exec $song_prev
+bindsym --locked $fn+End exec $song_prev
 bindsym --locked XF86AudioPrev exec $song_prev
 
 bindsym --locked XF86AudioStop exec playerctl stop

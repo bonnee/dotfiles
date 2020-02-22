@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 mouse="$(upower -e | grep mouse)"
-model="$(upower -i /org/freedesktop/UPower/devices/mouse_dev_EC_3B_81_71_E2_4E | awk '(/model/) {$1=""; print $0}' | sed 's/ //')"
+model="$(upower -i $(mouse) | awk '(/model/) {$1=""; print $0}' | sed 's/ //')"
 bit=$1
 dot='\xE2\x97\x8F'
 

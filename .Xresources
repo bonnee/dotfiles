@@ -1,21 +1,20 @@
-! BEGIN desktop
-!Xft.dpi:			157
-! END desktop
+#ifdef SRVR_Arch23
+    Xft.dpi 157
+#endif
 
-! BEGIN laptop
-!Xft.dpi:			166
-! END laptop
+#ifdef SRVR_FreakPad
+    Xft.dpi 166
+#endif
 
 Xft.autohint:			0
 Xft.lcdfilter:			lcddefault
 Xft.hintstyle:			hintmedium
 Xft.hinting:			1
 Xft.antialias:			1
-Xft.rgba:				rgb
+Xft.rgba:			rgb
 
 Xcursor.theme:			Bridge
 !Xcursor.size:			32
-
 
 ! Black + DarkGrey
 *color0:      #000000

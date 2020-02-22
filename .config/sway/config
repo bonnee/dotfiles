@@ -181,6 +181,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
+bindswitch --locked lid:on output eDP-1 disable
+bindswitch --locked lid:off output eDP-1 enable
+
 # BEGIN laptop
 bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 100000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 100000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
@@ -191,7 +194,6 @@ bindsym XF86Display exec wdisplays
 set $volume_up volume.sh -gs +2% > $SWAYSOCK.wob
 set $volume_down volume.sh -gs -2% > $SWAYSOCK.wob
 set $volume_mute volume.sh -gm > $SWAYSOCK.wob
-
 
 bindsym --locked XF86AudioRaiseVolume exec $volume_up
 bindsym --locked $fn+Page_Up exec $volume_up

@@ -1,3 +1,4 @@
+#!/bin/sh
 includes=/etc/X11/xinit/xinitrc.d/
 
 if [ -d "$includes" ]
@@ -32,4 +33,4 @@ numlockx &
 xcape -e 'Control_L=Escape'
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec i3
+#exec i3

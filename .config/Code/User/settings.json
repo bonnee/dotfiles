@@ -8,7 +8,7 @@
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
-    "window.zoomLevel": 1.3,
+    "window.zoomLevel": 2,
     "editor.smoothScrolling": true,
     // END desktop
     "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
@@ -55,5 +55,9 @@
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "editor.cursorSmoothCaretAnimation": true,
     "liveshare.allowGuestDebugControl": true,
-    "liveshare.allowGuestTaskControl": true
+    "liveshare.allowGuestTaskControl": true,
+    "workbench.colorTheme": "Deepdark Material Theme | Full Black Version",
+    "editor.cursorBlinking": "smooth",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser"
 }

@@ -52,6 +52,17 @@ gaps inner 15
 gaps outer 10
 smart_gaps on
 
+workspace 1 output primary
+workspace 2 output primary
+workspace 3 output primary
+workspace 4 output primary
+workspace 5 output primary
+workspace 6 output HDMI-0
+workspace 7 output HDMI-0
+workspace 8 output HDMI-0
+workspace 9 output HDMI-0
+workspace 10 output HDMI-0
+
 #################################################
 #####              Keystrokes               #####
 #################################################
@@ -90,10 +101,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+space floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -275,9 +286,11 @@ bar {
   }
   position bottom
 	
-  font pango:Aller, Font Awesome 5 Free 10
+  font pango:Noto Sans, Font Awesome 5 Free 10
 
   status_command i3blocks -c $HOME/.config/i3/i3blocks
+
+  tray_output primary
 }
 
 #################################################
@@ -290,3 +303,6 @@ exec --no-startup-id dunst &
 
 exec --no-startup-id $HOME/bin/autostart.sh
 exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+
+exec x11vnc -bg
+exec sleep 1; $HOME/.screenlayout/single.sh

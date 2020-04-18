@@ -82,12 +82,21 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+is_ssh() {
+  [[ -n ${SSH_CONNECTION-}${SSH_CLIENT-}${SSH_TTY-} ]]
+}
+
+h_name=''
+if is_ssh || (( EUID == 0 )); then
+  h_name="%f@%F{yellow}${(%):-%m}"
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 
-PROMPT='%F{blue}%n%f [%F{yellow}%~%f]> '
+PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
 
 # pywal

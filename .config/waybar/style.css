@@ -1,3 +1,5 @@
+@import url('/home/bonnee/.cache/wal/colors-trans.css');
+
 * {
     border: none;
     border-radius: 0;
@@ -7,8 +9,8 @@
 }
 
 window#waybar {
-    background: rgba(0,0,0,0.75);
-    color: white;
+    background: @background;
+    color: @foreground;
 }
 
 #workspaces {
@@ -19,34 +21,35 @@ window#waybar {
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: gray;
+    color: @foreground;
     border-top: 3px solid transparent;
 }
 
 #workspaces button.focused {
-    border-top: 3px solid white;
+    border-top: 3px solid @foreground;
 }
 
 #workspaces button.visible {
-  color: white;
+  color: @foreground;
 }
 
 #workspaces button.urgent {
-    border-top: 3px solid orangered;
-    color: orangered;
+    border-top: 3px solid @color0;
+    color: @color0;
     animation: blink 1.5s ease infinite;
-}
-
-#mode {
-    background: #64727D;
-    border-top: 3px solid white;
 }
 
 #clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #idle_inhibitor, #temperature, #custom-consumption, #custom-ibam {
     padding: 0 5px;
     margin: 0 5px;
     border-top: 3px solid transparent;
-    color: white;
+    color: @foreground;
+}
+
+#mode {
+    background: @foreground;
+    color: @background;
+    border-top: 3px solid @foregroundTrans;
 }
 
 #battery {
@@ -58,8 +61,8 @@ window#waybar {
     border-top: 3px solid lightgreen; /*#26A65B;*/
 }
 #battery.plugged {
-    color: white;
-    border-top: 3px solid white;
+    color: @foreground;
+    border-top: 3px solid @foreground;
 }
 
 #battery.warning.discharging {
@@ -74,7 +77,7 @@ window#waybar {
 
 @keyframes blink {
     50% {
-      color: black;
+      color: @background;
       background-color: orangered;
     }
 }
@@ -91,8 +94,8 @@ window#waybar {
 }
 
 #pulseaudio.muted {
-    color: white;
-    border-top: 3px solid white;
+    color: @foreground;
+    border-top: 3px solid @foreground;
 }
 
 #custom-consumption.low {
@@ -139,7 +142,7 @@ window#waybar {
 }
 
 #idle_inhibitor.activated {
-  border-top: 3px solid white;
+  border-top: 3px solid @foreground;
 }
 
 #custom-separator {

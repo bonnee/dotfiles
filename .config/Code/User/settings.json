@@ -56,7 +56,7 @@
     "editor.cursorSmoothCaretAnimation": true,
     "liveshare.allowGuestDebugControl": true,
     "liveshare.allowGuestTaskControl": true,
-    "workbench.colorTheme": "Deepdark Material Theme | Full Black Version",
+    "workbench.colorTheme": "Wal",
     "editor.cursorBlinking": "smooth",
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser"

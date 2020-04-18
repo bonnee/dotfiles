@@ -4,10 +4,10 @@
 #####               Variables               #####
 #################################################
 
-#output eDP-1 pos 3840,1080
-#output HDMI-A-1 res 3840x2160@60Hz pos 0,0 scale 1
+include "$HOME/.cache/wal/colors-sway"
+set $trans D9
 
-exec swaybg -o* -m fill -i $HOME/.config/sway/wallpaper.png
+exec swaybg -o* -m fill -i $wallpaper
 
 set $mod Mod4
 set $fn Menu
@@ -38,44 +38,10 @@ input 1:1:AT_Translated_Set_2_keyboard {
   xkb_numlock disabled
 }
 
-set $black        #000000
-set $darkgrey     #9E9E9E
-set $darkred      #B71C1C
-set $red          #F44336
-set $darkgreen    #1B5E20
-set $green        #4CAF50
-set $darkyellow   #F57F17
-set $yellow       #FFEB3B
-set $darkblue     #0D47A1
-set $blue         #2196F3
-set $darkmagenta  #AA00FF
-set $magenta      #D500F9
-set $darkcyan     #006064
-set $cyan         #00BCD4
-set $lightgrey    #E0E0E0
-set $white        #F6F6F6
-
-set $transparent #000000FF
-set $dark        #333333
-
 set $fontfam     Noto Sans Regular
-
-# BEGIN desktop
-#set $fontsize    14
-# END desktop
-
-# BEGIN laptop
 set $fontsize     11
-# END laptop
 
-# BEGIN desktop
-#set $browser chromium --force-device-scale-factor=1.35
-# END desktop
-
-# BEGIN laptop
-set $browser firefox # --force-device-scale-factor=1.2
-# END laptop
-
+set $browser firefox
 
 font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -86,21 +52,8 @@ focus_follows_mouse yes
 force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
 
-# BEGIN desktop
-#default_border pixel 3
-#hide_edge_borders both
-# END desktop
-
-# BEGIN laptop
 default_border pixel 4
-hide_edge_borders both
-# END laptop
-
-# BEGIN desktop
-#gaps inner 15
-#gaps outer 10
-#smart_gaps on
-# END desktop
+hide_edge_borders smart
 
 #################################################
 #####              Keystrokes               #####
@@ -111,7 +64,8 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu "bemenu -ib -p \"run\" --fn \"Noto Sans 13\"" | xargs swaymsg exec --
+set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 13' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
+bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu $bemenu | xargs swaymsg exec --
 
 # change focus
 bindsym $mod+Left focus left
@@ -184,12 +138,10 @@ bindsym $mod+Shift+r restart
 bindswitch --locked lid:on output eDP-1 disable
 bindswitch --locked lid:off output eDP-1 enable
 
-# BEGIN laptop
 bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 100000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 100000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
 bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
 bindsym XF86Display exec wdisplays
-# END laptop
 
 set $volume_up volume.sh -gs +2% > $SWAYSOCK.wob
 set $volume_down volume.sh -gs -2% > $SWAYSOCK.wob
@@ -313,12 +265,13 @@ mode "$exit" {
 #################################################
 
 # Window Colors
-# class                 border    backgr.   text        indicator  child_border
-client.focused		$white	  $white    $dark	$green	  $white
-client.focused_inactive $darkcyan $darkcyan $lightgrey  $green	  $darkcyan
-client.unfocused        $darkgrey $darkgrey $lightgrey  $green	  $darkgrey
-client.urgent           $red      $red      $lightgrey  $green	  $red
-client.background       $darkgrey
+# class                 border		  backgr.	    text        indicator	  child_border
+client.focused		$foreground	  $foreground	    $background $color4		  $foreground
+client.focused_inactive $color8		  $color8	    $foreground $color8		  $color8
+client.unfocused	$background$trans $background$trans $foreground $background$trans $background$trans
+client.urgent           $color6		  $color6	    $background $color6		  $color6
+client.background       $background
+
 
 include ~/.config/sway/config.d/*
 
@@ -327,7 +280,7 @@ include ~/.config/sway/config.d/*
 #################################################
 
 bar {
-  #swaybar_command waybar
+  swaybar_command waybar
 }
 
 exec xsettingsd
@@ -352,7 +305,7 @@ exec telegram-desktop -startintray
 
 # These applets are run by autostart.sh
 #exec blueman-applet
-#exec nm-applet --indicator
+exec nm-applet --indicator
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -368,7 +321,5 @@ exec swayidle -dw \
     before-sleep 'playerctl pause; brillo -O; brillo -u 500000 -S 0; lockw.sh' \
     after-resume 'swaymsg "output * dpms on"; brillo -u 250000 -I' \
     lock 'lockw.sh'
-
-exec waybar
 
 exec $HOME/bin/autostart.sh

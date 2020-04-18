@@ -1,11 +1,17 @@
 #!/usr/bin/env zsh
 
 mouse="$(upower -e | grep mouse)"
-model="$(upower -i $mouse | awk '(/model/) {$1=""; print $0}' | sed 's/ //')"
+model=""
 bit=$1
 dot='\xE2\x97\x8F'
 
 trap "exit 130" SIGKILL
+
+updatemodel() {
+  model="$(upower -i $mouse | awk '(/model/) {$1=""; print $0}' | sed 's/ //')"
+}
+
+updatemodel
 
 printdot() {
   state="on";
@@ -49,6 +55,8 @@ while read line ; do
 	printf "{ \"text\": \"\" }\n"
       else
 	mouse="$(echo $line | awk '{print $4}')"
+	updatemodel
+
 	perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
 
 	printdot "${perc%?}"

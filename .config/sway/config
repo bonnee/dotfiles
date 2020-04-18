@@ -59,23 +59,9 @@ set $transparent #000000FF
 set $dark        #333333
 
 set $fontfam     Noto Sans Regular
-
-# BEGIN desktop
-#set $fontsize    14
-# END desktop
-
-# BEGIN laptop
 set $fontsize     11
-# END laptop
 
-# BEGIN desktop
-#set $browser chromium --force-device-scale-factor=1.35
-# END desktop
-
-# BEGIN laptop
 set $browser firefox # --force-device-scale-factor=1.2
-# END laptop
-
 
 font pango: $fontfam $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position

@@ -1,14 +1,14 @@
 [user]
-	email = bonora.matteo@gmail.com
-	name = Bonnee
-	signingkey = 03F5F2890B72556B
+  email = bonora.matteo@gmail.com
+  name = Bonnee
+  signingkey = 03F5F2890B72556B
 [push]
-	default = simple
+  default = simple
 [credential]
-	helper = libsecret
+  helper = libsecret
 [color]
-	ui = auto
+  ui = auto
 [commit]
-	gpgsign = true
+  gpgsign = true
 [alias]
   graph = log --all --decorate --oneline --graph

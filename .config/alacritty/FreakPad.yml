@@ -29,13 +29,6 @@ window:
     x: 2
     y: 2
 
-# When true, bold text is drawn using the bright variant of colors.
-draw_bold_text_with_bright_colors: true
-
-# Display tabs using this many cells (changes require restart)
-tabspaces: 2
-
-
 scrolling:
   # How many lines of scrollback to keep,
   # '0' will disable scrolling.
@@ -54,10 +47,6 @@ scrolling:
   #
   # To disable this completely, set `faux_multiplier` to 0.
   #faux_multiplier: 3
-
-  # Automatically scroll to the bottom when new text is written
-  # to the terminal.
-  auto_scroll: false
 
 # Font configuration (changes require restart)
 #
@@ -189,11 +178,11 @@ colors:
 # To completely disable the visual bell, set its duration to 0.
 #
 visual_bell:
-  animation: EaseOutExpo
-  duration: 0
+  animation: EaseOut
+  duration: 100
 
 # Background opacity
-background_opacity: 0.75
+background_opacity: 0.85
 
 # Mouse bindings
 #

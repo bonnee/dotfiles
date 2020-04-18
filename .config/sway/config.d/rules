@@ -28,3 +28,8 @@ for_window [app_id="wdisplays"] floating enable
 for_window [app_id="firefox" title="Picture-in-Picture"] floating enable, sticky enable
 
 for_window [class="com-st-microxplorer-maingui-STM32CubeMX" title="win0"] floating enable
+
+for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [app_id="vinagre"] inhibit_idle fullscreen
+
+for_window [class="Vncviewer"] inhibit_idle fullscreen

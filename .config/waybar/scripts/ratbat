@@ -4,8 +4,6 @@ mouse="$(upower -e | grep mouse)"
 model=""
 dot='\xE2\x97\x8F'
 
-trap "exit 130" SIGKILL
-
 updatemodel() {
   model="$(upower -i $mouse | awk '(/model/) {$1=""; print $0}' | sed 's/ //')"
 }
@@ -40,7 +38,8 @@ if ! [ -z "$mouse" ]; then
   printdots "${perc%?}"
 fi
 
-while read line ; do
+# This is done to kill upower upon exit
+upower -m > >(while read line ; do
   case $line in
     *"mouse"* )
       if [ "$(echo $line | awk '{print $3}')" = "removed:" ]; then
@@ -57,4 +56,5 @@ while read line ; do
     * )
       ;;
   esac
-done < <(upower -m)
+done)
+wait $!

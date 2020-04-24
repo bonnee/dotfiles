@@ -2,7 +2,6 @@
 
 mouse="$(upower -e | grep mouse)"
 model=""
-bit=$1
 dot='\xE2\x97\x8F'
 
 trap "exit 130" SIGKILL
@@ -13,39 +12,32 @@ updatemodel() {
 
 updatemodel
 
-printdot() {
-  state="on";
-  
-  case $bit in
-    0)
-      if [ "$1" -le "10" ]; then
-	state="critical"
-      fi
-      ;;
-    1)
-      if [ "$1" -lt "33" ]; then
-	state="off"
-      fi
-      ;;
-    2)
-      if [ "$1" -lt "66" ]; then
-	state="off"
-      fi
-      ;;
-    *)
-  esac
+printdots() {
+  state="ok";
+  offdot="<span foreground='grey'>$dot</span>"
 
-  if [ "$bit" -ne "0" ] && [ "$1" -le "10" ]; then
-    state="notify"
+  dot1="$dot"
+  dot2="$dot"
+  dot3="$dot"
+  
+  if [ "$1" -le "10" ]; then
+    state="critical"
+  else
+    if [ "$1" -lt "33" ]; then
+      dot2="$offdot"
+    fi
+    if [ "$1" -lt "66" ]; then
+      dot3="$offdot"
+    fi
   fi
 
-  printf "{ \"text\": \"$dot\", \"tooltip\": \"$model: $1%%\", \"percentage\": $1, \"class\": \"$state\" }\n"
+  printf "{ \"text\": \"$dot3 $dot2 $dot1\", \"tooltip\": \"$model: $1%%\", \"percentage\": $1, \"class\": \"$state\" }\n"
 }
 
 if ! [ -z "$mouse" ]; then
   perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
 
-  printdot "${perc%?}"
+  printdots "${perc%?}"
 fi
 
 while read line ; do
@@ -59,7 +51,7 @@ while read line ; do
 
 	perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
 
-	printdot "${perc%?}"
+	printdots "${perc%?}"
       fi
       ;;
     * )

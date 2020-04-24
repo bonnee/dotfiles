@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode", "sway/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","custom/consumption","custom/ibam","battery", "custom/separator", "custom/ratbat#2", "custom/ratbat#1", "custom/ratbat", "custom/separator"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","custom/consumption","custom/ibam","battery", "custom/separator", "custom/ratbat", "custom/separator"],
     "sway/window": {
         "max-length": 100
     },
@@ -97,15 +97,7 @@
     },
     "custom/ratbat": {
       "return-type": "json",
-      "exec": "$HOME/.config/waybar/scripts/ratbat 0"
-    },
-    "custom/ratbat#1": {
-      "return-type": "json",
-      "exec": "$HOME/.config/waybar/scripts/ratbat 1"
-    },
-    "custom/ratbat#2": {
-      "return-type": "json",
-      "exec": "$HOME/.config/waybar/scripts/ratbat 2"
+      "exec": "$HOME/.config/waybar/scripts/ratbat"
     },
     "custom/separator": {
       "format": "&#x0;",

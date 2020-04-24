@@ -151,20 +151,9 @@ window#waybar {
 
 #custom-ratbat {
   border-top: 3px solid transparent;
+  color: lime;
   padding: 0 1px;
   font-size: 90%;
-}
-
-#custom-ratbat.on {
-  color: lightgreen;
-}
-
-#custom-ratbat.off {
-  color: grey;
-}
-
-#custom-ratbat.notify {
-  border-top: 3px solid orangered;
 }
 
 #custom-ratbat.critical {

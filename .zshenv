@@ -11,4 +11,6 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 export DISABLE_AUTO_UPDATE=true
 
+export HOSTNAME=$HOST
+
 source ~/."$HOST"_env

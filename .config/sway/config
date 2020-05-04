@@ -12,7 +12,8 @@ exec swaybg -o* -m fill -i $wallpaper
 set $mod Mod4
 set $fn Menu
 
-set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
+set $term kitty
+#set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
 input 2:14:ETPS/2_Elantech_Touchpad {
   pointer_accel 0.15
@@ -64,7 +65,7 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+q kill
 
-set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 13' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
+set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 12' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
 bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu $bemenu | xargs swaymsg exec --
 
 # change focus
@@ -290,14 +291,14 @@ exec_always import-gsettings \
     font-name:gtk-font-name \
     cursor-theme:gtk-cursor-theme-name
 
-exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term -d 150 35 --class dropterm; done'
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term --class dropterm; done'
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
 exec mako
 
 exec kanshi
 
 #exec caps2esc
-exec ydotool
+exec ydotoold
 exec libinput-gestures
 
 exec redshift-gtk

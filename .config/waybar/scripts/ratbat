@@ -2,7 +2,9 @@
 
 mouse="$(upower -e | grep mouse)"
 model=""
-dot='\xE2\x97\x8F'
+dot="•"
+#dot="&#9642;"
+#dot='\xE2\x97\x8F'
 
 updatemodel() {
   model="$(upower -i $mouse | awk '(/model/) {$1=""; print $0}' | sed 's/ //')"

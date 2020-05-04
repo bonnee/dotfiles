@@ -1,59 +1,54 @@
 {
     "layer": "bottom",
     "position": "bottom",
-    "modules-left": ["sway/workspaces","sway/mode", "sway/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","custom/consumption","custom/ibam","battery", "custom/separator", "custom/ratbat", "custom/separator"],
+    "modules-left": ["sway/workspaces","sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","memory","temperature","custom/fan","cpu","custom/consumption","battery","custom/ibam","custom/ratbat", "clock"],
     "sway/window": {
-        "max-length": 100
+        "max-length": 48
     },
-
+    "sway/workspaces": {
+      "smooth-scrolling-threshold": 3
+    },
     "battery": {
-        "format": "{capacity}% {icon}",
+        "format": "{icon} {capacity}%",
         "format-icons": ["", "", "", "", ""],
+	"format-plugged": " {capacity}%",
+	"format-charging": " {capacity}%",
 	"states": {
 	    "warning": 40,
 	    "low": 20,
 	    "critical": 10
-	}
+	},
+	"on-click": "threshy-gui"
     },
     "custom/ibam": {
-      "format": "{}",
+      "format": "&#xf714; {}h",
       "interval": 60,
       "exec": "ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
     },
     "clock": {
-        "format": "{:%a %d %H:%M}"
+	"locale": "C",  /* Fixes #565 */
+        "format":" {:%a %d, %H:%M}",
+	"tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
 	"interval": 5,
-	"format": "{usage}% ",
+	"format": " {usage}%",
 	"max-length": 10
     },
     "memory": {
 	"interval": 20,
-	"format": "{}% ",
+	"format": "&#xf538; {}%",
 	"max-length": 10
     },
-    "network": {
-	"interval": 20,
-	"interface": "wlan0",
-        "format": "{ifname}",
-        "format-wifi": "{signalStrength}% ",
-        "format-ethernet": "{ifname} ",
-        "format-disconnected": "no net", //An empty format will hide the module.
-        "tooltip-format": "{ipaddr} {ifname}",
-        "tooltip-format-wifi": "{ipaddr} {essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ipaddr} {ifname} ",
-        "tooltip-format-disconnected": "Disconnected"
-    },
     "pulseaudio": {
-	"format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+	"format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
         "format-muted": "mute",
         "format-icons": {
-            "headphones": "",
-            "handsfree": "",
+            "headphone": "",
+            "hands-free": "",
             "headset": "",
             "phone": "",
             "portable": "",
@@ -61,21 +56,22 @@
             "default": ["", ""]
         },
         "scroll-step": 1,
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+	"smooth-scrolling-threshold": 2
     },
     "temperature": {
-      "thermal-zone": 2,
-      "critical-threshold": 80,
-      "format-critical": "{temperatureC}°C ",
-      "format": "{temperatureC}°C "
+      "thermal-zone": 3,
+      "critical-threshold": 75,
+      "format-critical": " {temperatureC}°C",
+      "format": " {temperatureC}°C"
     },
     "custom/consumption": {
-      "format": "{}W &#xf0e7;",
+      "format": "&#xf0e7; {}W",
       "interval": 5,
       "exec": "$HOME/.config/waybar/scripts/consumption"
     },
      "tray": {
-	"icon-size": 24,
+	"icon-size": 22,
 	"spacing": 8
     },
     "idle_inhibitor": {

@@ -9,12 +9,15 @@
 }
 
 window#waybar {
+    border-bottom: 2px solid transparent;
     background: @background;
     color: @foreground;
+    transition-property: background-color;
+    transition-duration: .5s;
 }
 
-#workspaces {
-    margin-right: 15px;
+window#waybar.hidden {
+    opacity: 0.2;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -22,34 +25,46 @@ window#waybar {
     padding: 0 5px;
     background: transparent;
     color: @foreground;
-    border-top: 3px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 
 #workspaces button.focused {
-    border-top: 3px solid @foreground;
+    border-bottom: 2px solid @foreground;
 }
 
 #workspaces button.visible {
-  color: @foreground;
+    color: @foreground;
 }
 
 #workspaces button.urgent {
-    border-top: 3px solid @color0;
+    border-bottom: 2px solid @color0;
     color: @color0;
     animation: blink 1.5s ease infinite;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #idle_inhibitor, #temperature, #custom-consumption, #custom-ibam {
-    padding: 0 5px;
-    margin: 0 5px;
-    border-top: 3px solid transparent;
+#clock, 
+#battery, 
+#cpu, 
+#memory, 
+#pulseaudio, 
+#tray, 
+#mode, 
+#idle_inhibitor, 
+#temperature, 
+#custom-fan, 
+#custom-consumption, 
+#custom-ratbat, 
+#custom-ibam {
+    padding: 5px 5px 3px 5px;
+    margin: 0 3px;
     color: @foreground;
+    border-bottom: 2px solid transparent;
 }
 
 #mode {
     background: @foreground;
     color: @background;
-    border-top: 3px solid @foregroundTrans;
+    border-bottom: 2px solid @foregroundTrans;
 }
 
 #battery {
@@ -57,107 +72,93 @@ window#waybar {
 }
 
 #battery.charging {
-    color: lightgreen;
-    border-top: 3px solid lightgreen; /*#26A65B;*/
+    color: @color3;
+    border-bottom: 2px solid @color3;
 }
 #battery.plugged {
     color: @foreground;
-    border-top: 3px solid @foreground;
+    border-bottom: 2px solid @foreground;
 }
 
 #battery.warning.discharging {
-    color: orange;
-    border-top: 3px solid orange;
+    color: @color1;
+    border-bottom: 2px solid @color1;
 }
 
 #battery.low.discharging {
-    color: orangered;
-    border-top: 3px solid orangered;
+    color: @color6;
+    border-bottom: 2px solid @color6;
 }
 
 @keyframes blink {
     50% {
       color: @background;
-      background-color: orangered;
+      background-color: @color6;
     }
 }
 
 #battery.critical.discharging {
-    color: orangered;
-    border-top: 3px solid orangered;
+    color: @color6;
+    border-bottom: 2px solid @color6;
     animation: blink 1s ease-out infinite;
-}
-
-#network.disconnected {
-    color: gray;
-    border-top: 3px solid gray;
 }
 
 #pulseaudio.muted {
     color: @foreground;
-    border-top: 3px solid @foreground;
+    border-bottom: 2px solid @foreground;
 }
 
 #custom-consumption.low {
-  border-top: 3px solid lightgreen;
-  color: lightgreen
+  border-bottom: 2px solid @color2;
+  color: @color2
 }
 
 #custom-consumption.medium {
-  border-top: 3px solid orange;
-  color: orange;
+  border-bottom: 2px solid @color1;
+  color: @color1;
 }
 
 #custom-consumption.high {
-  color: orangered;
-  border-top: 3px solid orangered;
+  color: @color6;
+  border-bottom: 2px solid @color6;
 }
 
 #custom-fan {
-  border-top: 3px solid rgba(0,0,0,0);
+  border-bottom: 2px solid transparent;
   padding: 0 5px;
   margin: 0 5px;
 }
 
 #custom-fan.low {
-  color: lightgreen;
+  color: @color2;
 }
 
 #custom-fan.medium {
-  color: orange;
+  color: @color1;
 }
 
 #custom-fan.high {
-  color: orangered;
-}
-
-#custom-updates.high {
-  border-top: 3px solid lightgreen;
-  color: lightgreen;
+  color: @color6;
 }
 
 #temperature.critical {
-  border-top: 3px solid orangered;
-  color: orangered;
+  border-bottom: 2px solid @color6;
+  color: @color6;
 }
 
 #idle_inhibitor.activated {
-  border-top: 3px solid @foreground;
-}
-
-#custom-separator {
-  margin: 0 2px;
+  border-bottom: 2px solid @foreground;
 }
 
 #custom-ratbat {
-  border-top: 3px solid transparent;
-  color: lime;
-  padding: 0 1px;
-  font-size: 90%;
+  /*border-bottom: 2px solid transparent;*/
+  color: lightgreen;
+  /*padding: 0 1px;*/
+  /*font-size: 90%;*/
 }
 
 #custom-ratbat.critical {
-  border-top: 3px solid orangered;
+  border-bottom: 2px solid orangered;
   color: orangered;
   animation: dotblink 1s ease-out infinite;
 }

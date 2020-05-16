@@ -5,32 +5,43 @@
 #################################################
 
 set $mod Mod4
-
 set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
 set $hardlock XF86Launch8
 
-set_from_resource $black       color0   #000000
-set_from_resource $darkgrey    color8   #9E9E9E
-set_from_resource $darkred     color1   #B71C1C
-set_from_resource $red         color9   #F44336
-set_from_resource $darkgreen   color2   #1B5E20
-set_from_resource $green       color10  #4CAF50
-set_from_resource $darkyellow  color3   #F57F17
-set_from_resource $yellow      color11  #FFEB3B
-set_from_resource $darkblue    color4   #0D47A1
-set_from_resource $blue        color12  #2196F3
-set_from_resource $darkmagenta color5   #AA00FF
-set_from_resource $magenta     color13  #D500F9
-set_from_resource $darkcyan    color6   #006064
-set_from_resource $cyan        color14  #00BCD4
-set_from_resource $lightgrey   color7   #E0E0E0
-set_from_resource $white       color15  #F6F6F6
+#set_from_resource $black       color0   #000000
+#set_from_resource $darkgrey    color8   #9E9E9E
+#set_from_resource $darkred     color1   #B71C1C
+#set_from_resource $red         color9   #F44336
+#set_from_resource $darkgreen   color2   #1B5E20
+#set_from_resource $green       color10  #4CAF50
+#set_from_resource $darkyellow  color3   #F57F17
+#set_from_resource $yellow      color11  #FFEB3B
+#set_from_resource $darkblue    color4   #0D47A1
+#set_from_resource $blue        color12  #2196F3
+#set_from_resource $darkmagenta color5   #AA00FF
+#set_from_resource $magenta     color13  #D500F9
+#set_from_resource $darkcyan    color6   #006064
+#set_from_resource $cyan        color14  #00BCD4
+#set_from_resource $lightgrey   color7   #E0E0E0
+#set_from_resource $white       color15  #F6F6F6
 
-set $transparent #000000FF
-set $dark        #000000
+#set $transparent #000000FF
+#set $dark        #000000
 
-set $fontfam     Noto Sans
+set_from_resource $foreground i3wm.foreground #f0f0f0
+set_from_resource $background i3wm.background #f0f0f0
+
+set_from_resource $color0 i3wm.color0 #f0f0f0
+set_from_resource $color1 i3wm.color1 #f0f0f0
+set_from_resource $color2 i3wm.color2 #f0f0f0
+set_from_resource $color3 i3wm.color3 #f0f0f0
+set_from_resource $color4 i3wm.color4 #f0f0f0
+set_from_resource $color5 i3wm.color5 #f0f0f0
+set_from_resource $color6 i3wm.color6 #f0f0f0
+set_from_resource $color7 i3wm.color7 #f0f0f0
+set_from_resource $color8 i3wm.color8 #f0f0f0
+
 set $fontsize    9
 
 set $browser firefox
@@ -153,6 +164,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
 bindsym $mod+Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
+bindsym --release $mod+Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
 bindsym $mod+l exec --no-startup-id xset s activate
 bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off
@@ -233,12 +245,18 @@ mode "$mode_system" {
 
 # Window Colors
 # class                 border    backgr.   text        indicator
-client.focused          $white    $white    $black      $green
-client.focused_inactive $darkcyan $darkcyan $lightgrey  $green
-client.unfocused        $darkgrey $darkgrey $lightgrey  $green
-client.urgent           $red      $red      $lightgrey  $green
-client.background       $darkgrey
+#client.focused          $white    $white    $black      $green
+#client.focused_inactive $darkcyan $darkcyan $lightgrey  $green
+#client.unfocused        $darkgrey $darkgrey $lightgrey  $green
+#client.urgent           $red      $red      $lightgrey  $green
+#client.background       $darkgrey
 
+# class                 border		  backgr.	    text        indicator	  child_border
+client.focused		$foreground	  $foreground	    $background $color4		  $foreground
+client.focused_inactive $color8		  $color8	    $foreground $color8		  $color8
+client.unfocused	$background$trans $background$trans $foreground $background$trans $background$trans
+client.urgent           $color6		  $color6	    $background $color6		  $color6
+client.background	$background
 
 for_window [class="vlc"] floating enable
 for_window [class="Gpick"] floating enable
@@ -271,32 +289,36 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heigh
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-  colors {
-    background $dark
-    statusline $lightgrey
-    separator  $lightgrey
-
-    # Type             border     background font
-    focused_workspace  $white     $white     $black
-    active_workspace   $darkcyan  $darkcyan  $lightgrey
-    inactive_workspace $dark      $dark      $lightgrey
-    urgent_workspace   $red       $red       $white
-    binding_mode       $white     $white     $black
-  }
-  position bottom
-	
-  font pango:Noto Sans, Font Awesome 5 Free 10
-
-  status_command i3blocks -c $HOME/.config/i3/i3blocks
-
-  tray_output primary
-}
+#bar {
+#  colors {
+#    background $dark
+#    statusline $lightgrey
+#    separator  $lightgrey
+#
+#    # Type             border     background font
+#    focused_workspace  $white     $white     $black
+#    active_workspace   $darkcyan  $darkcyan  $lightgrey
+#    inactive_workspace $dark      $dark      $lightgrey
+#    urgent_workspace   $red       $red       $white
+#    binding_mode       $white     $white     $black
+#  }
+#  position bottom
+#	
+#  font pango:sans-serif $fontsize, Font Awesome 5 Free 10
+#
+#  #status_command i3blocks -c $HOME/.config/i3/i3blocks
+#  status_command polybar example
+#
+#  tray_output primary
+#}
 
 #################################################
 #####                Autorun                #####
 #################################################
 exec_always --no-startup-id exec feh --bg-fill $background
+exec_always --no-startup-id exec $HOME/.config/polybar/launch.sh
+
+exec --no-startup-id keeb.sh src/cava_cmmk/cava.conf
 
 exec sh -c 'while [ -S "$I3SOCK" ]; do $term -d 150 35 --title dropterm; done'
 exec --no-startup-id dunst &
@@ -305,4 +327,4 @@ exec --no-startup-id $HOME/bin/autostart.sh
 exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
 
 exec x11vnc -bg
-exec sleep 1; $HOME/.screenlayout/single.sh
+exec_always --no-startup-id sleep 1; $HOME/.screenlayout/single.sh

@@ -13,4 +13,5 @@ export DISABLE_AUTO_UPDATE=true
 
 export HOSTNAME=$HOST
 
+source .cache/wal/colors.sh
 source ~/."$HOST"_env

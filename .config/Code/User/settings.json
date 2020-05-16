@@ -8,10 +8,10 @@
     //"editor.smoothScrolling": false,
     // END laptop
     // BEGIN desktop
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 0,
     "editor.smoothScrolling": true,
     // END desktop
-    "editor.fontFamily": "'Fira Code Retina', 'Iosevka Term SS09', monospace",
+    "editor.fontFamily": "monospace",
     "editor.fontLigatures": true,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
@@ -59,6 +59,9 @@
     "workbench.colorTheme": "Wal",
     "editor.cursorBlinking": "smooth",
     "latex-workshop.view.pdf.viewer": "tab",
-    "editor.fontSize": 11,
-    "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser"
+    "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
+    "workbench.editor.scrollToSwitchTabs": true,
+    "telemetry.enableTelemetry": false,
+    "editor.fontSize": 13,
+    "diffEditor.ignoreTrimWhitespace": false
 }

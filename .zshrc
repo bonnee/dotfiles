@@ -37,8 +37,8 @@ key[ShiftTab]="${terminfo[kcbt]}"
 [[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"    overwrite-mode
 [[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}" backward-delete-char
 [[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"    delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"        up-line-or-history
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"      down-line-or-history
+#[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"        up-line-or-history
+#[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"      down-line-or-history
 [[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"      backward-char
 [[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"     forward-char
 [[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"    beginning-of-buffer-or-history
@@ -73,6 +73,9 @@ catch_signal_usr1() {
 }
 trap catch_signal_usr1 USR1
 
+# Use nearcolor if not on a 24bit terminal
+[[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
+
 export ZSH=/usr/share/oh-my-zsh
 
 plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found zsh-autosuggestions zsh-syntax-highlighting)
@@ -82,10 +85,10 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+# Display hostname in PROMPT if on ssh
 is_ssh() {
-  [[ -n ${SSH_CONNECTION-}${SSH_CLIENT-}${SSH_TTY-} ]]
+  [[ $SSH_CONNECTION ]]
 }
-
 h_name=''
 if is_ssh || (( EUID == 0 )); then
   h_name="%f@%F{yellow}${(%):-%m}"

@@ -69,7 +69,7 @@ separator=false
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=&#xf085; 
+label=&#xf085;
 min_width=1 100.00%
 align=center
 separator=false

@@ -1,7 +1,7 @@
-Net/IconThemeName     "Arc"
-Net/ThemeName	      "Arc-Dark"
-Xft/Antialias	      1
-Xft/HintStyle	      "hintfull"
-Xft/Hinting	      1
-Xft/RGBA	      "rgb"
-Xft/lcdfilter	      "none"
+Net/IconThemeName		"Arc"
+Net/ThemeName				"Arc-Dark"
+
+Xft/Antialias				1
+Xft/HintStyle				"hintfull"
+Xft/Hinting					1
+Xft/RGBA						"rgb"

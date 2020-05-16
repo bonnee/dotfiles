@@ -59,5 +59,6 @@
     "workbench.colorTheme": "Wal",
     "editor.cursorBlinking": "smooth",
     "latex-workshop.view.pdf.viewer": "tab",
+    "editor.fontSize": 11,
     "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser"
 }

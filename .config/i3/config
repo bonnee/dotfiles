@@ -37,7 +37,7 @@ set $browser firefox
 
 set $background $HOME/.config/i3/wallpaper.png
 
-font pango: $fontfam $fontsize
+font pango:sans-serif $fontsize
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 focus_follows_mouse yes

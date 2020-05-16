@@ -73,24 +73,24 @@ scrolling:
 font:
   # The normal (roman) font face to use.
   normal:
-    family: "Fira Code"	 # should be "Menlo" or something on macOS.
+    family: "monospace"	 # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Regular
+    style: Retina
 
   # The bold font face
   bold:
-    family: "Fira Code" # should be "Menlo" or something on macOS.
+    family: "monospace" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Bold
+    style: Bold
 
   # The italic font face
   italic:
-    family: "Fira Code" # should be "Menlo" or something on macOS.
+    family: "monospace" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Light
 
   # Point size of the font
-  size: 9
+  size: 9.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -104,11 +104,6 @@ font:
   glyph_offset:
     x: 0
     y: 0
-
-  # OS X only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
-  use_thin_strokes: true
 
 # Should display the render timer
 debug.render_timer: false
@@ -185,7 +180,7 @@ visual_bell:
   duration: 0
 
 # Background opacity
-background_opacity: 0.85
+background_opacity: .85
 
 # Mouse bindings
 #

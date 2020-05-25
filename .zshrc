@@ -76,7 +76,11 @@ trap catch_signal_usr1 USR1
 # Use nearcolor if not on a 24bit terminal
 [[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
 
-export ZSH=/usr/share/oh-my-zsh
+if [ -d /usr/share/oh-my-zsh ]; then
+  export ZSH=/usr/share/oh-my-zsh
+elif [ -d ~/.oh-my-zsh ]; then
+  export ZSH=~/.oh-my-zsh
+fi
 
 plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found zsh-autosuggestions zsh-syntax-highlighting)
 
@@ -103,5 +107,7 @@ PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
 
 # pywal
-(cat ~/.cache/wal/sequences &)
-source ~/.cache/wal/colors-tty.sh
+if [ -d ~/.cache/wal ]; then
+  (cat ~/.cache/wal/sequences &)
+  source ~/.cache/wal/colors-tty.sh
+fi

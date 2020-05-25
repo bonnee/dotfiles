@@ -13,5 +13,12 @@ export DISABLE_AUTO_UPDATE=true
 
 export HOSTNAME=$HOST
 
-source ~/.cache/wal/colors.sh
-source ~/."$HOST"_env
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+if [ -d ~/.cache/wal ]; then
+  source ~/.cache/wal/colors.sh
+fi
+
+if [ -d ~/."$HOST"_env ]; then
+  source ~/."$HOST"_env
+fi

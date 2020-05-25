@@ -9,6 +9,6 @@
 [color]
   ui = auto
 [commit]
-#  gpgsign = true
+  gpgsign = true
 [alias]
   graph = log --all --decorate --oneline --graph

@@ -4,6 +4,8 @@
 #####               Variables               #####
 #################################################
 
+output eDP-1 scale 1 subpixel rgb enable
+
 include "$HOME/.cache/wal/colors-sway"
 set $trans D9
 
@@ -12,8 +14,8 @@ exec swaybg -o* -m fill -i $wallpaper
 set $mod Mod4
 set $fn Menu
 
-set $term kitty
-#set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
+#set $term kitty
+set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
 input 2:14:ETPS/2_Elantech_Touchpad {
   pointer_accel 0.15
@@ -39,8 +41,8 @@ input 1:1:AT_Translated_Set_2_keyboard {
   xkb_numlock disabled
 }
 
-set $fontfam     Noto Sans Regular
-set $fontsize     11
+set $fontfam    sans-serif
+set $fontsize   11
 
 set $browser firefox
 
@@ -293,27 +295,27 @@ exec_always import-gsettings \
 
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term --class dropterm; done'
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
-exec mako
+exec --no-startup-id mako
 
-exec kanshi
+exec --no-startup-id kanshi
 
 #exec caps2esc
-exec ydotoold
-exec libinput-gestures
-
-exec redshift-gtk
-exec telegram-desktop -startintray
+exec --no-startup-id ydotoold
 
 # These applets are run by autostart.sh
+#exec libinput-gestures
+#exec redshift-gtk
+#exec telegram-desktop -startintray
 #exec blueman-applet
+#exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# --indicator for AppIndicator branch
 exec nm-applet --indicator
 
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
 # Let root run X apps
-exec xhost +SI:localuser:root
+exec --no-startup-id xhost +SI:localuser:root
 
-exec swayidle -dw \
+exec --no-startup-id swayidle -dw \
     timeout 120 'brillo -O; brillo -u 1000000 -S 5' \
     resume 'swaymsg "output * dpms on"; brillo -u 250000 -I' \
     timeout 210 'brillo -u 1000000 -S 0; lockw.sh; swaymsg "output * dpms off"' \
@@ -323,4 +325,5 @@ exec swayidle -dw \
     after-resume 'swaymsg "output * dpms on"; brillo -u 250000 -I' \
     lock 'lockw.sh'
 
-exec $HOME/bin/autostart.sh
+# Autostart
+exec --no-startup-id dex -a

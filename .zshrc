@@ -107,7 +107,7 @@ PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
 
 # pywal
-if [ -d ~/.cache/wal ]; then
-  (cat ~/.cache/wal/sequences &)
-  source ~/.cache/wal/colors-tty.sh
-fi
+#if [ -d ~/.cache/wal ]; then
+#  (cat ~/.cache/wal/sequences &)
+#  source ~/.cache/wal/colors-tty.sh
+#fi

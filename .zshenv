@@ -15,7 +15,11 @@ export HOSTNAME=$HOST
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+
+# pywal
 if [ -d ~/.cache/wal ]; then
+  (cat ~/.cache/wal/sequences &)
+  source ~/.cache/wal/colors-tty.sh
   source ~/.cache/wal/colors.sh
 fi
 

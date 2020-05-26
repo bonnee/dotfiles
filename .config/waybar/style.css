@@ -21,6 +21,9 @@ window#waybar.hidden {
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces {
+    /*margin: 0 3px;*/
+}
 #workspaces button {
     padding: 0 5px;
     background: transparent;
@@ -42,6 +45,7 @@ window#waybar.hidden {
     animation: blink 1.5s ease infinite;
 }
 
+#window,
 #clock, 
 #battery, 
 #cpu, 

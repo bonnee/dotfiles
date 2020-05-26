@@ -28,7 +28,6 @@
       "exec": "ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
     },
     "clock": {
-	"locale": "C",  /* Fixes #565 */
         "format":" {:%a %d, %H:%M}",
 	"tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },

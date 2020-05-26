@@ -13,8 +13,8 @@ export DISABLE_AUTO_UPDATE=true
 
 export HOSTNAME=$HOST
 
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # pywal
 if [ -d ~/.cache/wal ]; then
@@ -22,6 +22,8 @@ if [ -d ~/.cache/wal ]; then
   source ~/.cache/wal/colors-tty.sh
   source ~/.cache/wal/colors.sh
 fi
+
+export BEMENU_OPTS="-bi -p '> ' --fn 'sans-serif' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
 
 if [ -f ~/."$HOST"_env ]; then
   source ~/."$HOST"_env

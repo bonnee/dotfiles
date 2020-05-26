@@ -67,8 +67,8 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+q kill
 
-set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 12' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
-bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --display-binary --no-generic --dmenu $bemenu | xargs swaymsg exec --
+#set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 12' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
+bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --no-generic --dmenu "bemenu" | xargs swaymsg exec --
 
 # change focus
 bindsym $mod+Left focus left

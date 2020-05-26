@@ -19,6 +19,6 @@ if [ -d ~/.cache/wal ]; then
   source ~/.cache/wal/colors.sh
 fi
 
-if [ -d ~/."$HOST"_env ]; then
+if [ -f ~/."$HOST"_env ]; then
   source ~/."$HOST"_env
 fi

@@ -93,17 +93,19 @@ fi
 is_ssh() {
   [[ $SSH_CONNECTION ]]
 }
-h_name=''
-if is_ssh || (( EUID == 0 )); then
-  h_name="%f@%B%F{yellow}${(%):-%m}%b"
-fi
+
+#h_name=''
+#if is_ssh || (( EUID == 0 )); then
+#  h_name="%f@%B%F{yellow}${(%):-%m}%b"
+#fi
 
 source $ZSH/oh-my-zsh.sh
 
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 
-PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
+#PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
+PROMPT='%F{blue}${(%):-%m}%f %F{yellow}%4~%f '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
 
 # pywal

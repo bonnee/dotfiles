@@ -184,6 +184,8 @@ bindsym $mod+Shift+Print exec grim -g "$(slurp)" $screenshot
 
 bindsym $mod+l exec loginctl lock-session
 
+bindsym $mod+c exec $browser
+
 bindsym $mod+g exec thunar
 bindsym $mod+a exec telegram-desktop
 
@@ -192,54 +194,32 @@ bindsym $mod+a exec telegram-desktop
 #################################################
 
 # Keystrokes to show various marks
-bindsym $mod+t [con_mark="dropterm"] scratchpad show
-bindsym $mod+x [con_mark="music"] scratchpad show
 bindsym $mod+s [con_mark="scratch"] scratchpad show
 
 # General "Move to scratchpad" keystroke
 bindsym $mod+Shift+s mark "scratch", move scratchpad
 
-# Move dropterm to scratchpad
-for_window [app_id="dropterm"] mark "dropterm", move scratchpad
-
 # Automatically move Spotify to scratchpad
 for_window [class="Spotify"] mark "music", move scratchpad, resize set width 1600 height 900  [con_mark="music"] scratchpad show
 for_window [app_id="spotify"] mark "music", move scratchpad, resize set width 1600 height 900, [con_mark="music"] scratchpad show
+bindsym $mod+x [con_mark="music"] scratchpad show
 
-bindsym $mod+c exec $browser
+# Move dropterm to scratchpad
+for_window [app_id="dropterm"] mark "dropterm", move scratchpad
+bindsym $mod+t [con_mark="dropterm"] scratchpad show
+exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term --class dropterm; done'
+
+# Math pad
+for_window [app_id="math"] mark "math", move scratchpad
+bindsym $mod+r [con_mark="math"] scratchpad show
+exec sh -c 'while [ -S "$I3SOCK" ]; do $term --class math,math -e qalc; done'
 
 #################################################
 #####                 Modes                 #####
 #################################################
 
 set $mode_system System (l) lock, (e) exit, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-bindsym $mod+r mode "resize"
 bindsym $mod+Escape mode "$mode_system"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-  # These bindings trigger as soon as you enter the resize mode
-
-  # Pressing left will shrink the window’s width.
-  # Pressing right will grow the window’s width.
-  # Pressing up will shrink the window’s height.
-  # Pressing down will grow the window’s height.
-  bindsym h resize grow width 10 px or 10 ppt
-  bindsym j resize shrink width 10 px or 10 ppt
-  bindsym k resize grow height 10 px or 10 ppt
-  bindsym l resize shrink height 10 px or 10 ppt
-  bindsym ograve resize grow width 10 px or 10 ppt
-  
-  # same bindings, but for the arrow keys
-  bindsym Left resize shrink width 10 px or 10 ppt
-  bindsym Down resize grow height 10 px or 10 ppt
-  bindsym Up resize shrink height 10 px or 10 ppt
-  bindsym Right resize grow width 10 px or 10 ppt
-  
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
 
 mode "$mode_system" {
   bindsym l exec lockw.sh, mode "default"
@@ -293,7 +273,6 @@ exec_always import-gsettings \
     font-name:gtk-font-name \
     cursor-theme:gtk-cursor-theme-name
 
-exec sh -c 'while [ -S "$SWAYSOCK" ]; do $term --class dropterm; done'
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
 exec --no-startup-id mako
 

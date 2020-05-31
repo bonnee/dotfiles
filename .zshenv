@@ -22,10 +22,16 @@ alias yeet='yay -Rsn'
 alias v="$EDITOR"
 
 # pywal
-if [ -d ~/.cache/wal ]; then
-  (cat ~/.cache/wal/sequences &)
-  source ~/.cache/wal/colors-tty.sh
-  source ~/.cache/wal/colors.sh
+#if [ -d ~/.cache/wal ]; then
+#  (cat ~/.cache/wal/sequences &)
+#  source ~/.cache/wal/colors-tty.sh
+#  source ~/.cache/wal/colors.sh
+#
+#fi
+
+# wpgtk
+if [ -d $HOME/.config/wpg ]; then
+  cat $HOME/.config/wpg/sequences
 fi
 
 export BEMENU_OPTS="-bi -p '> ' --fn 'sans-serif' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"

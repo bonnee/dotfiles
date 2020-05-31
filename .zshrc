@@ -95,7 +95,7 @@ is_ssh() {
 }
 h_name=''
 if is_ssh || (( EUID == 0 )); then
-  h_name="%f@%F{yellow}${(%):-%m}"
+  h_name="%f@%B%F{yellow}${(%):-%m}%b"
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -110,4 +110,9 @@ RPROMPT='$(git_super_status)[%F{green}%?%f]'
 #if [ -d ~/.cache/wal ]; then
 #  (cat ~/.cache/wal/sequences &)
 #  source ~/.cache/wal/colors-tty.sh
+#fi
+
+# wpgtk
+#if [ -d $HOME/.config/wpg ]; then
+#  cat $HOME/.config/wpg/sequences
 #fi

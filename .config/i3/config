@@ -42,13 +42,12 @@ set_from_resource $color6 i3wm.color6 #f0f0f0
 set_from_resource $color7 i3wm.color7 #f0f0f0
 set_from_resource $color8 i3wm.color8 #f0f0f0
 
-set $fontsize    9
-
 set $browser firefox
-
 set $background $HOME/.config/i3/wallpaper.png
 
+set $fontsize    9
 font pango:sans-serif $fontsize
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 focus_follows_mouse yes
@@ -323,8 +322,10 @@ exec --no-startup-id keeb.sh src/cava_cmmk/cava.conf
 exec sh -c 'while [ -S "$I3SOCK" ]; do $term -d 150 35 --title dropterm; done'
 exec --no-startup-id dunst &
 
-exec --no-startup-id $HOME/bin/autostart.sh
-exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
-
 exec x11vnc -bg
+exec keeb.sh src/cava_cmmk/cava_cmmk.conf
+
+exec --no-startup-id dex -a
+
 exec_always --no-startup-id sleep 1; $HOME/.screenlayout/single.sh
+exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"

@@ -5,17 +5,21 @@ export PATH
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
-export EDITOR=vim
-export BC_ENV_ARGS="$HOME/.bc"
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+
+export BC_ENV_ARGS="$HOME/.config/bc"
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 export DISABLE_AUTO_UPDATE=true
 
 export HOSTNAME=$HOST
 
-
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias yeet='yay -Rsn'
+
+alias v="$EDITOR"
 
 # pywal
 if [ -d ~/.cache/wal ]; then

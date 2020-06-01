@@ -5,7 +5,12 @@ export PATH
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
-export EDITOR="nvim"
+EDITOR="vim"
+if type nvim &> /dev/null; then
+  EDITOR="nvim"
+fi
+export EDITOR
+
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 

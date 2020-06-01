@@ -12,7 +12,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 setopt autocd extendedglob nomatch notify
-setopt COMPLETE_ALIASES
 
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -107,14 +106,3 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 #PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
 PROMPT='%F{blue}${(%):-%m}%f %F{yellow}%4~%f '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
-
-# pywal
-#if [ -d ~/.cache/wal ]; then
-#  (cat ~/.cache/wal/sequences &)
-#  source ~/.cache/wal/colors-tty.sh
-#fi
-
-# wpgtk
-#if [ -d $HOME/.config/wpg ]; then
-#  cat $HOME/.config/wpg/sequences
-#fi

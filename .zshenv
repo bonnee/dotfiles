@@ -30,7 +30,7 @@ alias v="$EDITOR"
 #fi
 
 # wpgtk
-if [ -d $HOME/.config/wpg ]; then
+if [ -f $HOME/.config/wpg/sequences ]; then
   cat $HOME/.config/wpg/sequences
 fi
 

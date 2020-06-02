@@ -7,6 +7,7 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 EDITOR="vim"
 if type nvim &> /dev/null; then
+  alias vim="nvim"
   EDITOR="nvim"
 fi
 export EDITOR

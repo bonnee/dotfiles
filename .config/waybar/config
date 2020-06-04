@@ -1,11 +1,11 @@
 {
     "layer": "bottom",
     "position": "bottom",
-    "modules-left": ["sway/workspaces","sway/mode"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["sway/workspaces","sway/mode","sway/window"],
+    "modules-center": [],
     "modules-right": ["tray","idle_inhibitor","pulseaudio","memory","temperature","custom/fan","cpu","custom/consumption","battery","custom/ibam","custom/ratbat", "clock"],
     "sway/window": {
-        "max-length": 48
+        "max-length": 128
     },
     "sway/workspaces": {
       "smooth-scrolling-threshold": 3
@@ -93,10 +93,5 @@
     "custom/ratbat": {
       "return-type": "json",
       "exec": "$HOME/.config/waybar/scripts/ratbat"
-    },
-    "custom/separator": {
-      "format": "&#x0;",
-      "interval": "once",
-      "tooltip": false
     }
 }

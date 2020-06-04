@@ -2,7 +2,7 @@
     Xft.dpi:		157
 #endif
 
-#ifdef SRVR_FreakPad
+#ifdef SRVR_13
     Xft.dpi:		166
 #endif
 

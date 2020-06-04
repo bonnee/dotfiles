@@ -7,6 +7,9 @@ for_window [window_role="task_dialog"] floating enable
 for_window [window_role="(Pp)references"] floating enable
 for_window [window_type="dialog"] floating enable
 
+# Firefox xdg-open
+for_window [title="Launch Application"] floating enable
+
 for_window [title="Terminator Preferences"] floating enable
 for_window [app_id="lxrandr"] floating enable
 for_window [class="(?i)qemu-system"] floating enable

@@ -12,7 +12,7 @@ if type nvim &> /dev/null; then
 fi
 export EDITOR
 
-export TERMINAL="alacritty"
+export TERMINAL="alacritty --config-file ~/.config/alacritty/`hostname`.yml"
 export BROWSER="firefox"
 
 export BC_ENV_ARGS="$HOME/.config/bc"

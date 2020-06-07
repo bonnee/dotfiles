@@ -181,11 +181,13 @@ bindsym --locked XF86AudioStop exec playerctl stop
 
 set $screenshot "$(xdg-user-dir PICTURES)/screenshot-$(date +%F_%T).png" && notify-send -t 1000 -u critical "Screenshot Taken!"
 
-bindsym $mod+Print exec grim $screenshot
-bindsym $mod+Shift+Print exec grim -g "$(slurp)" $screenshot
+bindsym $mod+Print exec grimshot copy screen
+bindsym $mod+Shift+Print exec grimshot copy area
+
+bindsym $mod+Ctrl+Print exec grimshot save screen
+bindsym $mod+Ctrl+Shift+Print exec grimshot save area
 
 bindsym $mod+l exec loginctl lock-session
-
 bindsym $mod+c exec $browser
 
 bindsym $mod+g exec thunar
@@ -269,11 +271,13 @@ bar {
 }
 
 exec xsettingsd
+
 exec_always import-gsettings \
     gtk-theme:gtk-theme-name \
     icon-theme:gtk-icon-theme-name \
     font-name:gtk-font-name \
-    cursor-theme:gtk-cursor-theme-name
+    cursor-theme:gtk-cursor-theme-name \
+    font-name:gtk-font-name
 
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
 exec --no-startup-id mako

@@ -304,5 +304,5 @@ exec keeb.sh src/cava_cmmk/cava_cmmk.conf
 
 exec --no-startup-id dex -a
 
-#exec_always --no-startup-id sleep 1; $HOME/.screenlayout/single.sh
+exec_always --no-startup-id sleep 1; $HOME/.screenlayout/single.sh
 exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"

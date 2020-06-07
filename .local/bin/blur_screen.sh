@@ -1,20 +1,28 @@
+#!/bin/sh
+
 if [ -z "$1" ]; then
-  out="$(mktemp -t tmp.XXXXXXXXXX.png)"
-else
-  out="$1"
+  >&2 echo "Error: No output path specified"
+  exit 1
 fi
+out_img="$1"
 
-res="$(xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')"
-
+# Blocky instead of blur. faster
 #filters='noise=alls=10,scale=iw*.05:-1,scale=iw*20:-1:flags=neighbor'
 filters='boxblur=8:8'
 
-ffmpeg -y -loglevel 0 -s "$res" -f x11grab -i $DISPLAY -vframes 1 \
-  -vf "$filters" "$out"
+if [ "$XDG_SESSION_TYPE" != "wayland" ]; then
 
-#ffmpeg -probesize 100M -thread_queue_size 32 -f x11grab -video_size $RES \
-#  -y -i $DISPLAY -i $IMAGE -i $IMAGE -filter_complex \
-#  "eq=gamma=0.75,boxblur=3:3,overlay=(main_w-overlay_w)/4:(main_h-overlay_h)/2,overlay=3*(main_w-overlay_w)/4:(main_h-overlay_h)/2" \
-#  -vframes 1 "$OUT"
+  res="$(xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')"
 
-echo $out
+  ffmpeg -y -loglevel 0 -s "$res" -f x11grab -i $DISPLAY -vframes 1 -vf "$filters" "$out_img"
+
+  echo $out_img
+else
+  in_img="$(mktemp).png"
+  grim "$in_img"
+
+  ffmpeg -y -loglevel 0 -i "$in_img" -vf "$filters" "$out_img"
+
+  rm "$in_img"
+fi
+

@@ -12,6 +12,7 @@ green="$(xgetres color10)FF"
 
 #scrot --overwrite "$tmpbg"
 #convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
+blur_screen.sh $tmpbg
 
 i3lock --clock --indicator --pass-media-keys \
 \
@@ -39,4 +40,4 @@ i3lock --clock --indicator --pass-media-keys \
 --timestr="%H:%M" \
 --datestr="%a %d %b" \
 \
--i "$(blur_screen.sh $tmpbg)" 
+-i "$tmpbg"

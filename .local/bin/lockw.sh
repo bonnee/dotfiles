@@ -8,8 +8,9 @@ tmpbg='/tmp/screen.png'
 trans="#00000000"
 alpha="D9"
 
-grim "$tmpbg"
-convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
+#grim "$tmpbg"
+#convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
+blur_screen.sh "$tmpbg"
 
 swaylock -f \
 --ignore-empty-password \

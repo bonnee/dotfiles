@@ -62,6 +62,6 @@
     "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
     "workbench.editor.scrollToSwitchTabs": true,
     "telemetry.enableTelemetry": false,
-    "editor.fontSize": 13,
+    "editor.fontSize": 9,
     "diffEditor.ignoreTrimWhitespace": false
 }

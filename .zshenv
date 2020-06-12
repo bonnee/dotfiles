@@ -2,7 +2,7 @@ typeset -U PATH path
 path=("$HOME/.local/bin/" "$HOME/.npm-global/bin/" "$path[@]")
 export PATH
 
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 EDITOR="vim"

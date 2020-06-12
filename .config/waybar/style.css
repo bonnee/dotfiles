@@ -22,10 +22,10 @@ window#waybar.hidden {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces {
-    /*margin: 0 3px;*/
+    margin: 0 3px;
 }
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 10px;
     background: transparent;
     color: @foreground;
     border-bottom: 2px solid transparent;

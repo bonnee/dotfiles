@@ -17,7 +17,7 @@ set $fn Menu
 #set $term kitty
 set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
-input 2:14:ETPS/2_Elantech_Touchpad {
+input type:touchpad {
   pointer_accel 0.15
   tap enabled
   drag_lock enabled
@@ -26,19 +26,10 @@ input 2:14:ETPS/2_Elantech_Touchpad {
   dwt disabled
 }
 
-input * {
+input type:keyboard {
   xkb_options ctrl:swapcaps
   xkb_layout it
   xkb_numlock enabled
-}
-
-input 9494:71:Cooler_Master_Technology_Inc._MasterKeys_Pro_L_White {
-}
-
-input 1:1:AT_Translated_Set_2_keyboard {
-  xkb_options ctrl:swapcaps
-  xkb_layout it
-  xkb_numlock disabled
 }
 
 set $fontfam    sans-serif
@@ -67,10 +58,8 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+q kill
 
-#set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 12' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
-#bindsym $mod+d exec j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --no-generic --dmenu "bemenu" | xargs swaymsg exec --
-
-bindsym $mod+d exec bemenu-run
+set $bemenu "bemenu -bi -p '> ' --fn 'Noto Sans 12' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
+bindsym $mod+d exec unset SHELL && j4-dmenu-desktop --term "$term" --usage-log "$HOME/.config/j4-dmenu-usage" --no-generic --dmenu "bemenu" | xargs swaymsg exec --
 
 # change focus
 bindsym $mod+Left focus left
@@ -137,8 +126,6 @@ bindsym $mod+Shift+greater move container to workspace back_and_forth; workspace
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your sway session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 bindswitch --locked lid:on output eDP-1 disable
 bindswitch --locked lid:off output eDP-1 enable
@@ -277,7 +264,8 @@ exec_always import-gsettings \
     icon-theme:gtk-icon-theme-name \
     font-name:gtk-font-name \
     cursor-theme:gtk-cursor-theme-name \
-    font-name:gtk-font-name
+    font-name:gtk-font-name \
+    monospace-font-name:gtk-monospace-font-name
 
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
 exec --no-startup-id mako

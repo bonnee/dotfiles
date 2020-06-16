@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Zoom
 Comment=Zoom Video Conference
-Exec=LD_PRELOAD=/usr/lib/v4l2convert.so /usr/bin/zoom %U
+Exec=sh -c 'LD_PRELOAD=/usr/lib/libv4l/v4l2convert.so /usr/bin/zoom %U'
 Icon=Zoom
 Terminal=false
 Type=Application

@@ -36,7 +36,6 @@
         "python": true
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "window.titleBarStyle": "custom",
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     "editor.tabSize": 2,
@@ -62,6 +61,9 @@
     "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
     "workbench.editor.scrollToSwitchTabs": true,
     "telemetry.enableTelemetry": false,
-    "editor.fontSize": 9,
-    "diffEditor.ignoreTrimWhitespace": false
+    "editor.fontSize": 12,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "python.jediEnabled": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }

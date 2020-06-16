@@ -26,6 +26,7 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias yeet='yay -Rsn'
 
 alias v="$EDITOR"
+alias s="systemctl"
 
 # pywal
 if [ -d ~/.cache/wal ]; then

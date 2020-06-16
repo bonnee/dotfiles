@@ -3,6 +3,7 @@ zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename '/home/bonnee/.zshrc'
 zstyle ':completion::complete:*' gain-privileges 1
+zstyle ':completion:*' completer _expand_alias _complete _ignored
 
 autoload -Uz compinit
 compinit

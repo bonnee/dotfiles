@@ -43,7 +43,7 @@ set_from_resource $color7 i3wm.color7 #f0f0f0
 set_from_resource $color8 i3wm.color8 #f0f0f0
 
 set $browser firefox
-set $background $HOME/.config/i3/wallpaper.png
+set $bg $HOME/.config/i3/wallpaper.png
 
 set $fontsize    9
 font pango:sans-serif $fontsize
@@ -90,6 +90,11 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
 # move focused window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -97,7 +102,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -165,7 +170,7 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym $mod+Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 bindsym --release $mod+Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
-bindsym $mod+l exec --no-startup-id xset s activate
+#bindsym $mod+l exec --no-startup-id xset s activate
 bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off
 
 bindsym $mod+Escape mode "$mode_system"
@@ -264,6 +269,8 @@ for_window [class="(?i)recordmydesktop"] floating enable
 for_window [class="(?i)pavucontrol"] floating enable, move position mouse
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 
+for_window [class="zoom"] floating enable
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
@@ -292,7 +299,16 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heigh
 #################################################
 #####                Autorun                #####
 #################################################
-exec_always --no-startup-id exec feh --bg-fill $background
+exec xsettingsd
+exec_always import-gsettings \
+    gtk-theme:gtk-theme-name \
+    icon-theme:gtk-icon-theme-name \
+    font-name:gtk-font-name \
+    cursor-theme:gtk-cursor-theme-name \
+    font-name:gtk-font-name \
+    monospace-font-name:gtk-monospace-font-name
+
+exec_always --no-startup-id exec feh --bg-fill $bg
 exec_always --no-startup-id exec $HOME/.config/polybar/launch.sh
 
 exec --no-startup-id keeb.sh src/cava_cmmk/cava.conf

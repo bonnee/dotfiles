@@ -107,3 +107,15 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 #PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
 PROMPT='%F{blue}${(%):-%m}%f %F{yellow}%4~%f '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
+
+# pywal
+if [ -d ~/.cache/wal ]; then
+  if [ -f ~/.config/wpg/sequences ]; then
+    (cat ~/.config/wpg/sequences &)
+  else
+    (cat ~/.cache/wal/sequences &)
+  fi
+
+  source ~/.cache/wal/colors-tty.sh
+  source ~/.cache/wal/colors.sh
+fi

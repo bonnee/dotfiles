@@ -18,7 +18,7 @@
     "editor.formatOnPaste": true,
     "editor.renderIndentGuides": true,
     "editor.minimap.enabled": true,
-    "editor.minimap.maxColumn": 200,
+    "editor.minimap.maxColumn": 160,
     "editor.snippetSuggestions": "top",
     "editor.insertSpaces": false,
     "editor.acceptSuggestionOnEnter": "smart",
@@ -55,7 +55,6 @@
     "editor.cursorSmoothCaretAnimation": true,
     "liveshare.allowGuestDebugControl": true,
     "liveshare.allowGuestTaskControl": true,
-    "workbench.colorTheme": "Wal",
     "editor.cursorBlinking": "smooth",
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
@@ -65,5 +64,11 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "python.jediEnabled": false,
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "prettier.useTabs": true,
+    "editor.wordWrapColumn": 160,
+    "vim.textwidth": 160,
+    "html.format.wrapLineLength": 160,
+    "yaml.format.printWidth": 160,
+    "python.languageServer": "Microsoft"
 }

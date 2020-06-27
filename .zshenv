@@ -17,6 +17,7 @@ export BROWSER="firefox"
 
 export BC_ENV_ARGS="$HOME/.config/bc"
 export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_QPA_PLATFORMTHEME=gtk2
 
 export DISABLE_AUTO_UPDATE=true
 

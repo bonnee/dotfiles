@@ -1,16 +1,5 @@
 // Place your settings in this file to overwrite the default settings
 {
-    // BEGIN laptop
-    //"editor.fontSize": 14,
-    //"markdown.preview.fontSize": 14,
-    //"terminal.integrated.fontSize": 14,
-    //"window.zoomLevel": 1,
-    //"editor.smoothScrolling": false,
-    // END laptop
-    // BEGIN desktop
-    "window.zoomLevel": 0,
-    "editor.smoothScrolling": true,
-    // END desktop
     "editor.fontFamily": "monospace",
     "editor.fontLigatures": true,
     "editor.formatOnType": true,
@@ -60,7 +49,6 @@
     "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
     "workbench.editor.scrollToSwitchTabs": true,
     "telemetry.enableTelemetry": false,
-    "editor.fontSize": 12,
     "diffEditor.ignoreTrimWhitespace": false,
     "python.jediEnabled": false,
     "editor.suggestSelection": "first",
@@ -70,5 +58,7 @@
     "vim.textwidth": 160,
     "html.format.wrapLineLength": 160,
     "yaml.format.printWidth": 160,
-    "python.languageServer": "Microsoft"
+    "python.languageServer": "Microsoft",
+    "editor.smoothScrolling": true,
+    "window.zoomLevel": 1
 }

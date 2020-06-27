@@ -1,9 +1,10 @@
 #ifdef SRVR_Arch23
     Xft.dpi:		157
+    Xcursor.size:	32
 #endif
 
 #ifdef SRVR_13
-    Xft.dpi:		166
+    Xft.dpi:		165
 #endif
 
 Xft.autohint:		0
@@ -14,6 +15,5 @@ Xft.antialias:		1
 Xft.rgba:     		rgb
 
 !Xcursor.theme:		Bridge
-Xcursor.size:		32
 
 #include ".cache/wal/colors.Xresources"

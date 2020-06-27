@@ -9,8 +9,8 @@ output eDP-1 scale 1 subpixel rgb enable
 include "$HOME/.cache/wal/colors-sway"
 set $trans D9
 
-#exec swaybg -o* -m fill -i $wallpaper
-exec wpg -m
+#exec_always wpg -m --noreload
+exec_always swaybg -o* -m fill -i $wallpaper
 
 set $mod Mod4
 set $fn Menu
@@ -34,7 +34,7 @@ input type:keyboard {
 }
 
 set $fontfam    sans-serif
-set $fontsize   11
+set $fontsize   14
 
 set $browser firefox
 
@@ -267,7 +267,7 @@ bar {
   swaybar_command waybar
 }
 
-exec xsettingsd
+exec xsettingsd -c "$HOME/.config/xsettingsd/`hostname`.conf"
 
 exec_always import-gsettings \
     gtk-theme:gtk-theme-name \

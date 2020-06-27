@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","memory","temperature","custom/fan","cpu","custom/consumption","battery","custom/ibam","custom/ratbat", "clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu","custom/consumption","battery","custom/ibam","custom/ratbat", "clock"],
     "sway/window": {
         "max-length": 128
     },
@@ -70,7 +70,7 @@
       "exec": "$HOME/.config/waybar/scripts/consumption"
     },
      "tray": {
-	"icon-size": 22,
+	"icon-size": 24,
 	"spacing": 8
     },
     "idle_inhibitor": {

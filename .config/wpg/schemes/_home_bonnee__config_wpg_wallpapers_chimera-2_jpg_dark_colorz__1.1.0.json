@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/bonnee/.config/wpg/wallpapers/chimera-2.jpg",
+    "alpha": "85",
+
+    "special": {
+        "background": "#22140e",
+        "foreground": "#fffefb",
+        "cursor": "#fffefb"
+    },
+    "colors": {
+        "color0": "#22140e",
+        "color1": "#ab6548",
+        "color2": "#a9a6a1",
+        "color3": "#afa520",
+        "color4": "#76a0a7",
+        "color5": "#aa8c7d",
+        "color6": "#2687a9",
+        "color7": "#c7c4c2",
+        "color8": "#45281c",
+        "color9": "#ee7c4d",
+        "color10": "#f1ddbb",
+        "color11": "#f1e21c",
+        "color12": "#86ddeb",
+        "color13": "#f0af8f",
+        "color14": "#23b6e9",
+        "color15": "#fffefb"
+    }
+}

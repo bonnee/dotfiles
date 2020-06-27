@@ -9,7 +9,8 @@ output eDP-1 scale 1 subpixel rgb enable
 include "$HOME/.cache/wal/colors-sway"
 set $trans D9
 
-exec swaybg -o* -m fill -i $wallpaper
+#exec swaybg -o* -m fill -i $wallpaper
+exec wpg -m
 
 set $mod Mod4
 set $fn Menu

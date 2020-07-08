@@ -59,7 +59,7 @@
 	"smooth-scrolling-threshold": 2
     },
     "temperature": {
-      "thermal-zone": 3,
+      "thermal-zone": 2,
       "critical-threshold": 75,
       "format-critical": " {temperatureC}°C",
       "format": " {temperatureC}°C"

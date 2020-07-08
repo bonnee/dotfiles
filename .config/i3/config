@@ -58,9 +58,9 @@ popup_during_fullscreen smart
 new_window pixel 3
 hide_edge_borders both
 
-gaps inner 15
-gaps outer 10
-smart_gaps on
+#gaps inner 15
+#gaps outer 10
+#smart_gaps on
 
 workspace 1 output primary
 workspace 2 output primary

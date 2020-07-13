@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 mouse="$(upower -e | grep mouse)"
 model=""
@@ -34,14 +34,14 @@ printdots() {
   printf "{ \"text\": \"$dot3 $dot2 $dot1\", \"tooltip\": \"$model: $1%%\", \"percentage\": $1, \"class\": \"$state\" }\n"
 }
 
-if ! [ -z "$mouse" ]; then
+if [ -n "$mouse" ]; then
   perc="$(upower -i $mouse | grep percentage | awk '{print $2}')"
 
   printdots "${perc%?}"
 fi
 
 # This is done to kill upower upon exit
-upower -m > >(while read line ; do
+upower -m > >(while read -r line ; do
   case $line in
     *"mouse"* )
       if [ "$(echo $line | awk '{print $3}')" = "removed:" ]; then
@@ -59,4 +59,5 @@ upower -m > >(while read line ; do
       ;;
   esac
 done)
+echo "should exit"
 wait $!

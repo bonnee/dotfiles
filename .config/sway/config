@@ -279,18 +279,8 @@ exec xsettingsd -c "$HOME/.config/xsettingsd/`hostname`.conf"
 
 exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob -abottom -M10 -o2 -b3 -p0; done'
 exec --no-startup-id mako
-
 exec --no-startup-id kanshi
-
-#exec caps2esc
 exec --no-startup-id ydotoold
-
-# These applets are run by autostart.sh
-#exec libinput-gestures
-#exec redshift-gtk
-#exec telegram-desktop -startintray
-#exec blueman-applet
-#exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # --indicator for AppIndicator branch
 exec nm-applet --indicator

@@ -29,7 +29,7 @@ alias yeet='yay -Rsn'
 alias v="$EDITOR"
 alias s="systemctl"
 
-export BEMENU_OPTS="-bi -p '> ' --fn 'sans-serif' --tb '$background' --fb '$background' --nb '$background' --hb '$foreground' --sb '$background' --scb '$background' --tf '$foreground' --ff '$foreground' --nf '$foreground' --hf '$background' --sf '$foreground' --scf '$foreground'"
+export BEMENU_OPTS="-bi -p '> ' --fn 'sans-serif 14'"
 
 if [ -f ~/."$HOST"_env ]; then
   source ~/."$HOST"_env

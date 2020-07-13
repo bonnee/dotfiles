@@ -141,24 +141,43 @@ bindsym $mod+Shift+r restart
 bindswitch --locked lid:on output eDP-1 disable
 bindswitch --locked lid:off output eDP-1 enable
 
-bindsym --locked XF86MonBrightnessUp exec flock -n /tmp/backlight.lock brillo -u 100000 -A 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
-bindsym --locked XF86MonBrightnessDown exec flock -n /tmp/backlight.lock brillo -u 100000 -U 5 && brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
-bindsym XF86Bluetooth exec notify-send -t 1000 -u low "¯\_(ツ)_/¯"
+bindsym XF86Bluetooth exec notify-send -t 1000 -u low "Bluetooth toggle"
 bindsym XF86Display exec wdisplays
 
-set $volume_up volume.sh -gs +2% > $SWAYSOCK.wob
-set $volume_down volume.sh -gs -2% > $SWAYSOCK.wob
+# Backlight
+set $bright_set flock -n /tmp/backlight.lock brillo -u 100000
+set $bright_wob brillo | awk '{print int($1+0.5)}' > $SWAYSOCK.wob
+
+bindsym --locked XF86MonBrightnessUp exec $bright_set -A 10 && $bright_wob
+bindsym --locked XF86MonBrightnessDown exec $bright_set -U 10 && $bright_wob
+
+# Finer backlight control
+bindsym --locked Shift+XF86MonBrightnessUp exec $bright_set -A 5 && $bright_wob
+bindsym --locked Shift+XF86MonBrightnessDown exec $bright_set -U 5 && $bright_wob
+
 set $volume_mute volume.sh -gm > $SWAYSOCK.wob
+set $volume_set volume.sh -gs $1 > $SWAYSOCK.wob
+set $volume_set volume.sh -gs $1 > $SWAYSOCK.wob
 
-bindsym --locked XF86AudioRaiseVolume exec $volume_up
-bindsym --locked $fn+Page_Up exec $volume_up
+# Volume up
+bindsym --locked XF86AudioRaiseVolume exec $volume_set +5%
+bindsym --locked $fn+Page_Up exec $volume_set +5%
 
-bindsym --locked XF86AudioLowerVolume exec $volume_down
-bindsym --locked $fn+Page_Down exec $volume_down
+bindsym --locked Shift+XF86AudioRaiseVolume exec $volume_set +2%
+bindsym --locked Shift+$fn+Page_Up exec $volume_set +2%
 
+# Volume down
+bindsym --locked XF86AudioLowerVolume exec $volume_set -5%
+bindsym --locked $fn+Page_Down exec $volume_set -5%
+
+bindsym --locked Shift+XF86AudioLowerVolume exec $volume_set -2%
+bindsym --locked Shift+$fn+Page_Down exec $volume_set -2%
+
+# Volume mute
 bindsym --locked XF86AudioMute exec $volume_mute
 bindsym --locked $fn+Delete exec $volume_mute
 
+# Mic mute
 bindsym --locked XF86AudioMicMute exec volume.sh -i
 
 set $song_playpause playerctl play-pause
@@ -177,13 +196,12 @@ bindsym --locked XF86AudioPrev exec $song_prev
 
 bindsym --locked XF86AudioStop exec playerctl stop
 
-set $screenshot "$(xdg-user-dir PICTURES)/screenshot-$(date +%F_%T).png" && notify-send -t 1000 -u critical "Screenshot Taken!"
+# Screenshots
+bindsym Print exec grimshot copy screen
+bindsym Shift+Print exec grimshot copy area
 
-bindsym $mod+Print exec grimshot copy screen
-bindsym $mod+Shift+Print exec grimshot copy area
-
-bindsym $mod+Ctrl+Print exec grimshot save screen
-bindsym $mod+Ctrl+Shift+Print exec grimshot save area
+bindsym Ctrl+Print exec grimshot save screen
+bindsym Ctrl+Shift+Print exec grimshot save area
 
 bindsym $mod+c exec $browser
 

@@ -162,12 +162,25 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh -s +2% && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id volume.sh -s -2% && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioMute exec --no-startup-id volume.sh -m && pkill -SIGRTMIN+10 i3blocks
+set $volume_mute volume.sh -m
+set $volume_set volume.sh -s 
 
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
-bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && notify-send -u low -t 800 $(playerctl status)
+# Volume up
+bindsym XF86AudioRaiseVolume exec $volume_set +5%
+bindsym Shift+XF86AudioRaiseVolume exec $volume_set +2%
+
+# Volume down
+bindsym XF86AudioLowerVolume exec $volume_set -5%
+bindsym Shift+XF86AudioLowerVolume exec $volume_set -2%
+
+# Volume mute
+bindsym XF86AudioMute exec $volume_mute
+
+# Mic mute
+bindsym XF86AudioMicMute exec volume.sh -i
+
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop

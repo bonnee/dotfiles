@@ -34,7 +34,7 @@ input type:keyboard {
 }
 
 set $fontfam    sans-serif
-set $fontsize   14
+set $fontsize   16
 
 set $browser firefox
 
@@ -285,7 +285,7 @@ bar {
   swaybar_command waybar
 }
 
-exec xsettingsd -c "$HOME/.config/xsettingsd/`hostname`.conf"
+#exec xsettingsd -c "$HOME/.config/xsettingsd/`hostname`.conf"
 
 #exec_always import-gsettings \
 #    gtk-theme:gtk-theme-name \

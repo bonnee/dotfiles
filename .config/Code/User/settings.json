@@ -40,7 +40,6 @@
     "C_Cpp.experimentalFeatures": "Enabled",
     "C_Cpp.loggingLevel": "Warning",
     "C_Cpp.updateChannel": "Insiders",
-    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "editor.cursorSmoothCaretAnimation": true,
     "liveshare.allowGuestDebugControl": true,
     "liveshare.allowGuestTaskControl": true,
@@ -60,5 +59,6 @@
     "yaml.format.printWidth": 160,
     "python.languageServer": "Microsoft",
     "editor.smoothScrolling": true,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "terminal.integrated.shell.linux": "/bin/zsh"
 }

@@ -60,5 +60,7 @@
     "yaml.format.printWidth": 160,
     "python.languageServer": "Microsoft",
     "editor.smoothScrolling": true,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 0,
+    "python.formatting.provider": "black",
+    "python.linting.pylintPath": "/usr/local/bin/pylint"
 }

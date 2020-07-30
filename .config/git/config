@@ -13,4 +13,4 @@
 [alias]
   graph = log --all --decorate --oneline --graph
 [pull]
-	rebase = false
+  rebase = false

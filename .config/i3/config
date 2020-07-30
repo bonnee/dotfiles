@@ -4,7 +4,7 @@
 #####               Variables               #####
 #################################################
 
-set $mod Mod4
+set $mod Mod1
 set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
 set $hardlock XF86Launch8
@@ -165,13 +165,22 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 set $volume_mute volume.sh -m
 set $volume_set volume.sh -s 
 
+
+
+
 # Volume up
 bindsym XF86AudioRaiseVolume exec $volume_set +5%
 bindsym Shift+XF86AudioRaiseVolume exec $volume_set +2%
+# No Media
+bindsym Ctrl+Prior exec $volume_set +5%
+bindsym Ctrl+Shift+Prior exec $volume_set +2%
 
 # Volume down
 bindsym XF86AudioLowerVolume exec $volume_set -5%
 bindsym Shift+XF86AudioLowerVolume exec $volume_set -2%
+# No Media
+bindsym Ctrl+Next exec $volume_set -5%
+bindsym Ctrl+Shift+Next exec $volume_set -2%
 
 # Volume mute
 bindsym XF86AudioMute exec $volume_mute
@@ -179,21 +188,33 @@ bindsym XF86AudioMute exec $volume_mute
 # Mic mute
 bindsym XF86AudioMicMute exec volume.sh -i
 
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
-bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
+# Prev/Next
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym XF86AudioStop exec --no-startup-id playerctl stop
+# No Media
+bindsym Ctrl+Home exec --no-startup-id playerctl next
+bindsym Ctrl+End exec --no-startup-id playerctl previous
 
-bindsym $mod+Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
-bindsym --release $mod+Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
+# Play/Pause
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
+# No Media
+bindsym Ctrl+Insert exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
+
+# Stop
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
+bindsym Ctrl+Delete exec --no-startup-id playerctl stop
+
+
+bindsym Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
+bindsym --release Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
 #bindsym $mod+l exec --no-startup-id xset s activate
 bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off
 
 bindsym $mod+Escape mode "$mode_system"
 
-bindsym $mod+c exec --no-startup-id $browser
+bindsym $mod+c exec $browser
 
 bindsym $mod+g exec thunar
 bindsym $mod+a exec --no-startup-id telegram-desktop
@@ -308,7 +329,7 @@ for_window [class="zoom"] floating enable
 #	
 #  font pango:sans-serif $fontsize, Font Awesome 5 Free 10
 #
-#  #status_command i3blocks -c $HOME/.config/i3/i3blocks
+  #status_command i3blocks -c $HOME/.config/i3/i3blocks
 #  status_command polybar example
 #
 #  tray_output primary

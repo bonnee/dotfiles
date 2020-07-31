@@ -1,6 +1,6 @@
 devices: (
 {
-    name: "MX Master 2S";
+    name: "Wireless Mouse MX Master 2S";
     smartshift:
     {
         on: true;

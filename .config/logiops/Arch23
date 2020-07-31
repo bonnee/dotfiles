@@ -1,6 +1,6 @@
 devices: (
 {
-    name: "MX Master 2S";
+    name: "Wireless Mouse MX Master 2S";
     smartshift:
     {
         on: true;
@@ -47,7 +47,7 @@ devices: (
                         action =
                         {
 			    type: "KeyPress";
-			    keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
+			    keys: ["KEY_LEFTALT", "KEY_LEFTSHIFT", "KEY_TAB"];
                         };
                     },
                     {
@@ -56,7 +56,7 @@ devices: (
                         action =
                         {
 			    type: "KeyPress";
-			    keys: ["KEY_LEFTMETA", "KEY_TAB"];
+			    keys: ["KEY_LEFTALT", "KEY_TAB"];
                         }
                     },
                     {

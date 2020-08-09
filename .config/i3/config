@@ -56,7 +56,7 @@ force_display_urgency_hint 500 ms
 popup_during_fullscreen smart
 
 new_window pixel 3
-hide_edge_borders both
+hide_edge_borders smart
 
 #gaps inner 15
 #gaps outer 10

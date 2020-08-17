@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=GNOME Settings Daemon's sound plugin
+Exec=
+# /usr/lib/gsd-sound
+OnlyShowIn=GNOME;
+NoDisplay=true
+X-GNOME-Autostart-Phase=Initialization
+X-GNOME-Autostart-Notify=true
+X-GNOME-AutoRestart=true
+X-GNOME-HiddenUnderSystemd=true

@@ -29,7 +29,7 @@ input type:touchpad {
 
 input type:keyboard {
   xkb_options ctrl:swapcaps
-  xkb_layout it
+  xkb_layout us
   xkb_numlock enabled
 }
 
@@ -318,5 +318,4 @@ exec --no-startup-id swayidle -dw \
 
 # Autostart
 exec --no-startup-id dex -a
-
 

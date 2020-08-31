@@ -16,33 +16,12 @@ SAVEHIST=1000
 
 setopt autocd extendedglob nomatch notify
 
-# Vim mode for zsh change with -e to emacs(std of bash)
-#bindkey -v
-
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
-
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
-#typeset -g -A key
-#
-# setup key accordingly
-#[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"      beginning-of-line
-#[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"       end-of-line
-#[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"    overwrite-mode
-#[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}" backward-delete-char
-#[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"    delete-char
-##[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"        up-line-or-history
-##[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"      down-line-or-history
-#[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"      backward-char
-#[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"     forward-char
-#[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"    beginning-of-buffer-or-history
-#[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"  end-of-buffer-or-history
-#[[ -n "${key[ShiftTab]}"  ]] && bindkey -- "${key[ShiftTab]}"  reverse-menu-complete
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
@@ -98,7 +77,6 @@ source $ZSH/oh-my-zsh.sh
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 
-#PROMPT='%F{blue}%n$h_name%f [%F{yellow}%~%f]> '
 PROMPT='%F{blue}${(%):-%m}%f %F{yellow}%4~%f '
 RPROMPT='$(git_super_status)[%F{green}%?%f]'
 

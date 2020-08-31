@@ -1,4 +1,4 @@
- # i3 config file (v4)
+# i3 config file (v4)
 
 #################################################
 #####               Variables               #####
@@ -7,7 +7,7 @@
 set $mod Mod1
 set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
-set $hardlock XF86Launch8
+set $hardlock Pause
 
 #set_from_resource $black       color0   #000000
 #set_from_resource $darkgrey    color8   #9E9E9E
@@ -169,18 +169,18 @@ set $volume_set volume.sh -s
 
 
 # Volume up
-bindsym XF86AudioRaiseVolume exec $volume_set +5%
-bindsym Shift+XF86AudioRaiseVolume exec $volume_set +2%
+bindsym XF86AudioRaiseVolume exec $volume_set +2%
+bindsym Shift+XF86AudioRaiseVolume exec $volume_set +5%
 # No Media
-bindsym Ctrl+Prior exec $volume_set +5%
-bindsym Ctrl+Shift+Prior exec $volume_set +2%
+bindsym Ctrl+Prior exec $volume_set +2%
+bindsym Ctrl+Shift+Prior exec $volume_set +5%
 
 # Volume down
-bindsym XF86AudioLowerVolume exec $volume_set -5%
-bindsym Shift+XF86AudioLowerVolume exec $volume_set -2%
+bindsym XF86AudioLowerVolume exec $volume_set -2%
+bindsym Shift+XF86AudioLowerVolume exec $volume_set -5%
 # No Media
-bindsym Ctrl+Next exec $volume_set -5%
-bindsym Ctrl+Shift+Next exec $volume_set -2%
+bindsym Ctrl+Next exec $volume_set -2%
+bindsym Ctrl+Shift+Next exec $volume_set -5%
 
 # Volume mute
 bindsym XF86AudioMute exec $volume_mute
@@ -209,7 +209,7 @@ bindsym Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.p
 bindsym --release Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
 #bindsym $mod+l exec --no-startup-id xset s activate
-bindsym $hardlock exec --no-startup-id sleep .5 && xset dpms force off
+bindsym $hardlock exec --no-startup-id xset dpms force off
 
 bindsym $mod+Escape mode "$mode_system"
 

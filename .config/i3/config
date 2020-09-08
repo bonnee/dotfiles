@@ -210,6 +210,7 @@ bindsym --release Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICT
 
 #bindsym $mod+l exec --no-startup-id xset s activate
 bindsym $hardlock exec --no-startup-id xset dpms force off
+bindsym Shift+$hardlock exec --no-startup-id systemctl suspend
 
 bindsym $mod+Escape mode "$mode_system"
 

@@ -26,6 +26,8 @@ export HOSTNAME=$HOST
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias yeet='yay -Rsn'
 
+alias todo='todo.sh'
+
 alias v="$EDITOR"
 alias s="systemctl"
 

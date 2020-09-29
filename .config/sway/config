@@ -302,6 +302,7 @@ exec sh -c 'while [ -S "$SWAYSOCK" ]; do rm $SWAYSOCK.wob; mkfifo $SWAYSOCK.wob 
 exec --no-startup-id mako
 exec --no-startup-id kanshi
 exec --no-startup-id ydotoold
+exec --no-startup-id kmonad "$HOME/.config/kmonad/13.conf"
 
 # --indicator for AppIndicator branch
 exec nm-applet --indicator

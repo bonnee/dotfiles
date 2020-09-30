@@ -4,7 +4,7 @@
 #####               Variables               #####
 #################################################
 
-set $mod Mod1
+set $mod Mod4
 set $term alacritty --config-file ~/.config/alacritty/`hostname`.yml
 
 set $hardlock Pause
@@ -172,8 +172,8 @@ set $volume_set volume.sh -s
 bindsym XF86AudioRaiseVolume exec $volume_set +2%
 bindsym Shift+XF86AudioRaiseVolume exec $volume_set +5%
 # No Media
-bindsym Ctrl+Prior exec $volume_set +2%
-bindsym Ctrl+Shift+Prior exec $volume_set +5%
+#bindsym Ctrl+Prior exec $volume_set +2%
+#bindsym Ctrl+Shift+Prior exec $volume_set +5%
 
 # Volume down
 bindsym XF86AudioLowerVolume exec $volume_set -2%
@@ -193,14 +193,14 @@ bindsym XF86AudioMicMute exec volume.sh -i
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # No Media
-bindsym Ctrl+Home exec --no-startup-id playerctl next
-bindsym Ctrl+End exec --no-startup-id playerctl previous
+#bindsym Ctrl+Home exec --no-startup-id playerctl next
+#bindsym Ctrl+End exec --no-startup-id playerctl previous
 
 # Play/Pause
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
 bindsym XF86AudioPause exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
 # No Media
-bindsym Ctrl+Insert exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
+#bindsym Ctrl+Insert exec --no-startup-id playerctl play-pause && sleep .1 && notify-send -u low -t 800 $(playerctl status)
 
 # Stop
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
@@ -209,8 +209,8 @@ bindsym Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.p
 bindsym --release Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
 #bindsym $mod+l exec --no-startup-id xset s activate
-bindsym $hardlock exec --no-startup-id xset dpms force off
-bindsym Shift+$hardlock exec --no-startup-id systemctl suspend
+bindsym XF86DisplayOff exec --no-startup-id xset dpms force off
+bindsym XF86Suspend exec --no-startup-id systemctl suspend
 
 bindsym $mod+Escape mode "$mode_system"
 

@@ -1,0 +1,9 @@
+[Unit]
+Description=KMonad daemon
+
+[Service]
+Type=exec
+ExecStart=kmonad "%h/.config/kmonad/%i.conf"
+
+[Install]
+WantedBy=default.target

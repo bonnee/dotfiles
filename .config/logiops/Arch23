@@ -47,7 +47,7 @@ devices: (
                         action =
                         {
 			    type: "KeyPress";
-			    keys: ["KEY_LEFTALT", "KEY_LEFTSHIFT", "KEY_TAB"];
+			    keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
                         };
                     },
                     {
@@ -56,12 +56,13 @@ devices: (
                         action =
                         {
 			    type: "KeyPress";
-			    keys: ["KEY_LEFTALT", "KEY_TAB"];
+			    keys: ["KEY_LEFTMETA", "KEY_TAB"];
                         }
                     },
                     {
-                        direction: "None"
-                        mode: "NoPress"
+                        direction: "None";
+                        mode: "NoPress";
+			action = { type: "None"; }
                     }
                 );
             };

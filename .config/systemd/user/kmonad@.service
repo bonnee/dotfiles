@@ -1,9 +1,12 @@
 [Unit]
-Description=KMonad daemon
+Description=An advanced keyboard manager
 
 [Service]
 Type=exec
 ExecStart=kmonad "%h/.config/kmonad/%i.conf"
+Restart=on-failure
+RestartSec=1
+TimeoutStopSec=10
 
 [Install]
 WantedBy=default.target

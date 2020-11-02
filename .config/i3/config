@@ -209,8 +209,7 @@ bindsym Print exec --no-startup-id scrot "$(xdg-user-dir PICTURES)/scrot-%F_%T.p
 bindsym --release Shift+Print exec --no-startup-id scrot -s "$(xdg-user-dir PICTURES)/scrot-%F_%T.png" && notify-send -t 1000 -u normal "Screenshot Taken!"
 
 #bindsym $mod+l exec --no-startup-id xset s activate
-bindsym XF86DisplayOff exec --no-startup-id xset dpms force off
-bindsym XF86Suspend exec --no-startup-id systemctl suspend
+bindsym XF86Sleep exec --no-startup-id xset dpms force off
 
 bindsym $mod+Escape mode "$mode_system"
 

@@ -1,20 +1,29 @@
 #!/bin/sh
 
-[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+#[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 . "$HOME/.cache/wal/colors.sh"
 
-tmpbg='/tmp/screen.png'
+#tmpbg='/tmp/screen.png'
 
 trans="#00000000"
 alpha="D9"
 
 #grim "$tmpbg"
 #convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
-blur_screen.sh "$tmpbg"
+#"$HOME/.local/bin/blur_screen.sh" "$tmpbg"
 
 swaylock -f \
+--screenshot \
+--effect-blur 6x7 \
+--effect-vignette 0.6:0.5 \
+--clock \
+--timestr "%H:%M" \
+--datestr "%A %d %B" \
 --ignore-empty-password \
+--grace 5 \
 \
+--hide-keyboard-layout \
+--indicator-idle-visible \
 --indicator-radius=150 \
 --inside-ver-color="$background$alpha" \
 --ring-ver-color="$color2" \
@@ -36,5 +45,4 @@ swaylock -f \
 \
 --text-ver-color="$foreground" \
 --text-wrong-color="$foreground" \
-\
--i "$tmpbg"
+#--time-effects \

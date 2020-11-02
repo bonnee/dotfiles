@@ -1,0 +1,82 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-left": ["sway/workspaces","sway/mode","sway/window"],
+    "modules-center": [],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","cpu","battery","clock"],
+    "sway/window": {
+        "max-length": 128
+    },
+    "sway/workspaces": {
+      "smooth-scrolling-threshold": 3
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+	"format-plugged": " {capacity}%",
+	"format-charging": " {capacity}%",
+	"states": {
+	    "warning": 40,
+	    "low": 20,
+	    "critical": 10
+	},
+	"on-click": "threshy-gui"
+    },
+    "clock": {
+        "format":" {:%a %d, %H:%M}",
+	"tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+	"interval": 5,
+	"format": " {usage}%",
+	"max-length": 10
+    },
+    "memory": {
+	"interval": 20,
+	"format": "&#xf538; {}%",
+	"max-length": 10
+    },
+    "pulseaudio": {
+	"format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "mute",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+	"smooth-scrolling-threshold": 2
+    },
+    "temperature": {
+      "thermal-zone": 2,
+      "critical-threshold": 75,
+      "format-critical": " {temperatureC}°C",
+      "format": " {temperatureC}°C"
+    },
+     "tray": {
+	"icon-size": 24,
+	"spacing": 8
+    },
+    "idle_inhibitor": {
+	"format": "{icon}",
+        "format-icons": {
+	  "activated": "",
+	  "deactivated": ""
+        }
+    },
+    "custom/updates": {
+      "format": "{} &#xf2f1;",
+      "signal": 12,
+      "exec": "$HOME/.config/waybar/scripts/updates"
+    },
+    "custom/ratbat": {
+      "return-type": "json",
+      "exec": "$HOME/.config/waybar/scripts/ratbat"
+    }
+}

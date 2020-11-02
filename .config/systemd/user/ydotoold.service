@@ -1,0 +1,16 @@
+[Unit]
+Description=Generic command-line automation tool
+PartOf=sway-session.target
+After=sway-session.target
+
+[Service]
+Type=dbus
+ExecCondition=/bin/sh -c '[ -n "$WAYLAND_DISPLAY" ]'
+ExecStart=/usr/bin/ydotoold
+ExecStop=/bin/kill -2 $MAINPID
+Restart=on-failure
+RestartSec=1
+TimeoutStopSec=10
+
+[Install]
+WantedBy=sway-session.target

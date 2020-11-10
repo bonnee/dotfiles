@@ -20,7 +20,6 @@ swaylock -f \
 --timestr "%H:%M" \
 --datestr "%A %d %B" \
 --ignore-empty-password \
---grace 5 \
 \
 --hide-keyboard-layout \
 --indicator-idle-visible \

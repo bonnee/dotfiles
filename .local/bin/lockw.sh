@@ -18,7 +18,7 @@ swaylock -f \
 --effect-vignette 0.6:0.5 \
 --clock \
 --timestr "%H:%M" \
---datestr "%A %d %B" \
+--datestr "%a %d %B" \
 --ignore-empty-password \
 \
 --hide-keyboard-layout \

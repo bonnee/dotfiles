@@ -31,7 +31,7 @@ alias todo='todo.sh'
 alias v="$EDITOR"
 alias s="systemctl"
 
-export BEMENU_OPTS="-bi -p '> ' --fn 'sans-serif 14'"
+export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 
 if [ -f ~/."$HOST"_env ]; then
   source ~/."$HOST"_env

@@ -67,12 +67,9 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-# Display hostname in PROMPT if on ssh
-is_ssh() {
-  [[ $SSH_CONNECTION ]]
-}
-
-source $ZSH/oh-my-zsh.sh
+if [ -n "${ZSH}" ]; then
+  source "$ZSH/oh-my-zsh.sh"
+fi
 
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "

@@ -15,6 +15,8 @@ export EDITOR
 export TERMINAL="alacritty --config-file ~/.config/alacritty/`hostname`.yml"
 export BROWSER="firefox"
 
+export TASKRC=~/.config/taskwarrior/config
+
 export BC_ENV_ARGS="$HOME/.config/bc"
 export QT_QPA_PLATFORMTHEME=qt5ct
 #export QT_QPA_PLATFORMTHEME=gtk2

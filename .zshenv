@@ -19,7 +19,6 @@ export TASKRC=~/.config/taskwarrior/config
 
 export BC_ENV_ARGS="$HOME/.config/bc"
 export QT_QPA_PLATFORMTHEME=qt5ct
-#export QT_QPA_PLATFORMTHEME=gtk2
 
 export DISABLE_AUTO_UPDATE=true
 
@@ -32,6 +31,9 @@ alias todo='todo.sh'
 
 alias v="$EDITOR"
 alias s="systemctl"
+
+alias dc="docker-compose"
+alias d="docker"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 

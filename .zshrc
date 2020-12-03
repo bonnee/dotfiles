@@ -10,10 +10,6 @@ zmodload zsh/complist
 compinit
 promptinit
 
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-
 setopt autocd extendedglob nomatch notify
 
 # Use vim keys in tab complete menu:
@@ -75,7 +71,11 @@ ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 
 PROMPT='%F{blue}${(%):-%m}%f %F{yellow}%4~%f '
-RPROMPT='$(git_super_status)[%F{green}%?%f]'
+
+if type git_super_status &> /dev/null; then
+	RPROMPT='$(git_super_status)'
+fi
+RPROMPT="${RPROMPT}[%F{green}%?%f]"
 
 # pywal
 if [ -d ~/.cache/wal ]; then

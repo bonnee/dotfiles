@@ -337,6 +337,8 @@ for_window [class="zoom"] floating enable
 #################################################
 #####                Autorun                #####
 #################################################
+
+exec_always autotiling
 exec xsettingsd -c $HOME/.config/xsettingsd/`hostname`.conf
 exec_always import-gsettings \
     gtk-theme:gtk-theme-name \

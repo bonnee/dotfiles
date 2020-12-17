@@ -21,6 +21,7 @@ first() {
 file_name="$HOSTNAME-$(date +%Y-%m-%d).img"
 log_name="$HOSTNAME.log"
 
+# Compression program to call. Defaults to cat for no compression
 compress_cmd="cat"
 
 disk=""
@@ -35,12 +36,15 @@ while getopts "cr:o:d:" opt; do
   case $opt in
     c)
       if command -v zstd > /dev/null ; then
-        compress_cmd="zstd";
+	# Use Zstandard
+        compress_cmd="zstd -9";
       	file_name="$file_name.zst"
       elif command -v pigz > /dev/null ; then
+	# Use multithreaded-gzip
         compress_cmd="pigz -c";
       	file_name="$file_name.gz"
       else
+	# Fallback to plain gzip
 	compress_cmd="gzip -c"
       	file_name="$file_name.gz"
       fi
@@ -97,7 +101,8 @@ fi
 sync; sync
 
 msg "Backup starting"
-msg "Executing '$read_cmd | $compress_cmd > \"$dir/$file_name\"'"
+msg "$read_cmd | $compress_cmd > \"$dir/$file_name\""
+
 $read_cmd | $compress_cmd > "$dir/$file_name"
 
 state=$?
@@ -109,6 +114,7 @@ if [ $state -eq 0 ]; then
   IFS= # https://unix.stackexchange.com/a/164548
   imgs=$(ls -1tr "$dir" | grep -E "(img.*$|img$)")
 
+  # Remove older backups
   if [ $(count "$imgs") -gt 3 ] ; then
     old=$(first "$imgs")
     msg "Removing $old" && rm "$dir/$old" && msg "$old removed."

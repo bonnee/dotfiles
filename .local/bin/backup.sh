@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-#disk=$1
-#remote="192.168.1.14:/c/dimages"
-#subdir="$HOSTNAME"
-#dir="$mount_point/$subdir"
-
 log() {
   echo "$(date --rfc-3339=seconds)" "$1" >> "$dir/$log_name"
 }
@@ -39,15 +34,19 @@ out_flag=false
 while getopts "cr:o:d:" opt; do
   case $opt in
     c)
-      if command -v pigz > /dev/null ; then
+      if command -v zstd > /dev/null ; then
+        compress_cmd="zstd";
+      	file_name="$file_name.zst"
+      elif command -v pigz > /dev/null ; then
         compress_cmd="pigz -c";
+      	file_name="$file_name.gz"
       else
 	compress_cmd="gzip -c"
+      	file_name="$file_name.gz"
       fi
 
       log "Compression enabled with '$compress_cmd'"
 
-      file_name="$file_name.gz"
       ;;
     d)
       echo "Device to backup: $OPTARG"
@@ -108,7 +107,7 @@ if [ $state -eq 0 ]; then
 
   ifs=$IFS
   IFS= # https://unix.stackexchange.com/a/164548
-  imgs=$(ls -1tr "$dir" | grep -E "(img.gz$|img$)")
+  imgs=$(ls -1tr "$dir" | grep -E "(img.*$|img$)")
 
   if [ $(count "$imgs") -gt 3 ] ; then
     old=$(first "$imgs")

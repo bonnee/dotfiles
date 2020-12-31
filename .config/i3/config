@@ -352,12 +352,10 @@ exec_always --no-startup-id wpg -m
 #exec_always --no-startup-id exec feh --bg-fill $bg
 exec_always --no-startup-id exec $HOME/.config/polybar/launch.sh
 
-exec --no-startup-id keeb.sh src/cava_cmmk/cava.conf
 
 exec --no-startup-id dunst &
 
 exec x11vnc -bg
-exec keeb.sh src/cava_cmmk/cava_cmmk.conf
 
 exec --no-startup-id dex -a
 

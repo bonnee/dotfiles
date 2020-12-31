@@ -14,3 +14,5 @@
   graph = log --all --decorate --oneline --graph
 [pull]
   rebase = false
+[core]
+	attributesfile = .config/git/gitattributes

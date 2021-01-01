@@ -26,3 +26,15 @@
 *.rs    diff=rust
 *.lisp  diff=lisp
 *.el    diff=lisp
+
+# https://gist.github.com/ruediger/5647207
+*.tex   diff=tex
+*.bib   diff=bibtex
+*.f     diff=fortran
+*.pdf   diff=pdf
+*.png   diff=exif
+*.jpg   diff=exif
+*.jpeg  diff=exif
+*.gif   diff=exif
+*.js	diff=ecmascript
+*.rs    diff=rust

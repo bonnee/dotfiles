@@ -1,0 +1,3 @@
+#!/bin/bash
+# https://gist.github.com/ruediger/5647207
+pdftotext "$@" -

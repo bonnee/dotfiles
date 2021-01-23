@@ -32,8 +32,9 @@ alias todo='todo.sh'
 alias v="$EDITOR"
 alias s="systemctl"
 
-alias dc="docker-compose"
 alias d="docker"
+alias dc="docker-compose"
+alias dcup="docker-compose pull; docker-compose up"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 

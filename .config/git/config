@@ -30,3 +30,5 @@
       textconv = exiftool
 [diff "pdf"]
       textconv = pdftotext-stdout
+[diff "fcinfo"]
+      textconv = fcinfo

@@ -38,3 +38,6 @@
 *.gif   diff=exif
 *.js	diff=ecmascript
 *.rs    diff=rust
+
+# https://wiki.freecadweb.org/WebTools_Git
+*.FCStd diff=fcinfo

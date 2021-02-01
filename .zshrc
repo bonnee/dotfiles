@@ -10,7 +10,7 @@ zmodload zsh/complist
 compinit
 promptinit
 
-setopt autocd extendedglob nomatch notify
+setopt autocd extendedglob nomatch notify no_share_history
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char

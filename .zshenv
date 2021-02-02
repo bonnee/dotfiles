@@ -1,6 +1,8 @@
 typeset -U PATH path
-path=("$HOME/.local/bin/" "$HOME/.npm-global/bin/" "$path[@]")
+path=("/usr/lib/ccache/bin", "$HOME/.local/bin/" "$HOME/.npm-global/bin/" "$path[@]")
 export PATH
+
+export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
@@ -26,8 +28,7 @@ export HOSTNAME=$HOST
 
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias yeet='paru -Rsn'
-
-alias todo='todo.sh'
+alias yay="paru"
 
 alias v="$EDITOR"
 alias s="systemctl"
@@ -35,7 +36,6 @@ alias s="systemctl"
 alias d="docker"
 alias dc="docker-compose"
 alias dcup="docker-compose pull; docker-compose up"
-alias yay="paru"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 

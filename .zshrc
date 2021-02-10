@@ -5,10 +5,7 @@ zstyle :compinstall filename '/home/bonnee/.zshrc'
 zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 
-autoload -Uz compinit promptinit
 zmodload zsh/complist
-compinit
-promptinit
 
 setopt autocd extendedglob nomatch notify no_share_history
 

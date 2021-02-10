@@ -26,15 +26,31 @@ export DISABLE_AUTO_UPDATE=true
 
 export HOSTNAME=$HOST
 
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
+alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+compdef dots "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
 alias yeet='paru -Rsn'
+compdef yeet paru
+
 alias yay="paru"
+compdef yay paru
 
 alias v="$EDITOR"
+compdef v "$EDITOR"
+
 alias s="systemctl"
+compdef s systemctl
 
 alias d="docker"
+compdef d docker
+
 alias dc="docker-compose"
+compdef dc docker-compose
+
 alias dcup="docker-compose pull; docker-compose up"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"

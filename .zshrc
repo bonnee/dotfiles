@@ -67,7 +67,7 @@ fi
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 
-PROMPT='%F{blue}${(%):-%m}%f %F{yellow}%4~%f '
+PROMPT='%F{blue}%m%f %F{yellow}%4~%f '
 
 if type git_super_status &> /dev/null; then
 	RPROMPT='$(git_super_status)'

@@ -20,11 +20,12 @@
 
 # Get default sink name
 get_default_out() {
-    pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
+    echo "@DEFAULT_SINK@"
 }
 
 get_default_in() {
-    pacmd stat | awk -F": " '/^Default source name: /{print $2}'
+    echo "@DEFAULT_SOURCE@"
+    #pacmd stat | awk -F": " '/^Default source name: /{print $2}'
 }
 
 # Gets the sink volume as a percentage.

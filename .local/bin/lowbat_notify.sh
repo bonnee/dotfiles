@@ -2,7 +2,7 @@
 
 # Sends a graphical notification when a device's battery gets low
 
-lowbat=15
+lowbat=20
 
 upower -m > >(while read -r line ; do
   case $line in

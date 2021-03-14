@@ -31,4 +31,4 @@ include /usr/share/doc/task/rc/dark-256.theme
 
 verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,filter,unwait
 
-include ./config_sync
+include ~/.config/taskwarrior/config_sync

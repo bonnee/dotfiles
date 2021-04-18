@@ -1,5 +1,5 @@
 include $HOME/.cache/wal/colors-sway
 
 include $HOME/.config/sway/$(hostname).conf
-include $HOME/.config/sway/sway.d/*.conf
+include $HOME/.config/sway/config.d/*.conf
 include $HOME/.config/sway/$(hostname)/*.conf

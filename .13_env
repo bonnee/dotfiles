@@ -1,3 +1,7 @@
+typeset -U PATH path
+path=("/usr/lib/ccache/bin", "$path[@]")
+export PATH
+
 export XDG_CURRENT_DESKTOP=Unity
 export _JAVA_AWT_WM_NONREPARENTING=1
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
@@ -17,6 +21,9 @@ export CLUTTER_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland-egl
 #export GDK_BACKEND=wayland # Crashes vscode
 
+export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
+
 if [ ! -z "${DISPLAY}" ]; then
   xrdb ~/.Xresources
 fi
+

@@ -1,10 +1,8 @@
 typeset -U PATH path
-path=("/usr/lib/ccache/bin", "$HOME/.local/bin/" "$HOME/.npm-global/bin/" "$path[@]")
+path=("$HOME/.local/bin/" "$HOME/.npm-global/bin/" "$path[@]")
 export PATH
 
-export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
-
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
+#export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 EDITOR="vim"

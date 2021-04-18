@@ -1,7 +1,6 @@
-#typeset -U PATH path
-#path=("/usr/lib/icecream/bin" "$path[@]")
-#export PATH
+typeset -U PATH path
+path=("/usr/lib/ccache/bin" "$path[@]")
+export PATH
 
-export GDK_SCALE=1
-export QT_FONT_DPI=157
+export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
 

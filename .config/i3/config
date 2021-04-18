@@ -67,11 +67,11 @@ workspace 2 output primary
 workspace 3 output primary
 workspace 4 output primary
 workspace 5 output primary
-workspace 6 output HDMI-0
-workspace 7 output HDMI-0
-workspace 8 output HDMI-0
-workspace 9 output HDMI-0
-workspace 10 output HDMI-0
+workspace 6 output DP-0
+workspace 7 output DP-0
+workspace 8 output DP-0
+workspace 9 output DP-0
+workspace 10 output DP-0
 
 #################################################
 #####              Keystrokes               #####
@@ -164,9 +164,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 set $volume_mute volume.sh -m
 set $volume_set volume.sh -s 
-
-
-
 
 # Volume up
 bindsym XF86AudioRaiseVolume exec $volume_set +2%
@@ -338,7 +335,6 @@ for_window [class="zoom"] floating enable
 #####                Autorun                #####
 #################################################
 
-exec_always autotiling
 exec xsettingsd -c $HOME/.config/xsettingsd/`hostname`.conf
 exec_always import-gsettings \
     gtk-theme:gtk-theme-name \
@@ -347,17 +343,10 @@ exec_always import-gsettings \
     cursor-theme:gtk-cursor-theme-name \
     font-name:gtk-font-name \
     monospace-font-name:gtk-monospace-font-name
-
-exec_always --no-startup-id wpg -m
-#exec_always --no-startup-id exec feh --bg-fill $bg
-exec_always --no-startup-id exec $HOME/.config/polybar/launch.sh
-
-
 exec --no-startup-id dunst &
 
-exec x11vnc -bg
-
+exec_always --no-startup-id wpg -m
+exec_always --no-startup-id sleep 1; exec $HOME/.config/polybar/launch.sh
+exec_always autotiling
 exec --no-startup-id dex -a
-
-exec_always --no-startup-id sleep 1; $HOME/.screenlayout/single.sh
-exec_always --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+exec --no-startup-id lowbat_notify.sh

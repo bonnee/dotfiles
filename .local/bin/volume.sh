@@ -34,9 +34,7 @@ get_volume() {
   if is_out_muted; then
     echo 0
   else
-    pacmd list-sinks |
-        awk '/^\s+name: /{indefault = $2 == "<'$out'>"}
-            /^\s+volume: / && indefault {print $5; exit}' | sed 's/%$//'
+    pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%'
   fi
 }
 
@@ -67,10 +65,7 @@ toggle_in_mute() {
 # Returns:
 #   0 when true, 1 when false.
 is_out_muted() {
-    local sink="$1"
-    muted=$(pacmd list-sinks |
-            awk -v 'RS=\r?\n' '/^\s+name: /{indefault = $2 == "<'"$out"'>"}
-                /^\s+muted: / && indefault {print $2; exit}')
+    muted="pactl list sinks | grep -m1 'Mute' | awk '{ print $2 }'"
     [ "${muted}" = "yes" ]
 }
 
@@ -99,7 +94,7 @@ in="$(get_default_in)"
 
 volume_amount=""
 
-while getopts ":gims:" o; do
+while getopts ":gimsh:" o; do
     case "${o}" in
         m)
             opt_mute_out=true
@@ -107,12 +102,6 @@ while getopts ":gims:" o; do
 	i)
 	    opt_mute_in=true
 	    ;;
-        t)
-            statusline="${OPTARG}"
-            ;;
-        u)
-            signal="${OPTARG}"
-            ;;
         s)
             opt_set_volume=true
             volume_amount="${OPTARG}"

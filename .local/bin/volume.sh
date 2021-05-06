@@ -45,8 +45,7 @@ get_volume() {
 set_volume() {
     local vol="$1"
 
-    pactl set-sink-volume "${out}" "${vol}" ||
-        pactl set-sink-volume "${out}" -- "${vol}"
+    pactl set-sink-volume "${out}" "${vol}"
 }
 
 toggle_out_mute() {
@@ -94,7 +93,7 @@ in="$(get_default_in)"
 
 volume_amount=""
 
-while getopts ":gimsh:" o; do
+while getopts ":gimhs:" o; do
     case "${o}" in
         m)
             opt_mute_out=true

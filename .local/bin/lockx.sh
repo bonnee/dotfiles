@@ -10,6 +10,8 @@ blue="$(xgetres color4)FF"
 red="$(xgetres color1)FF"
 green="$(xgetres color10)FF"
 
+playerctl pause
+
 # Turn off desk light through Home Assistant
 curl -X POST \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIwMmZhZGJlODcwYzk0Nzg0OWI2YmE3MDBjOTgxZmJmMyIsImlhdCI6MTYxNzAwNzI3MiwiZXhwIjoxOTMyMzY3MjcyfQ.Obyi-6ZrkMkEOcLZnk5B9VMnmomLJpjWKAAbu0dUwag" \

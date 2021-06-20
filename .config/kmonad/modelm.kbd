@@ -12,7 +12,7 @@
 )
 
 (defalias
-  spnv (tap-hold 200 spc (layer-toggle nav))
+  spnv (tap-hold 150 spc (layer-toggle nav))
   cte (tap-hold-next 200 esc lctl)
 
   acc (tap-hold 200 ralt (layer-toggle accents))

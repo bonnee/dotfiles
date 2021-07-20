@@ -2,7 +2,7 @@
 Description=An advanced keyboard manager
 
 [Service]
-ExecStart=kmonad "%h/.config/kmonad/%i.conf"
+ExecStart=kmonad "%E/kmonad/%i.kbd"
 Restart=always
 RestartSec=3
 Nice=-20

@@ -3,9 +3,9 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu","custom/consumption","battery","custom/ibam","custom/ratbat", "clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu", "cpu#load","custom/consumption","battery","custom/ibam", "clock"],
     "sway/window": {
-        "max-length": 128
+        "max-length": 192
     },
     "sway/workspaces": {
       "smooth-scrolling-threshold": 3
@@ -16,16 +16,20 @@
 	"format-plugged": " {capacity}%",
 	"format-charging": " {capacity}%",
 	"states": {
-	    "warning": 40,
-	    "low": 20,
+	    "low": 40,
+	    "warning": 25,
 	    "critical": 10
 	},
 	"on-click": "threshy-gui"
     },
+    "battery#power": {
+      "format": "{power}W",
+      "interval": 5
+    },
     "custom/ibam": {
-      "format": "&#xf714; {}h",
+      "format": " {}h",
       "interval": 60,
-      "exec": "ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
+      "exec": "[ \"$(cat /sys/class/power_supply/BAT1/status)\" != \"Unknown\" ] && ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
     },
     "clock": {
         "format":" {:%a %d, %H:%M}",
@@ -33,8 +37,12 @@
     },
     "cpu": {
 	"interval": 5,
-	"format": " {usage}%",
+	"format": " {usage}%",
 	"max-length": 10
+    },
+    "cpu#load": {
+	"interval": 5,
+	"format": " {load}"
     },
     "memory": {
 	"interval": 20,
@@ -61,7 +69,7 @@
     "temperature": {
       "thermal-zone": 2,
       "critical-threshold": 75,
-      "format-critical": " {temperatureC}°C",
+      "format-critical": " {temperatureC}°C",
       "format": " {temperatureC}°C"
     },
     "custom/consumption": {

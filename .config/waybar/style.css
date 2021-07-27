@@ -22,7 +22,7 @@ window#waybar.hidden {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces {
-    margin: 0 3px;
+    margin: 0 5px;
 }
 #workspaces button {
     padding: 0 5px;
@@ -60,7 +60,7 @@ window#waybar.hidden {
 #custom-ratbat, 
 #custom-ibam {
     padding: 5px 5px 3px 3px;
-    margin: 0 3px;
+    margin: 0 5px;
     color: @foreground;
     border-bottom: 2px solid transparent;
 }
@@ -84,26 +84,26 @@ window#waybar.hidden {
     border-bottom: 2px solid @foreground;
 }
 
-#battery.warning.discharging {
-    color: @color1;
-    border-bottom: 2px solid @color1;
+#battery.low.discharging {
+    color: @color5;
+    border-bottom: 2px solid @color5;
 }
 
-#battery.low.discharging {
-    color: @color6;
-    border-bottom: 2px solid @color6;
+#battery.warning.discharging {
+    color: @color3;
+    border-bottom: 2px solid @color3;
 }
 
 @keyframes blink {
     50% {
       color: @background;
-      background-color: @color6;
+      background-color: @color1;
     }
 }
 
 #battery.critical.discharging {
-    color: @color6;
-    border-bottom: 2px solid @color6;
+    color: @color1;
+    border-bottom: 2px solid @color1;
     animation: blink 1s ease-out infinite;
 }
 
@@ -112,19 +112,19 @@ window#waybar.hidden {
     border-bottom: 2px solid @foreground;
 }
 
-#custom-consumption.low {
-  border-bottom: 2px solid @color2;
-  color: @color2
-}
+/*#custom-consumption.low {
+  border-bottom: 2px solid @color7;
+  color: @color7;
+}*/
 
 #custom-consumption.medium {
-  border-bottom: 2px solid @color1;
-  color: @color1;
+  border-bottom: 2px solid @color3;
+  color: @color3;
 }
 
 #custom-consumption.high {
-  color: @color6;
-  border-bottom: 2px solid @color6;
+  color: @color1;
+  border-bottom: 2px solid @color1;
 }
 
 #custom-fan {
@@ -138,16 +138,16 @@ window#waybar.hidden {
 }
 
 #custom-fan.medium {
-  color: @color1;
+  color: @color3;
 }
 
 #custom-fan.high {
-  color: @color6;
+  color: @color1;
 }
 
 #temperature.critical {
   border-bottom: 2px solid @color6;
-  color: @color6;
+  color: @color1;
 }
 
 #idle_inhibitor.activated {

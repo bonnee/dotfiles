@@ -24,29 +24,29 @@ blur_screen.sh $tmpbg
 
 i3lock --clock --indicator --pass-media-keys \
 \
---insidevercolor="$black" \
---ringvercolor="$blue" \
+--insidever-color="$black" \
+--ringver-color="$blue" \
 \
---insidewrongcolor="$black" \
---ringwrongcolor="$red" \
+--insidewrong-color="$black" \
+--ringwrong-color="$red" \
 \
---insidecolor="$black" \
---ringcolor="$trans" \
+--inside-color="$black" \
+--ring-color="$trans" \
 --line-uses-ring \
---separatorcolor="$trans" \
---keyhlcolor="$green" \
---bshlcolor="$red" \
+--separator-color="$trans" \
+--keyhl-color="$green" \
+--bshl-color="$red" \
 \
---verifcolor="$white" \
---wrongcolor="$white" \
---timecolor="$white" \
---datecolor="$white" \
---layoutcolor="$white" \
+--verif-color="$white" \
+--wrong-color="$white" \
+--time-color="$white" \
+--date-color="$white" \
+--layout-color="$white" \
 \
---veriftext="Mhm..." \
---wrongtext="Nope!" \
---timestr="%H:%M" \
---datestr="%a %d %b" \
+--verif-text="Mhm..." \
+--wrong-text="Nope!" \
+--time-str="%H:%M" \
+--date-str="%a %d %b" \
 \
 -i "$tmpbg"
 

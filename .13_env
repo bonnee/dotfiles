@@ -19,7 +19,7 @@ export BEMENU_BACKEND=wayland
 export XDG_SESSION_TYPE=wayland
 export CLUTTER_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland-egl
-#export GDK_BACKEND=wayland # Crashes vscode
+export GDK_BACKEND=wayland
 
 export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
 

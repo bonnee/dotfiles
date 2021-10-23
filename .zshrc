@@ -85,3 +85,4 @@ if [ -d ~/.cache/wal ]; then
   source ~/.cache/wal/colors-tty.sh
   source ~/.cache/wal/colors.sh
 fi
+

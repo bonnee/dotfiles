@@ -17,8 +17,8 @@
   acc (tap-hold 200 ralt (layer-toggle accents))
   med (tap-hold 200 lalt (layer-toggle media))
 
-  bac C-left
-  fwd C-right
+  bac (C-left)
+  fwd (C-right)
 
   del (layer-next del)
   dw #(C-del)

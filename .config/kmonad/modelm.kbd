@@ -21,8 +21,8 @@
   std (layer-switch standard)
   def (layer-switch default)
 
-  bac C-left
-  fwd C-right
+  bac (C-left)
+  fwd (C-right)
 
   del (layer-next del)
   dw #(C-del)
@@ -81,9 +81,9 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
   _    _    volu _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
-  _    prev vold next _    _    _    _    _    _    _    _    _                          _    _    _
+  _    previoussong vold nextsong _    _    _    _    _    _    _    _    _                          _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _                    _          _    _    _    _
-  _         _              pp                       _    _               _    _    _     _    _   
+  _         _              playpause                       _    _               _    _    _     _    _   
 )
 
 (deflayer standard

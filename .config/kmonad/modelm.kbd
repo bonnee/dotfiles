@@ -25,9 +25,9 @@
   fwd C-right
 
   del (layer-next del)
-  dw #(S-C-rght del)
-  db #(S-C-left del)
-  dd #(home S-end del del)
+  dw #(C-del)
+  db #(C-bspc)
+  dd #(home C-S-del)
 
   o #(end linefeed)
 )
@@ -81,9 +81,9 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
   _    _    volu _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
-  _    previoussong vold nextsong _    _    _    _    _    _    _    _    _                          _    _    _
+  _    prev vold next _    _    _    _    _    _    _    _    _                          _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _                    _          _    _    _    _
-  _         _              playpause                        _    _               _    _    _     _    _   
+  _         _              pp                       _    _               _    _    _     _    _   
 )
 
 (deflayer standard

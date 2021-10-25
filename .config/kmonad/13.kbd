@@ -11,20 +11,22 @@
   allow-cmd true
 )
 
-(defalias spnv (tap-hold 200 spc (layer-toggle nav)))
-(defalias cte (tap-hold-next 200 esc lctl))
-(defalias acc (tap-hold 200 ralt (layer-toggle accents)))
-(defalias med (tap-hold 200 caps (layer-toggle media)))
+(defalias
+  spnv (tap-hold 200 spc (layer-toggle nav))
+  cte (tap-hold-next 200 esc lctl)
+  acc (tap-hold 200 ralt (layer-toggle accents))
+  med (tap-hold 200 lalt (layer-toggle media))
 
-(defalias bac C-left)
-(defalias fwd C-right)
+  bac C-left
+  fwd C-right
 
-(defalias del (layer-next del))
-(defalias dw #(S-C-rght del))
-(defalias db #(S-C-left del))
-(defalias dd #(home S-end del del))
+  del (layer-next del)
+  dw #(C-del)
+  db #(C-bspc)
+  dd #(home C-S-del)
 
-(defalias o #(end linefeed))
+  o #(end linefeed)
+)
 
 (defsrc
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end  ins  del
@@ -32,7 +34,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]	   ret
   caps a    s    d    f    g    h    j    k    l    ;    '    \
   lsft iso  z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lalt lmet           spc                 ralt ssrq rctl pgup up   pgdn
+  lctl lmet lalt           spc                 ralt ssrq rctl pgup up   pgdn
                                                               left down rght)
 
 (deflayer base
@@ -41,7 +43,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   @cte _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
-  @med lmet lalt           @spnv               _    _    _    _    _    _
+  _    @med lmet              @spnv               caps _    _    _    _    _
                                                               _    _    _)
 
 (deflayer nav
@@ -73,9 +75,9 @@
 
 (deflayer media
   _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    previoussong vold volu nextsong _    _    _
+  _    _    -    _    _    _    _    _    _    _    _    _    _    _
+  _    _    volu _    _    _    _    _    _    _    _    _    _    _
+  _    previoussong vold nextsong _    _    previoussong vold volu nextsong _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _		   playpause           _    _    _    _    _    _
+  _    _    _		   playpause      _    _    _    _    _    _
 							      _    _    _)

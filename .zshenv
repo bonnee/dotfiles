@@ -1,5 +1,5 @@
 typeset -U PATH path
-path=("$HOME/.local/bin/" "$HOME/.npm-global/bin/" "$path[@]")
+path=("$HOME/.local/bin" "$HOME/.npm-global/bin" "$path[@]")
 export PATH
 
 #export QT_AUTO_SCREEN_SCALE_FACTOR=0
@@ -26,24 +26,36 @@ export DISABLE_AUTO_UPDATE=true
 export HOSTNAME=$HOST
 
 autoload -Uz compinit promptinit
-compinit
 promptinit
+compinit
 
 # https://unix.stackexchange.com/a/583743
 unsetopt completealiases
+unsetopt complete_aliases
 
 alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+compdef dots "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-alias yeet='paru -Rsn'
+alias yeet="paru -Rsn"
 alias yay="paru"
+compdef yay=paru
 
 alias v="$EDITOR"
+compdef _vim v
+compdef _vim nvim
 
-alias s="systemctl"
+alias s=systemctl
 
 alias d="docker"
+compdef d=docker
 alias dc="docker-compose"
 alias dcup="docker-compose pull; docker-compose up"
+
+alias -s txt="$EDITOR"
+alias -s md="$EDITOR"
+alias -s py="$EDITOR"
+alias -s c="$EDITOR"
+alias -s log="$EDITOR"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 

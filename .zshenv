@@ -33,23 +33,30 @@ compinit
 unsetopt completealiases
 unsetopt complete_aliases
 
-alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-compdef dots "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+if command -v git > /dev/null; then
+    alias dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+    compdef dots "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+fi
 
-alias yeet="paru -Rsn"
-alias yay="paru"
-compdef yay=paru
+if command -v paru > /dev/null; then
+    alias yeet="paru -Rsn"
+    alias yay="paru"
+    compdef yay=paru
+fi
 
 alias v="$EDITOR"
 compdef _vim v
 compdef _vim nvim
 
 alias s=systemctl
+compdef s=systemctl
 
-alias d="docker"
-compdef d=docker
-alias dc="docker-compose"
-alias dcup="docker-compose pull; docker-compose up"
+if command -v paru > /dev/null; then
+    alias d="docker"
+    compdef d=docker
+    alias dc="docker-compose"
+    alias dcup="docker-compose pull; docker-compose up"
+fi
 
 alias -s txt="$EDITOR"
 alias -s md="$EDITOR"

@@ -51,11 +51,13 @@ compdef _vim nvim
 alias s=systemctl
 compdef s=systemctl
 
-if command -v paru > /dev/null; then
-    alias d="docker"
-    compdef d=docker
+if command -v docker > /dev/null; then
+  alias d="docker"
+  compdef d=docker
+  if command -v docker-compose > /dev/null; then
     alias dc="docker-compose"
     alias dcup="docker-compose pull; docker-compose up"
+  fi
 fi
 
 alias -s txt="$EDITOR"

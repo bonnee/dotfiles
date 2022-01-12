@@ -74,6 +74,53 @@ if type git_super_status &> /dev/null; then
 fi
 RPROMPT="${RPROMPT}[%F{green}%?%f]"
 
+# ALIASES
+
+autoload -Uz compinit promptinit
+promptinit
+compinit
+
+alias v="$EDITOR"
+
+# https://unix.stackexchange.com/a/583743
+# don't expand aliases _before_ completion has finished
+#   like: git comm-[tab]
+unsetopt completealiases
+unsetopt complete_aliases
+
+if command -v git > /dev/null; then
+    _dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+    alias dots=$_dots
+    #compdef '$_dots'=git
+fi
+
+if command -v paru > /dev/null; then
+    alias yay="paru"
+    #compdef yay=paru
+
+    _yeet='paru -Rsn'
+    alias yeet=$_yeet
+    #compdef yeet='$_yeet'
+fi
+
+alias s=systemctl
+compdef s systemctl
+
+if command -v docker > /dev/null; then
+  alias d="docker"
+
+  if command -v docker-compose > /dev/null; then
+    alias dc="docker-compose"
+    alias dcup="docker-compose pull; docker-compose up"
+  fi
+fi
+
+alias -s txt="$EDITOR"
+alias -s md="$EDITOR"
+alias -s py="$EDITOR"
+alias -s c="$EDITOR"
+alias -s log="$EDITOR"
+
 # pywal
 if [ -d ~/.cache/wal ]; then
   if [ -f ~/.config/wpg/sequences ]; then

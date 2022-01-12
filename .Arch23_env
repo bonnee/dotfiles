@@ -1,6 +1,2 @@
-typeset -U PATH path
-path=("/usr/lib/ccache/bin" "$path[@]")
-export PATH
-
 export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
 

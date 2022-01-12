@@ -1,6 +1,4 @@
-typeset -U PATH path
-path=("/usr/lib/ccache/bin", "$path[@]")
-export PATH
+export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
 
 export XDG_CURRENT_DESKTOP=Unity
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -21,8 +19,6 @@ export XDG_SESSION_TYPE=wayland
 export CLUTTER_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland
 #export GDK_BACKEND=wayland
-
-export CCACHE_PREFIX=/usr/lib/icecream/bin/icecc
 
 if [ ! -z "${DISPLAY}" ]; then
   xrdb ~/.Xresources

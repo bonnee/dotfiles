@@ -104,7 +104,7 @@ if command -v paru > /dev/null; then
 fi
 
 alias s=systemctl
-compdef s systemctl
+compdef s=systemctl
 
 if command -v docker > /dev/null; then
   alias d="docker"

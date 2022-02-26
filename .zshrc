@@ -115,6 +115,8 @@ if command -v docker > /dev/null; then
   fi
 fi
 
+alias ts=tailscale
+
 alias -s txt="$EDITOR"
 alias -s md="$EDITOR"
 alias -s py="$EDITOR"

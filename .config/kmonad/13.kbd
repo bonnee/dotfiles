@@ -17,8 +17,8 @@
   acc (tap-hold 200 ralt (layer-toggle accents))
   med (tap-hold 200 lalt (layer-toggle media))
 
-  bac (C-left)
-  fwd (C-right)
+  bac C-left
+  fwd C-right
 
   del (layer-next del)
   dw #(C-del)
@@ -26,6 +26,9 @@
   dd #(home C-S-del)
 
   o #(end linefeed)
+
+  base (layer-switch base)
+  game (layer-switch gaming)
 )
 
 (defsrc
@@ -43,7 +46,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   @cte _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    @med lmet              @spnv               caps _    _    _    _    _
+  _    @med lmet           @spnv               caps _    @game _    _    _
                                                               _    _    _)
 
 (deflayer nav
@@ -81,3 +84,13 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _		   playpause      _    _    _    _    _    _
 							      _    _    _)
+
+(deflayer gaming
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  @cte _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    @med lmet                spc            caps _    @base _    _    _
+                                                              _    _    _)
+

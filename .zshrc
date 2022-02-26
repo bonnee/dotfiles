@@ -80,27 +80,27 @@ autoload -Uz compinit promptinit
 promptinit
 compinit
 
-alias v="$EDITOR"
-
 # https://unix.stackexchange.com/a/583743
 # don't expand aliases _before_ completion has finished
 #   like: git comm-[tab]
 unsetopt completealiases
 unsetopt complete_aliases
 
+alias v="$EDITOR"
+compdef v=nvim
+
 if command -v git > /dev/null; then
     _dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
     alias dots=$_dots
-    #compdef '$_dots'=git
+    compdef '$_dots'=git
 fi
 
 if command -v paru > /dev/null; then
     alias yay="paru"
-    #compdef yay=paru
+    compdef yay=paru
 
-    _yeet='paru -Rsn'
-    alias yeet=$_yeet
-    #compdef yeet='$_yeet'
+    alias yeet='paru -Rsn'
+    compdef yeet=paru
 fi
 
 alias s=systemctl
@@ -116,12 +116,6 @@ if command -v docker > /dev/null; then
 fi
 
 alias ts=tailscale
-
-alias -s txt="$EDITOR"
-alias -s md="$EDITOR"
-alias -s py="$EDITOR"
-alias -s c="$EDITOR"
-alias -s log="$EDITOR"
 
 # pywal
 if [ -d ~/.cache/wal ]; then

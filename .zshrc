@@ -86,8 +86,12 @@ compinit
 unsetopt completealiases
 unsetopt complete_aliases
 
+# https://medium.com/@alexcg1/using-sudo-with-user-dotfiles-and-aliases-db76813007e
+alias sudo='nocorrect sudo -E '
+
+alias vim="$EDITOR"
 alias v="$EDITOR"
-compdef v=nvim
+#compdef v=nvim
 
 if command -v git > /dev/null; then
     _dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

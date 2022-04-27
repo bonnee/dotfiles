@@ -115,7 +115,7 @@ if command -v docker > /dev/null; then
 
   if command -v docker-compose > /dev/null; then
     alias dc="docker-compose"
-    alias dcup="docker-compose pull; docker-compose up"
+    alias dcup="docker-compose pull; docker-compose up -d"
   fi
 fi
 

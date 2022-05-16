@@ -120,6 +120,7 @@ if command -v docker > /dev/null; then
 fi
 
 alias ts=tailscale
+alias ll='ls -lh'
 
 # pywal
 if [ -d ~/.cache/wal ]; then

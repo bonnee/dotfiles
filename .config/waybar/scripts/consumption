@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-w=$(awk '{printf "%.1f", $1*10^-6}' /sys/class/power_supply/BAT1/power_now)
-status=$(cat "/sys/class/power_supply/BAT1/status")
+batpath="/sys/class/power_supply/BAT"
+
+w=$(awk '{printf "%.1f", $1*10^-6}' "$batpath"?/power_now)
+status=$(cat "$batpath"?/status)
 
 class=""
 if [ "$status" != "Charging" ]; then

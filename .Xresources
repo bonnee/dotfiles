@@ -7,6 +7,10 @@
     Xft.dpi:		165
 #endif
 
+#ifdef SRVR_t490
+    Xft.dpi:		157
+#endif
+
 Xft.autohint:		0
 Xft.lcdfilter:		lcddefault
 Xft.hintstyle:		none

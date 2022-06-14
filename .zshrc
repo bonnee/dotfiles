@@ -53,7 +53,7 @@ elif [ -d ~/.oh-my-zsh ]; then
   export ZSH=~/.oh-my-zsh
 fi
 
-plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found zsh-autosuggestions zsh-syntax-highlighting vi-mode)
+plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found fzf-tab zsh-autosuggestions zsh-syntax-highlighting vi-mode)
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -73,6 +73,10 @@ if type git_super_status &> /dev/null; then
 	RPROMPT='$(git_super_status)'
 fi
 RPROMPT="${RPROMPT}[%F{green}%?%f]"
+
+# xdg-ninja
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+
 
 # ALIASES
 

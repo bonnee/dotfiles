@@ -2,6 +2,10 @@
   email = bonora.matteo@gmail.com
   name = Bonnee
   signingkey = 03F5F2890B72556B
+
+[includeIf "gitdir:~/uni/polito/softeng/"]
+  path = ~/uni/polito/softeng/.gitconfig
+
 [push]
   default = simple
 [credential]

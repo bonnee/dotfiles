@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+
+# AC/BAT
+mode=$(sudo tlp-stat -s | awk '$1 == "Mode" {print $3 }')
+mode_out="AC"
+if test "$mode" == "battery"; then
+  mode_out="BAT"
+fi
+
+auto="auto"
+is_man=$(sudo tlp-stat -s | awk '$1 == "Mode" { gsub(/[()]/,""); print $4 }')
+if ! test -z "$is_man"; then
+  auto=$is_man;
+fi
+
+echo "$mode_out"
+echo "$auto"
+echo "$mode_out $auto"
+

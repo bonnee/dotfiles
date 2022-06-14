@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu", "cpu#load","custom/consumption","battery","custom/ibam", "clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu","cpu#load","custom/consumption","custom/tlp","battery","custom/ibam","clock"],
     "sway/window": {
         "max-length": 192
     },
@@ -25,6 +25,13 @@
     "battery#power": {
       "format": "{power}W",
       "interval": 5
+    },
+    "custom/tlp": {
+      "format": "{}",
+      "interval": 10,
+      "exec": "$HOME/.config/waybar/scripts/tlp",
+      "exec-on-event": true,
+      "on-click": "$HOME/.config/waybar/scripts/tlp_fsm"
     },
     "custom/ibam": {
       "format": " {}h",
@@ -67,7 +74,7 @@
 	"smooth-scrolling-threshold": 2
     },
     "temperature": {
-      "thermal-zone": 2,
+      "thermal-zone": 7,
       "critical-threshold": 75,
       "format-critical": " {temperatureC}°C",
       "format": " {temperatureC}°C"
@@ -101,5 +108,10 @@
     "custom/ratbat": {
       "return-type": "json",
       "exec": "$HOME/.config/waybar/scripts/ratbat"
+    },
+    "custom/speed": {
+      "format": "{} km/h",
+      "interval": 10,
+      "exec": "$HOME/.config/waybar/scripts/ciufciuf.sh"
     }
 }

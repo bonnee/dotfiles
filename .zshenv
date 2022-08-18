@@ -2,6 +2,8 @@ typeset -U PATH path
 path=("$HOME/.local/bin" "$HOME/.npm-global/bin" "/usr/lib/ccache/bin", "$path[@]")
 export PATH
 
+export ZSH_CUSTOM=${XDG_DATA_HOME}/oh-my-zsh/custom
+
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
@@ -23,6 +25,7 @@ export STACK_ROOT="$XDG_DATA_HOME"/stack
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
+
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 
@@ -33,7 +36,7 @@ export BC_ENV_ARGS="$HOME/.config/bc"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-#export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export OPENCV_LOG_LEVEL=ERROR
 
 # https://github.com/MicrosoftDocs/live-share/issues/180
@@ -52,10 +55,12 @@ export DIFFPROG="$EDITOR -d"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 
-if [ -f ~/."$HOST"_env ]; then
-  source ~/."$HOST"_env
+export ENV_HOME="$XDG_CONFIG_HOME/env"
+if [ -f "$ENV_HOME/$HOST" ]; then
+  source "$ENV_HOME/$HOST"
 fi
 
 if [ -f ~/.zshsecret ]; then
   source ~/.zshsecret
 fi
+

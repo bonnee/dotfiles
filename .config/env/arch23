@@ -1,0 +1,3 @@
+#!/bin/sh
+
+source "$ENV_HOME/wayland"

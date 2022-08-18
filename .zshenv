@@ -2,12 +2,12 @@ typeset -U PATH path
 path=("$HOME/.local/bin" "$HOME/.npm-global/bin" "/usr/lib/ccache/bin", "$path[@]")
 export PATH
 
-export ZSH_CUSTOM=${XDG_DATA_HOME}/oh-my-zsh/custom
-
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
+
+export ZSH_CUSTOM=${XDG_DATA_HOME}/oh-my-zsh/custom
 
 # xdg-ninja <3
 export ANDROID_HOME=$XDG_DATA_HOME/android
@@ -27,7 +27,6 @@ export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
 
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-
 
 export TERMINAL="alacritty --config-file ~/.config/alacritty/`hostname`.yml"
 export BROWSER="firefox"

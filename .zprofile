@@ -26,7 +26,7 @@ export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
 
-export TERMINAL="alacritty --config-file ~/.config/alacritty/`hostname`.yml"
+export TERMINAL="alacritty"
 export BROWSER="firefox"
 
 export BC_ENV_ARGS="$HOME/.config/bc"

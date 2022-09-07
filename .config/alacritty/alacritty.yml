@@ -29,6 +29,8 @@ window:
     x: 2
     y: 2
 
+  opacity: .85
+
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
@@ -90,7 +92,7 @@ font:
     style: Extended Italic
 
   # Point size of the font
-  size: 16.0
+  size: 16
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -133,9 +135,6 @@ debug.render_timer: false
 bell:
   animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-background_opacity: .85
 
 # Mouse bindings
 #
@@ -186,7 +185,6 @@ live_config_reload: true
 # etc.  These all match the glutin::VirtualKeyCode variants.
 #
 # Possible values for `mods`
-# `Command`, `Super` refer to the super/command/windows key
 # `Control` for the control key
 # `Shift` for the Shift key
 # `Alt` and `Option` refer to alt/option

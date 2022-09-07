@@ -26,8 +26,6 @@ export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
 
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-
 export TERMINAL="alacritty --config-file ~/.config/alacritty/`hostname`.yml"
 export BROWSER="firefox"
 
@@ -54,6 +52,7 @@ export DIFFPROG="$EDITOR -d"
 
 export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 
+# Load host-specific environment
 export ENV_HOME="$XDG_CONFIG_HOME/env"
 if [ -f "$ENV_HOME/$HOST" ]; then
   source "$ENV_HOME/$HOST"

@@ -13,6 +13,8 @@ export CLUTTER_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland
 export GDK_BACKEND=wayland
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 if [ ! -z "${DISPLAY}" ]; then
   xrdb ~/.Xresources
 fi

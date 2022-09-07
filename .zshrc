@@ -55,7 +55,7 @@ fi
 
 plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found fzf-tab zsh-autosuggestions zsh-syntax-highlighting vi-mode)
 
-ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
+ZSH_CACHE_DIR=$XDG_CACHE_HOME/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
@@ -70,19 +70,17 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="] "
 PROMPT='%F{blue}%m%f %F{yellow}%4~%f '
 
 if type git_super_status &> /dev/null; then
-	RPROMPT='$(git_super_status)'
+  RPROMPT='$(git_super_status)'
 fi
 RPROMPT="${RPROMPT}[%F{green}%?%f]"
-
-# xdg-ninja
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
-
 
 # ALIASES
 
 autoload -Uz compinit promptinit
 promptinit
-compinit
+# xdg-ninja
+mkdir -p $XDG_CACHE_HOME/zsh
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 # https://unix.stackexchange.com/a/583743
 # don't expand aliases _before_ completion has finished
@@ -90,11 +88,13 @@ compinit
 unsetopt completealiases
 unsetopt complete_aliases
 
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+
 # https://medium.com/@alexcg1/using-sudo-with-user-dotfiles-and-aliases-db76813007e
 alias sudo='nocorrect sudo -E '
 
-alias vim="$EDITOR"
-alias v="$EDITOR"
+alias vim="$EDITOR -p"
+alias v="$EDITOR -p"
 #compdef v=nvim
 
 if command -v git > /dev/null; then

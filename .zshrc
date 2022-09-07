@@ -117,9 +117,9 @@ compdef s=systemctl
 if command -v docker > /dev/null; then
   alias d="docker"
 
-  if command -v docker-compose > /dev/null; then
-    alias dc="docker-compose"
-    alias dcup="docker-compose pull; docker-compose up -d"
+  if command -v docker compose > /dev/null; then
+    alias dc="docker compose"
+    alias dcup="docker compose pull; docker compose up -d"
   fi
 fi
 

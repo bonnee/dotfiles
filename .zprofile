@@ -27,7 +27,7 @@ export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
 
 export TERMINAL="alacritty"
-export BROWSER="firefox"
+export BROWSER="firefox-developer-edition"
 
 export BC_ENV_ARGS="$HOME/.config/bc"
 

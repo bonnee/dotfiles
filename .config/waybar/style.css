@@ -76,8 +76,8 @@ window#waybar.hidden {
 }
 
 #battery.charging {
-    color: @color3;
-    border-bottom: 2px solid @color3;
+    color: @color2;
+    border-bottom: 2px solid @color2;
 }
 #battery.plugged {
     color: @foreground;
@@ -85,13 +85,13 @@ window#waybar.hidden {
 }
 
 #battery.low.discharging {
-    color: @color5;
-    border-bottom: 2px solid @color5;
+    color: @color3;
+    border-bottom: 2px solid @color3;
 }
 
 #battery.warning.discharging {
-    color: @color3;
-    border-bottom: 2px solid @color3;
+    color: @color1;
+    border-bottom: 2px solid @color1;
 }
 
 @keyframes blink {

@@ -1,0 +1,73 @@
+profile 13 {
+  output eDP-1 scale 1 enable
+}
+{
+  output "Unknown VG245 G9LMQS036466" mode 1920x1080 position 0,0 scale 1
+  output eDP-1 position 0,1080 scale 1
+}
+{
+  output "Unknown VG245 G9LMQS036464" mode 1920x1080 position 0,0 scale 1
+  output eDP-1 position 0,1080 scale 1
+}
+{
+  output "Unknown VG245 G8LMQS019609" mode 1920x1080 position 0,0 scale 1  
+  output eDP-1 position 0,1080 scale 1
+}
+{
+  output "Dell Inc. DELL 2009W 91D1V07K343L" mode 1680x1050 position 120,0 scale 1  
+  output eDP-1 position 0,1050 scale 1
+}
+{
+  output "Goldstar Company Ltd LG TV 0x00000101" mode 1920x1080 position 0,0 scale 1  
+  output eDP-1 position 0,1080 scale 1
+}
+
+profile eagle_tv {
+  output "Sony SONY TV  *00 0x00000101" mode 4096x2160 scale 3
+}
+
+profile monitor_lg{
+  output "Unknown MStar Demo 0x00000001" mode 1920x1080 position 0,0
+  output eDP-1 position 0,1080 scale 1
+}
+
+{
+  output "Dell Inc. DELL S2721DGF GM06223" mode 2560x1440 position 0,0
+  output eDP-1 position 320,1440 scale 1
+}
+
+profile old_monitor_and_tv_lg{
+  output "Goldstar Company Ltd LG TV 0x00000101" mode 1920x1080 position 0,0 scale 1  
+  output "Unknown MStar Demo 0x00000001" mode 1920x1080 position 1920,0
+  output eDP-1 position 1920,1080 scale 1
+  exec swaymsg workspace 1, move workspace to output 'Unknown MStar Demo 0x00000001'
+  exec swaymsg workspace 2, move workspace to output 'Unknown MStar Demo 0x00000001'
+  exec swaymsg workspace 3, move workspace to output 'Unknown MStar Demo 0x00000001'
+  exec swaymsg workspace 4, move workspace to output 'Unknown MStar Demo 0x00000001'
+  exec swaymsg workspace 5, move workspace to output 'Unknown MStar Demo 0x00000001'
+  exec swaymsg workspace 6, move workspace to eDP-1
+  exec swaymsg workspace 7, move workspace to eDP-1
+  exec swaymsg workspace 8, move workspace to output 'Goldstar Company Ltd LG TV 0x00000101'
+  exec swaymsg workspace 9, move workspace to output 'Goldstar Company Ltd LG TV 0x00000101'
+}
+
+profile monitor_and_tv_lg{
+  output 'Goldstar Company Ltd LG TV 0x00000101' mode 1920x1080 position 0,350 scale 1  
+  output 'Goldstar Company Ltd M2362D 0x00000101' mode 1920x1080 position 1920,0
+  output eDP-1 position 1920,1080 scale 1
+  exec swaymsg workspace 1, move workspace to output 'Goldstar Company Ltd M2362D 0x00000101'
+  exec swaymsg workspace 2, move workspace to output 'Goldstar Company Ltd M2362D 0x00000101'
+  exec swaymsg workspace 3, move workspace to output 'Goldstar Company Ltd M2362D 0x00000101'
+  exec swaymsg workspace 4, move workspace to output 'Goldstar Company Ltd M2362D 0x00000101'
+  exec swaymsg workspace 5, move workspace to output 'Goldstar Company Ltd M2362D 0x00000101'
+  exec swaymsg workspace 6, move workspace to eDP-1
+  exec swaymsg workspace 7, move workspace to eDP-1
+  exec swaymsg workspace 8, move workspace to output 'Goldstar Company Ltd LG TV 0x00000101'
+  exec swaymsg workspace 9, move workspace to output 'Goldstar Company Ltd LG TV 0x00000101'
+}
+
+profile polito_led2{
+  output "Dell Inc. DELL U2518D 3C4YP844504L" mode 2560x1440 position 0,0
+  output eDP-1 position 320,1440 scale 1
+
+}

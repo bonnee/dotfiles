@@ -1,6 +1,6 @@
 # Disable client side decoration
 export GTK_CSD=0
-export LD_PRELOAD=/lib/libgtk3-nocsd.so.0
+#export LD_PRELOAD=/lib/libgtk3-nocsd.so.0
 
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1

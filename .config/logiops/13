@@ -46,8 +46,8 @@ devices: (
                         mode: "OnRelease";
                         action =
                         {
-                            type: "KeyPress";
-                            keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
+			    type: "KeyPress";
+			    keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
                         };
                     },
                     {
@@ -55,7 +55,7 @@ devices: (
                         mode: "OnRelease";
                         action =
                         {
-                            type: "KeyPress";
+			    type: "KeyPress";
 			    keys: ["KEY_LEFTMETA", "KEY_TAB"];
                         }
                     },

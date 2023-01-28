@@ -3,8 +3,14 @@
   name = Bonnee
   signingkey = 03F5F2890B72556B
 
+[includeIf "gitdir:~/uni/softeng/"]
+  path = ~/uni/polito/.gitconfig
+
 [includeIf "gitdir:~/uni/polito/softeng/"]
   path = ~/uni/polito/softeng/.gitconfig
+
+[includeIf "gitdir:~/src/scd/"]
+  path = ~/src/scd/.gitconfig
 
 [push]
   default = simple
@@ -36,3 +42,10 @@
       textconv = pdftotext-stdout
 [diff "fcinfo"]
       textconv = fcinfo
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[tag]
+	gpgsign = true

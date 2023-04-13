@@ -1,0 +1,22 @@
+#!/usr/bin/awk -f
+
+BEGIN{
+  NR==3
+}
+
+/^BAT manual$/{
+  system("sudo tlp ac")
+}
+/^AC manual$/{
+  system("sudo tlp start")
+}
+/^BAT auto$/{
+  system("sudo tlp ac")
+}
+/^AC auto$/{
+  system("sudo tlp bat")
+}
+
+END{
+  state
+}

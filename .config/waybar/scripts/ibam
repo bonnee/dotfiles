@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+IFS=':'
+remaining="$(ibam -r | head -n1 | awk '{print $4}')"
+split=($remaining)
+
+echo "${split[0]}:${split[1]}h"
+echo $(date -d "+${split[0]} hours +${split[1]} minutes +${split[2]} seconds" +%R)
+

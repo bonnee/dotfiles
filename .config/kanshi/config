@@ -27,8 +27,8 @@ profile eagle_tv {
 }
 
 profile monitor_lg{
-  output "Unknown MStar Demo 0x00000001" mode 1920x1080 position 0,0
-  output eDP-1 position 0,1080 scale 1
+  output 'LG Electronics M2362D 0x00000101' mode 1920x1080 position 0,0 scale 1
+  output eDP-1 position 1920,216 scale 1.25
 }
 
 {
@@ -52,9 +52,9 @@ profile old_monitor_and_tv_lg{
 }
 
 profile monitor_and_tv_lg{
-  output 'LG Electronics LG TV 0x00000101' mode 1920x1080 position 0,350 scale 1  
-  output 'LG Electronics M2362D 0x00000101' mode 1920x1080 position 1920,0
-  output eDP-1 position 1920,1080 scale 1
+  output 'LG Electronics LG TV 0x00000101' mode 1920x1080 position 0,0 scale 1  
+  output 'LG Electronics M2362D 0x00000101' mode 1920x1080 position 1920,350 scale 1
+  output eDP-1 mode 1920x1080 position 3840,566 scale 1.25
   exec swaymsg workspace 1, move workspace to output 'LG Electronics M2362D 0x00000101'
   exec swaymsg workspace 2, move workspace to output 'LG Electronics M2362D 0x00000101'
   exec swaymsg workspace 3, move workspace to output 'LG Electronics M2362D 0x00000101'

@@ -31,12 +31,13 @@ window#waybar.hidden {
     border-bottom: 2px solid transparent;
 }
 
-#workspaces button.focused {
-    border-bottom: 2px solid @foreground;
-}
-
 #workspaces button.visible {
     color: @foreground;
+    border-bottom: 2px solid @color5;
+}
+
+#workspaces button.focused {
+    border-bottom: 2px solid @foreground;
 }
 
 #workspaces button.urgent {
@@ -104,7 +105,7 @@ window#waybar.hidden {
 #battery.critical.discharging {
     color: @color1;
     border-bottom: 2px solid @color1;
-    animation: blink 1s ease-out infinite;
+    animation: blink 5s ease-out infinite;
 }
 
 #pulseaudio.muted {

@@ -3,6 +3,7 @@
 batpath="/sys/class/power_supply/BAT"
 
 w=$(awk '{printf "%.1f", $1*10^-6}' "$batpath"?/power_now)
+e=$(awk '{printf "%.1f", $1*10^-6}' "$batpath"?/energy_now)
 status=$(cat "$batpath"?/status)
 
 class=""
@@ -13,6 +14,6 @@ else
   w="-$w"
 fi
 
-echo "$w"
-echo ""
+echo "${w}W"
+echo "${e}Wh"
 echo "$class"

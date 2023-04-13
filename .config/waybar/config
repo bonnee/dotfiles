@@ -34,9 +34,9 @@
       "on-click": "$HOME/.config/waybar/scripts/tlp_fsm"
     },
     "custom/ibam": {
-      "format": " {}h",
+      "format": " {}",
       "interval": 60,
-      "exec": "[ \"$(cat /sys/class/power_supply/BAT1/status)\" != \"Unknown\" ] && ibam -r | head -n1 | awk '{print $4}' | cut -d':' -f1,2"
+      "exec": "$HOME/.config/waybar/scripts/ibam",
     },
     "clock": {
         "format":" {:%a %d, %H:%M}",
@@ -80,7 +80,7 @@
       "format": " {temperatureC}°C"
     },
     "custom/consumption": {
-      "format": "&#xf0e7; {}W",
+      "format": "&#xf0e7; {}",
       "interval": 5,
       "exec": "$HOME/.config/waybar/scripts/consumption"
     },

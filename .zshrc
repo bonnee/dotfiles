@@ -80,7 +80,7 @@ autoload -Uz compinit promptinit
 promptinit
 # xdg-ninja
 mkdir -p $XDG_CACHE_HOME/zsh
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION" # xdg-ninja 
 
 # https://unix.stackexchange.com/a/583743
 # don't expand aliases _before_ completion has finished

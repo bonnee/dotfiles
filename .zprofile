@@ -9,23 +9,6 @@ export XDG_CACHE_HOME=$HOME/.cache
 
 export ZSH_CUSTOM=${XDG_DATA_HOME}/oh-my-zsh/custom
 
-# xdg-ninja <3
-export ANDROID_HOME=$XDG_DATA_HOME/android
-export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export CCACHE_DIR=${XDG_CACHE_HOME}/ccache
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-export GRIPHOME="$XDG_CONFIG_HOME/grip"
-export LESSHISTFILE=${XDG_CACHE_HOME}/less/history
-export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
-export NVM_DIR="$XDG_DATA_HOME"/nvm
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
-export STACK_ROOT="$XDG_DATA_HOME"/stack
-export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-export USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
-
 export TERMINAL="alacritty"
 export BROWSER="firefox-developer-edition"
 
@@ -54,6 +37,11 @@ export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 
 # Load host-specific environment
 export ENV_HOME="$XDG_CONFIG_HOME/env"
+
+if [ -f "$ENV_HOME/xdg-ninja" ]; then
+  source "$ENV_HOME/xdg-ninja"
+fi
+
 if [ -f "$ENV_HOME/$HOST" ]; then
   source "$ENV_HOME/$HOST"
 fi

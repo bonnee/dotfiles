@@ -5,7 +5,7 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
 export WINEPREFIX="$XDG_DATA_HOME"/wine
 
-export RUSTUP_HOME"${XDG_DATA_HOME}"/rustup
+export RUSTUP_HOME="${XDG_DATA_HOME}"/rustup
 
 prefix=${XDG_DATA_HOME}/npm
 cache=${XDG_CACHE_HOME}/npm

@@ -95,7 +95,6 @@ alias sudo='nocorrect sudo -E '
 
 alias vim="$EDITOR -p"
 alias v="$EDITOR -p"
-#compdef v=nvim
 
 if command -v git > /dev/null; then
     _dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

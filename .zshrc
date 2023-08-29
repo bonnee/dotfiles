@@ -93,6 +93,11 @@ alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 # https://medium.com/@alexcg1/using-sudo-with-user-dotfiles-and-aliases-db76813007e
 alias sudo='nocorrect sudo -E '
 
+# https://github.com/rushsteve1/trash-d
+if command -v trash > /dev/null; then
+  alias rm='trash'
+fi
+
 alias vim="$EDITOR -p"
 alias v="$EDITOR -p"
 

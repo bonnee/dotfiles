@@ -1,19 +1,62 @@
 #!/usr/bin/sh
 
-# AC/BAT
-mode=$(sudo tlp-stat -s | awk '$1 == "Mode" {print $3 }')
-mode_out="AC"
-if test "$mode" == "battery"; then
-  mode_out="BAT"
+get_state()
+{
+  tlpstat=$(sudo tlp-stat -s)
+  
+  # AC/BAT
+  mode=$(echo "$tlpstat" | awk '$1 == "Mode" {print $3 }')
+  mode_out="AC"
+  if test "$mode" == "battery"; then
+    mode_out="BAT"
+  fi
+  
+  auto="auto"
+  is_man=$(echo "$tlpstat" | awk '$1 == "Mode" { gsub(/[()]/,""); print $4 }')
+  if ! test -z "$is_man"; then
+    auto=$is_man;
+  fi
+}
+
+print()
+{
+  if test "$auto" != "auto"; then
+    printf '󱧧 '
+  fi
+  echo "$mode_out"
+  echo "$auto"
+  echo "$mode_out $auto"
+}
+
+fsm()
+{
+  case "$1 $2" in
+    "BAT manual")
+      sudo tlp ac > /dev/null
+      ;;
+    "AC manual")
+      sudo tlp start > /dev/null
+      ;;
+    "BAT auto")
+      sudo tlp ac > /dev/null
+      ;;
+    "AC auto")
+      sudo tlp bat > /dev/null
+      ;;
+    *)
+      echo "Unknown state $1 $2"
+      ;;
+  esac
+}
+
+get_state $mode_out $auto
+
+if ! test -z "$1"; then
+  fsm $mode_out $auto
+
+  pkill -SIGRTMIN+8 waybar
+  exit
 fi
 
-auto="auto"
-is_man=$(sudo tlp-stat -s | awk '$1 == "Mode" { gsub(/[()]/,""); print $4 }')
-if ! test -z "$is_man"; then
-  auto=$is_man;
-fi
-
-echo "$mode_out"
-echo "$auto"
-echo "$mode_out $auto"
+print
 

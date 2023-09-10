@@ -1,19 +1,20 @@
 @import url('../../.cache/wal/colors-trans.css');
 
 * {
-    border: none;
-    border-radius: 0;
-    font-family: sans-serif, "Font Awesome 5 Free";
-    font-size: 16px;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  border-style: solid;
+  font-family: "sans-serif", "Symbols Nerd Font";
+  font-size: 17px;
+  min-height: 0;
 }
 
 window#waybar {
-    border-bottom: 2px solid transparent;
-    background: @background;
-    color: @foreground;
-    transition-property: background-color;
-    transition-duration: .5s;
+  border-bottom: 2px solid transparent;
+  background: @background;
+  color: @foreground;
+  transition-property: background-color;
+  transition-duration: .5s;
 }
 
 window#waybar.hidden {
@@ -22,28 +23,27 @@ window#waybar.hidden {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 #workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: @foreground;
-    border-bottom: 2px solid transparent;
+  padding: 0 5px 2px;
+  background: transparent;
+  color: @foreground;
+  border-color: transparent;
+  border-width: 2px 0;
 }
 
 #workspaces button.visible {
-    color: @foreground;
-    border-bottom: 2px solid @color5;
+  border-color: @color5;
 }
 
 #workspaces button.focused {
-    border-bottom: 2px solid @foreground;
+  border-color: @foreground;
 }
 
 #workspaces button.urgent {
-    border-bottom: 2px solid @color0;
-    color: @color0;
-    animation: blink 1.5s ease infinite;
+  border-color: @color0;
+  animation: blink 1.5s ease infinite;
 }
 
 #window,
@@ -60,99 +60,126 @@ window#waybar.hidden {
 #custom-consumption, 
 #custom-ratbat, 
 #custom-ibam {
-    padding: 5px 5px 3px 3px;
-    margin: 0 5px;
-    color: @foreground;
-    border-bottom: 2px solid transparent;
+  padding: 0 5px 2px;
+  margin: 0 5px;
+  color: @foreground;
+  border-color: transparent;
+  border-width: 2px 0;
 }
 
 #mode {
-    background: @foreground;
-    color: @background;
-    border-bottom: 2px solid @foregroundTrans;
+  background: @foreground;
+  color: @background;
+  border-color: @foregroundTrans;
 }
 
-#battery {
-    margin-right: 2px;
+/** SYSTEM SECTION **/
+
+#cpu,
+#load,
+#custom-fan,
+#temperature {
+  background: @color8;
+  color: @foreground;
+  padding: 0 5px 2px;
+  margin: 3px 0;
+}
+#cpu {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+#temperature {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-right: 3px;
 }
 
-#battery.charging {
-    color: @color2;
-    border-bottom: 2px solid @color2;
+#cpu.high {
+  border-color: @color3;
 }
-#battery.plugged {
-    color: @foreground;
-    border-bottom: 2px solid @foreground;
-}
-
-#battery.low.discharging {
-    color: @color3;
-    border-bottom: 2px solid @color3;
-}
-
-#battery.warning.discharging {
-    color: @color1;
-    border-bottom: 2px solid @color1;
-}
-
-@keyframes blink {
-    50% {
-      color: @background;
-      background-color: @color1;
-    }
-}
-
-#battery.critical.discharging {
-    color: @color1;
-    border-bottom: 2px solid @color1;
-    animation: blink 5s ease-out infinite;
-}
-
-#pulseaudio.muted {
-    color: @foreground;
-    border-bottom: 2px solid @foreground;
-}
-
-/*#custom-consumption.low {
-  border-bottom: 2px solid @color7;
-  color: @color7;
-}*/
-
-#custom-consumption.medium {
-  border-bottom: 2px solid @color3;
-  color: @color3;
-}
-
-#custom-consumption.high {
-  color: @color1;
-  border-bottom: 2px solid @color1;
-}
-
-#custom-fan {
-  border-bottom: 2px solid transparent;
-  padding: 0 5px;
-  margin: 0 5px;
-}
-
-#custom-fan.low {
-  color: @color2;
-}
-
-#custom-fan.medium {
-  color: @color3;
-}
-
-#custom-fan.high {
-  color: @color1;
+#cpu.max {
+  border-color: @color1;
 }
 
 #temperature.critical {
-  border-bottom: 2px solid @color6;
-  color: @color1;
+  border-color: @color1;
+}
+
+
+/** END SYSTEM **/
+
+/** BATTERY SECTION **/
+
+#custom-tlp,
+#battery,
+#custom-consumption,
+#custom-ibam {
+  background: @color8;
+  color: @foreground;
+  padding: 0 5px 2px;
+  margin: 3px 0;
+}
+#custom-tlp {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-left: 3px;
+}
+#custom-ibam {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#battery.charging {
+  border-color: @color2;
+}
+#battery.plugged {
+  border-color: @foreground;
+}
+#battery.low.discharging {
+  border-color: @color3;
+}
+#battery.warning.discharging {
+  border-color: @color1;
+}
+#battery.critical.discharging {
+  border-color: @color1;
+  animation: blink 5s ease-out infinite;
+}
+@keyframes blink {
+  50% {
+    /*color: @foreground;*/
+    background-color: @color1;
+  }
+}
+
+#custom-consumption.medium {
+  border-color: @color3;
+}
+
+#custom-consumption.high {
+  border-color: @color1;
+}
+
+/** END BATTERY **/
+
+#pulseaudio.muted {
+  border-color: @foreground;
+}
+
+#custom-fan.low {
+  border-color: @color2;
+}
+
+#custom-fan.medium {
+  border-color: @color3;
+}
+
+#custom-fan.high {
+  border-color: @color1;
 }
 
 #idle_inhibitor.activated {
-  border-bottom: 2px solid @foreground;
+  border-color: @foreground;
 }
 
 #custom-ratbat {
@@ -163,7 +190,7 @@ window#waybar.hidden {
 }
 
 #custom-ratbat.critical {
-  border-bottom: 2px solid orangered;
+  border-color: orangered;
   color: orangered;
   animation: dotblink 1s ease-out infinite;
 }

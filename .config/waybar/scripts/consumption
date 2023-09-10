@@ -15,5 +15,5 @@ else
 fi
 
 echo "${w}W"
-echo "${e}Wh"
+echo "${e}Wh left"
 echo "$class"

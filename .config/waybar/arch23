@@ -1,0 +1,60 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-left": ["sway/workspaces","sway/mode","sway/window"],
+    "modules-center": [],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu","cpu","custom/consumption","custom/tlp","battery","custom/ibam","clock"],
+    "sway/window": {
+        "max-length": 192
+    },
+    "sway/workspaces": {
+      "smooth-scrolling-threshold": 3
+    },
+    "clock": {
+        "format":" {:%a %d, %H:%M}",
+	"tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+	"interval": 5,
+	"format": " {usage}% {load}"
+    },
+    "memory": {
+	"interval": 20,
+	"format": "&#xf538; {}%",
+	"max-length": 10
+    },
+    "pulseaudio": {
+	"format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "mute",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+	"smooth-scrolling-threshold": 2
+    },
+    "temperature": {
+      "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+      "critical-threshold": 95,
+      "format-critical": " {temperatureC}°C",
+      "format": " {temperatureC}°C"
+    },
+     "tray": {
+	"icon-size": 24,
+	"spacing": 8
+    },
+    "idle_inhibitor": {
+	"format": "{icon}",
+        "format-icons": {
+	  "activated": "",
+	  "deactivated": ""
+        }
+    }
+}

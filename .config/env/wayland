@@ -4,9 +4,10 @@ export GTK_CSD=0
 
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1
+
 # Ugly hack to make hardware-accelerated video decoding work with the latest
 # versions of Firefox
-export MOZ_DISABLE_RDD_SANDBOX=1
+#export MOZ_DISABLE_RDD_SANDBOX=1
 export BEMENU_BACKEND=wayland
 export XDG_SESSION_TYPE=wayland
 export CLUTTER_BACKEND=wayland

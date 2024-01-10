@@ -38,12 +38,18 @@ export BEMENU_OPTS="-il 15 -p '> ' --fn 'sans-serif 14' --scrollbar autohide"
 # Load host-specific environment
 export ENV_HOME="$XDG_CONFIG_HOME/env"
 
-if [ -f "$ENV_HOME/xdg-ninja" ]; then
-  source "$ENV_HOME/xdg-ninja"
+if [ -d "$ENV_HOME" ]; then
+  source <(cat $ENV_HOME/* 2> /dev/null) > /dev/null
+  #for file in "$ENV_HOME/*" ; do
+  #  echo $file
+  #  if [ -f "$file" ] ; then
+  #    source "$file"
+  #  fi
+  #done
 fi
 
-if [ -f "$ENV_HOME/$HOST" ]; then
-  source "$ENV_HOME/$HOST"
+if [ -d "$ENV_HOME/$HOST" ]; then
+  source <(cat $ENV_HOME/$HOST/* 2> /dev/null) > /dev/null
 fi
 
 if [ -f ~/.zshsecret ]; then

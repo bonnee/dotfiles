@@ -8,9 +8,9 @@ devices: (
     };
     hiresscroll:
     {
-        hires: true;
+        hires: false;
         invert: false;
-        target: false;
+        target: true;
     };
     dpi: 2100;
 

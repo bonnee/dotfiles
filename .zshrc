@@ -122,12 +122,15 @@ fi
 alias s=systemctl
 compdef s=systemctl
 
-if command -v docker > /dev/null; then
+if type docker > /dev/null 2>&1; then
   alias d="docker"
 
-  if command -v docker compose > /dev/null; then
+  if docker compose --version > /dev/null 2>&1; then
     alias dc="docker compose"
     alias dcup="docker compose pull; docker compose up -d"
+  elif type docker-compose > /dev/null 2>&1; then
+    alias dc="docker-compose"
+    alias dcup="docker-compose pull; docker-compose up -d"
   fi
 fi
 

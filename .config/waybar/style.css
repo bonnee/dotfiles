@@ -142,7 +142,7 @@ window#waybar.hidden {
 }
 #battery.critical.discharging {
   border-color: @color1;
-  animation: blink 5s ease-out infinite;
+  animation: blink 1s ease-out infinite;
 }
 @keyframes blink {
   50% {

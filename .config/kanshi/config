@@ -36,34 +36,30 @@ profile home {
   output eDP-1 position 320,1440 scale 1
 }
 
-profile old_monitor_and_tv_lg {
-  output "LG Electronics LG TV 0x00000101" mode 1920x1080 position 0,0 scale 1  
-  output "Unknown MStar Demo 0x01010101" mode 1920x1080 position 1920,0
-  output eDP-1 position 1920,1080 scale 1
-  exec swaymsg workspace 1, move workspace to output 'Unknown MStar Demo 0x01010101'
-  exec swaymsg workspace 2, move workspace to output 'Unknown MStar Demo 0x01010101'
-  exec swaymsg workspace 3, move workspace to output 'Unknown MStar Demo 0x01010101'
-  exec swaymsg workspace 4, move workspace to output 'Unknown MStar Demo 0x01010101'
-  exec swaymsg workspace 5, move workspace to output 'Unknown MStar Demo 0x01010101'
-  exec swaymsg workspace 6, move workspace to eDP-1
-  exec swaymsg workspace 7, move workspace to eDP-1
-  exec swaymsg workspace 8, move workspace to output 'LG Electronics LG TV 0x00000101'
-  exec swaymsg workspace 9, move workspace to output 'LG Electronics LG TV 0x00000101'
-}
-
 profile monitor_and_tv_lg {
-  output 'LG Electronics LG TV 0x00000101' mode 1920x1080 position 0,0 scale 1  
-  output 'LG Electronics M2362D 0x00000101' mode 1920x1080 position 1920,350 scale 1
-  output eDP-1 mode 1920x1080 position 3840,566 scale 1.25
-  exec swaymsg workspace 1, move workspace to output 'LG Electronics M2362D 0x00000101'
-  exec swaymsg workspace 2, move workspace to output 'LG Electronics M2362D 0x00000101'
-  exec swaymsg workspace 3, move workspace to output 'LG Electronics M2362D 0x00000101'
-  exec swaymsg workspace 4, move workspace to output 'LG Electronics M2362D 0x00000101'
-  exec swaymsg workspace 5, move workspace to output 'LG Electronics M2362D 0x00000101'
-  exec swaymsg workspace 6, move workspace to eDP-1
-  exec swaymsg workspace 7, move workspace to eDP-1
-  exec swaymsg workspace 8, move workspace to output 'LG Electronics LG TV 0x00000101'
-  exec swaymsg workspace 9, move workspace to output 'LG Electronics LG TV 0x00000101'
+  output 'LG Electronics M2362D 0x01010101' mode 1920x1080 position 0,0 scale 1
+  output 'LG Electronics LG TV 0x01010101' mode 1920x1080 position 1920,0 scale 1
+  output eDP-1 disable
+  exec swaymsg "workspace 1 output 'LG Electronics LG TV 0x01010101'"
+  exec swaymsg "workspace 2 output 'LG Electronics LG TV 0x01010101'"
+  exec swaymsg "workspace 3 output 'LG Electronics LG TV 0x01010101'"
+  exec swaymsg "workspace 4 output 'LG Electronics LG TV 0x01010101'"
+  exec swaymsg "workspace 5 output 'LG Electronics LG TV 0x01010101'"
+  exec swaymsg "workspace 6 output 'LG Electronics M2362D 0x01010101'"
+  exec swaymsg "workspace 7 output 'LG Electronics M2362D 0x01010101'"
+  exec swaymsg "workspace 8 output 'LG Electronics M2362D 0x01010101'"
+  exec swaymsg "workspace 9 output 'LG Electronics M2362D 0x01010101'"
+  exec swaymsg "workspace 10 output 'LG Electronics M2362D 0x01010101'"
+  #exec swaymsg workspace  1, move workspace to output "LG Electronics LG TV 0x01010101"
+  #exec swaymsg workspace  2, move workspace to output "LG Electronics LG TV 0x01010101"
+  #exec swaymsg workspace  3, move workspace to output "LG Electronics LG TV 0x01010101"
+  #exec swaymsg workspace  4, move workspace to output "LG Electronics LG TV 0x01010101"
+  #exec swaymsg workspace  5, move workspace to output "LG Electronics LG TV 0x01010101"
+  #exec swaymsg workspace  6, move workspace to output "LG Electronics M2362D 0x01010101"
+  #exec swaymsg workspace  7, move workspace to output "LG Electronics M2362D 0x01010101"
+  #exec swaymsg workspace  8, move workspace to output "LG Electronics M2362D 0x01010101"
+  #exec swaymsg workspace  9, move workspace to output "LG Electronics M2362D 0x01010101"
+  #exec swaymsg workspace 10, move workspace to output "LG Electronics M2362D 0x01010101"
 }
 
 profile polito_led2 {

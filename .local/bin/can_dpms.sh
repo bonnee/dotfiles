@@ -19,7 +19,7 @@ command -v playerctl > /dev/null 2>&1 || {
 }
 
 # Check if music is playing on an external display
-if playerctl status 2> /dev/null | grep -q "Playing" && is_external_display; then
+if playerctl status --format "{{ uc(status) }}" 2> /dev/null | grep -q "PLAYING" && is_external_display; then
     exit 0  # Music playing on an external display
 else
     exit 1  # No music playing or not on an external display

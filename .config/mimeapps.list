@@ -52,6 +52,11 @@ application/x-wine-extension-ini=org.gnome.gedit.desktop
 image/webp=org.gnome.eog.desktop
 application/x-pak=org.gnome.FileRoller.desktop
 x-scheme-handler/prusaslicer=PrusaSlicerURLProtocol.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
+image/heif=org.gnome.eog.desktop
+x-scheme-handler/discord-831593107883032657=discord-831593107883032657.desktop
+application/x-mswinurl=firefox-developer-edition.desktop
+x-scheme-handler/msteams=teams.desktop
 
 [Added Associations]
 image/gif=org.gnome.eog.desktop;imv-folder.desktop;gimp.desktop;feh.desktop;eog.desktop;
@@ -95,7 +100,7 @@ x-scheme-handler/mid=userapp-Thunderbird-Z2U1F1.desktop;
 x-scheme-handler/webcal=userapp-Thunderbird-3R5GG1.desktop;
 x-scheme-handler/webcals=userapp-Thunderbird-3R5GG1.desktop;
 application/x-cd-image=gnome-disk-image-mounter.desktop;org.gnome.FileRoller.desktop;
-image/heif=gimp.desktop;imv-folder.desktop;
+image/heif=gimp.desktop;imv-folder.desktop;org.gnome.eog.desktop;
 image/svg+xml=gimp.desktop;org.inkscape.Inkscape.desktop;
 application/postscript=org.inkscape.Inkscape.desktop;org.gnome.Evince.desktop;
 application/x-shellscript=nvim.desktop;vim.desktop;org.gnome.gedit.desktop;
@@ -117,3 +122,5 @@ application/x-pak=org.gnome.FileRoller.desktop;
 x-scheme-handler/http=firefox-developer-edition.desktop;
 x-scheme-handler/https=firefox-developer-edition.desktop;
 x-scheme-handler/chrome=firefox-developer-edition.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;
+application/x-mswinurl=firefox-developer-edition.desktop;

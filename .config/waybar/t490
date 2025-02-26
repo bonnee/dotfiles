@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","custom/fan","temperature","custom/tlp","battery","custom/consumption","custom/ibam","clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","custom/fan","temperature","custom/tlp","battery","custom/consumption","clock"],
     "sway/window": {
         "max-length": 192
     },
@@ -33,11 +33,6 @@
       "exec-on-event": true,
       "on-click": "$HOME/.config/waybar/scripts/tlp click",
       "signal": 8
-    },
-    "custom/ibam": {
-      "format": "󱧥 {}",
-      "interval": 60,
-      "exec": "$HOME/.config/waybar/scripts/ibam",
     },
     "clock": {
         "format":" {:%a %d, %H:%M}",

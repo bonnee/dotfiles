@@ -9,6 +9,8 @@ zmodload zsh/complist
 
 setopt autocd extendedglob nomatch notify no_share_history
 
+export HISTSIZE=100000
+
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history

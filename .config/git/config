@@ -1,13 +1,16 @@
 [user]
   email = bonora.matteo@gmail.com
-  name = Bonnee
+  name = bonny
   signingkey = 03F5F2890B72556B
 
-[includeIf "gitdir:~/uni/softeng/"]
-  path = ~/uni/polito/.gitconfig
+[includeIf "gitdir:~/src/rt/"]
+  path = ~/src/rt/gitconfig
 
-[includeIf "gitdir:~/uni/polito/softeng/"]
-  path = ~/uni/polito/softeng/.gitconfig
+[includeIf "gitdir:~/Documents/uni/polito/"]
+  path = ~/Documents/uni/polito/.gitconfig
+
+[includeIf "gitdir:~/Documents/uni/polito/softeng/"]
+  path = ~/Documents/uni/polito/softeng/.gitconfig
 
 [includeIf "gitdir:~/src/scd/"]
   path = ~/src/scd/.gitconfig
@@ -49,3 +52,15 @@
 	process = git-lfs filter-process
 [tag]
 	gpgsign = true
+[safe]
+	directory = /opt/esp-idf
+	directory = /opt/esp-idf/components/bt/controller/lib_esp32
+	directory = /opt/esp-idf/components/bootloader/subproject/components/micro-ecc/micro-ecc
+	directory = /opt/esp-idf/components/spiffs/spiffs
+	directory = /opt/esp-idf/components/json/cJSON
+	directory = /opt/esp-idf/components/mbedtls/mbedtls
+	directory = /opt/esp-idf/components/lwip/lwip
+	directory = /opt/esp-idf/components/mqtt/esp-mqtt
+	directory = /opt/esp-idf/components/protobuf-c/protobuf-c
+	directory = /opt/esp-idf/components/unity/unity
+	directory = /opt/esp-idf/components/bt/host/nimble/nimble

@@ -67,3 +67,7 @@ profile polito_led2 {
   output eDP-1 position 320,1440 scale 1
 }
 
+profile tp13_display {
+  output "Invalid Vendor Codename - RTK 0x1920 0x19201080" position 0,0 scale 1.1
+  output eDP-1 position 1749,0 scale 1
+}

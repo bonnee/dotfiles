@@ -3,7 +3,7 @@
 #[ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 . "$HOME/.cache/wal/colors.sh"
 
-#tmpbg='/tmp/screen.png'
+tmpbg='/tmp/screen.png'
 
 trans="#00000000"
 alpha="D9"
@@ -12,8 +12,7 @@ alpha="D9"
 #convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
 #"$HOME/.local/bin/blur_screen.sh" "$tmpbg"
 
-swaylock -f \
---screenshot \
+swaylock -f -S \
 --effect-blur 6x7 \
 --effect-vignette 0.6:0.5 \
 --clock \

@@ -32,7 +32,7 @@ dir=""
 in_flag=false
 out_flag=false
 
-while getopts "cr:o:d:" opt; do
+while getopts "cr:o:d:k:" opt; do
   case $opt in
     c)
       if command -v zstd > /dev/null ; then
@@ -69,6 +69,10 @@ while getopts "cr:o:d:" opt; do
       mount_point=$(mktemp -d)
       dir="$mount_point"
       out_flag=true
+      ;;
+    k)
+      echo "Keeping last $OPTARG backups"
+      keep="$OPTARG"
       ;;
     \?)
       echo "Invalid option: -$OPTARG"
@@ -115,7 +119,7 @@ if [ $state -eq 0 ]; then
   imgs=$(ls -1tr "$dir" | grep -E "(img.*$|img$)")
 
   # Remove older backups
-  if [ $(count "$imgs") -gt 3 ] ; then
+  if [ -n "$keep" ] && [ $(count "$imgs") -gt $keep ] ; then
     old=$(first "$imgs")
     msg "Removing $old" && rm "$dir/$old" && msg "$old removed."
   fi

@@ -60,7 +60,7 @@ x-scheme-handler/msteams=teams.desktop
 
 [Added Associations]
 image/gif=org.gnome.eog.desktop;imv-folder.desktop;gimp.desktop;feh.desktop;eog.desktop;
-text/plain=org.gnome.gedit.desktop;visual-studio-code.desktop;text.desktop;vim.desktop;stm32cubemx.desktop;
+text/plain=org.freecad.FreeCAD.desktop;org.gnome.gedit.desktop;visual-studio-code.desktop;text.desktop;vim.desktop;stm32cubemx.desktop;
 application/pdf=org.inkscape.Inkscape.desktop;com.github.xournalpp.xournalpp.desktop;calibre-gui.desktop;org.gnome.Evince.desktop;
 application/epub+zip=calibre-ebook-viewer.desktop;
 text/html=firefoxdeveloperedition.desktop;firefox.desktop;firefox-developer-edition.desktop;
@@ -124,3 +124,4 @@ x-scheme-handler/https=firefox-developer-edition.desktop;
 x-scheme-handler/chrome=firefox-developer-edition.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
 application/x-mswinurl=firefox-developer-edition.desktop;
+application/p21=org.freecad.FreeCAD.desktop;

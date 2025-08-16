@@ -9,7 +9,7 @@ trans="#00000000"
 alpha="D9"
 
 #grim "$tmpbg"
-#convert "$tmpbg" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
+convert "$wallpaper" -scale 50% -scale 10% -scale 1000% -scale 200% "$tmpbg"
 #"$HOME/.local/bin/blur_screen.sh" "$tmpbg"
 
 swaylock -f -S \
@@ -38,9 +38,8 @@ swaylock -f -S \
 --ring-color="$trans" \
 --line-uses-ring \
 --separator-color="$trans" \
---key-hl-color="$color1" \
---bs-hl-color="$color6" \
 \
 --text-ver-color="$foreground" \
---text-wrong-color="$foreground" \
-#--time-effects \
+--text-wrong-color="$foreground"
+#--time-effects 
+

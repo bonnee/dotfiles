@@ -1,3 +1,5 @@
+#!/bin/sh
+
 dotdir=$HOME/.dotfiles
 alias dots='/usr/bin/git --git-dir=$dotdir --work-tree=$HOME'
 

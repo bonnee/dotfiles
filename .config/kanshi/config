@@ -50,16 +50,6 @@ profile monitor_and_tv_lg {
   exec swaymsg "workspace 8 output 'LG Electronics M2362D 0x01010101'"
   exec swaymsg "workspace 9 output 'LG Electronics M2362D 0x01010101'"
   exec swaymsg "workspace 10 output 'LG Electronics M2362D 0x01010101'"
-  #exec swaymsg workspace  1, move workspace to output "LG Electronics LG TV 0x01010101"
-  #exec swaymsg workspace  2, move workspace to output "LG Electronics LG TV 0x01010101"
-  #exec swaymsg workspace  3, move workspace to output "LG Electronics LG TV 0x01010101"
-  #exec swaymsg workspace  4, move workspace to output "LG Electronics LG TV 0x01010101"
-  #exec swaymsg workspace  5, move workspace to output "LG Electronics LG TV 0x01010101"
-  #exec swaymsg workspace  6, move workspace to output "LG Electronics M2362D 0x01010101"
-  #exec swaymsg workspace  7, move workspace to output "LG Electronics M2362D 0x01010101"
-  #exec swaymsg workspace  8, move workspace to output "LG Electronics M2362D 0x01010101"
-  #exec swaymsg workspace  9, move workspace to output "LG Electronics M2362D 0x01010101"
-  #exec swaymsg workspace 10, move workspace to output "LG Electronics M2362D 0x01010101"
 }
 
 profile polito_led2 {
@@ -77,7 +67,8 @@ profile hvc {
   output eDP-1 disable
 }
 
-profile {
-    output HDMI-A-2 position 0,0 mode 2560x1440@30.0000 scale 1.00 transform normal
-    output eDP-1 position 3840,0 mode 1920x1080@60.0080 scale 1.00 transform normal
+profile dell_and_tv_lg {
+  output 'LG Electronics M2362D 0x01010101' mode 1920x1080 position 0,180
+  output 'Dell Inc. DELL S2721DGF J129T83' mode 2560x1440 position 1920,0
 }
+

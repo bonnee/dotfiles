@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu","cpu","custom/consumption","custom/tlp","battery","custom/ibam","clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","temperature","custom/fan","cpu","custom/consumption","custom/tlp","battery","custom/ibam","clock"],
     "sway/window": {
         "max-length": 192
     },

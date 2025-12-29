@@ -71,3 +71,13 @@ profile tp13_display {
   output "Invalid Vendor Codename - RTK 0x1920 0x19201080" position 0,0 scale 1.1
   output eDP-1 position 1749,0 scale 1
 }
+
+profile hvc {
+  output 'Samsung Electric Company U28D590 H4MFB04265' mode 2560x1440 scale 1
+  output eDP-1 disable
+}
+
+profile {
+    output HDMI-A-2 position 0,0 mode 2560x1440@30.0000 scale 1.00 transform normal
+    output eDP-1 position 3840,0 mode 1920x1080@60.0080 scale 1.00 transform normal
+}

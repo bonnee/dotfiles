@@ -1,5 +1,5 @@
 typeset -U PATH path
-path=("$HOME/.local/bin" "$HOME/.npm-global/bin" "/usr/lib/ccache/bin", "$path[@]")
+path=("$HOME/.local/bin" "$HOME/.npm-global/bin" "/usr/lib/ccache/bin" "/usr/lib/" "$path[@]")
 export PATH
 
 export XDG_CONFIG_HOME=$HOME/.config

@@ -25,6 +25,7 @@
   gpgsign = true
 [alias]
   graph = log --all --decorate --oneline --graph
+	s = status
 [pull]
   rebase = false
 [core]

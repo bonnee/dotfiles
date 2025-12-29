@@ -1,72 +1,155 @@
 devices: (
-{
-    name: "Wireless Mouse MX Master 2S";
-    smartshift:
     {
-        on: true;
-        threshold: 20;
-    };
-    hiresscroll:
-    {
-        hires: true;
-        invert: false;
-        target: false;
-    };
-    dpi: 2100;
-
-    buttons: (
+        name: "MX Master 3S"
+	smartshift:
         {
-            cid: 0xc3;
-            action =
-            {
-                type: "Gestures";
-                gestures: (
-                    {
-                        direction: "Up";
-                        mode: "OnFewPixels";
-			pixels: 150;
-                        action =
-                        {
-                            type: "Keypress";
-                            keys: ["KEY_VOLUMEUP"];
-                        };
-                    },
-                    {
-                        direction: "Down";
-                        mode: "OnFewPixels";
-			pixels: 150;
-                        action =
-                        {
-                            type: "Keypress";
-                            keys: ["KEY_VOLUMEDOWN"];
-                        };
-                    },
-                    {
-                        direction: "Left";
-                        mode: "OnRelease";
-                        action =
-                        {
-			    type: "KeyPress";
-			    keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
-                        };
-                    },
-                    {
-                        direction: "Right";
-                        mode: "OnRelease";
-                        action =
-                        {
-			    type: "KeyPress";
-			    keys: ["KEY_LEFTMETA", "KEY_TAB"];
-                        }
-                    },
-                    {
-                        direction: "None";
-                        mode: "NoPress";
-			action = { type: "None"; }
-                    }
-                );
+            on: true;
+            threshold: 10;
+            default_threshold: 20;
+        };
+        hiresscroll:
+        {
+            hires: true;
+            invert: false;
+            target: false;
+            up: {
+                mode: "Axis";
+                axis: "REL_WHEEL";
+                // Adjust this multiplier:
+                axis_multiplier: 2;
             };
-        }
-    );
-}
+
+            down: {
+                mode: "Axis";
+                axis: "REL_WHEEL";
+                axis_multiplier: -0.1;
+            },
+        };
+        dpi: 2100;
+
+        buttons: (
+            {
+                cid: 0xc3;
+                action =
+                {
+                    type: "Gestures";
+                    gestures: (
+                        {
+                            direction: "Up";
+                            mode: "OnFewPixels";
+                            pixels: 150;
+                            action =
+                            {
+                                type: "Keypress";
+                                keys: ["KEY_VOLUMEUP"];
+                            };
+                        },
+                        {
+                            direction: "Down";
+                            mode: "OnFewPixels";
+                            pixels: 150;
+                            action =
+                            {
+                                type: "Keypress";
+                                keys: ["KEY_VOLUMEDOWN"];
+                            };
+                        },
+                        {
+                            direction: "Left";
+                            mode: "OnRelease";
+                            action =
+                            {
+                                type: "KeyPress";
+                                keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
+                            };
+                        },
+                        {
+                            direction: "Right";
+                            mode: "OnRelease";
+                            action =
+                            {
+                                type: "KeyPress";
+                                keys: ["KEY_LEFTMETA", "KEY_TAB"];
+                            }
+                        },
+                        {
+                            direction: "None";
+                            mode: "NoPress";
+                            action = { type: "None"; }
+                        }
+                    );
+                };
+            }
+        );
+    },
+    {
+        name: "Wireless Mouse MX Master 2S";
+        smartshift:
+        {
+            on: true;
+            threshold: 20;
+        };
+        hiresscroll:
+        {
+            hires: true;
+            invert: false;
+            target: false;
+        };
+        dpi: 2100;
+
+        buttons: (
+            {
+                cid: 0xc3;
+                action =
+                {
+                    type: "Gestures";
+                    gestures: (
+                        {
+                            direction: "Up";
+                            mode: "OnFewPixels";
+                            pixels: 150;
+                            action =
+                            {
+                                type: "Keypress";
+                                keys: ["KEY_VOLUMEUP"];
+                            };
+                        },
+                        {
+                            direction: "Down";
+                            mode: "OnFewPixels";
+                            pixels: 150;
+                            action =
+                            {
+                                type: "Keypress";
+                                keys: ["KEY_VOLUMEDOWN"];
+                            };
+                        },
+                        {
+                            direction: "Left";
+                            mode: "OnRelease";
+                            action =
+                            {
+                                type: "KeyPress";
+                                keys: ["KEY_LEFTMETA", "KEY_LEFTSHIFT", "KEY_TAB"];
+                            };
+                        },
+                        {
+                            direction: "Right";
+                            mode: "OnRelease";
+                            action =
+                            {
+                                type: "KeyPress";
+                                keys: ["KEY_LEFTMETA", "KEY_TAB"];
+                            }
+                        },
+                        {
+                            direction: "None";
+                            mode: "NoPress";
+                            action = { type: "None"; }
+                        }
+                    );
+                };
+            }
+        );
+    }
 );

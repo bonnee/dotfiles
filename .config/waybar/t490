@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","load","memory","custom/fan","temperature","group/power","clock"],
+    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","load","memory","group/power","clock"],
     "sway/window": {
         "max-length": 192
     },
@@ -13,13 +13,14 @@
     "group/power": {
       "orientation": "horizontal",
       "drawer": {
+	"click-to-reveal": true,
 	"transition-duration": 500,
 	"transition-left-to-right": false,
       },
       "modules": [
 	"battery",
-	"custom/tlp",
 	"battery#power",
+	"power-profiles-daemon",
       ],
     },
     "battery": {
@@ -34,24 +35,21 @@
 	    "warning": 25,
 	    "critical": 10
 	},
-	"on-click": "threshy-gui"
     },
     "battery#power": {
-      "format": "&#xf0e7; {power:0.1f}W",
+      "format": "&#xf06d; {power:0.1f}W",
       "interval": 5
     },
-    "custom/tlp": {
-      "format": "{}",
-      "interval": 20,
-      "exec": "$HOME/.config/waybar/scripts/tlp",
-      "exec-on-event": true,
-      "on-click": "$HOME/.config/waybar/scripts/tlp click",
-      "signal": 8
-    },
-    "custom/consumption": {
-      "format": "&#xf0e7; {}",
-      "interval": 5,
-      "exec": "$HOME/.config/waybar/scripts/consumption"
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
     },
     "clock": {
         "format":" {:%a %d, %H:%M (%Z)}",
@@ -93,10 +91,17 @@
     "load": {
       "format": "&#xF029A; {load1}",
     },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
     "memory": {
-	"interval": 20,
-	"format": "&#xF538; {}%",
-	"tooltip-format": "Mem:\t{used:0.1f}G / {total:0.1f}G\nSwap:\t{swapUsed:0.1f}G / {swapTotal:0.1f}G",
+      "interval": 20,
+      "format": " {}%",
+      "tooltip-format": "Mem:\t{used:0.1f}G / {total:0.1f}G\nSwap:\t{swapUsed:0.1f}G / {swapTotal:0.1f}G",
     },
     "pulseaudio": {
 	"format": "{icon} {volume}%",
@@ -107,8 +112,12 @@
     	    "hands-free": "󰋎",
     	    "headset": "󰋎",
     	    "phone": "",
+	    "phone-muted": "",
     	    "portable": "",
     	    "car": "",
+	    "default": ["&#xf027;", "&#xf6a8;", "&#xf028;"],
+	},
+	"scroll-step": 2,
 	"smooth-scrolling-threshold": 2
     },
     "temperature": {
@@ -118,26 +127,13 @@
       "format": "{icon} {temperatureC}°C",
       "format-icons": ["","","","",""]
     },
-     "tray": {
-	"icon-size": 32,
-	"spacing": 16
-    },
-    "idle_inhibitor": {
-	"format": "{icon}",
-        "format-icons": {
-	  "activated": "",
-	  "deactivated": ""
-        }
-    },
     "custom/fan": {
       "format": "{}",
       "interval": 10,
-      "exec": "$HOME/.config/waybar/scripts/fan"
+      "exec": "$HOME/.config/waybar/scripts/fan.sh"
     },
-    "custom/updates": {
-      "format": "{} &#xf2f1;",
-      "signal": 12,
-      "exec": "$HOME/.config/waybar/scripts/updates"
+     "tray": {
+	"icon-size": 24,
     },
     "custom/speed": {
       "format": "{} km/h",
@@ -145,4 +141,4 @@
       "exec": "$HOME/.config/waybar/scripts/ciufciuf.sh"
     }
 }
-}
+

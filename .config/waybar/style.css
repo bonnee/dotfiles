@@ -59,10 +59,7 @@ window#waybar.hidden {
 #idle_inhibitor, 
 #temperature, 
 #custom-fan, 
-#custom-consumption, 
-#custom-ratbat, 
-#custom-tlp,
-#custom-ibam {
+#power-profiles-daemon {
   padding: 0px 5px 2px;
   margin: 0 5px;
   color: @foreground;
@@ -90,7 +87,7 @@ window#waybar.hidden {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-#temperature {
+#memory {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   margin-right: 3px;
@@ -112,43 +109,47 @@ window#waybar.hidden {
 
 /** BATTERY SECTION **/
 
-#power {
-}
-
-#custom-tlp,
-#battery,
-#custom-consumption,
-#custom-ibam {
+#power-profiles-daemon,
+#battery {
   background: @color8;
   margin: 3px 0;
 }
-#custom-tlp {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  margin-left: 3px;
+#power-profiles-daemon {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-right: 3px;
+  padding: 0 5px;
 }
 #battery {
   border-radius: 10px;
 }
 
 #battery.power {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-left: 5px;
 }
 
-#battery.charging {
+#power-profiles-daemon.power-saver {
+  background-color: @color3;
+}
+#power-profiles-daemon.performance {
+  background-color: @color1;
+}
+
+#battery.charging:not(.power) {
   border-color: @color2;
 }
-#battery.plugged {
+#battery.plugged:not(.power) {
   border-color: @foreground;
 }
-#battery.low.discharging {
+#battery.low.discharging:not(.power) {
   border-color: @color3;
 }
-#battery.warning.discharging {
+#battery.warning.discharging:not(.power) {
   border-color: @color1;
 }
-#battery.critical.discharging {
+#battery.critical.discharging:not(.power) {
   border-color: @color1;
   animation: blink 1s ease-out infinite;
 }
@@ -159,14 +160,6 @@ window#waybar.hidden {
   }
 }
 
-#custom-consumption.medium {
-  border-color: @color3;
-}
-
-#custom-consumption.high {
-  border-color: @color1;
-}
-
 /** END BATTERY **/
 
 #pulseaudio.muted {
@@ -174,29 +167,19 @@ window#waybar.hidden {
 }
 
 #custom-fan.low {
-  border-color: @color2;
+  color: @color2;
 }
 
 #custom-fan.medium {
-  border-color: @color3;
+  color: @color3;
 }
 
 #custom-fan.high {
-  border-color: @color1;
+  color: @color1;
 }
 
 #idle_inhibitor.activated {
   border-color: @foreground;
-}
-
-#custom-ratbat {
-  color: lightgreen;
-}
-
-#custom-ratbat.critical {
-  border-color: orangered;
-  color: orangered;
-  animation: dotblink 1s ease-out infinite;
 }
 
 @keyframes dotblink {

@@ -81,6 +81,7 @@ window#waybar.hidden {
 #cpu,
 #load,
 #custom-fan,
+#memory,
 #temperature {
   background: @color8;
   margin: 3px 0;
@@ -111,6 +112,9 @@ window#waybar.hidden {
 
 /** BATTERY SECTION **/
 
+#power {
+}
+
 #custom-tlp,
 #battery,
 #custom-consumption,
@@ -123,9 +127,13 @@ window#waybar.hidden {
   border-bottom-left-radius: 10px;
   margin-left: 3px;
 }
-#custom-consumption {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+#battery {
+  border-radius: 10px;
+}
+
+#battery.power {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 #battery.charging {

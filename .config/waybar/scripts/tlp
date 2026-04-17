@@ -5,14 +5,14 @@ get_state()
   tlpstat=$(sudo tlp-stat -s)
   
   # AC/BAT
-  mode=$(echo "$tlpstat" | awk '$1 == "Mode" {print $3 }')
+  mode=$(echo "$tlpstat" | awk '$2 == "profile" {print $4 }')
   mode_out="AC"
-  if test "$mode" == "battery"; then
+  if test "$mode" == "balanced/BAT"; then
     mode_out="BAT"
   fi
   
   auto="auto"
-  is_man=$(echo "$tlpstat" | awk '$1 == "Mode" { gsub(/[()]/,""); print $4 }')
+  is_man=$(echo "$tlpstat" | awk '$2 == "profile" { gsub(/[()]/,""); print $5 }')
   if ! test -z "$is_man"; then
     auto=$is_man;
   fi

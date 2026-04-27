@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","pulseaudio","cpu","temperature","custom/fan","load","memory","group/power","clock"],
+    "modules-right": ["tray","idle_inhibitor","group/audio","cpu","temperature","custom/fan","load","memory","group/power","clock"],
     "sway/window": {
         "max-length": 192
     },
@@ -14,8 +14,8 @@
       "orientation": "horizontal",
       "drawer": {
 	"click-to-reveal": true,
-	"transition-duration": 500,
-	"transition-left-to-right": false,
+	"transition-duration": 200,
+	"transition-left-to-right": true,
       },
       "modules": [
 	"battery",
@@ -26,7 +26,8 @@
     "battery": {
 	"interval": 10,
         "format": "{icon} {capacity}%",
-        "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+        //"format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+        "format-icons": ["&#xf244;","&#xf243;","&#xf242;","&#xf241;","&#xf240;"],
 	"format-plugged": " {capacity}%",
 	"format-charging": "󰂄 {capacity}%",
 	"tooltip-format": "Cycles:\t{cycles}\nSoH:\t{health}%",
@@ -103,6 +104,38 @@
       "format": " {}%",
       "tooltip-format": "Mem:\t{used:0.1f}G / {total:0.1f}G\nSwap:\t{swapUsed:0.1f}G / {swapTotal:0.1f}G",
     },
+    "wireplumber#icon": {
+      "format": "<span size='large'>{icon}</span>",
+      "format-bluetooth": "{icon}󰂯 {volume}%",
+      "format-muted": "<span size='large'>󰝟</span>",
+      "format-icons": {
+          "headphone": "󰋋",
+          "hands-free": "󰋎",
+          "headset": "󰋎",
+          "phone": "",
+          "phone-muted": "",
+          "portable": "",
+          "car": "",
+          "default": ["&#xf027;", "&#xf6a8;", "&#xf028;"],
+      },
+      "scroll-step": 2,
+      "smooth-scrolling-threshold": 1
+    },
+    "wireplumber#sink": {
+      "format": "{volume}%",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click": "pavucontrol",
+      "smooth-scrolling-threshold": 1
+    },
+    "wireplumber#source": {
+      "node-type": "Audio/Source",
+      "format": "<span size='large'>󰍬</span> {volume}%",
+      "format-muted": "󰍭",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "on-click": "pavucontrol",
+      "scroll-step": 2,
+      "smooth-scrolling-threshold": 1
+    },
     "pulseaudio": {
 	"format": "{icon} {volume}%",
         "format-bluetooth": "{icon}󰂯 {volume}%",
@@ -120,8 +153,22 @@
 	"scroll-step": 2,
 	"smooth-scrolling-threshold": 2
     },
+    "group/audio": {
+      "orientation": "horizontal",
+      "drawer": {
+	"click-to-reveal": true,
+	"transition-duration": 200,
+	"transition-left-to-right": true,
+      },
+      "modules": [
+	"wireplumber#icon",
+	"wireplumber#sink",
+	"wireplumber#source",
+      ],
+    },
     "temperature": {
       "thermal-zone": 7,
+      "warning-threshold": 55,
       "critical-threshold": 75,
       "format-critical": " {temperatureC}°C",
       "format": "{icon} {temperatureC}°C",
@@ -134,6 +181,7 @@
     },
      "tray": {
 	"icon-size": 24,
+	"spacing": 8,
     },
     "custom/speed": {
       "format": "{} km/h",

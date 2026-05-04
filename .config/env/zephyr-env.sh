@@ -1,0 +1,1 @@
+/home/bonnee/.local/lib/nrf-connect/nrf_connect_sdk/zephyr/zephyr-env.sh

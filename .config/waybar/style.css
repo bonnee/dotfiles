@@ -4,7 +4,7 @@
   border: none;
   border-radius: 0;
   border-style: solid;
-  font-family: "sans-serif", "Symbols Nerd Font";
+  font-family: "Noto Sans", "Symbols Nerd Font", "Font Awesome 7 Free", "sans-serif";
   font-size: 17px;
   min-height: 0;
 }
@@ -108,7 +108,6 @@ window#waybar.hidden {
 #temperature.critical {
   border-color: @color1;
 }
-
 
 /** END SYSTEM **/
 

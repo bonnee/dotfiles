@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // New sessions start on the build agent's model unless a session
+  // carries its own selection.
+  "model": "deepseek/deepseek-flash",
+
+  // Only model selections are overridden; modes, descriptions, prompts,
+  // and permissions all come from the built-in agent defaults.
+  "agents": {
+    "build": {
+      "model": "deepseek/deepseek-flash"
+    },
+    "explore": {
+      "model": "opencode/mimo-v2.6-flash-free"
+    },
+    "compaction": {
+      "model": "opencode/mimo-v2.6-flash-free"
+    }
+  }
+}

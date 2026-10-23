@@ -6,7 +6,7 @@ PartOf=sway-session.target
 [Service]
 Type=simple
 Environment=LOCK="%h/.local/bin/lockw.sh"
-ExecStart=/usr/bin/swayidle -w lock '${LOCK}' timeout 300 'can_dpms.sh || swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 330 '${LOCK}' timeout 600 'swayidle_tick.sh' before-sleep 'playerctl -a pause 2>/dev/null || true; ${LOCK}' after-resume 'sleep 1; swaymsg "output * dpms on"; swaymsg "output * power on"'
+ExecStart=/usr/bin/swayidle -w lock '${LOCK}' timeout 300 'can_dpms.sh || swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 330 '${LOCK}' timeout 600 'swayidle_tick.sh' before-sleep 'playerctl -a pause 2>/dev/null || true; ${LOCK}' after-resume 'sleep 1; systemctl --user restart kmonad@t490.service; swaymsg "output * dpms on"; swaymsg "output * power on"'
 
 # kill -9 (not -2) on stop/restart: the periodic restart that swayidle_tick.sh
 # triggers must not run stale pending `resume` commands (which would switch

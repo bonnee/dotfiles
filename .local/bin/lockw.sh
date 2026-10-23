@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Idempotency guard: swayidle_tick.sh periodically restarts the idle manager,
+# which re-arms this script via `timeout 330` on every fresh cycle. If a
+# lock is already active, don't spawn a redundant swaylock.
+pgrep -x swaylock >/dev/null && exit 0
+
 #. "$HOME/.cache/wal/colors.sh"
 source "$HOME/.cache/wal/colors.sh"
 

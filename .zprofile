@@ -65,5 +65,16 @@ fi
 
 if uwsm check may-start; then
   exec uwsm start default
+elif [ "$(tty)" = /dev/tty1 ] &&
+     ! pgrep -x sway >/dev/null 2>&1 &&
+     systemctl --user is-active --quiet graphical-session.target 2>/dev/null; then
+  # Session targets left over from a sway that died outside uwsm: nothing stops
+  # graphical-session.target when a non-uwsm compositor exits, and it blocks
+  # `uwsm check may-start` above.
+  echo "uwsm: clearing stale graphical-session.target" >&2
+  systemctl --user stop graphical-session.target
+  if uwsm check may-start; then
+    exec uwsm start default
+  fi
 fi
 

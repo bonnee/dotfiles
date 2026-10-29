@@ -1,0 +1,63 @@
+#!/bin/sh
+# dropwin - run a drop-down (scratchpad) terminal window.
+#
+#   dropwin <app_id> [command ...]
+#
+# Spawns alacritty with --class <app_id>, then hands the window to
+# ~/.local/bin/swayplace (floating, sized, centred, marked, scratchpad) and
+# respawns it when it is closed (same behaviour as the old `while ...; done`
+# loops).
+#
+# Why this exists instead of a `for_window` rule (what it replaces):
+#
+#   * sway re-runs for_window criteria every time a window's title or app_id
+#     changes - starting htop/nvim/qalc changes the title.  A per-view guard
+#     normally stops a rule from firing twice, but that guard lives in memory
+#     only: it is lost after a `reload` (the rules are re-created) and after
+#     an unmap/remap.  From then on the rule's `move to scratchpad` fires on
+#     the next title change and yanks the drop-down window out of the way.
+#     `swaymsg reload` happens silently on every wallpaper/palette change
+#     (wpgtk/pywal), hence "it only happens sometimes".
+#
+#   * sway does not resize scratchpad-hidden windows, so the old rule's
+#     `resize set` after `move to scratchpad` never reached the client - the
+#     drop-down windows kept alacritty's default 80x24 geometry.  Here the
+#     resize is applied while the window is still visible, so it sticks.
+
+set -u
+
+app_id=${1:-}
+[ -n "$app_id" ] || { echo "usage: $(basename "$0") <app_id> [command ...]" >&2; exit 2; }
+shift
+
+term=${DROPWIN_TERM:-alacritty}
+width=${DROPWIN_WIDTH:-1820}
+height=${DROPWIN_HEIGHT:-900}
+
+: "${SWAYSOCK:?SWAYSOCK is not set - run this inside a sway session}"
+
+# con_id of a window with app_id == $app_id, empty if there is none
+existing() {
+	swaymsg -t get_tree -r |
+		jq -r --arg app "$app_id" \
+			'first(.. | objects | select(.app_id == $app) | .id) // empty'
+}
+
+while [ -S "$SWAYSOCK" ]; do
+	sleep 0.5
+
+	# A window of this app_id is already up (e.g. it was started before this
+	# script existed): don't spawn a second one, just wait until it is gone.
+	if [ -n "$(existing)" ]; then
+		while [ -n "$(existing)" ]; do sleep 1; done
+		continue
+	fi
+
+	"$term" --class "$app_id" "$@" &
+	pid=$!
+
+	# floating + size + centre + mark + scratchpad, once the window is mapped
+	swayplace "$app_id" "$pid" "$width" "$height"
+
+	wait "$pid"
+done

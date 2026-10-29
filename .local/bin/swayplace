@@ -1,0 +1,44 @@
+#!/bin/sh
+# swayplace - turn a freshly started window into a scratchpad drop-down.
+#
+#   swayplace <app_id> <pid> [width height]
+#
+# Waits until sway knows the window owned by <pid>, then applies, once:
+#
+#   floating enable, resize set <width> <height>, move position center,
+#   mark <app_id>, move to scratchpad
+#
+# The resize has to happen while the window is still on-screen: sway skips
+# resizes for scratchpad-hidden windows (view_autoconfigure returns early),
+# so resizing after `move to scratchpad` never reaches the client.
+#
+# Used by ~/.local/bin/dropwin (drop-down terminals) and
+# ~/.local/bin/spotify-drop, so that neither needs a for_window rule.
+# for_window criteria are re-run on every window title change once their
+# per-view guard is gone (i.e. after any reload or unmap/remap), which makes
+# side effects such as `move to scratchpad` fire at random later moments.
+
+set -u
+
+app_id=${1:-}
+pid=${2:-}
+if [ -z "$app_id" ] || [ -z "$pid" ]; then
+	echo "usage: $(basename "$0") <app_id> <pid> [width height]" >&2
+	exit 2
+fi
+width=${3:-1820}
+height=${4:-900}
+
+: "${SWAYSOCK:?SWAYSOCK is not set - run this inside a sway session}"
+
+i=0
+while [ $i -lt 100 ]; do
+	if swaymsg -q "[pid=$pid] floating enable, resize set $width $height, move position center, mark $app_id, move to scratchpad"; then
+		exit 0
+	fi
+	sleep 0.1
+	i=$((i + 1))
+done
+
+echo "swayplace: no window for pid $pid (app_id $app_id)" >&2
+exit 1

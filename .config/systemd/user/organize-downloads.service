@@ -1,0 +1,8 @@
+[Unit]
+Description=Sort new files in ~/Downloads into category folders
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/organize run
+Nice=10
+IOSchedulingClass=idle

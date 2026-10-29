@@ -1,0 +1,10 @@
+[Unit]
+Description=Sort ~/Downloads every 15 minutes
+
+[Timer]
+OnCalendar=*:0/15
+RandomizedDelaySec=30
+Persistent=true
+
+[Install]
+WantedBy=timers.target

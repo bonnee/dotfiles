@@ -1,0 +1,223 @@
+# Sort newly downloaded files in ~/Downloads into category subfolders.
+#
+# Scope: only files *created* in the last 30 days and only at the top level of
+# ~/Downloads (subfolders: false), so the older backlog and existing project
+# folders are never touched.
+#
+# Simulate with:  organize sim
+# Apply with:     organize run
+#
+# Nothing is deleted here. On a name collision organize appends a counter
+# (on_conflict defaults to rename_new) instead of overwriting.
+
+rules:
+  - name: "CAD and 3D"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - step
+          - stp
+          - stl
+          - 3mf
+          - obj
+          - f3d
+          - fcstd
+          - sldprt
+          - sldasm
+          - catpart
+          - catproduct
+          - ipt
+          - iam
+          - skp
+          - dxf
+          - dwg
+          - csg
+          - blend
+          - scad
+    actions:
+      - move: ~/Downloads/_sorted/CAD/
+
+  - name: "Images"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - png
+          - jpg
+          - jpeg
+          - gif
+          - webp
+          - svg
+          - bmp
+          - tif
+          - tiff
+          - heic
+          - psd
+          - xcf
+          - cr2
+          - nef
+          - arw
+    actions:
+      - move: ~/Downloads/_sorted/Images/
+
+  - name: "Documents"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - pdf
+          - doc
+          - docx
+          - xls
+          - xlsx
+          - ppt
+          - pptx
+          - odt
+          - ods
+          - odp
+          - txt
+          - md
+          - rtf
+          - ics
+          - html
+          - htm
+          - epub
+    actions:
+      - move: ~/Downloads/_sorted/Documents/
+
+  - name: "Installers and disk images"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - exe
+          - msi
+          - msix
+          - appx
+          - iso
+          - img
+          - dmg
+          - appimage
+          - deb
+          - rpm
+          - run
+          - pkg
+    actions:
+      - move: ~/Downloads/_sorted/Installers/
+
+  - name: "Data and firmware"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - dbc
+          - trc
+          - blf
+          - asc
+          - arxml
+          - a2l
+          - ldf
+          - sym
+          - dcm
+          - hex
+          - s19
+          - mot
+          - uf2
+          - dfu
+          - bin
+          - enc
+          - json
+          - xml
+          - csv
+          - yaml
+          - yml
+          - xmp
+    actions:
+      - move: ~/Downloads/_sorted/Data/
+
+  - name: "Archives"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - zip
+          - 7z
+          - rar
+          - tar
+          - gz
+          - xz
+          - bz2
+          - zst
+          - tgz
+          - tbz2
+          - cab
+    actions:
+      - move: ~/Downloads/_sorted/Archives/
+
+  - name: "Media"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - mp4
+          - mkv
+          - avi
+          - mov
+          - webm
+          - mp3
+          - wav
+          - flac
+          - m4a
+          - ogg
+    actions:
+      - move: ~/Downloads/_sorted/Media/
+
+  - name: "Code and projects"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - extension:
+          - py
+          - s
+          - c
+          - h
+          - cpp
+          - hpp
+          - js
+          - ts
+          - sh
+          - lua
+          - rs
+          - go
+          - java
+          - ino
+          - ipynb
+          - jar
+          - fcmacro
+          - kicad_pcb
+          - kicad_sch
+          - sch
+          - brd
+    actions:
+      - move: ~/Downloads/_sorted/Code/
+
+  # Catch-all: files that arrived more than a day ago and matched nothing above.
+  # The one-day delay keeps freshly downloaded files in place while you still
+  # need them at the top level.
+  - name: "Misc (anything older than a day)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: newer}
+      - created: {days: 1, mode: older}
+    actions:
+      - move: ~/Downloads/_sorted/Misc/

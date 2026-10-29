@@ -1,23 +1,6 @@
-# Disable client side decoration
-export GTK_CSD=0
-#export LD_PRELOAD=/lib/libgtk3-nocsd.so.0
-
-export MOZ_ENABLE_WAYLAND=1
-export MOZ_DBUS_REMOTE=1
-
-# Ugly hack to make hardware-accelerated video decoding work with the latest
-# versions of Firefox
-#export MOZ_DISABLE_RDD_SANDBOX=1
-export BEMENU_BACKEND=wayland
-export XDG_SESSION_TYPE=wayland
-export XDG_CURRENT_DESKTOP="${XDG_CURRENT_DESKTOP:-sway}"
-export CLUTTER_BACKEND=wayland
-export QT_QPA_PLATFORM=wayland
-export GDK_BACKEND=wayland
-
-export _JAVA_AWT_WM_NONREPARENTING=1
-
-if [ ! -z "${DISPLAY}" ]; then
-  xrdb ~/.Xresources
-fi
-
+# Wayland/graphical-session variables moved to ~/.config/uwsm/env, which uwsm
+# applies to the sway session only (they used to leak into every TTY shell).
+# Shell-visible vars stay in this directory.
+#
+# XDG_SESSION_TYPE and XDG_CURRENT_DESKTOP are set by uwsm (sway plugin appends
+# ":wlroots").

@@ -56,3 +56,14 @@ if [ -f ~/.zshsecret ]; then
   source ~/.zshsecret
 fi
 
+# Wayland session (uwsm): log in on tty1 to start Sway.
+# Other VTs stay plain login shells; `uwsm check may-start` decides.
+if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] &&
+   [ -S "${XDG_RUNTIME_DIR:-/run/user/$UID}/bus" ]; then
+  export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR:-/run/user/$UID}/bus"
+fi
+
+if uwsm check may-start; then
+  exec uwsm start default
+fi
+

@@ -1,219 +1,257 @@
-# Sort newly downloaded files in ~/Downloads into category subfolders.
+# Sort files in ~/Downloads into category folders.
 #
-# Scope: only files *created* in the last 30 days and only at the top level of
-# ~/Downloads (subfolders: false), so the older backlog and existing project
-# folders are never touched.
+# Three passes, in order:
+#   1. byte-identical duplicates at the top level -> trash (recoverable)
+#   2. files created in the last 30 days        -> _sorted/<Category>/
+#   3. anything older                           -> _sorted/<Category>/<year>/
+#
+# "Older" is based on birth time, so on this filesystem the pre-2026 backlog
+# lands in year folders. Subfolders inside ~/Downloads are never scanned, so
+# _sorted/ and existing project folders are left alone.
+#
+# Nothing is deleted outright: duplicates go to the trash. On a name collision
+# organize appends a counter (on_conflict defaults to rename_new).
 #
 # Simulate with:  organize sim
 # Apply with:     organize run
-#
-# Nothing is deleted here. On a name collision organize appends a counter
-# (on_conflict defaults to rename_new) instead of overwriting.
+
+ext_cad: &cad
+  - step
+  - stp
+  - stl
+  - 3mf
+  - obj
+  - f3d
+  - fcstd
+  - sldprt
+  - sldasm
+  - catpart
+  - catproduct
+  - ipt
+  - iam
+  - skp
+  - dxf
+  - dwg
+  - csg
+  - blend
+  - scad
+
+ext_images: &images
+  - png
+  - jpg
+  - jpeg
+  - gif
+  - webp
+  - svg
+  - bmp
+  - tif
+  - tiff
+  - heic
+  - psd
+  - xcf
+  - cr2
+  - nef
+  - arw
+
+ext_documents: &documents
+  - pdf
+  - doc
+  - docx
+  - xls
+  - xlsx
+  - ppt
+  - pptx
+  - odt
+  - ods
+  - odp
+  - txt
+  - md
+  - rtf
+  - ics
+  - html
+  - htm
+  - epub
+
+ext_installers: &installers
+  - exe
+  - msi
+  - msix
+  - appx
+  - iso
+  - img
+  - dmg
+  - appimage
+  - deb
+  - rpm
+  - run
+  - pkg
+
+ext_data: &data
+  - dbc
+  - trc
+  - blf
+  - asc
+  - arxml
+  - a2l
+  - ldf
+  - sym
+  - dcm
+  - hex
+  - s19
+  - mot
+  - uf2
+  - dfu
+  - bin
+  - enc
+  - json
+  - xml
+  - csv
+  - yaml
+  - yml
+  - xmp
+
+ext_archives: &archives
+  - zip
+  - 7z
+  - rar
+  - tar
+  - gz
+  - xz
+  - bz2
+  - zst
+  - tgz
+  - tbz2
+  - cab
+
+ext_media: &media
+  - mp4
+  - mkv
+  - avi
+  - mov
+  - webm
+  - mp3
+  - wav
+  - flac
+  - m4a
+  - ogg
+
+ext_code: &code
+  - py
+  - s
+  - c
+  - h
+  - cpp
+  - hpp
+  - js
+  - ts
+  - sh
+  - lua
+  - rs
+  - go
+  - java
+  - ino
+  - ipynb
+  - jar
+  - fcmacro
+  - kicad_pcb
+  - kicad_sch
+  - sch
+  - brd
 
 rules:
-  - name: "CAD and 3D"
+  # ---- 1. duplicates ------------------------------------------------------
+  # Byte-for-byte comparison, not name matching. Restricted to browser-style
+  # "(1)" / "(2)" copies so that differently-named pairs (a contract filed
+  # under two names, board revisions) are never touched. The plain name wins:
+  # detect_original_by sorts by name, so reversing it keeps the last-
+  # alphabetical name — the one without the counter.
+  - name: "Trash byte-identical duplicates"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - duplicate:
+          detect_original_by: "-name"
+      - name:
+          match: "*(*)*"
+      - not empty
+    actions:
+      - trash
+
+  # ---- 2. recent files (last 30 days) -------------------------------------
+  - name: "CAD (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - step
-          - stp
-          - stl
-          - 3mf
-          - obj
-          - f3d
-          - fcstd
-          - sldprt
-          - sldasm
-          - catpart
-          - catproduct
-          - ipt
-          - iam
-          - skp
-          - dxf
-          - dwg
-          - csg
-          - blend
-          - scad
+      - extension: *cad
     actions:
       - move: ~/Downloads/_sorted/CAD/
 
-  - name: "Images"
+  - name: "Images (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - png
-          - jpg
-          - jpeg
-          - gif
-          - webp
-          - svg
-          - bmp
-          - tif
-          - tiff
-          - heic
-          - psd
-          - xcf
-          - cr2
-          - nef
-          - arw
+      - extension: *images
     actions:
       - move: ~/Downloads/_sorted/Images/
 
-  - name: "Documents"
+  - name: "Documents (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - pdf
-          - doc
-          - docx
-          - xls
-          - xlsx
-          - ppt
-          - pptx
-          - odt
-          - ods
-          - odp
-          - txt
-          - md
-          - rtf
-          - ics
-          - html
-          - htm
-          - epub
+      - extension: *documents
     actions:
       - move: ~/Downloads/_sorted/Documents/
 
-  - name: "Installers and disk images"
+  - name: "Installers (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - exe
-          - msi
-          - msix
-          - appx
-          - iso
-          - img
-          - dmg
-          - appimage
-          - deb
-          - rpm
-          - run
-          - pkg
+      - extension: *installers
     actions:
       - move: ~/Downloads/_sorted/Installers/
 
-  - name: "Data and firmware"
+  - name: "Data and firmware (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - dbc
-          - trc
-          - blf
-          - asc
-          - arxml
-          - a2l
-          - ldf
-          - sym
-          - dcm
-          - hex
-          - s19
-          - mot
-          - uf2
-          - dfu
-          - bin
-          - enc
-          - json
-          - xml
-          - csv
-          - yaml
-          - yml
-          - xmp
+      - extension: *data
     actions:
       - move: ~/Downloads/_sorted/Data/
 
-  - name: "Archives"
+  - name: "Archives (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - zip
-          - 7z
-          - rar
-          - tar
-          - gz
-          - xz
-          - bz2
-          - zst
-          - tgz
-          - tbz2
-          - cab
+      - extension: *archives
     actions:
       - move: ~/Downloads/_sorted/Archives/
 
-  - name: "Media"
+  - name: "Media (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - mp4
-          - mkv
-          - avi
-          - mov
-          - webm
-          - mp3
-          - wav
-          - flac
-          - m4a
-          - ogg
+      - extension: *media
     actions:
       - move: ~/Downloads/_sorted/Media/
 
-  - name: "Code and projects"
+  - name: "Code (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
       - created: {days: 30, mode: newer}
-      - extension:
-          - py
-          - s
-          - c
-          - h
-          - cpp
-          - hpp
-          - js
-          - ts
-          - sh
-          - lua
-          - rs
-          - go
-          - java
-          - ino
-          - ipynb
-          - jar
-          - fcmacro
-          - kicad_pcb
-          - kicad_sch
-          - sch
-          - brd
+      - extension: *code
     actions:
       - move: ~/Downloads/_sorted/Code/
 
-  # Catch-all: files that arrived more than a day ago and matched nothing above.
-  # The one-day delay keeps freshly downloaded files in place while you still
-  # need them at the top level.
-  - name: "Misc (anything older than a day)"
+  # Quick downloads with no matching category stay visible for a day.
+  - name: "Misc (recent)"
     locations: ~/Downloads
     subfolders: false
     filters:
@@ -221,3 +259,93 @@ rules:
       - created: {days: 1, mode: older}
     actions:
       - move: ~/Downloads/_sorted/Misc/
+
+  # ---- 3. backlog (older than 30 days), bucketed by year ------------------
+  - name: "CAD (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *cad
+    actions:
+      - move: "~/Downloads/_sorted/CAD/{lastmodified.year}/"
+
+  - name: "Images (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *images
+    actions:
+      - move: "~/Downloads/_sorted/Images/{lastmodified.year}/"
+
+  - name: "Documents (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *documents
+    actions:
+      - move: "~/Downloads/_sorted/Documents/{lastmodified.year}/"
+
+  - name: "Installers (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *installers
+    actions:
+      - move: "~/Downloads/_sorted/Installers/{lastmodified.year}/"
+
+  - name: "Data and firmware (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *data
+    actions:
+      - move: "~/Downloads/_sorted/Data/{lastmodified.year}/"
+
+  - name: "Archives (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *archives
+    actions:
+      - move: "~/Downloads/_sorted/Archives/{lastmodified.year}/"
+
+  - name: "Media (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *media
+    actions:
+      - move: "~/Downloads/_sorted/Media/{lastmodified.year}/"
+
+  - name: "Code (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+      - extension: *code
+    actions:
+      - move: "~/Downloads/_sorted/Code/{lastmodified.year}/"
+
+  - name: "Misc (backlog)"
+    locations: ~/Downloads
+    subfolders: false
+    filters:
+      - created: {days: 30, mode: older}
+      - lastmodified
+    actions:
+      - move: "~/Downloads/_sorted/Misc/{lastmodified.year}/"

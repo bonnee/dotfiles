@@ -1,16 +1,22 @@
-# Sort files in ~/Downloads into category folders.
+# Keep ~/Downloads shallow: recent files stay one level inside a category,
+# anything older than 12 months is swept into an archive tree.
 #
-# Three passes, in order:
-#   1. byte-identical duplicates at the top level -> trash (recoverable)
-#   2. files created in the last 30 days        -> _sorted/<Category>/
-#   3. anything older                           -> _sorted/<Category>/<year>/
+# Layout:
+#   ~/Downloads/_sorted/<Category>/            files from the last 12 months
+#   ~/Downloads/_archive/<year>/<Category>/    older files, by modification year
 #
-# "Older" is based on birth time, so on this filesystem the pre-2026 backlog
-# lands in year folders. Subfolders inside ~/Downloads are never scanned, so
-# _sorted/ and existing project folders are left alone.
+# Passes, in order:
+#   1. byte-identical browser duplicates at the top level -> trash
+#   2. top-level files -> _sorted/<Category>/ (extension rules)
+#   3. _sorted files older than 12 months -> _archive/<year>/<Category>/
 #
-# Nothing is deleted outright: duplicates go to the trash. On a name collision
-# organize appends a counter (on_conflict defaults to rename_new).
+# Age is measured with modification time, not birth time: everything restored
+# in Feb 2026 has a 2026 btime, which would keep the 2013-2025 backlog
+# "recent" forever. Subfolders of ~/Downloads are never scanned except by the
+# archive sweeper, which only looks inside _sorted.
+#
+# Nothing is deleted outright: duplicates go to the trash. Name collisions get
+# a counter (on_conflict defaults to rename_new).
 #
 # Simulate with:  organize sim
 # Apply with:     organize run
@@ -161,10 +167,9 @@ ext_code: &code
 rules:
   # ---- 1. duplicates ------------------------------------------------------
   # Byte-for-byte comparison, not name matching. Restricted to browser-style
-  # "(1)" / "(2)" copies so that differently-named pairs (a contract filed
-  # under two names, board revisions) are never touched. The plain name wins:
-  # detect_original_by sorts by name, so reversing it keeps the last-
-  # alphabetical name — the one without the counter.
+  # "(1)" / "(2)" copies so differently-named pairs (a contract filed under two
+  # names, board revisions) are never touched. detect_original_by sorts by
+  # name and is reversed, so the name without the counter is kept.
   - name: "Trash byte-identical duplicates"
     locations: ~/Downloads
     subfolders: false
@@ -177,175 +182,91 @@ rules:
     actions:
       - trash
 
-  # ---- 2. recent files (last 30 days) -------------------------------------
-  - name: "CAD (recent)"
+  # ---- 2. sort top-level files into categories ----------------------------
+  - name: "CAD"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *cad
     actions:
       - move: ~/Downloads/_sorted/CAD/
 
-  - name: "Images (recent)"
+  - name: "Images"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *images
     actions:
       - move: ~/Downloads/_sorted/Images/
 
-  - name: "Documents (recent)"
+  - name: "Documents"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *documents
     actions:
       - move: ~/Downloads/_sorted/Documents/
 
-  - name: "Installers (recent)"
+  - name: "Installers"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *installers
     actions:
       - move: ~/Downloads/_sorted/Installers/
 
-  - name: "Data and firmware (recent)"
+  - name: "Data and firmware"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *data
     actions:
       - move: ~/Downloads/_sorted/Data/
 
-  - name: "Archives (recent)"
+  - name: "Archives"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *archives
     actions:
       - move: ~/Downloads/_sorted/Archives/
 
-  - name: "Media (recent)"
+  - name: "Media"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *media
     actions:
       - move: ~/Downloads/_sorted/Media/
 
-  - name: "Code (recent)"
+  - name: "Code"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
       - extension: *code
     actions:
       - move: ~/Downloads/_sorted/Code/
 
   # Quick downloads with no matching category stay visible for a day.
-  - name: "Misc (recent)"
+  - name: "Misc"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - created: {days: 30, mode: newer}
-      - created: {days: 1, mode: older}
+      - lastmodified:
+          days: 1
+          mode: older
     actions:
       - move: ~/Downloads/_sorted/Misc/
 
-  # ---- 3. backlog (older than 30 days), bucketed by year ------------------
-  - name: "CAD (backlog)"
-    locations: ~/Downloads
-    subfolders: false
+  # ---- 3. age out: older than 12 months --------------------------------
+  # Walks _sorted recursively; the category is the file's parent folder and
+  # the year comes from modification time.
+  - name: "Archive: older than 12 months"
+    locations: ~/Downloads/_sorted
+    subfolders: true
     filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *cad
+      - lastmodified:
+          days: 365
+          mode: older
     actions:
-      - move: "~/Downloads/_sorted/CAD/{lastmodified.year}/"
-
-  - name: "Images (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *images
-    actions:
-      - move: "~/Downloads/_sorted/Images/{lastmodified.year}/"
-
-  - name: "Documents (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *documents
-    actions:
-      - move: "~/Downloads/_sorted/Documents/{lastmodified.year}/"
-
-  - name: "Installers (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *installers
-    actions:
-      - move: "~/Downloads/_sorted/Installers/{lastmodified.year}/"
-
-  - name: "Data and firmware (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *data
-    actions:
-      - move: "~/Downloads/_sorted/Data/{lastmodified.year}/"
-
-  - name: "Archives (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *archives
-    actions:
-      - move: "~/Downloads/_sorted/Archives/{lastmodified.year}/"
-
-  - name: "Media (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *media
-    actions:
-      - move: "~/Downloads/_sorted/Media/{lastmodified.year}/"
-
-  - name: "Code (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-      - extension: *code
-    actions:
-      - move: "~/Downloads/_sorted/Code/{lastmodified.year}/"
-
-  - name: "Misc (backlog)"
-    locations: ~/Downloads
-    subfolders: false
-    filters:
-      - created: {days: 30, mode: older}
-      - lastmodified
-    actions:
-      - move: "~/Downloads/_sorted/Misc/{lastmodified.year}/"
+      - move: "~/Downloads/_archive/{lastmodified.year}/{path.parent.name}/"

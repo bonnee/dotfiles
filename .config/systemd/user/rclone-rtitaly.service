@@ -1,5 +1,5 @@
 [Unit]
-Description=Rclone VFS Mount for shared RT_ITALY folder (mounted at ~/OneDrive)
+Description=Rclone VFS Mount for shared RT_ITALY folder (mounted at ~/RT/Italy)
 Documentation=man:rclone(1)
 After=network-online.target
 Wants=network-online.target
@@ -8,19 +8,22 @@ Wants=network-online.target
 Type=notify
 
 # Ensure target directory exists before mounting
-ExecStartPre=/usr/bin/mkdir -p %h/OneDrive
+ExecStartPre=/usr/bin/mkdir -p %h/RT/Italy
 
-ExecStart=/usr/bin/rclone mount rtitaly: %h/OneDrive \
+ExecStart=/usr/bin/rclone mount rtitaly: %h/RT/Italy \
   --vfs-cache-mode full \
   --vfs-cache-max-size 10G \
   --vfs-fast-fingerprint \
   --dir-cache-time 5m \
   --attr-timeout 1m \
   --transfers 4 \
-  --checkers 8
+  --checkers 8 \
+  --rc \
+  --rc-addr=localhost:5573 \
+  --rc-no-auth
 
 # Clean unmount on service stop or shutdown
-ExecStop=/usr/bin/fusermount -u -z %h/OneDrive
+ExecStop=/usr/bin/fusermount -u -z %h/RT/Italy
 
 # Restart configuration
 Restart=on-failure

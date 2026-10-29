@@ -1,0 +1,34 @@
+[Unit]
+Description=Rclone VFS Mount for RT_CAD (Fabrizio's drive)
+Documentation=man:rclone(1)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+
+# Ensure target directory exists before mounting
+ExecStartPre=/usr/bin/mkdir -p %h/RT/CAD
+
+ExecStart=/usr/bin/rclone mount fabrizio:RT_CAD %h/RT/CAD \
+  --vfs-cache-mode full \
+  --vfs-cache-max-size 10G \
+  --vfs-fast-fingerprint \
+  --dir-cache-time 5m \
+  --attr-timeout 1m \
+  --transfers 4 \
+  --checkers 8 \
+  --rc \
+  --rc-addr=localhost:5574 \
+  --rc-no-auth
+
+# Clean unmount on service stop or shutdown
+ExecStop=/usr/bin/fusermount -u -z %h/RT/CAD
+
+# Restart configuration
+Restart=on-failure
+RestartSec=10s
+TimeoutStopSec=30s
+
+[Install]
+WantedBy=default.target

@@ -259,14 +259,18 @@ rules:
       - move: ~/Downloads/_sorted/Misc/
 
   # ---- 3. age out: older than 12 months --------------------------------
-  # Walks _sorted recursively; the category is the file's parent folder and
-  # the year comes from modification time.
+  # Age is measured from *birth time* (when the file arrived on disk), so a
+  # download that carries an old server mtime (datasheets, old firmware) still
+  # stays reachable in _sorted for a year. The archive folder is keyed by the
+  # file's own modification year, which is the useful axis for the pre-2026
+  # backlog (all of it has a 2026 birth time).
   - name: "Archive: older than 12 months"
     locations: ~/Downloads/_sorted
     subfolders: true
     filters:
-      - lastmodified:
+      - created:
           days: 365
           mode: older
+      - lastmodified
     actions:
       - move: "~/Downloads/_archive/{lastmodified.year}/{path.parent.name}/"

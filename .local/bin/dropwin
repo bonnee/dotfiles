@@ -34,9 +34,22 @@ height=${DROPWIN_HEIGHT:-900}
 
 : "${SWAYSOCK:?SWAYSOCK is not set - run this inside a sway session}"
 
+# Only one supervisor per app_id may run: two of them race to spawn and respawn
+# the window (this happens when a drop-down is restarted by hand while an old
+# copy is still around).
+lock="${XDG_RUNTIME_DIR:-/tmp}/dropwin-$app_id.lock"
+exec 9>"$lock" || exit 1
+flock -n 9 || exit 0
+
 spawn() {
 	case "${term##*/}" in
-	foot|footclient) "$term" --app-id "$app_id" -w "${width}x${height}" "$@" ;;
+	foot|footclient)
+		# footclient takes the command as trailing arguments. Its `-e` exists
+		# only for xterm compatibility and swallows the command, which silently
+		# started a plain shell instead of `qalc`/`nvim`.
+		[ "${1:-}" = "-e" ] && shift
+		"$term" --app-id "$app_id" -w "${width}x${height}" "$@"
+		;;
 	*)               "$term" --class   "$app_id" "$@" ;;
 	esac
 }
@@ -63,6 +76,8 @@ while [ -S "$SWAYSOCK" ]; do
 	# before a restart): wait for it instead of spawning a second one.
 	while [ -n "$(existing)" ]; do sleep 1; done
 
-	spawn
+	# pass the script's arguments: inside spawn() "$@" is the function's own
+	# positional list, so a bare `spawn` would drop `-e nvim` / `-e qalc`
+	spawn "$@"
 	sleep 0.5
 done

@@ -11,7 +11,7 @@ ExecStart=/usr/bin/swayidle -w lock '${LOCK}' timeout 300 'can_dpms.sh || swayms
 # kill -9 (not -2) on stop/restart: the periodic restart that swayidle_tick.sh
 # triggers must not run stale pending `resume` commands (which would switch
 # the display back on every 10-min cycle while media plays).
-ExecStop=/bin/kill -9 $MAINPID
+ExecStop=/bin/sh -c 'kill -9 "$$MAINPID" 2>/dev/null || true'
 Restart=on-failure
 RestartSec=1
 TimeoutStopSec=30

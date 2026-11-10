@@ -57,7 +57,7 @@ elif [ -d ~/.oh-my-zsh ]; then
   export ZSH=~/.oh-my-zsh
 fi
 
-plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found fzf-tab zsh-autosuggestions zsh-syntax-highlighting vi-mode)
+plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found vi-mode)
 
 ZSH_CACHE_DIR=$XDG_CACHE_HOME/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -73,6 +73,18 @@ ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-${HOST%%.*}-$ZSH_VERSION"
 if [ -n "${ZSH}" ]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
+
+# The three interactive plugins cost ~30ms before the first prompt and are only
+# needed once a line is being edited, so zsh-defer sources them right after the
+# prompt is drawn (zsh-syntax-highlighting last: it wraps the other widgets).
+_custom=${ZSH_CUSTOM:-${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom}/plugins
+if [[ -f $_custom/zsh-defer/zsh-defer.plugin.zsh ]]; then
+  source "$_custom/zsh-defer/zsh-defer.plugin.zsh"
+  zsh-defer source "$_custom/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  zsh-defer source "$_custom/fzf-tab/fzf-tab.zsh"
+  zsh-defer source "$_custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+unset _custom
 
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "

@@ -1,0 +1,10 @@
+[Unit]
+Description=Weekly update of the oh-my-zsh custom plugins
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=1h
+
+[Install]
+WantedBy=timers.target

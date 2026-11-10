@@ -1,0 +1,46 @@
+#!/bin/sh
+# zsh-plugins-update - fast-forward the git checkouts under oh-my-zsh's custom
+# plugin directory.
+#
+# oh-my-zsh itself comes from the pacman package (/usr/share/oh-my-zsh) and is
+# updated by `paru -Syu`; the plugins in ~/.local/share/oh-my-zsh/custom/plugins
+# are plain git clones (fzf-tab, zsh-autosuggestions, zsh-syntax-highlighting,
+# zsh-defer), so they need `git pull`.
+#
+#   zsh-plugins-update            # pull everything, report what changed
+#   zsh-plugins-update --quiet    # only report repos that moved
+#
+# Exits non-zero if a pull failed.
+
+set -u
+
+plugins="${ZSH_CUSTOM:-${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom}/plugins"
+quiet=0
+[ "${1:-}" = "--quiet" ] && quiet=1
+
+[ -d "$plugins" ] || { echo "zsh-plugins-update: $plugins does not exist" >&2; exit 1; }
+
+status=0
+for dir in "$plugins"/*/; do
+	[ -d "$dir/.git" ] || continue
+	name=$(basename "$dir")
+
+	before=$(git -C "$dir" rev-parse --short HEAD 2>/dev/null) || continue
+	# prune stale remote refs first: a clone whose upstream branch was renamed or
+	# deleted fails with "some local refs could not be updated"
+	git -C "$dir" remote prune origin >/dev/null 2>&1
+	if ! out=$(git -C "$dir" pull --ff-only --quiet 2>&1); then
+		echo "$name: pull failed: $out"
+		status=1
+		continue
+	fi
+	after=$(git -C "$dir" rev-parse --short HEAD 2>/dev/null)
+
+	if [ "$before" = "$after" ]; then
+		[ "$quiet" -eq 1 ] || echo "$name: up to date ($after)"
+	else
+		echo "$name: $before -> $after"
+	fi
+done
+
+exit $status

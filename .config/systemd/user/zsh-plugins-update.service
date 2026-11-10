@@ -1,0 +1,9 @@
+[Unit]
+Description=Update the oh-my-zsh custom plugins (git pull)
+Documentation=man:git-pull(1)
+# A failed pull is reported by the script's exit status; the next weekly run
+# retries, so this does not need a hard network dependency.
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/zsh-plugins-update --quiet

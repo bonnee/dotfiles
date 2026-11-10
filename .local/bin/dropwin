@@ -60,15 +60,10 @@ while [ -S "$SWAYSOCK" ]; do
 	esac
 	pid=$!
 
-	# footclient exits at once when no `foot --server` is running; don't spend
-	# swayplace's 10s timeout on a window that cannot appear.
-	sleep 0.2
-	if ! kill -0 "$pid" 2>/dev/null; then
-		sleep 1
-		continue
-	fi
-
-	# floating + size + centre + mark + scratchpad, once the window is mapped
+	# floating + size + centre + mark + scratchpad, as soon as the window is
+	# mapped (swayplace gives up quickly if the client dies, e.g. footclient
+	# without a running foot --server, so dropwin's loop retries instead of
+	# waiting out a 10s timeout)
 	swayplace "$app_id" "$pid" "$width" "$height"
 
 	wait "$pid"

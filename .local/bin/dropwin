@@ -8,19 +8,18 @@
 # after it exits. Nothing polls for the window: placement is driven by sway's
 # window events and the respawn by waiting for the child process.
 #
-# Geometry (floating, 1820x900, centred, marked) comes from the per-app_id
-# `for_window` rules in sway/config.d/50_rules.conf. A rule is applied by sway
-# at map time; the same commands sent with `swaymsg` right after the window
-# appears are racy - the size is computed against the tiling container and the
-# drop-down ends up at ~1928x1052 instead of 1820x900. `-w` keeps the initial
-# size sane when no rule matches the app_id.
+# The window is hidden first and resized/centred while it is in the scratchpad.
+# Applying the size while the window is still being mapped is racy - sway then
+# computes it against the tiling container and the drop-down ends up at
+# ~1928x1052 instead of 1820x900. Doing it with `for_window` rules instead is
+# ruled out by the re-fire behaviour described below.
 #
-# Why `move to scratchpad` is not in the rule: sway re-runs for_window criteria
-# on every window title/app_id change, and the per-view guard is lost after any
+# Why no `for_window` rule for these windows: sway re-runs for_window criteria on
+# every window title/app_id change, and the per-view guard is lost after any
 # `reload` (`swaymsg reload` is issued silently by pywal/wpgtk on every palette
-# change) and after an unmap/remap. The window would then be yanked into the
-# scratchpad at random later moments - the "drop term jumps away when I open
-# something" bug.
+# change) and after an unmap/remap. A geometry rule then fires again on the
+# hidden window and pulls it back onto the workspace - "the drop term does not
+# stay in the scratchpad after a reload".
 
 set -u
 
@@ -59,6 +58,16 @@ existing() {
 		jq -r --arg app "$app_id" 'first(.. | objects | select(.app_id? == $app) | .id) // empty'
 }
 
+place() {
+	# Hide first: leaving the workspace is the time-critical step, and only it
+	# happens while the window is visible. Size and position are applied while
+	# the window sits in the scratchpad - sway stores them and applies them when
+	# it is shown, whereas resizing it while it is being mapped computes the
+	# geometry against the tiling container (1928x1052 instead of 1820x900).
+	swaymsg -q "[app_id=\"$app_id\"] floating enable, mark $app_id, move to scratchpad"
+	swaymsg -q "[app_id=\"$app_id\"] resize set $width $height, move position center"
+}
+
 # Park every new window of this app_id in the scratchpad. Event driven, and
 # started before the first spawn so the `new` event cannot be missed (swaymsg
 # needs a moment to subscribe, hence the sleep below).
@@ -66,7 +75,7 @@ swaymsg -t subscribe -m '["window"]' |
 	jq --unbuffered -r --arg app "$app_id" \
 		'select(.container.app_id? == $app and .change == "new") | .change' |
 	while read -r _; do
-		swaymsg -q "[app_id=\"$app_id\"] move to scratchpad"
+		place
 	done &
 
 sleep 0.3

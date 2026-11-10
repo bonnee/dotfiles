@@ -82,6 +82,7 @@ window#waybar.hidden {
 #memory,
 #temperature {
   background: @color8;
+  color: @background;
   margin: 3px 0;
 }
 #cpu {
@@ -120,6 +121,7 @@ window#waybar.hidden {
   background: 
     /*linear-gradient(to bottom, green 2px, transparent 2px, transparent calc(100% - 2px), green calc(100% - 2px)),*/
     @color8;
+  color: @background;
   border: none;
 }
 
@@ -186,6 +188,7 @@ window#waybar.hidden {
   border-radius: 10px;
   border: none;
   margin: 3px 5px 3px 0;
+  color: @background;
   padding: 0 6px;
 }
 

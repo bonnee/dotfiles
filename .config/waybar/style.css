@@ -52,7 +52,6 @@ window#waybar.hidden {
 #load,
 #temperature,
 #memory, 
-#pulseaudio, 
 #wireplumber, 
 #tray, 
 #mode, 
@@ -180,34 +179,33 @@ window#waybar.hidden {
 /** END BATTERY **/
 
 /** BEGIN VOLUME **/
+
+/* group/audio is a single pill, like #cpu / #memory */
 #audio {
-  margin: 3px;
+  background: @color8;
   border-radius: 10px;
-  /* Simulate 2px top and bottom borders using gradients */
-  background: 
-    /*linear-gradient(to bottom, green 2px, transparent 2px, transparent calc(100% - 2px), green calc(100% - 2px)),*/
-    @color8;
   border: none;
+  margin: 3px 5px 3px 0;
+  padding: 0 6px;
 }
 
-#battery.icon {
-  padding: 0 10px;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-  border-radius: 5px;
+/* the wireplumber modules live inside the group: no pill of their own */
+#audio #wireplumber {
+  padding: 0 4px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
-#wireplumber:not(.icon) {
-  /* Use inset box-shadow to simulate top/bottom borders that respect rounding */
-  /*box-shadow: inset 0 2px 0 0 red, inset 0 -2px 0 0 red;*/
-  padding: 0;
-  margin: 0 3px;
-  border-radius: 10px;
+/* speaker icon sits flush against the left edge of the pill */
+#audio #wireplumber.icon {
+  padding: 0 4px 0 2px;
 }
 
-#pulseaudio.muted,
-#wireplumber.muted {
-  border-color: @foreground;
+/* mute state: dim the module instead of drawing a border around it */
+#audio #wireplumber.muted {
+  color: @color1;
 }
 
 /** END VOLUME **/
@@ -224,8 +222,9 @@ window#waybar.hidden {
   color: @color1;
 }
 
-#idle_inhibitor.activated {
-  border-color: @foreground;
+/* same grey-out treatment as muted audio: dim the "off" state, no borders */
+#idle_inhibitor.deactivated {
+  color: @color1;
 }
 
 @keyframes dotblink {

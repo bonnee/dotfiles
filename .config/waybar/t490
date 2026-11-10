@@ -130,7 +130,7 @@
     "wireplumber#source": {
       "node-type": "Audio/Source",
       "format": "<span size='large'>󰍬</span> {volume}%",
-      "format-muted": "󰍭",
+      "format-muted": "󰍭 0%",
       "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
       "on-click": "pavucontrol",
       "scroll-step": 2,
@@ -157,6 +157,7 @@
       "orientation": "horizontal",
       "drawer": {
 	"click-to-reveal": true,
+	"start-expanded": true,
 	"transition-duration": 200,
 	"transition-left-to-right": true,
       },

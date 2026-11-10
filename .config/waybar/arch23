@@ -92,12 +92,7 @@
     },
     "group/audio": {
       "orientation": "horizontal",
-      "drawer": {
-	"click-to-reveal": true,
-	"start-expanded": true,
-	"transition-duration": 200,
-	"transition-left-to-right": true,
-      },
+      // no drawer: group stays expanded, children keep their own clicks
       "modules": [
 	"wireplumber#icon",
 	"wireplumber#sink",

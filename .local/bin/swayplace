@@ -12,8 +12,8 @@
 # resizes for scratchpad-hidden windows (view_autoconfigure returns early),
 # so resizing after `move to scratchpad` never reaches the client.
 #
-# Used by ~/.local/bin/dropwin (drop-down terminals) and
-# ~/.local/bin/spotify-drop, so that neither needs a for_window rule.
+# Used by ~/.local/bin/dropwin (drop-down terminals), so that it does not
+# need a for_window rule.
 # for_window criteria are re-run on every window title change once their
 # per-view guard is gone (i.e. after any reload or unmap/remap), which makes
 # side effects such as `move to scratchpad` fire at random later moments.

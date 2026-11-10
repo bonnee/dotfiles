@@ -2,7 +2,13 @@
 Description=Lightweight Wayland notification daemon
 Documentation=man:mako(1)
 PartOf=sway-session.target
-After=sway-session.target
+# graphical-session.target is ordered before the XDG autostart target, so
+# finishing mako first guarantees the notification daemon owns the bus before
+# apps like blueman-applet start and try to notify.
+# Deliberately no "After=sway-session.target": together with Before=graphical-
+# session.target it forms a stop-ordering cycle (sway-session -> mako ->
+# graphical -> sway-session) that blocks the session from shutting down.
+Before=graphical-session.target
 
 [Service]
 Type=dbus

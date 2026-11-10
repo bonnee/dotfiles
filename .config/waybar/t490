@@ -119,15 +119,15 @@
           "car": "",
           "default": ["&#xf027;", "&#xf6a8;", "&#xf028;"],
       },
-      "on-click": "pwvucontrol",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click-right": "pwvucontrol",
       "scroll-step": 2,
       "smooth-scrolling-threshold": 1
     },
     "wireplumber#sink": {
       "format": "{volume}%",
-      "on-click": "pwvucontrol",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click-right": "pwvucontrol",
       "scroll-step": 2,
       "smooth-scrolling-threshold": 1
     },
@@ -135,8 +135,8 @@
       "node-type": "Audio/Source",
       "format": "<span size='large'>󰍬</span> {volume}%",
       "format-muted": "󰍭 0%",
-      "on-click": "pwvucontrol",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "on-click-right": "pwvucontrol",
       "scroll-step": 2,
       "smooth-scrolling-threshold": 1
     },

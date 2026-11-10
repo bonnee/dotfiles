@@ -3,42 +3,13 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","group/audio","cpu","temperature","load","memory","clock"],
+    "modules-right": ["tray","idle_inhibitor","group/audio","cpu","temperature","load","memory","custom/rclone","clock"],
     "sway/window": {
         "max-length": 192
-    },
-    "sway/workspaces": {
-      "smooth-scrolling-threshold": 6
-    },
-    "group/power": {
-      "orientation": "horizontal",
-      "drawer": {
-	"click-to-reveal": true,
-	"start-expanded": true,
-	"transition-duration": 200,
-	"transition-left-to-right": true,
-      },
-      "modules": [
-	"battery",
-	"battery#power",
-	"power-profiles-daemon",
-      ],
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
     },
     "clock": {
         "format":" {:%a %d, %H:%M (%Z)}",
 	"tooltip-format": "<tt><small>{calendar}</small></tt>",
-	"smooth-scrolling-threshold": 6,
 	"timezones": [
 	  "Europe/Rome",
 	  "America/Detroit",
@@ -101,26 +72,23 @@
           "car": "",
           "default": ["&#xf027;", "&#xf6a8;", "&#xf028;"],
       },
-      "on-click": "pwvucontrol",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-      "scroll-step": 2,
-      "smooth-scrolling-threshold": 1
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click-right": "pwvucontrol",
+      "scroll-step": 2
     },
     "wireplumber#sink": {
       "format": "{volume}%",
-      "on-click": "pwvucontrol",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-      "scroll-step": 2,
-      "smooth-scrolling-threshold": 1
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "on-click-right": "pwvucontrol",
+      "scroll-step": 2
     },
     "wireplumber#source": {
       "node-type": "Audio/Source",
       "format": "<span size='large'>󰍬</span> {volume}%",
       "format-muted": "󰍭 0%",
-      "on-click": "pwvucontrol",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-      "scroll-step": 2,
-      "smooth-scrolling-threshold": 1
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "on-click-right": "pwvucontrol",
+      "scroll-step": 2
     },
     "group/audio": {
       "orientation": "horizontal",

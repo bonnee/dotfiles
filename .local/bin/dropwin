@@ -59,13 +59,46 @@ existing() {
 }
 
 place() {
-	# Hide first: leaving the workspace is the time-critical step, and only it
-	# happens while the window is visible. Size and position are applied while
-	# the window sits in the scratchpad - sway stores them and applies them when
-	# it is shown, whereas resizing it while it is being mapped computes the
-	# geometry against the tiling container (1928x1052 instead of 1820x900).
-	swaymsg -q "[app_id=\"$app_id\"] floating enable, mark $app_id, move to scratchpad"
-	swaymsg -q "[app_id=\"$app_id\"] resize set $width $height, move position center"
+	# Step 1: make it invisible and hide it in one command list. The window maps
+	# tiled and is on screen for a frame or two before it can be hidden, and it
+	# would be seen at the tiled size - the "flash" that made the drop-down look
+	# broken. One IPC round trip instead of two keeps that window short.
+	swaymsg -q "[app_id=\"$app_id\"] opacity 0, floating enable, mark $app_id, move to scratchpad"
+
+	# Step 2: let the tiling helper settle. It reacts to the map event
+	# asynchronously and resizes the window after it has been hidden, which is
+	# what left the drop-down at the workspace size (~1920x1048).
+	sleep 0.25
+
+	# Step 3: size and centre while the window sits in the scratchpad. A single
+	# attempt is not reliable: if the window is still being mapped, sway computes
+	# the size against the tiling container. Repeat until the stored geometry is
+	# within a character cell of the request (foot snaps to whole cells).
+	i=0
+	while [ $i -lt 20 ]; do
+		swaymsg -q "[app_id=\"$app_id\"] resize set $width $height, move position center"
+		sleep 0.05
+		settled "$(geometry)" && break
+		i=$((i + 1))
+	done
+
+	# Step 4: visible again, still hidden in the scratchpad.
+	swaymsg -q "[app_id=\"$app_id\"] opacity 1"
+}
+
+geometry() {
+	swaymsg -t get_tree -r |
+		jq -r --arg app "$app_id" \
+			'first(.. | objects | select(.app_id? == $app) | "\(.rect.width)x\(.rect.height)") // empty'
+}
+
+# true when WxH is within one character cell of the requested size
+settled() {
+	w=${1%x*}
+	h=${1#*x}
+	[ -n "$w" ] && [ -n "$h" ] &&
+		[ "$w" -ge $((width - 40)) ] && [ "$w" -le $((width + 40)) ] &&
+		[ "$h" -ge $((height - 40)) ] && [ "$h" -le $((height + 40)) ]
 }
 
 # Park every new window of this app_id in the scratchpad. Event driven, and

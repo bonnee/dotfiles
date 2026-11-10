@@ -107,7 +107,7 @@
     },
     "wireplumber#icon": {
       "format": "<span size='large'>{icon}</span>",
-      "format-bluetooth": "{icon}󰂯",
+      "format-bluetooth": "<span size='large'>{icon}󰂯</span>",
       "format-muted": "<span size='large'>󰝟</span>",
       "format-icons": {
           "headphone": "󰋋",
@@ -134,7 +134,7 @@
     "wireplumber#source": {
       "node-type": "Audio/Source",
       "format": "<span size='large'>󰍬</span> {volume}%",
-      "format-muted": "󰍭 0%",
+      "format-muted": "<span size='large'>󰍭</span> {volume}%",
       "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
       "on-click-right": "pwvucontrol",
       "scroll-step": 2,
@@ -142,12 +142,7 @@
     },
     "group/audio": {
       "orientation": "horizontal",
-      "drawer": {
-	"click-to-reveal": true,
-	"start-expanded": true,
-	"transition-duration": 200,
-	"transition-left-to-right": true,
-      },
+      // no drawer: group stays expanded, children keep their own clicks
       "modules": [
 	"wireplumber#icon",
 	"wireplumber#sink",

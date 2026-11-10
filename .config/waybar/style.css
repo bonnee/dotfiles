@@ -58,6 +58,7 @@ window#waybar.hidden {
 #idle_inhibitor, 
 #temperature, 
 #custom-fan, 
+#custom-rclone,
 #audio,
 #power
 {
@@ -81,8 +82,11 @@ window#waybar.hidden {
 #custom-fan,
 #memory,
 #temperature {
-  background: @color8;
-  color: @background;
+  /* @color8 comes from the wallpaper and can land almost black, which made
+     @background text unreadable (~1.2:1). A translucent foreground tint keeps
+     the same look but guarantees contrast on any pywal theme. */
+  background: alpha(@foreground, 0.12);
+  color: @foreground;
   margin: 3px 0;
 }
 #cpu {
@@ -120,8 +124,8 @@ window#waybar.hidden {
   /* Simulate 2px top and bottom borders using gradients */
   background: 
     /*linear-gradient(to bottom, green 2px, transparent 2px, transparent calc(100% - 2px), green calc(100% - 2px)),*/
-    @color8;
-  color: @background;
+    alpha(@foreground, 0.12);
+  color: @foreground;
   border: none;
 }
 
@@ -145,14 +149,18 @@ window#waybar.hidden {
   border-radius: 5px;
 }
 
+/* these three paint a light chip, so the glyph has to go back to dark */
 #power-profiles-daemon.power-saver {
   background-color: @color3;
+  color: @background;
 }
 #power-profiles-daemon.balanced {
   background-color: @color2;
+  color: @background;
 }
 #power-profiles-daemon.performance {
   background-color: @color1;
+  color: @background;
 }
 
 #battery.charging:not(.power) {
@@ -184,11 +192,11 @@ window#waybar.hidden {
 
 /* group/audio is a single pill, like #cpu / #memory */
 #audio {
-  background: @color8;
+  background: alpha(@foreground, 0.12);
   border-radius: 10px;
   border: none;
   margin: 3px 5px 3px 0;
-  color: @background;
+  color: @foreground;
   padding: 0 6px;
 }
 
@@ -223,6 +231,11 @@ window#waybar.hidden {
 
 #custom-fan.high {
   color: @color1;
+}
+
+/* rclone: plain text module like the clock, blue while it is uploading */
+#custom-rclone.uploading {
+  color: @color9;
 }
 
 /* same grey-out treatment as muted audio: dim the "off" state, no borders */

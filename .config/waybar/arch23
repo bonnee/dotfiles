@@ -7,6 +7,9 @@
     "sway/window": {
         "max-length": 192
     },
+    "sway/workspaces": {
+      "smooth-scrolling-threshold": 6
+    },
     "group/power": {
       "orientation": "horizontal",
       "drawer": {
@@ -35,6 +38,7 @@
     "clock": {
         "format":" {:%a %d, %H:%M (%Z)}",
 	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+	"smooth-scrolling-threshold": 6,
 	"timezones": [
 	  "Europe/Rome",
 	  "America/Detroit",
@@ -85,7 +89,7 @@
     },
     "wireplumber#icon": {
       "format": "<span size='large'>{icon}</span>",
-      "format-bluetooth": "{icon}󰂯 {volume}%",
+      "format-bluetooth": "{icon}󰂯",
       "format-muted": "<span size='large'>󰝟</span>",
       "format-icons": {
           "headphone": "󰋋",
@@ -97,36 +101,26 @@
           "car": "",
           "default": ["&#xf027;", "&#xf6a8;", "&#xf028;"],
       },
+      "on-click": "pwvucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
       "scroll-step": 2,
+      "smooth-scrolling-threshold": 1
     },
     "wireplumber#sink": {
       "format": "{volume}%",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
       "on-click": "pwvucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "scroll-step": 2,
+      "smooth-scrolling-threshold": 1
     },
     "wireplumber#source": {
       "node-type": "Audio/Source",
       "format": "<span size='large'>󰍬</span> {volume}%",
       "format-muted": "󰍭 0%",
-      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
       "on-click": "pwvucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
       "scroll-step": 2,
-    },
-    "pulseaudio": {
-	"format": "{icon} {volume}%",
-        "format-bluetooth": "{icon}󰂯 {volume}%",
-	"format-muted": "󰝟",
-	"format-icons": {
-    	    "headphone": "󰋋",
-    	    "hands-free": "󰋎",
-    	    "headset": "󰋎",
-    	    "phone": "",
-	    "phone-muted": "",
-    	    "portable": "",
-    	    "car": "",
-	    "default": ["&#xf027;", "&#xf6a8;", "&#xf028;"],
-	},
-	"scroll-step": 2,
+      "smooth-scrolling-threshold": 1
     },
     "group/audio": {
       "orientation": "horizontal",

@@ -1,28 +1,26 @@
 #!/bin/sh
-# dropwin - run a drop-down (scratchpad) terminal window.
+# dropwin - keep a drop-down (scratchpad) terminal alive for an app_id.
 #
 #   dropwin <app_id> [command ...]
 #
-# Spawns alacritty with --class <app_id>, then hands the window to
-# ~/.local/bin/swayplace (floating, sized, centred, marked, scratchpad) and
-# respawns it when it is closed (same behaviour as the old `while ...; done`
-# loops).
+# Spawns the terminal with the window's app_id set to <app_id>, parks the window
+# in the scratchpad the moment sway reports it, and respawns the terminal 0.5s
+# after it exits. Nothing polls for the window: placement is driven by sway's
+# window events and the respawn by waiting for the child process.
 #
-# Why this exists instead of a `for_window` rule (what it replaces):
+# Geometry (floating, 1820x900, centred, marked) comes from the per-app_id
+# `for_window` rules in sway/config.d/50_rules.conf. A rule is applied by sway
+# at map time; the same commands sent with `swaymsg` right after the window
+# appears are racy - the size is computed against the tiling container and the
+# drop-down ends up at ~1928x1052 instead of 1820x900. `-w` keeps the initial
+# size sane when no rule matches the app_id.
 #
-#   * sway re-runs for_window criteria every time a window's title or app_id
-#     changes - starting htop/nvim/qalc changes the title.  A per-view guard
-#     normally stops a rule from firing twice, but that guard lives in memory
-#     only: it is lost after a `reload` (the rules are re-created) and after
-#     an unmap/remap.  From then on the rule's `move to scratchpad` fires on
-#     the next title change and yanks the drop-down window out of the way.
-#     `swaymsg reload` happens silently on every wallpaper/palette change
-#     (wpgtk/pywal), hence "it only happens sometimes".
-#
-#   * sway does not resize scratchpad-hidden windows, so the old rule's
-#     `resize set` after `move to scratchpad` never reached the client - the
-#     drop-down windows kept alacritty's default 80x24 geometry.  Here the
-#     resize is applied while the window is still visible, so it sticks.
+# Why `move to scratchpad` is not in the rule: sway re-runs for_window criteria
+# on every window title/app_id change, and the per-view guard is lost after any
+# `reload` (`swaymsg reload` is issued silently by pywal/wpgtk on every palette
+# change) and after an unmap/remap. The window would then be yanked into the
+# scratchpad at random later moments - the "drop term jumps away when I open
+# something" bug.
 
 set -u
 
@@ -30,34 +28,41 @@ app_id=${1:-}
 [ -n "$app_id" ] || { echo "usage: $(basename "$0") <app_id> [command ...]" >&2; exit 2; }
 shift
 
-term=${DROPWIN_TERM:-alacritty}
+term=${DROPWIN_TERM:-footclient}
 width=${DROPWIN_WIDTH:-1820}
 height=${DROPWIN_HEIGHT:-900}
 
 : "${SWAYSOCK:?SWAYSOCK is not set - run this inside a sway session}"
 
-# con_id of a window with app_id == $app_id, empty if there is none
-existing() {
-	swaymsg -t get_tree -r |
-		jq -r --arg app "$app_id" \
-			'first(.. | objects | select(.app_id == $app) | .id) // empty'
+spawn() {
+	case "${term##*/}" in
+	foot|footclient) "$term" --app-id "$app_id" -w "${width}x${height}" "$@" ;;
+	*)               "$term" --class   "$app_id" "$@" ;;
+	esac
 }
 
+existing() {
+	swaymsg -t get_tree -r |
+		jq -r --arg app "$app_id" 'first(.. | objects | select(.app_id? == $app) | .id) // empty'
+}
+
+# Park every new window of this app_id in the scratchpad. Event driven, and
+# started before the first spawn so the `new` event cannot be missed (swaymsg
+# needs a moment to subscribe, hence the sleep below).
+swaymsg -t subscribe -m '["window"]' |
+	jq --unbuffered -r --arg app "$app_id" \
+		'select(.container.app_id? == $app and .change == "new") | .change' |
+	while read -r _; do
+		swaymsg -q "[app_id=\"$app_id\"] move to scratchpad"
+	done &
+
+sleep 0.3
+
 while [ -S "$SWAYSOCK" ]; do
+	# A window with this app_id is already up (started before this script, or
+	# before a restart): wait for it instead of spawning a second one.
+	while [ -n "$(existing)" ]; do sleep 1; done
+
+	spawn
 	sleep 0.5
-
-	# A window of this app_id is already up (e.g. it was started before this
-	# script existed): don't spawn a second one, just wait until it is gone.
-	if [ -n "$(existing)" ]; then
-		while [ -n "$(existing)" ]; do sleep 1; done
-		continue
-	fi
-
-	"$term" --class "$app_id" "$@" &
-	pid=$!
-
-	# floating + size + centre + mark + scratchpad, once the window is mapped
-	swayplace "$app_id" "$pid" "$width" "$height"
-
-	wait "$pid"
 done

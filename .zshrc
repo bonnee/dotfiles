@@ -64,6 +64,12 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+# Keep the completion dump in the XDG cache dir (xdg-ninja). Set it before
+# sourcing oh-my-zsh: oh-my-zsh runs compinit itself, so this must be the only
+# compinit and the only dump file.
+mkdir -p "$XDG_CACHE_HOME/zsh"
+ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-${HOST%%.*}-$ZSH_VERSION"
+
 if [ -n "${ZSH}" ]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
@@ -84,11 +90,10 @@ RPROMPT="${RPROMPT}[%F{green}%?%f]"
 
 # ALIASES
 
-autoload -Uz compinit promptinit
+autoload -Uz promptinit
 promptinit
-# xdg-ninja
-mkdir -p $XDG_CACHE_HOME/zsh
-compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION" # xdg-ninja 
+# compinit already ran in oh-my-zsh (with $ZSH_COMPDUMP above); running it again
+# here only added a second dump file and ~20 ms to every shell.
 
 # https://unix.stackexchange.com/a/583743
 # don't expand aliases _before_ completion has finished
@@ -129,13 +134,24 @@ compdef s=systemctl
 if type docker > /dev/null 2>&1; then
   alias d="docker"
 
-  if docker compose > /dev/null 2>&1; then
+  # Probe the compose CLI plugin on disk instead of running `docker compose`,
+  # which cost ~60 ms of every shell startup.
+  _compose_plugin=""
+  for _f in "$HOME/.docker/cli-plugins/docker-compose" \
+            /usr/lib/docker/cli-plugins/docker-compose \
+            /usr/local/lib/docker/cli-plugins/docker-compose; do
+    [[ -x $_f ]] && { _compose_plugin=1; break }
+  done
+  unset _f
+
+  if [[ -n $_compose_plugin ]]; then
     alias dc="docker compose"
     alias dcup="docker compose pull; docker compose up -d"
   elif type docker-compose > /dev/null 2>&1; then
     alias dc="docker-compose"
     alias dcup="docker-compose pull; docker-compose up -d"
   fi
+  unset _compose_plugin
 fi
 
 alias ts=tailscale

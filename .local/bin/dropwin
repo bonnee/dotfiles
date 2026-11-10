@@ -3,23 +3,17 @@
 #
 #   dropwin <app_id> [command ...]
 #
-# Spawns the terminal with the window's app_id set to <app_id>, parks the window
-# in the scratchpad the moment sway reports it, and respawns the terminal 0.5s
-# after it exits. Nothing polls for the window: placement is driven by sway's
-# window events and the respawn by waiting for the child process.
+# Spawns the terminal with the window's app_id set to <app_id> and respawns it
+# 0.5 s after it exits. Nothing here places the window: the per-app_id
+# `for_window` rule in sway/config.d/50_rules.conf floats it, sizes it, marks it
+# and moves it into the scratchpad at map time, before sway draws it - that is
+# what keeps the drop-down from flashing in the workspace.
 #
-# The window is hidden first and resized/centred while it is in the scratchpad.
-# Applying the size while the window is still being mapped is racy - sway then
-# computes it against the tiling container and the drop-down ends up at
-# ~1928x1052 instead of 1820x900. Doing it with `for_window` rules instead is
-# ruled out by the re-fire behaviour described below.
-#
-# Why no `for_window` rule for these windows: sway re-runs for_window criteria on
-# every window title/app_id change, and the per-view guard is lost after any
-# `reload` (`swaymsg reload` is issued silently by pywal/wpgtk on every palette
-# change) and after an unmap/remap. A geometry rule then fires again on the
-# hidden window and pulls it back onto the workspace - "the drop term does not
-# stay in the scratchpad after a reload".
+# The rule's criteria include the transient start-up title set with `-T`
+# ("boot-<pid>-<app_id>"), so it stops matching as soon as the shell sets its
+# own title. A rule that matches for the window's whole life would fire again on
+# every title change after a `reload` (which wpgtk/pywal trigger on palette
+# changes) and pull a visible drop-down back into the scratchpad.
 
 set -u
 
@@ -43,13 +37,21 @@ flock -n 9 || exit 0
 spawn() {
 	case "${term##*/}" in
 	foot|footclient)
-		# footclient takes the command as trailing arguments. Its `-e` exists
-		# only for xterm compatibility and swallows the command, which silently
-		# started a plain shell instead of `qalc`/`nvim`.
+		# footclient takes the command as trailing arguments; its `-e` exists
+		# only for xterm compatibility and swallows the command.
 		[ "${1:-}" = "-e" ] && shift
-		"$term" --app-id "$app_id" -w "${width}x${height}" "$@"
+		[ $# -gt 0 ] || set -- "${SHELL:-/bin/sh}"
+
+		# -T sets the start-up title the for_window rule matches. The wrapper
+		# then sets a real title before exec'ing the command, so the criteria
+		# stop matching as soon as the window exists: a rule that keeps matching
+		# (a program that never sets a title, like qalc) would fire again on
+		# later title changes and could pull the window out of the scratchpad.
+		"$term" --app-id "$app_id" -T "boot-$$" -w "${width}x${height}" \
+			sh -c 'printf "\033]2;%s\007" "$1"; shift; exec "$@"' \
+			dropwin "$app_id" "$@"
 		;;
-	*)               "$term" --class   "$app_id" "$@" ;;
+	*) "$term" --class "$app_id" "$@" ;;
 	esac
 }
 
@@ -58,68 +60,11 @@ existing() {
 		jq -r --arg app "$app_id" 'first(.. | objects | select(.app_id? == $app) | .id) // empty'
 }
 
-place() {
-	# Step 1: make it invisible and hide it in one command list. The window maps
-	# tiled and is on screen for a frame or two before it can be hidden, and it
-	# would be seen at the tiled size - the "flash" that made the drop-down look
-	# broken. One IPC round trip instead of two keeps that window short.
-	swaymsg -q "[app_id=\"$app_id\"] opacity 0, floating enable, mark $app_id, move to scratchpad"
-
-	# Step 2: let the tiling helper settle. It reacts to the map event
-	# asynchronously and resizes the window after it has been hidden, which is
-	# what left the drop-down at the workspace size (~1920x1048).
-	sleep 0.25
-
-	# Step 3: size and centre while the window sits in the scratchpad. A single
-	# attempt is not reliable: if the window is still being mapped, sway computes
-	# the size against the tiling container. Repeat until the stored geometry is
-	# within a character cell of the request (foot snaps to whole cells).
-	i=0
-	while [ $i -lt 20 ]; do
-		swaymsg -q "[app_id=\"$app_id\"] resize set $width $height, move position center"
-		sleep 0.05
-		settled "$(geometry)" && break
-		i=$((i + 1))
-	done
-
-	# Step 4: visible again, still hidden in the scratchpad.
-	swaymsg -q "[app_id=\"$app_id\"] opacity 1"
-}
-
-geometry() {
-	swaymsg -t get_tree -r |
-		jq -r --arg app "$app_id" \
-			'first(.. | objects | select(.app_id? == $app) | "\(.rect.width)x\(.rect.height)") // empty'
-}
-
-# true when WxH is within one character cell of the requested size
-settled() {
-	w=${1%x*}
-	h=${1#*x}
-	[ -n "$w" ] && [ -n "$h" ] &&
-		[ "$w" -ge $((width - 40)) ] && [ "$w" -le $((width + 40)) ] &&
-		[ "$h" -ge $((height - 40)) ] && [ "$h" -le $((height + 40)) ]
-}
-
-# Park every new window of this app_id in the scratchpad. Event driven, and
-# started before the first spawn so the `new` event cannot be missed (swaymsg
-# needs a moment to subscribe, hence the sleep below).
-swaymsg -t subscribe -m '["window"]' |
-	jq --unbuffered -r --arg app "$app_id" \
-		'select(.container.app_id? == $app and .change == "new") | .change' |
-	while read -r _; do
-		place
-	done &
-
-sleep 0.3
-
 while [ -S "$SWAYSOCK" ]; do
 	# A window with this app_id is already up (started before this script, or
 	# before a restart): wait for it instead of spawning a second one.
 	while [ -n "$(existing)" ]; do sleep 1; done
 
-	# pass the script's arguments: inside spawn() "$@" is the function's own
-	# positional list, so a bare `spawn` would drop `-e nvim` / `-e qalc`
 	spawn "$@"
 	sleep 0.5
 done

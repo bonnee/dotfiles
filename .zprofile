@@ -9,7 +9,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 
 export ZSH_CUSTOM=${XDG_DATA_HOME}/oh-my-zsh/custom
 
-export TERMINAL="alacritty"
+export TERMINAL="footclient"
 export BROWSER="firefox-developer-edition"
 
 export BC_ENV_ARGS="$HOME/.config/bc"

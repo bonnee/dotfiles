@@ -3,10 +3,10 @@
 #
 #   dropwin <app_id> [command ...]
 #
-# Spawns alacritty with --class <app_id>, then hands the window to
-# ~/.local/bin/swayplace (floating, sized, centred, marked, scratchpad) and
-# respawns it when it is closed (same behaviour as the old `while ...; done`
-# loops).
+# Spawns the terminal (default: footclient) with the window's app_id set to
+# <app_id>, then hands the window to ~/.local/bin/swayplace (floating, sized,
+# centred, marked, scratchpad) and respawns it when it is closed (same
+# behaviour as the old `while ...; done` loops).
 #
 # Why this exists instead of a `for_window` rule (what it replaces):
 #
@@ -30,7 +30,7 @@ app_id=${1:-}
 [ -n "$app_id" ] || { echo "usage: $(basename "$0") <app_id> [command ...]" >&2; exit 2; }
 shift
 
-term=${DROPWIN_TERM:-alacritty}
+term=${DROPWIN_TERM:-footclient}
 width=${DROPWIN_WIDTH:-1820}
 height=${DROPWIN_HEIGHT:-900}
 
@@ -53,8 +53,20 @@ while [ -S "$SWAYSOCK" ]; do
 		continue
 	fi
 
-	"$term" --class "$app_id" "$@" &
+	# foot/footclient call the Wayland app_id --app-id; alacritty calls it --class
+	case "${term##*/}" in
+	foot|footclient) "$term" --app-id "$app_id" "$@" & ;;
+	*)               "$term" --class  "$app_id" "$@" & ;;
+	esac
 	pid=$!
+
+	# footclient exits at once when no `foot --server` is running; don't spend
+	# swayplace's 10s timeout on a window that cannot appear.
+	sleep 0.2
+	if ! kill -0 "$pid" 2>/dev/null; then
+		sleep 1
+		continue
+	fi
 
 	# floating + size + centre + mark + scratchpad, once the window is mapped
 	swayplace "$app_id" "$pid" "$width" "$height"

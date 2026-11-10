@@ -33,7 +33,15 @@ height=${4:-900}
 
 i=0
 while [ $i -lt 100 ]; do
+	# Prefer the pid criterion: it selects exactly one window. A thin frontend
+	# like footclient has no window of its own (the `foot --server` it talks to
+	# owns the toplevel and the pty), so sway never sees that pid - after a
+	# second, fall back to the app_id, which dropwin keeps unique.
 	if swaymsg -q "[pid=$pid] floating enable, resize set $width $height, move position center, mark $app_id, move to scratchpad"; then
+		exit 0
+	fi
+	if [ $i -ge 10 ] &&
+	   swaymsg -q "[app_id=\"$app_id\"] floating enable, resize set $width $height, move position center, mark $app_id, move to scratchpad"; then
 		exit 0
 	fi
 	sleep 0.1

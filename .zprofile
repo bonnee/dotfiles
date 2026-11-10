@@ -66,15 +66,19 @@ fi
 if uwsm check may-start; then
   exec uwsm start default
 elif [ "$(tty)" = /dev/tty1 ] &&
-     ! pgrep -x sway >/dev/null 2>&1 &&
-     systemctl --user is-active --quiet graphical-session.target 2>/dev/null; then
-  # Session targets left over from a sway that died outside uwsm: nothing stops
-  # graphical-session.target when a non-uwsm compositor exits, and it blocks
-  # `uwsm check may-start` above.
-  echo "uwsm: clearing stale graphical-session.target" >&2
-  systemctl --user stop graphical-session.target
-  if uwsm check may-start; then
-    exec uwsm start default
+     ! pgrep -x sway >/dev/null 2>&1; then
+  # Session units left over from a compositor that exited outside uwsm (or a
+  # shutdown that did not complete) keep `uwsm check may-start` refusing.
+  # wayland-session-shutdown.target conflicts with all the session targets, so
+  # it clears them - including graphical-session-pre.target, which a plain
+  # `systemctl stop graphical-session.target` leaves behind.
+  if systemctl --user is-active --quiet graphical-session.target ||
+     systemctl --user is-active --quiet graphical-session-pre.target; then
+    echo "uwsm: clearing stale session units" >&2
+    systemctl --user start wayland-session-shutdown.target
+    if uwsm check may-start; then
+      exec uwsm start default
+    fi
   fi
 fi
 

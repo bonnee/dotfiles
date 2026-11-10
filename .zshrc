@@ -90,10 +90,9 @@ RPROMPT="${RPROMPT}[%F{green}%?%f]"
 
 # ALIASES
 
-autoload -Uz promptinit
-promptinit
 # compinit already ran in oh-my-zsh (with $ZSH_COMPDUMP above); running it again
 # here only added a second dump file and ~20 ms to every shell.
+# promptinit is gone too: the prompt is set by hand below, no theme is loaded.
 
 # https://unix.stackexchange.com/a/583743
 # don't expand aliases _before_ completion has finished

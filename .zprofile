@@ -9,7 +9,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 
 export ZSH_CUSTOM=${XDG_DATA_HOME}/oh-my-zsh/custom
 
-export TERMINAL="footclient"
+export TERMINAL="term"
 export BROWSER="firefox-developer-edition"
 
 export BC_ENV_ARGS="$HOME/.config/bc"

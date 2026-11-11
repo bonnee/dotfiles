@@ -1,0 +1,17 @@
+#!/bin/sh
+# term - launch the terminal, reusing a running kitty process when there is one.
+#
+# kitty's --single-instance sends the new window to the existing instance
+# (shared GPU sprite cache), which is what makes a second window appear in
+# ~70 ms instead of ~800 ms. The instance exits a few seconds after its last
+# window closes, so the first terminal after a clean slate is a cold start.
+#
+# A wrapper is needed because sway's $term and j4-dmenu-desktop's --term expect
+# a single executable name, not "kitty --single-instance".
+
+set -u
+
+if command -v kitty >/dev/null 2>&1; then
+	exec kitty --single-instance "$@"
+fi
+exec footclient "$@"

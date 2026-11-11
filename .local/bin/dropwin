@@ -21,7 +21,7 @@ app_id=${1:-}
 [ -n "$app_id" ] || { echo "usage: $(basename "$0") <app_id> [command ...]" >&2; exit 2; }
 shift
 
-term=${DROPWIN_TERM:-footclient}
+term=${DROPWIN_TERM:-term}
 width=${DROPWIN_WIDTH:-1820}
 height=${DROPWIN_HEIGHT:-900}
 
@@ -30,9 +30,18 @@ height=${DROPWIN_HEIGHT:-900}
 # Only one supervisor per app_id may run: two of them race to spawn and respawn
 # the window (this happens when a drop-down is restarted by hand while an old
 # copy is still around).
+# The lock is held on fd 9. Every child (terminal, swaymsg, jq) must be started
+# with that fd closed (9>&-), otherwise a straggler keeps the lock after the
+# supervisor is gone and no new supervisor can start.
 lock="${XDG_RUNTIME_DIR:-/tmp}/dropwin-$app_id.lock"
 exec 9>"$lock" || exit 1
 flock -n 9 || exit 0
+
+# The wrapper sets a real title right after start-up, so the for_window rule
+# (which matches the throwaway -T/--title value) stops matching as soon as the
+# window exists: a rule that keeps matching - a program that never sets a title,
+# like qalc - would fire again on later title changes and could pull the window
+# out of the scratchpad.
 
 spawn() {
 	case "${term##*/}" in
@@ -41,24 +50,50 @@ spawn() {
 		# only for xterm compatibility and swallows the command.
 		[ "${1:-}" = "-e" ] && shift
 		[ $# -gt 0 ] || set -- "${SHELL:-/bin/sh}"
-
-		# -T sets the start-up title the for_window rule matches. The wrapper
-		# then sets a real title before exec'ing the command, so the criteria
-		# stop matching as soon as the window exists: a rule that keeps matching
-		# (a program that never sets a title, like qalc) would fire again on
-		# later title changes and could pull the window out of the scratchpad.
 		"$term" --app-id "$app_id" -T "boot-$$" -w "${width}x${height}" \
 			sh -c 'printf "\033]2;%s\007" "$1"; shift; exec "$@"' \
-			dropwin "$app_id" "$@"
+			dropwin "$app_id" "$@" 9>&-
+		;;
+	term|kitty)
+		# Plain kitty, not the --single-instance wrapper: the *first* window of a
+		# fresh instance ignores --class (it stays app_id "kitty"), so the drop-down
+		# rule would not match it. A drop-down is spawned once and lives for the
+		# whole session, so the cold start is paid once.
+		[ "${1:-}" = "-e" ] && shift
+		[ $# -gt 0 ] || set -- "${SHELL:-/bin/sh}"
+		kitty --class "$app_id" --title "boot-$$" \
+			-o initial_window_width="$width" \
+			-o initial_window_height="$height" \
+			sh -c 'printf "\033]2;%s\007" "$1"; shift; exec "$@"' \
+			dropwin "$app_id" "$@" 9>&-
 		;;
 	*) "$term" --class "$app_id" "$@" ;;
 	esac
 }
 
-existing() {
-	swaymsg -t get_tree -r |
-		jq -r --arg app "$app_id" 'first(.. | objects | select(.app_id? == $app) | .id) // empty'
+# The for_window rule hides the window but cannot size it reliably: the size is
+# computed while the tiling helper is still working on the window (kitty ends up
+# at the tiled 960x1044). Once the window is hidden, a delayed resize is
+# invisible and sticks.
+watch_new_windows() {
+	swaymsg -t subscribe -m '["window"]' 9>&- |
+		jq --unbuffered -r --arg app "$app_id" 9>&- \
+			'select(.container.app_id? == $app and .change == "new") | .change' |
+		while read -r _; do
+			(
+				sleep 0.3
+				swaymsg -q "[app_id=\"$app_id\"] resize set $width $height, move position center"
+			) 9>&- &
+		done 9>&- &
 }
+
+existing() {
+	swaymsg -t get_tree -r 9>&- |
+		jq -r --arg app "$app_id" 'first(.. | objects | select(.app_id? == $app) | .id) // empty' 9>&-
+}
+
+watch_new_windows
+sleep 0.3
 
 while [ -S "$SWAYSOCK" ]; do
 	# A window with this app_id is already up (started before this script, or

@@ -80,7 +80,10 @@ fi
 _custom=${ZSH_CUSTOM:-${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom}/plugins
 if [[ -f $_custom/zsh-defer/zsh-defer.plugin.zsh ]]; then
   source "$_custom/zsh-defer/zsh-defer.plugin.zsh"
-  zsh-defer source "$_custom/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  # -t delays the (blocking) plugin load by 200ms so that keystrokes typed right
+  # after the prompt are handled first; zsh-defer also postpones the load again
+  # whenever keys are queued.
+  zsh-defer -t 0.2 source "$_custom/zsh-autosuggestions/zsh-autosuggestions.zsh"
   zsh-defer source "$_custom/fzf-tab/fzf-tab.zsh"
   zsh-defer source "$_custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi

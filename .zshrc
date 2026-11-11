@@ -57,7 +57,7 @@ elif [ -d ~/.oh-my-zsh ]; then
   export ZSH=~/.oh-my-zsh
 fi
 
-plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found vi-mode)
+plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found fzf-tab zsh-autosuggestions zsh-syntax-highlighting vi-mode)
 
 ZSH_CACHE_DIR=$XDG_CACHE_HOME/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -74,20 +74,13 @@ if [ -n "${ZSH}" ]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
 
-# The three interactive plugins cost ~30ms before the first prompt and are only
-# needed once a line is being edited, so zsh-defer sources them right after the
-# prompt is drawn (zsh-syntax-highlighting last: it wraps the other widgets).
-_custom=${ZSH_CUSTOM:-${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom}/plugins
-if [[ -f $_custom/zsh-defer/zsh-defer.plugin.zsh ]]; then
-  source "$_custom/zsh-defer/zsh-defer.plugin.zsh"
-  # -t delays the (blocking) plugin load by 200ms so that keystrokes typed right
-  # after the prompt are handled first; zsh-defer also postpones the load again
-  # whenever keys are queued.
-  zsh-defer -t 0.2 source "$_custom/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  zsh-defer source "$_custom/fzf-tab/fzf-tab.zsh"
-  zsh-defer source "$_custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-unset _custom
+# The interactive plugins (fzf-tab, zsh-autosuggestions, zsh-syntax-highlighting)
+# are loaded eagerly, here in plugins=(). Deferring them with zsh-defer was tried
+# on 2026-11-11 and produced input stalls: a pty key->echo test (baseline 2 ms)
+# showed 150-350 ms freezes aligned with the deferred sources, and none with
+# eager loading. Later runs of the same deferred config did not always reproduce
+# them, but eager loading never stalled - the ~0.1 s of extra start-up is the
+# better trade, so keep them in this list.
 
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="] "

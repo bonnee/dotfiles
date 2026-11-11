@@ -49,6 +49,10 @@ _Last verified: 2026-11-11._
   the tick restarts. A restart discards the pending 300 s resume handler;
   without this, input after a tick restart left the screen DPMS-off until a
   suspend/resume.
+- `KillMode=process`: the tick restart kills only the swayidle main PID; the
+  `swaylock` child started by `lockw.sh` stays in the cgroup and survives. With
+  the default `control-group`, the restart killed the lock screen, which could
+  leave a corrupted/red display until the next suspend/resume.
 - `lockw.sh` runs `swaylock -f` with pywal colors and has a `pgrep -x swaylock`
   guard so a fresh swayidle cycle does not spawn a second locker.
 - `can_dpms.sh` exits 0 (skip DPMS off) only when media is playing and the

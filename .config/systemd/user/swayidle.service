@@ -5,6 +5,7 @@ PartOf=sway-session.target
 
 [Service]
 Type=simple
+KillMode=process
 Environment=LOCK="%h/.local/bin/lockw.sh"
 ExecStart=/usr/bin/swayidle -w lock '${LOCK}' timeout 1 'true' resume 'swaymsg "output * dpms on"' timeout 300 'can_dpms.sh || swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' timeout 330 '${LOCK}' timeout 600 'swayidle_tick.sh' before-sleep '${LOCK}' after-resume 'sleep 1; swaymsg "output * dpms on"; swaymsg "output * power on"'
 

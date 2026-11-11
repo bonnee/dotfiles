@@ -1,6 +1,6 @@
 # Power management — t490
 
-_Last verified: 2026-11-10._
+_Last verified: 2026-11-11._
 
 ## Overview
 
@@ -44,6 +44,11 @@ _Last verified: 2026-11-10._
   `Restart=on-failure`, `RestartSec=1`. The guard handles `MAINPID` already
   being unset at session shutdown. The tick handler restarts the unit to re-arm;
   SIGKILL avoids stale `resume` commands switching the display back on.
+- A no-op `timeout 1 'true'` with the same
+  `resume 'swaymsg "output * dpms on"'` keeps a DPMS resume handler alive across
+  the tick restarts. A restart discards the pending 300 s resume handler;
+  without this, input after a tick restart left the screen DPMS-off until a
+  suspend/resume.
 - `lockw.sh` runs `swaylock -f` with pywal colors and has a `pgrep -x swaylock`
   guard so a fresh swayidle cycle does not spawn a second locker.
 - `can_dpms.sh` exits 0 (skip DPMS off) only when media is playing and the

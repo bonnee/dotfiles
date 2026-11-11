@@ -57,7 +57,7 @@ elif [ -d ~/.oh-my-zsh ]; then
   export ZSH=~/.oh-my-zsh
 fi
 
-plugins=(git-prompt common-aliases colorize colored-man-pages command-not-found fzf-tab zsh-autosuggestions zsh-syntax-highlighting vi-mode)
+plugins=(git-prompt common-aliases command-not-found fzf-tab zsh-autosuggestions zsh-syntax-highlighting vi-mode)
 
 ZSH_CACHE_DIR=$XDG_CACHE_HOME/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -69,6 +69,12 @@ fi
 # compinit and the only dump file.
 mkdir -p "$XDG_CACHE_HOME/zsh"
 ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-${HOST%%.*}-$ZSH_VERSION"
+
+# Skip compinit's fpath security audit: every directory in $fpath is root-owned
+# or owned by me and none is group/world-writable, so the audit has nothing to
+# report. Saves ~24 ms at 800 MHz. Re-enable if an fpath directory ever becomes
+# shared or writable by another user.
+ZSH_DISABLE_COMPFIX=true
 
 if [ -n "${ZSH}" ]; then
   source "$ZSH/oh-my-zsh.sh"

@@ -1,13 +1,14 @@
-# Keep ~/Downloads shallow: recent files stay one level inside a category,
-# anything older than 12 months is swept into an archive tree.
+# Keep ~/Downloads shallow without hiding new downloads: everything sits in the
+# Downloads root for a month, then gets sorted, and after a year it is archived.
 #
 # Layout:
-#   ~/Downloads/_sorted/<Category>/            files from the last 12 months
+#   ~/Downloads/                               files younger than 30 days
+#   ~/Downloads/_sorted/<Category>/            sorted files, up to 12 months old
 #   ~/Downloads/_archive/<year>/<Category>/    older files, by modification year
 #
 # Passes, in order:
 #   1. byte-identical browser duplicates at the top level -> trash
-#   2. top-level files -> _sorted/<Category>/ (extension rules)
+#   2. top-level files older than 30 days -> _sorted/<Category>/ (extension rules)
 #   3. _sorted files older than 12 months -> _archive/<year>/<Category>/
 #
 # Age is measured with modification time, not birth time: everything restored
@@ -187,6 +188,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *cad
     actions:
       - move: ~/Downloads/_sorted/CAD/
@@ -195,6 +197,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *images
     actions:
       - move: ~/Downloads/_sorted/Images/
@@ -203,6 +206,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *documents
     actions:
       - move: ~/Downloads/_sorted/Documents/
@@ -211,6 +215,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *installers
     actions:
       - move: ~/Downloads/_sorted/Installers/
@@ -219,6 +224,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *data
     actions:
       - move: ~/Downloads/_sorted/Data/
@@ -227,6 +233,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *archives
     actions:
       - move: ~/Downloads/_sorted/Archives/
@@ -235,6 +242,7 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *media
     actions:
       - move: ~/Downloads/_sorted/Media/
@@ -243,17 +251,19 @@ rules:
     locations: ~/Downloads
     subfolders: false
     filters:
+      - created: {days: 30, mode: older}
       - extension: *code
     actions:
       - move: ~/Downloads/_sorted/Code/
 
-  # Quick downloads with no matching category stay visible for a day.
+  # Unknown extensions wait in the root like everything else; after 30 days
+  # they go to Misc.
   - name: "Misc"
     locations: ~/Downloads
     subfolders: false
     filters:
-      - lastmodified:
-          days: 1
+      - created:
+          days: 30
           mode: older
     actions:
       - move: ~/Downloads/_sorted/Misc/

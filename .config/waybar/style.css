@@ -59,6 +59,7 @@ window#waybar.hidden {
 #temperature, 
 #custom-fan, 
 #custom-rclone,
+#custom-timew,
 #audio,
 #power
 {
@@ -247,4 +248,20 @@ window#waybar.hidden {
     50% {
       color: grey;
     }
+}
+
+/* timew: red when Syncthing left conflict files in the timew database */
+#custom-timew.conflict {
+  color: @color1;
+}
+
+/* timew: inverted pill while a timer is running, like the sway mode indicator */
+#custom-timew.active {
+  background: @foreground;
+  color: @background;
+  border-color: @foregroundTrans;
+}
+
+#custom-timew.active.conflict {
+  background: @color1;
 }

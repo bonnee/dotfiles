@@ -3,7 +3,7 @@
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["tray","idle_inhibitor","group/audio","cpu","temperature","custom/fan","load","memory","group/power","custom/rclone","clock"],
+    "modules-right": ["tray","idle_inhibitor","group/audio","cpu","temperature","custom/fan","load","memory","group/power","custom/rclone","custom/timew","clock"],
     "sway/window": {
         "max-length": 192
     },
@@ -170,6 +170,15 @@
       "tooltip": true,
       "return-type": "json",
       "exec": "$HOME/.config/waybar/scripts/rclone-status.sh"
+    },
+    "custom/timew": {
+      "format": "{}",
+      "return-type": "json",
+      "interval": 30,
+      "signal": 8,
+      "tooltip": true,
+      "exec": "$HOME/.config/waybar/scripts/timew-status.sh",
+      "on-click": "$HOME/.local/bin/timew-menu",
+      "on-click-right": "timew stop; pkill -RTMIN+8 waybar"
     }
 }
-

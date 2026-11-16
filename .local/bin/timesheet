@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Print Timewarrior intervals as CSV: date,project,tags,hours.
+
+Usage: timesheet [timew range]   (default :month)
+  timesheet :lastmonth
+  timesheet :week
+  timesheet 2026-11-01 - 2026-11-15
+  timesheet --total :month        # one row per project instead of per day
+
+Project = first tag of the interval, tags = the remaining tags.
+Intervals are assigned to the local date they start on; a running
+interval counts up to now.
+"""
+import csv
+import json
+import subprocess
+import sys
+from collections import defaultdict
+from datetime import datetime, timezone
+
+args = sys.argv[1:]
+total = "--total" in args
+args = [a for a in args if a != "--total"] or [":month"]
+
+raw = subprocess.run(["timew", "export", *args], check=True,
+                     capture_output=True, text=True).stdout
+now = datetime.now(timezone.utc)
+
+
+def parse(ts):
+    return datetime.strptime(ts, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc)
+
+
+hours = defaultdict(float)
+for iv in json.loads(raw or "[]"):
+    start = parse(iv["start"])
+    end = parse(iv["end"]) if "end" in iv else now
+    tags = iv.get("tags") or ["(untagged)"]
+    day = "" if total else start.astimezone().date().isoformat()
+    hours[(day, tags[0], " ".join(tags[1:]))] += (end - start).total_seconds() / 3600
+
+w = csv.writer(sys.stdout)
+w.writerow(["project", "tags", "hours"] if total else ["date", "project", "tags", "hours"])
+for (day, proj, tags), h in sorted(hours.items()):
+    w.writerow(([] if total else [day]) + [proj, tags, f"{h:.2f}"])

@@ -1,0 +1,32 @@
+#!/bin/sh
+# Pick a project in bemenu and start timing it with Timewarrior.
+# First word = project, further words = extra tags (e.g. "KimeraEVO37 wiring").
+# Typing a name that is not in the list starts it and adds it to the list.
+# The list lives in the Syncthing-shared timew folder, so all hosts share it.
+
+list="${XDG_DATA_HOME:-$HOME/.local/share}/timewarrior/projects"
+stop="■ stop"
+touch "$list"
+
+if [ "$(timew get dom.active 2>/dev/null)" = 1 ]; then
+    running="$(timew get dom.active.json | jq -r '.tags // [] | join(" ")')"
+    prompt="⏱ $running"
+else
+    running=""
+    prompt="⏱ project"
+fi
+
+choice="$( { [ -n "$running" ] && printf '%s\n' "$stop"; grep -v '^[[:space:]]*$' "$list"; } \
+    | bemenu -i -p "$prompt" )" || exit 0
+[ -n "$choice" ] || exit 0
+
+if [ "$choice" = "$stop" ]; then
+    timew stop >/dev/null && notify-send -a timew "Timer stopped" "$running"
+else
+    # shellcheck disable=SC2086  # word splitting = one tag per word
+    timew start $choice >/dev/null && notify-send -a timew "Timer started" "$choice"
+    grep -qxF "$choice" "$list" || { printf '%s\n' "$choice" >>"$list"; sort -fu -o "$list" "$list"; }
+fi
+
+pkill -RTMIN+8 waybar 2>/dev/null
+exit 0

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Time tracker
+Comment=Start or stop a Timewarrior project timer
+Exec=/home/bonnee/.local/bin/timew-menu
+Icon=appointment-soon
+Terminal=false
+Categories=Utility;
+Keywords=timew;timewarrior;timer;hours;project;

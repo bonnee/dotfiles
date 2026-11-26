@@ -1,0 +1,16 @@
+[Unit]
+Description=wayvnc streaming the phone-dash virtual output (HEADLESS-1)
+PartOf=sway-session.target
+# Like foot-server: start only once uwsm has imported WAYLAND_DISPLAY/SWAYSOCK.
+After=graphical-session.target sway-session.target
+
+[Service]
+# sway creates HEADLESS-1 from an `exec` in 30_phone_dash.conf; wait (up to
+# 30 s) for it so wayvnc doesn't start against a missing output.
+ExecStartPre=/bin/sh -c 'for i in $$(seq 300); do swaymsg -t get_outputs -r 2>/dev/null | grep -qw HEADLESS-1 && exit 0; sleep 0.1; done; echo "HEADLESS-1 did not appear" >&2; exit 1'
+ExecStart=/usr/bin/wayvnc -r -s phone -o HEADLESS-1 -f 60 -S %t/wayvnc-dash.sock 127.0.0.1 5900
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=sway-session.target

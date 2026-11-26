@@ -1,4 +1,5 @@
 {
+    "output": ["!HEADLESS-1", "*"],
     "layer": "bottom",
     "position": "bottom",
     "modules-left": ["sway/workspaces","sway/mode","sway/window"],

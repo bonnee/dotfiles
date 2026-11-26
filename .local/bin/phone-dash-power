@@ -1,0 +1,31 @@
+#!/bin/sh
+# Turn the phone-dash phone's screen off/on over adb (USB). Called by swayidle:
+#   off: before-sleep, and when the monitors are DPMS-blanked
+#   on:  after-resume, and when the monitors come back
+# Uses the power keys, which work even with stay_on_while_plugged_in set.
+SERIAL="${PHONE_DASH_SERIAL:-e90acbb2}"
+
+send() { adb -s "$SERIAL" shell input keyevent "$1" >/dev/null 2>&1; }
+
+case "$1" in
+    off)
+        # Must finish before the PC suspends: short and synchronous.
+        timeout 5 adb -s "$SERIAL" wait-for-device 2>/dev/null && send KEYCODE_SLEEP
+        ;;
+    on)
+        # After a resume adb can take 15+ s to see the phone again (USB reset,
+        # adb server re-detect by phone-dash-adb). Keep trying for 60 s in the
+        # background so swayidle isn't blocked.
+        (
+            i=0
+            while [ $i -lt 60 ]; do
+                if adb -s "$SERIAL" get-state >/dev/null 2>&1; then
+                    send KEYCODE_WAKEUP && exit 0
+                fi
+                sleep 1; i=$((i + 1))
+            done
+        ) >/dev/null 2>&1 &
+        ;;
+    *)
+        echo "usage: $0 on|off" >&2; exit 2 ;;
+esac

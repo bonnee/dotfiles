@@ -1,0 +1,13 @@
+[Unit]
+Description=adb reverse tunnel phone:5900 -> wayvnc (phone-dash)
+PartOf=sway-session.target
+# Ordered after wayvnc so AVNC, launched on (re)connect, finds a server.
+After=graphical-session.target sway-session.target phone-dash-vnc.service
+
+[Service]
+ExecStart=%h/.local/bin/phone-dash-adb
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=sway-session.target

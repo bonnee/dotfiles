@@ -1,0 +1,17 @@
+[Unit]
+Description=Home Assistant kiosk window (phone-dash background, Firefox profile)
+PartOf=sway-session.target
+After=graphical-session.target sway-session.target
+
+[Service]
+# Separate Firefox profile; --name sets the Wayland app_id used by the sway
+# rule and phone-dash-floater. Firefox (unlike Chromium) accepts input from
+# wayvnc's transient seat, so phone taps don't grab the main mouse.
+# Restart=always brings it back if the window is closed or crashes.
+# To close it on purpose: systemctl --user stop phone-dash-hass
+ExecStart=/usr/bin/firefox-developer-edition --new-instance --profile %h/.local/share/hass-dash/firefox --name hass-dash-ff https://hass.pgl.bonnee.me/
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=sway-session.target

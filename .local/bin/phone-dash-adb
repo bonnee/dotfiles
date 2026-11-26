@@ -1,0 +1,63 @@
+#!/bin/sh
+# Keep a USB tunnel from the phone's localhost:5900 to wayvnc on this PC,
+# re-creating it whenever the phone (re)connects. On each (re)connect also
+# keep the screen awake while plugged in and bring AVNC to the foreground.
+SERIAL="${PHONE_DASH_SERIAL:-e90acbb2}"
+AVNC_PKG=com.gaurav.avnc
+# AVNC's vnc:// URI only takes connection params (ConnectionName, ViewOnly,
+# VncPassword, ...); display prefs (fullscreen, keep-screen-on, toolbar) live
+# in the app's private SharedPreferences and can't be set from adb sans root.
+VNC_URI="vnc://127.0.0.1:5900"
+
+a() { adb -s "$SERIAL" "$@"; }
+
+avnc_in_front() {
+    a shell 'dumpsys activity activities 2>/dev/null | grep -m1 ResumedActivity' \
+        | grep -q "$AVNC_PKG/"
+}
+
+phone_on_usb() {
+    # LineageOS enumerates with Google's adb ids; OnePlus' own vendor id too.
+    lsusb -d 18d1: >/dev/null 2>&1 || lsusb -d 2a70: >/dev/null 2>&1
+}
+
+wait_for_phone() {
+    # After a PC suspend/resume the adb server sometimes never re-detects the
+    # phone even though it is back on USB. If USB sees it but adb doesn't
+    # within 3 s, restart the adb server (cheap; it re-detects in ~1 s).
+    while ! timeout 3 adb -s "$SERIAL" wait-for-device 2>/dev/null; do
+        if phone_on_usb; then
+            adb kill-server 2>/dev/null
+            adb start-server >/dev/null 2>&1
+        fi
+    done
+}
+
+tunnel_ok() {
+    a get-state >/dev/null 2>&1 && a reverse --list 2>/dev/null | grep -q 'tcp:5900'
+}
+
+while :; do
+    wait_for_phone
+    a reverse tcp:5900 tcp:5900
+    # 7 = stay awake on AC|USB|wireless charging (dedicated dashboard phone).
+    [ "$(a shell settings get global stay_on_while_plugged_in | tr -d '\r')" = 7 ] \
+        || a shell settings put global stay_on_while_plugged_in 7
+    if ! avnc_in_front; then
+        a shell input keyevent KEYCODE_WAKEUP
+        # --activity-clear-task drops any stale backgrounded VncActivity so
+        # sessions don't pile up; AVNC starts a fresh one to the tunnel.
+        a shell am start --activity-clear-task -a android.intent.action.VIEW \
+            -d "$VNC_URI" "$AVNC_PKG" >/dev/null
+    fi
+    # AVNC's own auto-reconnect backs off between attempts; if no client is
+    # connected 3 s after re-arming, kick a fresh connection instead of waiting.
+    sleep 3
+    if ! ss -Htn state established '( sport = :5900 )' | grep -q .; then
+        a shell am start --activity-clear-task -a android.intent.action.VIEW \
+            -d "$VNC_URI" "$AVNC_PKG" >/dev/null
+    fi
+    # Poll until the device goes away or the reverse tunnel is lost (e.g. USB
+    # reset on resume), then loop and re-arm.
+    while tunnel_ok; do sleep 2; done
+done

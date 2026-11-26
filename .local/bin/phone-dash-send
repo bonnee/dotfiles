@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+"""Single-slot "scratchpad" for the phone screen.
+
+  phone-dash-send toggle   focused window -> phone (fullscreen over the HA
+                           dashboard). If it already is the phone window, send
+                           it back. A window previously on the phone is sent
+                           back first.
+  phone-dash-send return   send the phone window back, wherever focus is.
+
+The phone window carries the sway mark "phone"; where it came from (workspace,
+floating state, size) is kept in $XDG_RUNTIME_DIR/phone-dash-slot.json.
+"""
+import json
+import os
+import sys
+
+import i3ipc
+
+DASH_WS = "11:dash"
+MARK = "phone"
+STATE = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "phone-dash-slot.json")
+HASS_APP_ID = "hass-dash-ff"
+
+ipc = i3ipc.Connection()
+
+
+def load():
+    try:
+        with open(STATE) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {}
+
+
+def save(d):
+    with open(STATE, "w") as f:
+        json.dump(d, f)
+
+
+def phone_window(tree):
+    found = tree.find_marked(f"^{MARK}$")
+    return found[0] if found else None
+
+
+def send_back(con):
+    st = load().get(str(con.id), {})
+    ws = st.get("workspace")
+    if not ws or ws == DASH_WS:
+        # Unknown origin: use the focused workspace on a real monitor.
+        ws = next((w.name for w in ipc.get_workspaces()
+                   if w.visible and w.name != DASH_WS and w.focused), None) \
+            or next(w.name for w in ipc.get_workspaces() if w.visible and w.name != DASH_WS)
+    cmds = [f"[con_id={con.id}] fullscreen disable",
+            f"[con_id={con.id}] unmark {MARK}",
+            f"[con_id={con.id}] move container to workspace {ws}"]
+    if st.get("floating"):
+        cmds.append(f"[con_id={con.id}] floating enable")
+        if st.get("w") and st.get("h"):
+            cmds.append(f"[con_id={con.id}] resize set {st['w']} px {st['h']} px")
+        cmds.append(f"[con_id={con.id}] move position center")
+    else:
+        cmds.append(f"[con_id={con.id}] floating disable")
+    ipc.command("; ".join(cmds))
+    d = load()
+    d.pop(str(con.id), None)
+    save(d)
+
+
+def send_to_phone(con):
+    ws = con.workspace()
+    floating = con.floating in ("auto_on", "user_on")
+    d = load()
+    d[str(con.id)] = {"workspace": ws.name if ws else None, "floating": floating,
+                      "w": con.rect.width, "h": con.rect.height}
+    save(d)
+    # Mark first so phone-dash-floater ignores it, then move and fullscreen
+    # (fullscreen applies to the workspace it lands on: the phone output).
+    ipc.command(f"[con_id={con.id}] mark --add {MARK}; "
+                f"[con_id={con.id}] fullscreen disable; "
+                f"[con_id={con.id}] move container to workspace {DASH_WS}; "
+                f"[con_id={con.id}] fullscreen enable")
+
+
+def main():
+    action = sys.argv[1] if len(sys.argv) > 1 else "toggle"
+    tree = ipc.get_tree()
+    current = phone_window(tree)
+
+    if action == "return":
+        if current:
+            send_back(current)
+        return
+
+    focused = tree.find_focused()
+    if focused is None or focused.type not in ("con", "floating_con") or \
+            not (focused.app_id or focused.window_class) or \
+            focused.app_id == HASS_APP_ID:
+        # Nothing sendable focused (empty workspace, the dashboard itself):
+        # behave like "return".
+        if current:
+            send_back(current)
+        return
+
+    if current and current.id == focused.id:
+        send_back(current)
+        return
+    if current:
+        send_back(current)
+    send_to_phone(focused)
+
+
+if __name__ == "__main__":
+    main()

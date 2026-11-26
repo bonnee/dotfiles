@@ -1,0 +1,21 @@
+/* Hide all browser UI: tabs, toolbars, sidebar header */
+#navigator-toolbox {
+  visibility: collapse !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#sidebar-box, #sidebar-main { display: none !important; }
+
+/* Remove the 1px chrome/content separator Firefox still draws at the top. */
+:root {
+  --chrome-content-separator-color: transparent !important;
+  --toolbox-border-bottom-color: transparent !important;
+  --tabpanel-background-color: #000 !important;
+}
+#browser, #tabbrowser-tabbox, #tabbrowser-tabpanels, .browserContainer, .browserStack {
+  border: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin-top: 0 !important;
+}

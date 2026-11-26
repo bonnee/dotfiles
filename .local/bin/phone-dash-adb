@@ -1,31 +1,46 @@
 #!/bin/sh
-# Keep a USB tunnel from the phone's localhost:5900 to wayvnc on this PC,
-# re-creating it whenever the phone (re)connects. On each (re)connect also
-# keep the screen awake while plugged in and bring AVNC to the foreground.
-SERIAL="${PHONE_DASH_SERIAL:-e90acbb2}"
+# Keep the phone connected to wayvnc. The only place that opens AVNC.
+#
+# Transport: USB tethering (RNDIS) when possible -- ~50% more fps than the adb
+# tunnel -- with the adb reverse tunnel (phone 127.0.0.1:5900) as fallback.
+# wayvnc listens on whatever phone-dash-vnc-addr prints; this script restarts
+# it when that address changes. Whenever the phone is awake but no VNC client
+# has been connected for a few seconds (phone replugged, wayvnc restarted by a
+# sway reload, AVNC closed...), it (re)opens AVNC.
+[ -n "$ANDROID_SERIAL" ] || . "$HOME/.config/phone-dash/env"
+export ANDROID_SERIAL                # adb talks to this device only
+TETHER="${PHONE_DASH_TETHER:-1}"     # 0 = never enable USB tethering
 AVNC_PKG=com.gaurav.avnc
-# AVNC's vnc:// URI only takes connection params (ConnectionName, ViewOnly,
-# VncPassword, ...); display prefs (fullscreen, keep-screen-on, toolbar) live
-# in the app's private SharedPreferences and can't be set from adb sans root.
-VNC_URI="vnc://127.0.0.1:5900"
+ADDR_CMD="$HOME/.local/bin/phone-dash-vnc-addr"
 
-a() { adb -s "$SERIAL" "$@"; }
+# Use the saved "PC dash" entry (so its settings, e.g. Image quality, apply)
+# and re-save it with the current address: AVNC 3.3.1 connects to the
+# entry's stored host, which changes with the tethering address.
+# (The URI can't carry display prefs -- fullscreen, toolbar...; those live in
+# AVNC's private settings.)
+vnc_uri() { echo "vnc://$("$ADDR_CMD"):5900?ConnectionName=PC%20dash&SaveConnection=true"; }
 
-avnc_in_front() {
-    a shell 'dumpsys activity activities 2>/dev/null | grep -m1 ResumedActivity' \
-        | grep -q "$AVNC_PKG/"
+avnc_open() {
+    # --activity-clear-task drops any stale backgrounded session.
+    adb shell am start --activity-clear-task -a android.intent.action.VIEW \
+        -d "'$(vnc_uri)'" "$AVNC_PKG" >/dev/null 2>&1
 }
 
+phone_awake() { adb shell dumpsys power 2>/dev/null | grep -q 'mWakefulness=Awake'; }
+client_connected() { ss -Htn state established '( sport = :5900 )' | grep -q .; }
+listen_addr() { ss -Hltn '( sport = :5900 )' | awk '{print $4}' | head -1 | sed 's/:5900$//'; }
+
 phone_on_usb() {
-    # LineageOS enumerates with Google's adb ids; OnePlus' own vendor id too.
-    lsusb -d 18d1: >/dev/null 2>&1 || lsusb -d 2a70: >/dev/null 2>&1
+    # By USB serial: the vendor/product id changes with the USB mode
+    # (18d1:4ee7 adb, 05c6:9024 tethering+adb, ...).
+    grep -qx "$ANDROID_SERIAL" /sys/bus/usb/devices/*/serial 2>/dev/null
 }
 
 wait_for_phone() {
-    # After a PC suspend/resume the adb server sometimes never re-detects the
-    # phone even though it is back on USB. If USB sees it but adb doesn't
-    # within 3 s, restart the adb server (cheap; it re-detects in ~1 s).
-    while ! timeout 3 adb -s "$SERIAL" wait-for-device 2>/dev/null; do
+    # After a USB reset (PC resume, hub reset) the adb server sometimes never
+    # re-detects the phone. If USB sees it but adb doesn't within 3 s, restart
+    # the adb server (cheap; it re-detects in ~1 s).
+    while ! timeout 3 adb wait-for-device 2>/dev/null; do
         if phone_on_usb; then
             adb kill-server 2>/dev/null
             adb start-server >/dev/null 2>&1
@@ -33,31 +48,63 @@ wait_for_phone() {
     done
 }
 
-tunnel_ok() {
-    a get-state >/dev/null 2>&1 && a reverse --list 2>/dev/null | grep -q 'tcp:5900'
+last_tether_try=0
+ensure_tether() {
+    # Returns 1 if it switched the USB mode (adb drops; caller re-loops).
+    [ "$TETHER" = 1 ] || return 0
+    adb shell getprop sys.usb.config | grep -q rndis && return 0
+    now=$(date +%s)
+    # At most one attempt per 10 min: if it doesn't stick, stay on adb.
+    [ $((now - last_tether_try)) -ge 600 ] || return 0
+    last_tether_try=$now
+    # Same USB mode the Settings "USB tethering" toggle sets; the tethering
+    # service starts IP serving on its own once RNDIS is configured.
+    # (Never "ncm": this phone's kernel doesn't support it and crashes.)
+    adb shell svc usb setFunctions rndis >/dev/null 2>&1
+    sleep 3
+    return 1
+}
+
+link_ok() {
+    adb get-state >/dev/null 2>&1 \
+        && adb reverse --list 2>/dev/null | grep -q 'tcp:5900' \
+        && [ "$(listen_addr)" = "$("$ADDR_CMD")" ]
 }
 
 while :; do
     wait_for_phone
-    a reverse tcp:5900 tcp:5900
-    # 7 = stay awake on AC|USB|wireless charging (dedicated dashboard phone).
-    [ "$(a shell settings get global stay_on_while_plugged_in | tr -d '\r')" = 7 ] \
-        || a shell settings put global stay_on_while_plugged_in 7
-    if ! avnc_in_front; then
-        a shell input keyevent KEYCODE_WAKEUP
-        # --activity-clear-task drops any stale backgrounded VncActivity so
-        # sessions don't pile up; AVNC starts a fresh one to the tunnel.
-        a shell am start --activity-clear-task -a android.intent.action.VIEW \
-            -d "$VNC_URI" "$AVNC_PKG" >/dev/null
+    ensure_tether || continue
+    # Give DHCP on the tethering link a moment.
+    for _ in 1 2 3 4 5 6 7 8 9 10; do
+        [ "$("$ADDR_CMD")" != 127.0.0.1 ] && break
+        adb shell getprop sys.usb.config | grep -q rndis || break
+        sleep 1
+    done
+    adb reverse tcp:5900 tcp:5900 >/dev/null   # fallback path, harmless when tethering
+    if [ "$(listen_addr)" != "$("$ADDR_CMD")" ]; then
+        systemctl --user restart phone-dash-vnc.service
+        sleep 2
     fi
-    # AVNC's own auto-reconnect backs off between attempts; if no client is
-    # connected 3 s after re-arming, kick a fresh connection instead of waiting.
-    sleep 3
-    if ! ss -Htn state established '( sport = :5900 )' | grep -q .; then
-        a shell am start --activity-clear-task -a android.intent.action.VIEW \
-            -d "$VNC_URI" "$AVNC_PKG" >/dev/null
-    fi
-    # Poll until the device goes away or the reverse tunnel is lost (e.g. USB
-    # reset on resume), then loop and re-arm.
-    while tunnel_ok; do sleep 2; done
+    # 7 = stay awake on AC|USB|wireless charging (dedicated dashboard phone;
+    # phone-dash-power switches it off/on with the PC).
+    [ "$(adb shell settings get global stay_on_while_plugged_in | tr -d '\r')" = 7 ] \
+        || adb shell settings put global stay_on_while_plugged_in 7
+
+    # Watch until the device goes away, the tunnel is lost or the tethering
+    # address changes (then re-arm). Meanwhile keep AVNC connected: after 3
+    # checks (~6 s) without a client while the phone is awake, open it --
+    # AVNC's own auto-reconnect backs off and may retry a stale address.
+    idle=3   # first pass: open right away if nothing is connected
+    while link_ok; do
+        if client_connected; then
+            idle=0
+        else
+            idle=$((idle + 1))
+            if [ $idle -ge 3 ] && phone_awake; then
+                avnc_open
+                idle=0
+            fi
+        fi
+        sleep 2
+    done
 done

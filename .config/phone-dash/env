@@ -1,0 +1,3 @@
+# phone-dash: shared settings, loaded by the phone-dash services (EnvironmentFile=)
+# and by the scripts when run by hand. adb itself honours ANDROID_SERIAL.
+ANDROID_SERIAL=e90acbb2

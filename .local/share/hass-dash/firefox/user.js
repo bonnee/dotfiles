@@ -15,3 +15,7 @@ user_pref("browser.gesture.swipe.left", "");
 user_pref("browser.gesture.swipe.right", "");
 user_pref("app.update.auto", false);
 user_pref("dom.disable_open_during_load", false);
+// No "… is now full screen" banner, no zoom animation when entering fullscreen
+user_pref("full-screen-api.warning.timeout", 0);
+user_pref("full-screen-api.transition-duration.enter", "0 0");
+user_pref("full-screen-api.transition-duration.leave", "0 0");

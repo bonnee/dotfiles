@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""phone-dash: keep the phone's workspace and screen in line with sway.
+
+Rules (applied on every window/workspace/output event, plus a 1 s poll for
+changes sway sends no event for, e.g. a floating window dragged across
+outputs):
+
+  * Phone workspace 11:dash shows either the Home Assistant kiosk (app_id
+    hass-dash-ff) as its background, or -- when any other window is there --
+    that window/those windows, tiled. Floating windows that land there are
+    tiled; fullscreen is left alone. While something else is on the phone the
+    kiosk is parked on the hidden workspace 11:dash-bg.
+  * A kiosk window that shows up anywhere else is moved where it belongs.
+  * The "phone" mark (set by phone-dash-send) is dropped from a window that
+    is no longer on the phone.
+  * The phone screen follows the monitors: all real outputs powered off ->
+    phone screen off; any back on -> phone screen on (phone-dash-power).
+
+Run by phone-dash-daemon.service; on a lost IPC connection it exits and
+systemd restarts it.
+"""
+import subprocess
+import sys
+import threading
+
+import i3ipc
+
+DASH_WS = "11:dash"
+DASH_BG_WS = "11:dash-bg"
+HASS_APP_ID = "hass-dash-ff"
+MARK = "phone"
+POLL_INTERVAL = 1.0
+
+lock = threading.Lock()
+monitors_on = None   # last seen power state of the real monitors
+
+
+def log(*a):
+    print("phone-dash-daemon:", *a, file=sys.stderr, flush=True)
+
+
+def views(con):
+    """Application windows in con, skipping scratchpad (dropterm & co.)."""
+    return [c for c in con.descendants()
+            if (c.pid is not None or c.window is not None)
+            and getattr(c, "scratchpad_state", "none") in (None, "none")]
+
+
+def is_floating(con):
+    return con.floating in ("auto_on", "user_on")
+
+
+def arrange(ipc):
+    tree = ipc.get_tree()
+    workspaces = {ws.name: ws for ws in tree.workspaces()}
+    dash = workspaces.get(DASH_WS)
+    on_phone = [v for v in views(dash)] if dash else []
+    others = [v for v in on_phone if v.app_id != HASS_APP_ID]
+
+    for v in others:
+        if is_floating(v) and not v.fullscreen_mode:
+            v.command("floating disable")
+            log(f"tiled {v.app_id or v.window_class}")
+
+    for w in tree.find_marked(f"^{MARK}$"):
+        ws = w.workspace()
+        if ws is None or ws.name != DASH_WS:
+            w.command(f"unmark {MARK}")
+
+    target = DASH_BG_WS if others else DASH_WS
+    for k in [c for c in tree.descendants() if c.app_id == HASS_APP_ID]:
+        ws = k.workspace()
+        if ws is None or ws.name != target:
+            k.command(f"move container to workspace {target}")
+            log(f"dashboard -> {target}")
+        if is_floating(k):
+            k.command("floating disable")
+        if k.border != "none":
+            k.command("border none")
+
+
+def follow_monitors(ipc):
+    global monitors_on
+    real = [o for o in ipc.get_outputs() if not o.name.startswith("HEADLESS-")]
+    if not real:
+        return
+    on = any(o.ipc_data.get("power", True) and o.ipc_data.get("dpms", True) for o in real)
+    if monitors_on is None:           # first look: just remember
+        monitors_on = on
+        return
+    if on != monitors_on:
+        monitors_on = on
+        log(f"monitors {'on' if on else 'off'} -> phone screen {'on' if on else 'off'}")
+        subprocess.Popen(["phone-dash-power", "on" if on else "off"],
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
+def tick(ipc, _event=None):
+    with lock:
+        try:
+            arrange(ipc)
+            follow_monitors(ipc)
+        except Exception as ex:   # one bad pass must not kill the daemon
+            log(f"error: {ex!r}")
+
+
+def main():
+    ipc = i3ipc.Connection()
+    for ev in (i3ipc.Event.WINDOW, i3ipc.Event.WORKSPACE, i3ipc.Event.OUTPUT):
+        ipc.on(ev, tick)
+    tick(ipc)
+
+    def poll():
+        poll_ipc = i3ipc.Connection()   # own socket: not shared with main()
+        stop = threading.Event()
+        while not stop.wait(POLL_INTERVAL):
+            tick(poll_ipc)
+
+    threading.Thread(target=poll, daemon=True).start()
+    ipc.main()   # returns/raises when sway goes away
+    log("IPC connection closed")
+    sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,16 @@
+[Unit]
+Description=phone-dash: phone workspace rules and screen power (sway IPC)
+PartOf=sway-session.target
+After=graphical-session.target sway-session.target
+
+[Service]
+EnvironmentFile=%h/.config/phone-dash/env
+# PATH for phone-dash-power
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
+ExecStart=%h/.local/bin/phone-dash-daemon
+# Exits when the sway IPC connection drops (e.g. sway restart): come back.
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=sway-session.target

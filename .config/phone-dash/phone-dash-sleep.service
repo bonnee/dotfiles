@@ -1,0 +1,23 @@
+# System unit (install: see README line below). Turns the phone-dash phone's
+# screen off when the system sleeps -- whatever triggered it: power button,
+# lid, `systemctl suspend`, idle -- and on again on resume. A system unit
+# because the user manager has no sleep.target.
+#
+#   sudo install -m644 ~/.config/phone-dash/phone-dash-sleep.service /etc/systemd/system/ \
+#     && sudo systemctl daemon-reload && sudo systemctl enable phone-dash-sleep.service
+[Unit]
+Description=phone-dash: phone screen off during system sleep
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=bonnee
+EnvironmentFile=/home/bonnee/.config/phone-dash/env
+ExecStart=/home/bonnee/.local/bin/phone-dash-power off
+ExecStop=/home/bonnee/.local/bin/phone-dash-power on
+TimeoutStopSec=75
+
+[Install]
+WantedBy=sleep.target

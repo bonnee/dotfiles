@@ -1,8 +1,8 @@
 [Unit]
-Description=phone-dash: keep the phone connected (USB tethering / adb tunnel, AVNC)
+Description=phone-dash: keep the phone connected and streaming (tethering, adb, Moonlight)
 PartOf=sway-session.target
-# Ordered after wayvnc so AVNC, launched on (re)connect, finds a server.
-After=graphical-session.target sway-session.target phone-dash-vnc.service
+# Ordered after Sunshine so Moonlight, launched on (re)connect, finds it.
+After=graphical-session.target sway-session.target phone-dash-sunshine.service
 
 [Service]
 EnvironmentFile=%h/.config/phone-dash/env

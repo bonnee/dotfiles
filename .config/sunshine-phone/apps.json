@@ -1,0 +1,6 @@
+{
+  "env": {},
+  "apps": [
+    { "name": "Phone screen", "output": "", "cmd": "", "auto-detach": "true" }
+  ]
+}

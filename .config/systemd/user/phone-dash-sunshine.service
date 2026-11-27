@@ -1,0 +1,13 @@
+[Unit]
+Description=phone-dash: Sunshine streaming HEADLESS-1 to Moonlight on the phone
+PartOf=sway-session.target
+After=graphical-session.target sway-session.target
+
+[Service]
+# Separate instance from the Steam-streaming one (~/.config/sunshine).
+ExecStart=/usr/bin/sunshine %h/.config/sunshine-phone/sunshine.conf
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=sway-session.target

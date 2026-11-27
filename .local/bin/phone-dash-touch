@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""phone-dash: real multitouch from the phone into sway.
+
+VNC and the stock Android Moonlight client only send mouse events, so pinch
+and natural scrolling are lost. This reads the phone's own touchscreen over
+adb (`getevent`, kernel multitouch protocol B) and replays it through a
+virtual touchscreen on the PC ("phone-dash touch"), which sway attaches to
+the phone seat and maps onto HEADLESS-1 (sway/arch23/30_phone_dash.conf).
+
+Panel coordinates are portrait; they are rotated to the phone's current
+orientation (read at start). Exits when the adb stream ends; systemd
+(phone-dash-touch.service) restarts it.
+"""
+import os
+import re
+import subprocess
+import sys
+
+from evdev import AbsInfo, UInput, ecodes as e
+
+DEVICE = os.environ.get("PHONE_DASH_TOUCH_DEV", "/dev/input/event3")  # synaptics,s3320
+NAT_W, NAT_H = 1080, 2340          # panel size in its natural (portrait) orientation
+SLOTS = 10
+
+
+def log(*a):
+    print("phone-dash-touch:", *a, file=sys.stderr, flush=True)
+
+
+def adb(*args):
+    return subprocess.run(["adb", *args], capture_output=True, text=True, timeout=10).stdout
+
+
+def rotation():
+    m = re.search(r"SurfaceOrientation:\s*(\d)", adb("shell", "dumpsys input"))
+    return int(m.group(1)) if m else 1
+
+
+def main():
+    rot = rotation()
+    out_w, out_h = (NAT_H, NAT_W) if rot in (1, 3) else (NAT_W, NAT_H)
+
+    def to_out(x, y):
+        """Natural panel coords -> displayed (rotated) coords."""
+        if rot == 1:
+            return y, NAT_W - 1 - x
+        if rot == 2:
+            return NAT_W - 1 - x, NAT_H - 1 - y
+        if rot == 3:
+            return NAT_H - 1 - y, x
+        return x, y
+
+    caps = {
+        e.EV_KEY: [e.BTN_TOUCH],
+        e.EV_ABS: [
+            (e.ABS_X, AbsInfo(0, 0, out_w - 1, 0, 0, 0)),
+            (e.ABS_Y, AbsInfo(0, 0, out_h - 1, 0, 0, 0)),
+            (e.ABS_MT_SLOT, AbsInfo(0, 0, SLOTS - 1, 0, 0, 0)),
+            (e.ABS_MT_TRACKING_ID, AbsInfo(0, 0, 65535, 0, 0, 0)),
+            (e.ABS_MT_POSITION_X, AbsInfo(0, 0, out_w - 1, 0, 0, 0)),
+            (e.ABS_MT_POSITION_Y, AbsInfo(0, 0, out_h - 1, 0, 0, 0)),
+        ],
+    }
+    ui = UInput(caps, name="phone-dash touch", vendor=0, product=0,
+                input_props=[e.INPUT_PROP_DIRECT])
+    log(f"virtual touchscreen {out_w}x{out_h}, phone rotation {rot}")
+
+    # Per-slot state in natural coordinates; -1 tracking id = no contact.
+    slot = 0
+    tid = [-1] * SLOTS
+    nx = [0] * SLOTS
+    ny = [0] * SLOTS
+    dirty = set()
+    touching = False
+
+    # -tt: give getevent a pty so it flushes every line (without one its
+    # stdout is block-buffered and touches arrive late, in bursts).
+    proc = subprocess.Popen(["adb", "shell", "-tt", "getevent", DEVICE],
+                            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                            text=True, bufsize=1)
+    for line in proc.stdout:
+        parts = line.split()
+        if len(parts) < 3:
+            continue
+        try:
+            typ, code, val = (int(p, 16) for p in parts[-3:])
+        except ValueError:
+            continue
+        if val >= 0x80000000:               # signed 32-bit (e.g. tracking id -1)
+            val -= 1 << 32
+
+        if typ == e.EV_ABS:
+            if code == e.ABS_MT_SLOT:
+                slot = min(max(val, 0), SLOTS - 1)
+            elif code == e.ABS_MT_TRACKING_ID:
+                tid[slot] = val
+                dirty.add(slot)
+            elif code == e.ABS_MT_POSITION_X:
+                nx[slot] = val
+                dirty.add(slot)
+            elif code == e.ABS_MT_POSITION_Y:
+                ny[slot] = val
+                dirty.add(slot)
+        elif typ == e.EV_SYN and code == e.SYN_REPORT:
+            if not dirty:
+                continue
+            for s in sorted(dirty):
+                ui.write(e.EV_ABS, e.ABS_MT_SLOT, s)
+                ui.write(e.EV_ABS, e.ABS_MT_TRACKING_ID, tid[s])
+                if tid[s] >= 0:
+                    x, y = to_out(nx[s], ny[s])
+                    ui.write(e.EV_ABS, e.ABS_MT_POSITION_X, x)
+                    ui.write(e.EV_ABS, e.ABS_MT_POSITION_Y, y)
+            dirty.clear()
+            active = [s for s in range(SLOTS) if tid[s] >= 0]
+            if active:
+                x, y = to_out(nx[active[0]], ny[active[0]])
+                ui.write(e.EV_ABS, e.ABS_X, x)
+                ui.write(e.EV_ABS, e.ABS_Y, y)
+            if bool(active) != touching:
+                touching = bool(active)
+                ui.write(e.EV_KEY, e.BTN_TOUCH, int(touching))
+            ui.syn()
+
+    log("adb stream ended")
+    ui.close()
+    sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

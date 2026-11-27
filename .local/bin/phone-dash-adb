@@ -3,9 +3,10 @@
 # phone-dash-sunshine.service, over USB tethering).
 #
 # Loop: wait for the phone on adb -> make sure USB tethering is on -> keep the
-# screen awake while plugged in -> while connected, (re)open the Moonlight
-# stream whenever the phone is awake but not streaming (phone replugged, PC
-# resumed, app closed...). Re-arms when the phone or the tethering link goes.
+# screen awake while plugged in -> open the Moonlight stream when the phone
+# connects and whenever its screen comes on (PC resumed, monitors back).
+# Leaving the app with the screen on is respected. Re-arms when the phone or
+# the tethering link goes.
 [ -n "$ANDROID_SERIAL" ] || . "$HOME/.config/phone-dash/env"
 export ANDROID_SERIAL                # adb talks to this device only
 TETHER="${PHONE_DASH_TETHER:-1}"     # 0 = never enable USB tethering
@@ -17,17 +18,22 @@ TETHER="${PHONE_DASH_TETHER:-1}"     # 0 = never enable USB tethering
 # abs(int32(crc32(app name))) when the app has no image.
 SUNSHINE_DIR="$HOME/.config/sunshine-phone"
 MOONLIGHT_APP="Phone screen"
+# Artemis (ClassicOldSong/moonlight-android, a Moonlight fork): its
+# "multi-touch" mouse mode sends real touch to Sunshine, so pinch/scroll work
+# and touches only come from the stream view. (Stock Moonlight would be
+# com.limelight, but it sends touches as mouse events.)
+MOONLIGHT_PKG=com.limelight.noir
 moonlight_open() {
     uuid=$(jq -r '.root.uniqueid // empty' "$SUNSHINE_DIR/sunshine_state.json")
     appid=$(python3 -c 'import sys,zlib,ctypes; print(abs(ctypes.c_int32(zlib.crc32(sys.argv[1].encode())).value))' "$MOONLIGHT_APP")
-    adb shell "am start --activity-clear-task -n com.limelight/.ShortcutTrampoline --es UUID $uuid --es AppId $appid" >/dev/null 2>&1
+    adb shell "am start --activity-clear-task -n $MOONLIGHT_PKG/com.limelight.ShortcutTrampoline --es UUID $uuid --es AppId $appid" >/dev/null 2>&1
 }
 
 # Streaming = Moonlight's stream activity is in front (immediate; Sunshine's
 # log only notices a dropped client after a timeout, e.g. after a PC resume).
 moonlight_streaming() {
     adb shell 'dumpsys activity activities 2>/dev/null | grep -m1 ResumedActivity' \
-        | grep -q 'com.limelight/.Game'
+        | grep -qE "$MOONLIGHT_PKG/(com\.limelight)?\.Game"
 }
 
 phone_awake() { adb shell dumpsys power 2>/dev/null | grep -q 'mWakefulness=Awake'; }
@@ -93,9 +99,18 @@ while :; do
     [ "$(adb shell settings get global stay_on_while_plugged_in | tr -d '\r')" = 7 ] \
         || adb shell settings put global stay_on_while_plugged_in 7
 
+    # Open the stream on (re)connect and whenever the phone screen comes on
+    # (PC resumed, monitors back); but if the user leaves the app while the
+    # screen stays on, leave them be.
+    was_awake=no
     while link_ok; do
-        if ! moonlight_streaming && phone_awake; then
-            moonlight_open
+        if phone_awake; then
+            if [ "$was_awake" = no ] && ! moonlight_streaming; then
+                moonlight_open
+            fi
+            was_awake=yes
+        else
+            was_awake=no
         fi
         sleep 2
     done

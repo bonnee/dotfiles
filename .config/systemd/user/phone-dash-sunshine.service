@@ -1,5 +1,5 @@
 [Unit]
-Description=phone-dash: Sunshine streaming HEADLESS-1 to Moonlight on the phone
+Description=phone-dash: Sunshine streaming HEADLESS-1 to Artemis on the phone
 PartOf=sway-session.target
 After=graphical-session.target sway-session.target
 

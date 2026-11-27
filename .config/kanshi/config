@@ -79,10 +79,11 @@ profile dell_and_tv_lg {
 # HEADLESS-1 present the 2-output desk profiles above never match.
 # The phone output's position and scale live only here; sway sets just its
 # mode (sway/arch23/30_phone_dash.conf), and re-runs `kanshictl reload` on
-# every sway reload so these survive it.
+# every sway reload so these survive it. No mode on the HEADLESS-1 line:
+# kanshi can't set one on a headless output and would reject the whole profile.
 profile desk_phone {
   output 'LG Electronics M2362D 0x01010101' mode 1920x1080@60.000 position 0,180 scale 1
   output 'Dell Inc. DELL S2721DGF J129T83' mode 2560x1440@165.080 position 1920,0 scale 1
-  output HEADLESS-1 position 3325,1440 mode 2340x1080@60.0000 scale 3.70 transform normal
+  output HEADLESS-1 position 3325,1440 scale 3.70 transform normal
 }
 
